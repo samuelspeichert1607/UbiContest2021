@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public int PlayerSpeed;
+    public int playerSpeed;
     public int RotationSpeed;
     public int jumpValue;
     public float gravity = -9.81f;
@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
     {
         //on tourne le joueur selon l'axe x du joystick droit
         transform.Rotate(new Vector3(0, Input.GetAxis("RotateX"), 0) * Time.deltaTime * RotationSpeed, Space.World);
+        
 
 
         if (controller.isGrounded)
@@ -42,8 +43,8 @@ public class PlayerController : MonoBehaviour
         }
 
         //le joueur se deplace
-        controller.Move(transform.forward * -Input.GetAxis("Vertical") * Time.deltaTime * PlayerSpeed);
-        controller.Move(transform.right * Input.GetAxis("Horizontal") * Time.deltaTime * PlayerSpeed);
+        controller.Move(transform.forward * -Input.GetAxis("Vertical") * Time.deltaTime * playerSpeed);
+        controller.Move(transform.right * Input.GetAxis("Horizontal") * Time.deltaTime * playerSpeed);
         controller.Move(new Vector3(0, velocityY, 0) * Time.deltaTime);
 
     }
