@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6258277163700730531}
   - component: {fileID: 3197700676257428461}
   - component: {fileID: 3636425763329252920}
-  - component: {fileID: 22801462125219729}
+  - component: {fileID: 8608479506868728637}
   m_Layer: 0
   m_Name: TheCube
   m_TagString: Untagged
@@ -47,7 +47,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6b33802963d9c94c880e8c9d74b9e9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0
+  PlayerSpeed: 0
+  RotationSpeed: 0
+  jumpHeight: 1
+  gravity: -9.81
 --- !u!33 &6258277163700730531
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -110,7 +113,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!143 &22801462125219729
+--- !u!143 &8608479506868728637
 CharacterController:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -125,6 +128,6 @@ CharacterController:
   m_Radius: 0.5
   m_SlopeLimit: 45
   m_StepOffset: 0.3
-  m_SkinWidth: 0.08
+  m_SkinWidth: 0.0001
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
