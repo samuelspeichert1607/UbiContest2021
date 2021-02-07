@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     public int jumpValue;
     public float gravity = -9.81f;
     private CharacterController controller;
-    private float velocityY;
+    private float velocityY = -1;
 
     // Start is called before the first frame update
     void Start()
@@ -20,6 +20,8 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log("Input.GetAxis(RotateX) = " + Input.GetAxis("RotateX"));
+
         //on tourne le joueur selon l'axe x du joystick droit
         transform.Rotate(new Vector3(0, Input.GetAxis("RotateX"), 0) * Time.deltaTime * RotationSpeed, Space.World);
         
