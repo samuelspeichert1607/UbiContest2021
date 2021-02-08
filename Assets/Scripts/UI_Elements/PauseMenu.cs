@@ -7,8 +7,11 @@ namespace UI_Elements
 {
     public class PauseMenu : MonoBehaviour
     {
-        public GameObject pauseMenu;
-        public GameObject validationMenu;
+        [SerializeField]
+        private GameObject pauseMenu;
+        
+        [SerializeField]
+        private GameObject validationMenu;
     
         private bool _isPaused = false;
 
