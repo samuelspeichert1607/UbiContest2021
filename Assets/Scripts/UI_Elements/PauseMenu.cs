@@ -2,6 +2,7 @@
 using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 
 namespace UI_Elements
 {
@@ -12,6 +13,8 @@ namespace UI_Elements
         
         [SerializeField]
         private GameObject validationMenu;
+
+        [SerializeField] private GameObject onPauseFirstSelected, onValidationFirstSelection;
 
         public void Start()
         {
@@ -35,7 +38,10 @@ namespace UI_Elements
         {
             if (!pauseMenu.activeInHierarchy)
             {
-                pauseMenu.SetActive(true);                
+                pauseMenu.SetActive(true);
+                
+                EventSystem.current.SetSelectedGameObject(null);
+                EventSystem.current.SetSelectedGameObject(onPauseFirstSelected);
             }
             else
             {
