@@ -609,6 +609,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7869358864654378369, guid: d99000752cd7f634ea803c83a1bd9774, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: pauseUnPause
+      objectReference: {fileID: 0}
     - target: {fileID: 7869358865307005956, guid: d99000752cd7f634ea803c83a1bd9774, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
