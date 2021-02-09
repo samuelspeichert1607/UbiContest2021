@@ -532,3 +532,5 @@ MigrationBackup/
 # End of https://www.toptal.com/developers/gitignore/api/windows,unity,visualstudio,rider,linux
 
 .idea/.idea.UbiContest2021/.idea/
+
+.idea/.idea.UbiContest2021/riderModule.iml
