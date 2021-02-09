@@ -14,7 +14,8 @@ namespace UI_Elements
         [SerializeField]
         private GameObject validationMenu;
 
-        [SerializeField] private GameObject onPauseFirstSelected, onValidationFirstSelection;
+        [SerializeField] 
+        private GameObject onPauseFirstSelected, onValidationFirstSelected, onReturnFromValidationFirstSelected;
 
         public void Start()
         {
@@ -39,9 +40,7 @@ namespace UI_Elements
             if (!pauseMenu.activeInHierarchy)
             {
                 pauseMenu.SetActive(true);
-                
-                EventSystem.current.SetSelectedGameObject(null);
-                EventSystem.current.SetSelectedGameObject(onPauseFirstSelected);
+                SelectObject(onPauseFirstSelected);
             }
             else
             {
@@ -54,6 +53,26 @@ namespace UI_Elements
             Debug.Log("Logging out");
             // SceneManager.LoadScene(0); //Laoding back the menu scene
         }
-    
+
+        public void OpenValidationMenu()
+        {
+            validationMenu.SetActive(true);
+            SelectObject(onValidationFirstSelected);
+        }
+
+        public void CloseValidationMenu()
+        {
+            validationMenu.SetActive(false);
+            SelectObject(onReturnFromValidationFirstSelected);
+        }
+        
+
+        private void SelectObject(GameObject gameObjectToSelect)
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject(gameObjectToSelect);
+        }
+
+
     }
 }
