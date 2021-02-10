@@ -4,26 +4,40 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public int playerSpeed;
-    public int RotationSpeed;
-    public int jumpValue;
-    public float gravity = -9.81f;
+
+    [SerializeField] private int playerSpeed;
+    [SerializeField] private int RotationSpeed;
+    [SerializeField] private int jumpValue;
+    [SerializeField] private float gravity = -9.81f;
     private CharacterController controller;
-    private float velocityY;
+    private float velocityY =-1;
+    private GameObject cam;
+
+    private float eulerAngleX;
 
     // Start is called before the first frame update
     void Start()
     {
+        
+        cam = transform.GetChild(0).gameObject;
         controller = GetComponent<CharacterController>();
+        eulerAngleX = cam.transform.position.y;
     }
 
     // Update is called once per frame
     void Update()
     {
+
+        float rotationY = Input.GetAxis("RotateY");
+        //on limite la rotation
+        if ((Mathf.Abs(eulerAngleX) < 90) || (eulerAngleX >= 90 && rotationY > 0) || (eulerAngleX <= -90 && rotationY < 0))
+        {
+            eulerAngleX -= rotationY * Time.deltaTime * RotationSpeed;
+            cam.transform.localEulerAngles = new Vector3(eulerAngleX, 0, 0);
+        }
+
         //on tourne le joueur selon l'axe x du joystick droit
         transform.Rotate(new Vector3(0, Input.GetAxis("RotateX"), 0) * Time.deltaTime * RotationSpeed, Space.World);
-        
-
 
         if (controller.isGrounded)
         {
@@ -46,7 +60,6 @@ public class PlayerController : MonoBehaviour
         controller.Move(transform.forward * -Input.GetAxis("Vertical") * Time.deltaTime * playerSpeed);
         controller.Move(transform.right * Input.GetAxis("Horizontal") * Time.deltaTime * playerSpeed);
         controller.Move(new Vector3(0, velocityY, 0) * Time.deltaTime);
-
     }
 
 }
