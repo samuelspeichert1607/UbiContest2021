@@ -21,6 +21,9 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         Debug.Log("Input.GetAxis(RotateX) = " + Input.GetAxis("RotateX"));
+        Debug.Log("Input.GetJoystickNames() : " + Input.GetJoystickNames()[0]);
+
+        string[] controllers = Input.GetJoystickNames();
 
         //on tourne le joueur selon l'axe x du joystick droit
         transform.Rotate(new Vector3(0, Input.GetAxis("RotateX"), 0) * Time.deltaTime * RotationSpeed, Space.World);
@@ -38,6 +41,7 @@ public class PlayerController : MonoBehaviour
             {
                 velocityY = jumpValue;
             }
+            
         }
         else
         {
