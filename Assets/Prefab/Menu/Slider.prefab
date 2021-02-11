@@ -233,7 +233,7 @@ GameObject:
   - component: {fileID: 2179710679124121722}
   - component: {fileID: 4684287227205893390}
   m_Layer: 5
-  m_Name: Slider 1
+  m_Name: Slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -285,7 +285,7 @@ MonoBehaviour:
     m_NormalColor: {r: 0.070274055, g: 0.8867924, b: 0.709495, a: 1}
     m_HighlightedColor: {r: 0, g: 0.5660378, b: 0.4443397, a: 1}
     m_PressedColor: {r: 0, g: 0.6509434, b: 0.5109906, a: 1}
-    m_SelectedColor: {r: 0.06666667, g: 0.85098046, b: 0.68235296, a: 1}
+    m_SelectedColor: {r: 0.07710925, g: 0.5210769, b: 0.7169812, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
