@@ -18,7 +18,7 @@ public class Joystick : InteractableItem
         {
             OnPlayerInRange();
         }
-        
+
         if (isInteractedWith)
         {
             target.Move(-Input.GetAxis("Vertical"), Input.GetAxis("Horizontal"), Time.deltaTime);
@@ -36,7 +36,12 @@ public class Joystick : InteractableItem
 
     public override void OnPlayerInRange()
     {
-        textRenderer.ShowInfo(InteractPreButtonText + " " + InteractButton + " " + InteractPostButtonText);
-        Debug.Log("Player in range of interaction");
+        textRenderer.ShowInfo(InteractPreButtonText + " " + InteractButtonName + " " + InteractPostButtonText);
+        
+        if (Input.GetButton(InteractButtonName))
+        {
+            isInteractedWith = true;
+            Debug.Log("Pressed the button " + InteractButtonName);
+        }
     }
 }

@@ -3845,6 +3845,10 @@ PrefabInstance:
       value: B
       objectReference: {fileID: 0}
     - target: {fileID: 1945875078829356901, guid: cb7ceab846afc614ca6c9811f5c819ed, type: 3}
+      propertyPath: InteractButtonName
+      value: B
+      objectReference: {fileID: 0}
+    - target: {fileID: 1945875078829356901, guid: cb7ceab846afc614ca6c9811f5c819ed, type: 3}
       propertyPath: InteractPreButtonText
       value: Press
       objectReference: {fileID: 0}
