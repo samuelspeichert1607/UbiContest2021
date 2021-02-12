@@ -1,28 +1,42 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static InteractableItemBase;
+using static InteractableItem;
 using static CustomController;
 
-public class Joystick : InteractableItemBase
+public class Joystick : InteractableItem
 {
     
-
     [SerializeField] private CustomController target;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private TextRenderer textRenderer;
 
     // Update is called once per frame
     void Update()
     {
-        target.Move(-Input.GetAxis("Vertical"), Input.GetAxis("Horizontal"), Time.deltaTime);
+        CheckIfAPlayerIsInRange();
+        if (hasPlayerInRange)
+        {
+            OnPlayerInRange();
+        }
+        
+        if (isInteractedWith)
+        {
+            target.Move(-Input.GetAxis("Vertical"), Input.GetAxis("Horizontal"), Time.deltaTime);
+            //Animation of the joystick would go here
+        }
+        
     }
 
-    public override void onInteract()
+    public override void OnInteract()
     {
-        base.onInteract();
+        base.OnInteract();
+
+        isInteractedWith = !isInteractedWith;
+    }
+
+    public override void OnPlayerInRange()
+    {
+        textRenderer.ShowInfo(InteractPreButtonText + " " + InteractButton + " " + InteractPostButtonText);
+        Debug.Log("Player in range of interaction");
     }
 }
