@@ -65,18 +65,30 @@ public class InteractableItem : MonoBehaviour
         {
             playerHasEnteredRange = true;
             playerHasLeftRange = false;
-            Debug.Log("Entered");
-            
         }
         if (previousPlayerRangeState && !hasPlayerInRange)
         {
             playerHasEnteredRange = false;
             playerHasLeftRange = true;
-            Debug.Log("Left");
         }
     }
 
+    protected GameObject GetInRangePlayer()
+    {
+        // if (inRangePlayer == null)
+        // {
+        //     throw new NullReferenceException();
+        // }
+        return inRangePlayer;
+    }
+
+
     public virtual void OnInteract()
+    {
+        
+    }
+
+    public virtual void OnInteractEnd()
     {
         
     }

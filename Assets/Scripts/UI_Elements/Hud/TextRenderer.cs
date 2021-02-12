@@ -16,13 +16,13 @@ public class TextRenderer : MonoBehaviour
         textContainer.SetActive(false);
     }
 
-    public void ShowInfo(string info)
+    public void ShowInfoText(string info)
     {
         textContainer.SetActive(true);
         textField.text = info;
     }
 
-    public void CloseText()
+    public void CloseInfoText()
     {
         textContainer.SetActive(false);
         textField.text = "";
