@@ -2,21 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpotlightController : MonoBehaviour
+public class SpotlightController : CustomController
 {
     [SerializeField] private int movementSpeed;
     private CharacterController controller;
-    
+
     // Start is called before the first frame update
     void Start()
     {
         controller = GetComponent<CharacterController>();
     }
+    
 
-    // Update is called once per frame
-    void Update()
+    public override void Move(float verticalMotion, float horizontalMotion, float timeElapsed)
     {
-        controller.Move(transform.forward * (-Input.GetAxis("Vertical") * Time.deltaTime * movementSpeed));
-        controller.Move(transform.right * (Input.GetAxis("Horizontal") * Time.deltaTime * movementSpeed));
+        controller.Move(transform.forward * (verticalMotion * timeElapsed * movementSpeed));
+        controller.Move(transform.right * (horizontalMotion * timeElapsed * movementSpeed));
     }
+
 }
