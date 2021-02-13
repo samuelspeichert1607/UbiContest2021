@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using Photon.Pun;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -10,16 +9,24 @@ public class PlayerController : MonoBehaviour
     public float gravity = -9.81f;
     private CharacterController controller;
     private float velocityY = -1;
+    private PhotonView photonView;
+
+    [SerializeField]
+    private Camera mainCamera;
 
     // Start is called before the first frame update
     void Start()
     {
+        photonView = GetComponent<PhotonView>();
         controller = GetComponent<CharacterController>();
+        mainCamera.enabled = photonView.IsMine;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (!photonView.IsMine) return;
+
         Debug.Log("Input.GetAxis(RotateX) = " + Input.GetAxis("RotateX"));
         Debug.Log("Input.GetJoystickNames() : " + Input.GetJoystickNames()[0]);
 
