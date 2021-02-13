@@ -530,3 +530,4 @@ MigrationBackup/
 .ionide/
 
 # End of https://www.toptal.com/developers/gitignore/api/windows,unity,visualstudio,rider,linux
+/Assets/Photon/PhotonVoice/PhotonVoiceLibs/x86_64
