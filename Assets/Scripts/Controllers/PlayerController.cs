@@ -60,10 +60,14 @@ public class PlayerController : CustomController
             }
 
             //le joueur se deplace
-            controller.Move(transform.forward * (-Input.GetAxis("Vertical") * Time.deltaTime * playerSpeed));
-            controller.Move(transform.right * (Input.GetAxis("Horizontal") * Time.deltaTime * playerSpeed));
-            controller.Move(new Vector3(0, velocityY, 0) * Time.deltaTime);
+            Move(Input.GetAxis("Vertical"), Input.GetAxis("Horizontal"), Time.deltaTime);
         }
     }
 
+    public override void Move(float verticalMotion, float horizontalMotion, float timeElapsed)
+    {
+        controller.Move(transform.forward * (verticalMotion * timeElapsed * playerSpeed));
+        controller.Move(transform.right * (horizontalMotion * timeElapsed * playerSpeed));
+        controller.Move(new Vector3(0, velocityY, 0) * Time.deltaTime);
+    }
 }

@@ -10,22 +10,28 @@ public class InteractableItem : MonoBehaviour
     public string InteractPreButtonText;
     public string InteractPostButtonText;
     public string InteractButtonName = "B";
+    public string InteractionStopPostButtonText;
     public float interactRadius = 3f;
 
     protected bool isInteractedWith = false;
     protected bool hasPlayerInRange = false;
-    private bool previousPlayerRangeState = false;
+    protected string toStartInteractText;
+    protected string toEndInteractText;
     
+    private GameObject inRangePlayer;
+    
+    private bool previousPlayerRangeState = false;
     private bool playerHasEnteredRange = false;
     private bool playerHasLeftRange = false;
 
 
     private GameObject[] players;
-    private GameObject inRangePlayer;
 
     private void Start()
     {
         players = GameObject.FindGameObjectsWithTag("Player");
+        toStartInteractText = String.Join(" ", InteractPreButtonText, InteractButtonName, InteractPostButtonText);
+        toEndInteractText = String.Join(" ", InteractPreButtonText, InteractButtonName, InteractionStopPostButtonText);
     }
 
     private void Update()
@@ -83,7 +89,7 @@ public class InteractableItem : MonoBehaviour
     }
 
 
-    public virtual void OnInteract()
+    public virtual void OnInteractStart()
     {
         
     }

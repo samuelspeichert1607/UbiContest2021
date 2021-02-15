@@ -10,7 +10,8 @@ public class Joystick : InteractableItem
     
     [SerializeField] private CustomController target;
     [SerializeField] private TextRenderer textRenderer;
-
+    
+    
     // Update is called once per frame
     void Update()
     {
@@ -30,31 +31,25 @@ public class Joystick : InteractableItem
 
         if (isInteractedWith)
         {
-            target.Move(-Input.GetAxis("Vertical"), Input.GetAxis("Horizontal"), Time.deltaTime);
+            target.Move(Input.GetAxis("Vertical"), Input.GetAxis("Horizontal"), Time.deltaTime);
             //Animation of the joystick would go here
         }
 
     }
 
-    public override void OnInteract()
+    public override void OnInteractStart()
     {
-        isInteractedWith = !isInteractedWith;
+        isInteractedWith = true;
         TogglePlayerController();
+        textRenderer.ShowInfoText(toEndInteractText);
     }
 
     private void TogglePlayerController()
     {
         try
         {
-            CustomController playerController = base.GetInRangePlayer().GetComponent<CustomController>();
-            if (playerController.isMovementAllowed())
-            {
-                playerController.disableMovement();   
-            }
-            else
-            {
-                playerController.allowMovement();
-            }
+            CustomController playerController = GetInRangePlayer().GetComponent<CustomController>();
+            playerController.ToggleMovement();
         }
         catch (NullReferenceException e)
         {
@@ -65,11 +60,13 @@ public class Joystick : InteractableItem
     public override void OnInteractEnd()
     {
         isInteractedWith = false;
+        TogglePlayerController();
+        textRenderer.ShowInfoText(toStartInteractText);
     }
 
     public override void OnPlayerEnterRange()
     {
-        textRenderer.ShowInfoText(InteractPreButtonText + " " + InteractButtonName + " " + InteractPostButtonText);   
+        textRenderer.ShowInfoText(toStartInteractText);   
     }
 
     public override void OnPlayerExitRange()
@@ -81,7 +78,14 @@ public class Joystick : InteractableItem
     {
         if (Input.GetButtonDown(InteractButtonName))
         {
-            OnInteract();
+            if (isInteractedWith)
+            {
+                OnInteractEnd();   
+            }
+            else
+            {
+                OnInteractStart();
+            }
         }
     }
 }

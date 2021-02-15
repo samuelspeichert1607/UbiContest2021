@@ -12,6 +12,18 @@ public class CustomController : MonoBehaviour
         
     }
 
+    public void ToggleMovement()
+    {
+        if (canMove)
+        {
+            disableMovement();
+        }
+        else
+        {
+            allowMovement();
+        }
+    }
+
     public void disableMovement()
     {
         canMove = false;
