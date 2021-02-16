@@ -1,7 +1,4 @@
-﻿using System;
-using UnityEditorInternal;
-using UnityEngine;
-using UnityEngine.SceneManagement;
+﻿using UnityEngine;
 
 namespace UI_Elements
 {

@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour
     {
         photonView = GetComponent<PhotonView>();
         cam = transform.GetChild(0).gameObject;
-        cam.enabled = photonView.IsMine;
+        cam.GetComponent<Camera>().enabled = photonView.IsMine;
         controller = GetComponent<CharacterController>();
         eulerAngleX = cam.transform.position.y;
     }
