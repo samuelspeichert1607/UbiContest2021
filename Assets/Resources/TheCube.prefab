@@ -332,6 +332,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Speaker
       objectReference: {fileID: 0}
+    - target: {fileID: 5037639469788012423, guid: d80a83c9a7ea13a4bb5ea7590592ffe1, type: 3}
+      propertyPath: MaxDistance
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5037639469788012423, guid: d80a83c9a7ea13a4bb5ea7590592ffe1, type: 3}
+      propertyPath: MinDistance
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d80a83c9a7ea13a4bb5ea7590592ffe1, type: 3}
 --- !u!4 &7733076883875937677 stripped
