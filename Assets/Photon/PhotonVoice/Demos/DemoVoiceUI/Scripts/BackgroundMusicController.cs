@@ -22,7 +22,6 @@
             this.volumeSlider.maxValue = 1f;
             this.volumeSlider.SetSingleOnValueChangedCallback(this.OnVolumeChanged);
             this.volumeSlider.value = this.initialVolume;
-            this.OnVolumeChanged(this.initialVolume);
         }
 
         private void OnVolumeChanged(float newValue)

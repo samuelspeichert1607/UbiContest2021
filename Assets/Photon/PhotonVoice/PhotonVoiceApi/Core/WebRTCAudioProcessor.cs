@@ -6,6 +6,9 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Threading;
+#if NETFX_CORE
+using Windows.System.Threading;
+#endif
 
 namespace Photon.Voice
 {
@@ -190,7 +193,7 @@ namespace Photon.Voice
                     if (!reverseStreamThreadRunning)
                     {
 #if NETFX_CORE
-                        Windows.System.Threading.ThreadPool.RunAsync((x) =>
+                        ThreadPool.RunAsync((x) =>
                         {
                             ReverseStreamThread();
                         });
@@ -351,11 +354,7 @@ namespace Photon.Voice
                     {
                         while (reverseStreamThreadRunning)
                         {
-#if WINDOWS_UWP || ENABLE_WINMD_SUPPORT
-                            System.Threading.Tasks.Task.Delay(1).Wait();
-#else
                             Thread.Sleep(1);
-#endif
                         }
                         webrtc_audio_processor_destroy(proc);
                         logger.LogInfo("[PV] WebRTCAudioProcessor: destroyed");

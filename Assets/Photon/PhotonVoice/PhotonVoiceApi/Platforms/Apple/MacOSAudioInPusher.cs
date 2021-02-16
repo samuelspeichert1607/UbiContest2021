@@ -63,17 +63,14 @@ namespace Photon.Voice.MacOS
         // Otherwise recreate native object (instead of adding 'set callback' method to native interface)
         public void SetCallback(Action<float[]> callback, ObjectFactory<float[], int> bufferFactory)
         {
-            this.bufferFactory = bufferFactory;
             this.pushCallback = callback;
+            this.bufferFactory = bufferFactory;
         }
         private void push(IntPtr buf, int len)
         {            
-            if (this.pushCallback != null)
-            {
-                var bufManaged = bufferFactory.New(len);
-                Marshal.Copy(buf, bufManaged, 0, len);
-                pushCallback(bufManaged);
-            }
+            var bufManaged = bufferFactory.New(len);
+            Marshal.Copy(buf, bufManaged, 0, len);
+            pushCallback(bufManaged);
         }
 
         public int Channels { get { return 1; } }

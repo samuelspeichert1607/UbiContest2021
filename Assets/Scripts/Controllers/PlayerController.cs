@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using Photon.Pun;
 using UnityEngine;
 
 public class PlayerController : CustomController
@@ -10,16 +9,18 @@ public class PlayerController : CustomController
     [SerializeField] private int jumpValue;
     [SerializeField] private float gravity = -9.81f;
     private CharacterController controller;
-    private float velocityY =-1;
     private GameObject cam;
+    private float velocityY = -1;
+    private PhotonView photonView;
 
     private float eulerAngleX;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        photonView = GetComponent<PhotonView>();
         cam = transform.GetChild(0).gameObject;
+        cam.GetComponent<Camera>().enabled = photonView.IsMine;
         controller = GetComponent<CharacterController>();
         eulerAngleX = cam.transform.position.y;
     }
@@ -27,9 +28,15 @@ public class PlayerController : CustomController
     // Update is called once per frame
     void Update()
     {
+        if (!photonView.IsMine) return;
+
+        string[] controllers = Input.GetJoystickNames();
+
+        float rotationY = Input.GetAxis("RotateY");
+
+        //on limite la rotation
         if (canMove)
         {
-            float rotationY = Input.GetAxis("RotateY");
             //on limite la rotation
             if ((Mathf.Abs(eulerAngleX) < 90) || (eulerAngleX >= 90 && rotationY > 0) ||
                 (eulerAngleX <= -90 && rotationY < 0))

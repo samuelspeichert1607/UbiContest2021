@@ -7,14 +7,12 @@ public static class AppSettingsExtensions
     {
         return new ChatAppSettings
         {
-            AppIdChat = appSettings.AppIdChat,
+            AppId = appSettings.AppIdChat,
             AppVersion = appSettings.AppVersion,
             FixedRegion = appSettings.IsBestRegion ? null : appSettings.FixedRegion,
             NetworkLogging = appSettings.NetworkLogging,
             Protocol = appSettings.Protocol,
-            EnableProtocolFallback = appSettings.EnableProtocolFallback,
-            Server = appSettings.IsDefaultNameServer ? null : appSettings.Server,
-            Port = (ushort)appSettings.Port
+            Server = appSettings.IsDefaultNameServer ? null : appSettings.Server
         };
     }
 }

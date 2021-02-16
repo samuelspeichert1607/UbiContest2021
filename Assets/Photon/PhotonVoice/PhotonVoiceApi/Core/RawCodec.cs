@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace Photon.Voice
 {
@@ -11,8 +12,6 @@ namespace Photon.Voice
 
 			public Action<ArraySegment<byte>, FrameFlags> Output { set; get; }
 
-            int sizeofT = System.Runtime.InteropServices.Marshal.SizeOf(default(T));
-			byte[] byteBuf = new byte[0];
 			private static readonly ArraySegment<byte> EmptyBuffer = new ArraySegment<byte>(new byte[] { });
 
 			public ArraySegment<byte> DequeueOutput(out FrameFlags flags)
@@ -21,13 +20,10 @@ namespace Photon.Voice
                 return EmptyBuffer;
 			}
 
+            public VoiceInfo Info { get; }
+
 			public void EndOfStream()
 			{
-			}
-
-			public I GetPlatformAPI<I>() where I : class
-			{
-				return null;
 			}
 
 			public void Dispose()
@@ -53,14 +49,10 @@ namespace Photon.Voice
 				{
 					return;
 				}
-
-				var s = buf.Length * sizeofT;
-				if (byteBuf.Length < s)
-				{
-					byteBuf = new byte[s];
-				}
-				Buffer.BlockCopy(buf, 0, byteBuf, 0, s);
-				Output(new ArraySegment<byte>(byteBuf, 0, s), 0);
+				BinaryFormatter bf = new BinaryFormatter();
+				MemoryStream stream = new MemoryStream();
+				bf.Serialize(stream, buf);
+				Output(new ArraySegment<byte>(stream.GetBuffer(), 0, (int)stream.Length), 0);
 			}
 		}
 
@@ -77,29 +69,45 @@ namespace Photon.Voice
 			{
 			}
 			
-			private Type outType = typeof(T);
-			T[] buf = new T[0];
-			int sizeofT = System.Runtime.InteropServices.Marshal.SizeOf(default(T));
-
-			public void Input(byte[] byteBuf, FrameFlags flags)
+			private Type outType = (new T[1])[0].GetType();
+			
+			public void Input(byte[] buf, FrameFlags flags)
 			{
-				if (byteBuf == null)
+				if (buf == null)
 				{
 					return;
 				}
-				if (byteBuf.Length == 0)
+				if (buf.Length == 0)
 				{
 					return;
 				}
-
-				var s = byteBuf.Length / sizeofT;
-				if (buf.Length < s)
+				BinaryFormatter bf = new BinaryFormatter();
+				MemoryStream stream = new MemoryStream(buf);
+				var obj = bf.Deserialize(stream);
+				if (obj.GetType() != outType)
 				{
-					buf = new T[s];
+					var objFloat = obj as float[];
+					if (objFloat != null)
+					{
+						var objShort = new short[objFloat.Length];
+						AudioUtil.Convert(objFloat, objShort, objFloat.Length);
+						output(new FrameOut<T>((T[])(object)objShort, false));
+					}
+					else
+					{
+						var objShort = obj as short[];
+						if (objShort != null)
+						{
+							objFloat = new float[objShort.Length];
+							AudioUtil.Convert(objShort, objFloat, objShort.Length);
+							output(new FrameOut<T>((T[])(object)objFloat, false));
+						}
+					}
 				}
-				Buffer.BlockCopy(byteBuf, 0, buf, 0, byteBuf.Length);
-
-				output(new FrameOut<T>((T[])(object)buf, false));
+				else
+				{
+					output(new FrameOut<T>((T[])obj, false));
+				}
 			}
 			public void Dispose()
 			{

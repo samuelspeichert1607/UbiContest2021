@@ -19,7 +19,6 @@ namespace Photon.Voice.Unity
     /// <summary> Component representing remote audio stream in local scene. </summary>
     [RequireComponent(typeof(AudioSource))]
     [AddComponentMenu("Photon Voice/Speaker")]
-    [DisallowMultipleComponent]
     public class Speaker : VoiceComponent
     {
         #region Private Fields
@@ -45,33 +44,36 @@ namespace Photon.Voice.Unity
         [SerializeField]
         private int playDelayMs = 200;
 
-        [SerializeField] 
-        private PlaybackDelaySettings playbackDelaySettings = new PlaybackDelaySettings
-        {
-            MinDelaySoft = PlaybackDelaySettings.DEFAULT_LOW,
-            MaxDelaySoft = PlaybackDelaySettings.DEFAULT_HIGH,
-            MaxDelayHard = PlaybackDelaySettings.DEFAULT_MAX
-        };
-
-        private bool playbackExplicitlyStopped;
-
         #endregion
 
         #region Public Fields
 
-        ///<summary>Remote audio stream playback delay to compensate packets latency variations. Try 100 - 200 if sound is choppy.</summary>
-        [Obsolete("Use SetPlaybackDelaySettings methods instead")]
-        public int PlayDelayMs
+        ///<summary>Remote audio stream playback delay to compensate packets latency variations. Try 100 - 200 if sound is choppy.</summary> 
+        public int PlayDelayMs 
         {
             get
             {
-                return this.playbackDelaySettings.MinDelaySoft;
+                return this.playDelayMs;
             }
             set
             {
-                if (value >= 0 && value < this.playbackDelaySettings.MaxDelaySoft)
+                if (this.playDelayMs != value)
                 {
-                    this.playbackDelaySettings.MinDelaySoft = value;
+                    if (value < 0)
+                    {
+                        if (this.Logger.IsErrorEnabled)
+                        {
+                            this.Logger.LogError("Playback delay cannot be negative ({0})", value);
+                        }
+                    }
+                    else
+                    {
+                        this.playDelayMs = value;
+                        if (this.IsPlaying)
+                        {
+                            this.RestartPlayback();
+                        }
+                    }
                 }
             }
         }
@@ -144,18 +146,15 @@ namespace Photon.Voice.Unity
                             {
                                 if (this.isActiveAndEnabled)
                                 {
-                                    if (!this.playbackExplicitlyStopped)
-                                    {
-                                        this.StartPlaying();
-                                    }
+                                    this.StartPlayback();
                                 }
                                 else
                                 {
-                                    this.StopPlaying();
+                                    this.StopPlayback();
                                 }
                             }
                         }
-                        else if (!this.PlaybackStarted && !this.playbackExplicitlyStopped)
+                        else if (!this.PlaybackStarted)
                         {
                             this.StartPlaying();
                         }
@@ -167,40 +166,13 @@ namespace Photon.Voice.Unity
         /// <summary> Returns if the playback is on. </summary>
         public bool PlaybackStarted { get; private set; }
 
-        /// <summary>Gets the value in ms above which the audio player tries to keep the delay.</summary>
-        public int PlaybackDelayMinSoft
-        {
-            get
-            {
-                return this.playbackDelaySettings.MinDelaySoft;
-            }
-        }
-
-        /// <summary>Gets the value in ms below which the audio player tries to keep the delay.</summary>
-        public int PlaybackDelayMaxSoft
-        {
-            get
-            {
-                return this.playbackDelaySettings.MaxDelaySoft;
-            }
-        }
-
-        /// <summary>Gets the value in ms that audio play delay will not exceed.</summary>
-        public int PlaybackDelayMaxHard
-        {
-            get
-            {
-                return this.playbackDelaySettings.MaxDelayHard;
-            }
-        }
-
         #endregion
 
         #region Private Methods
         
         private void OnEnable()
         {
-            if (this.IsLinked && !this.PlaybackStarted && !this.playbackExplicitlyStopped)
+            if (this.IsLinked && !this.PlaybackStarted)
             {
                 this.StartPlaying();
             }
@@ -229,13 +201,11 @@ namespace Photon.Voice.Unity
                 this.Logger.LogDebug("Initializing.");
             }
             #if USE_ONAUDIOFILTERREAD
-            this.outBuffer = new AudioSyncBuffer<float>(this.playbackDelaySettings.MinDelaySoft, this.Logger, string.Empty, this.Logger.IsInfoEnabled);
+            this.outBuffer = new AudioSyncBuffer<float>(this.Logger, string.Empty, this.Logger.IsInfoEnabled);
             this.outputSampleRate = AudioSettings.outputSampleRate;
             Func<IAudioOut<float>> factory = () => this.outBuffer;
             #else
-            Func<IAudioOut<float>> factory = () => new UnityAudioOut(this.GetComponent<AudioSource>(), 
-                new UnityAudioOut.PlayDelayConfig { Low = this.playbackDelaySettings.MinDelaySoft, High = this.playbackDelaySettings.MaxDelaySoft, Max = this.playbackDelaySettings.MaxDelayHard }, 
-                this.Logger, string.Empty, this.Logger.IsInfoEnabled);
+            Func<IAudioOut<float>> factory = () => new UnityAudioOut(this.GetComponent<AudioSource>(), this.Logger, string.Empty, this.Logger.IsInfoEnabled);
             #endif
 
             #if !UNITY_EDITOR && (UNITY_PS4 || UNITY_SHARLIN)
@@ -337,14 +307,6 @@ namespace Photon.Voice.Unity
                 }
                 return false;
             }
-            if (this.isActiveAndEnabled && this.PlaybackOnlyWhenEnabled)
-            {
-                if (this.Logger.IsWarningEnabled)
-                {
-                    this.Logger.LogWarning("Cannot start playback because PlaybackOnlyWhenEnabled is true and Speaker is not enabled or its GameObject is not active in the hierarchy.");
-                }
-                return false;
-            }
             if (this.audioOutput == null)
             {
                 if (this.Logger.IsErrorEnabled)
@@ -364,13 +326,12 @@ namespace Photon.Voice.Unity
             }
             if (this.Logger.IsInfoEnabled)
             {
-                this.Logger.LogInfo("Speaker about to start playback (v#{0}/p#{1}/c#{2}), i=[{3}], d={4}", 
-                    this.remoteVoiceLink.VoiceId, this.remoteVoiceLink.PlayerId, this.remoteVoiceLink.ChannelId, voiceInfo, this.playbackDelaySettings);
+                this.Logger.LogInfo("Speaker about to start playback (v#{0}/p#{1}/c#{2}), i=[{3}], d={4}ms", 
+                    this.remoteVoiceLink.VoiceId, this.remoteVoiceLink.PlayerId, this.remoteVoiceLink.ChannelId, voiceInfo, this.PlayDelayMs);
             }
-            this.audioOutput.Start(voiceInfo.SamplingRate, voiceInfo.Channels, voiceInfo.FrameDurationSamples);
+            this.audioOutput.Start(voiceInfo.SamplingRate, voiceInfo.Channels, voiceInfo.FrameDurationSamples, this.PlayDelayMs);
             this.remoteVoiceLink.FloatFrameDecoded += this.OnAudioFrame;
             this.PlaybackStarted = true;
-            this.playbackExplicitlyStopped = false;
             if (this.useSeparateCoroutine)
             {
                 this.playbackCoroutine = this.StartCoroutine(this.PlaybackCoroutine());
@@ -469,28 +430,6 @@ namespace Photon.Voice.Unity
         }
         #endif
 
-        #if UNITY_EDITOR
-        private void OnValidate()
-        {
-            if (this.playDelayMs > 0)
-            {
-                if (this.playbackDelaySettings.MinDelaySoft != this.playDelayMs)
-                {
-                    this.playbackDelaySettings.MinDelaySoft = this.playDelayMs;
-                    if (this.playbackDelaySettings.MaxDelaySoft <= this.playbackDelaySettings.MinDelaySoft)
-                    {
-                        this.playbackDelaySettings.MaxDelaySoft = 2 * this.playbackDelaySettings.MinDelaySoft;
-                        if (this.playbackDelaySettings.MaxDelayHard < this.playbackDelaySettings.MaxDelaySoft)
-                        {
-                            this.playbackDelaySettings.MaxDelayHard = this.playbackDelaySettings.MaxDelaySoft + 1000;
-                        }
-                    }
-                }
-                this.playDelayMs = -1;
-            }
-        }
-        #endif
-
         #endregion
 
         #region Public Methods
@@ -510,16 +449,7 @@ namespace Photon.Voice.Unity
         /// <returns>True if playback is successfully stopped.</returns>
         public bool StopPlayback()
         {
-            if (this.playbackExplicitlyStopped)
-            {
-                if (this.Logger.IsWarningEnabled)
-                {
-                    this.Logger.LogWarning("Cannot stop playback because it was already been explicitly stopped.");
-                }
-                return false;
-            }
-            this.playbackExplicitlyStopped = this.StopPlaying();
-            return this.playbackExplicitlyStopped;
+            return this.StopPlaying();
         }
 
         /// <summary>
@@ -529,67 +459,6 @@ namespace Photon.Voice.Unity
         public bool RestartPlayback()
         {
             return this.StopPlayback() && this.StartPlayback();
-        }
-
-        /// <summary>
-        /// Sets the settings for the playback behaviour in case of delays.
-        /// </summary>
-        /// <param name="pdc">Playback delay configuration struct.</param>
-        /// <returns>If a change has been made.</returns>
-        public bool SetPlaybackDelaySettings(PlaybackDelaySettings pdc)
-        {
-            return this.SetPlaybackDelaySettings(pdc.MinDelaySoft, pdc.MaxDelaySoft, pdc.MaxDelayHard);
-        }
-        
-        /// <summary>
-        /// Sets the settings for the playback behaviour in case of delays.
-        /// </summary>
-        /// <param name="low">In milliseconds, audio player tries to keep the playback delay above this value.</param>
-        /// <param name="high">In milliseconds, audio player tries to keep the playback below above this value.</param>
-        /// <param name="max">In milliseconds, audio player guarantees that the playback delay never exceeds this value.</param>
-        /// <returns>If a change has been made.</returns>
-        public bool SetPlaybackDelaySettings(int low, int high, int max)
-        {
-            if (low >= 0 && low < high)
-            {
-                if (this.playbackDelaySettings.MaxDelaySoft != high ||
-                    this.playbackDelaySettings.MinDelaySoft != low ||
-                    this.playbackDelaySettings.MaxDelayHard != max)
-                {
-                    if (max < high)
-                    {
-                        max = high;
-                    }
-                    this.playbackDelaySettings.MaxDelaySoft = high;
-                    this.playbackDelaySettings.MinDelaySoft = low;
-                    this.playbackDelaySettings.MaxDelayHard = max;
-                    bool wasPlaying = this.IsPlaying;
-                    if (this.IsPlaying)
-                    {
-                        this.StopPlaying();
-                    }
-                    bool wasInitialized = this.initialized;
-                    if (this.initialized)
-                    {
-                        this.initialized = false;
-                        this.audioOutput = null;
-                    }
-                    if (wasInitialized)
-                    {
-                        this.Initialize();
-                        if (wasPlaying)
-                        {
-                            this.StartPlaying();
-                        }
-                    }
-                    return true;
-                }
-            } 
-            else if (this.Logger.IsErrorEnabled)
-            {
-                this.Logger.LogError("Wrong playback delay config values, make sure 0 <= Low < High, low={0}, high={1}, max={2}", low, high, max);
-            }
-            return false;
         }
 
         #endregion
