@@ -1,12 +1,8 @@
-<<<<<<< HEAD
-﻿using UnityEngine;
-=======
-﻿using System;
+using System;
 using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
->>>>>>> origin/develop
 
 namespace UI_Elements
 {

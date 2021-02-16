@@ -37,7 +37,6 @@ public class PlayerController : CustomController
         //on limite la rotation
         if (canMove)
         {
-            float rotationY = Input.GetAxis("RotateY");
             //on limite la rotation
             if ((Mathf.Abs(eulerAngleX) < 90) || (eulerAngleX >= 90 && rotationY > 0) ||
                 (eulerAngleX <= -90 && rotationY < 0))
