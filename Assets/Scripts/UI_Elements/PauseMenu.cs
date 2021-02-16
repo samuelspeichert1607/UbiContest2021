@@ -1,4 +1,12 @@
+<<<<<<< HEAD
 ﻿using UnityEngine;
+=======
+﻿using System;
+using UnityEditorInternal;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
+>>>>>>> origin/develop
 
 namespace UI_Elements
 {
@@ -9,41 +17,39 @@ namespace UI_Elements
         
         [SerializeField]
         private GameObject validationMenu;
-    
-        private bool _isPaused = false;
+
+        [SerializeField] 
+        private GameObject onPauseFirstSelected, onValidationFirstSelected, onReturnFromValidationFirstSelected;
+
+        public void Start()
+        {
+            pauseMenu.SetActive(false);
+        }
 
         public void Update()
         {
             //TODO there is a better way to map this probably
-            if (Input.GetKeyDown(KeyCode.Escape))
+            if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Joystick1Button7))
             {
-                _isPaused = !_isPaused;
+                pauseUnPause();
                 if (validationMenu.activeSelf)
                 {
                     validationMenu.SetActive(false);
                 }
             }
+        }
 
-            if (_isPaused)
+        public void pauseUnPause()
+        {
+            if (!pauseMenu.activeInHierarchy)
             {
-                TriggerPauseOn();
+                pauseMenu.SetActive(true);
+                SelectObject(onPauseFirstSelected);
             }
             else
             {
-                TriggerPauseOff();
+                pauseMenu.SetActive(false);
             }
-        }
-
-        public void TriggerPauseOn()
-        {
-            pauseMenu.SetActive(true);
-            _isPaused = true;
-        }
-    
-        public void TriggerPauseOff()
-        {
-            pauseMenu.SetActive(false);
-            _isPaused = false;
         }
 
         public void LogOut()
@@ -51,6 +57,26 @@ namespace UI_Elements
             Debug.Log("Logging out");
             // SceneManager.LoadScene(0); //Laoding back the menu scene
         }
-    
+
+        public void OpenValidationMenu()
+        {
+            validationMenu.SetActive(true);
+            SelectObject(onValidationFirstSelected);
+        }
+
+        public void CloseValidationMenu()
+        {
+            validationMenu.SetActive(false);
+            SelectObject(onReturnFromValidationFirstSelected);
+        }
+        
+
+        private void SelectObject(GameObject gameObjectToSelect)
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject(gameObjectToSelect);
+        }
+
+
     }
 }
