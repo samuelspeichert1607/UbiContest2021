@@ -12,7 +12,7 @@ public class MenuPrincipal : MonoBehaviour
     
     public void ClickStartButton()
     {
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     public void ClickQuitButton()
