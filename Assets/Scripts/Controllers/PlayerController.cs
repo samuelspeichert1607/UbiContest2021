@@ -22,9 +22,9 @@ public class PlayerController : CustomController
     // Start is called before the first frame update
     void Start()
     {
-        //photonView = GetComponent<PhotonView>();
+        photonView = GetComponent<PhotonView>();
         cam = transform.GetChild(0).gameObject;
-        //cam.GetComponent<Camera>().enabled = photonView.IsMine;
+        cam.GetComponent<Camera>().enabled = photonView.IsMine;
         controller = GetComponent<CharacterController>();
         eulerAngleX = cam.transform.position.y;
     }
