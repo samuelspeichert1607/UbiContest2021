@@ -4,63 +4,83 @@ using UnityEngine;
 
 public class MarelleTile : MonoBehaviour
 {
-    //private GameObject player1;
-    //private GameObject player2;
 
-    [SerializeField] private float timerTime;
+    
     [SerializeField] private bool firstTile = false;
 
 
+    Material tileMaterial1;
+    Material tileMaterial2;
+
+    private float timerTime;
     private float timer =0;
+    private bool timerEnable = false;
 
     private GameObject playerEntered=null;
 
-    // Start is called before the first frame update
+    
+
     void Start()
     {
-        
+        timerTime = transform.parent.GetComponent<MarelleWon>().timerTime;
+        tileMaterial1 = transform.GetChild(0).GetComponent<Renderer>().material;
+        tileMaterial2 = transform.GetChild(1).GetComponent<Renderer>().material;
     }
 
-    // Update is called once per frame
+
     void Update()
     {
-        
-        if (timer > 0)
+        if (timerEnable)
         {
-            timer -= Time.deltaTime;
+            if (timer > 0)
+            {
+                timer -= Time.deltaTime;
+            }
+            else
+            {
+                ChangeColour(Color.red);
+                timer = 0;
+            }
         }
-        else
-        {
-            timer = 0;
-        }
+
 
 
     }
 
 
-    public void CollisionDetected(GameObject collision)
+    public void CollisionDetected(GameObject collision,GameObject sourceTile)
     {
-        bool check = transform.parent.GetComponent<EndTile>().check;
-        if ((!firstTile&& check) || (firstTile && !check))
+        
+        bool isResolve = transform.parent.GetComponent<MarelleWon>().isResolve;
+        
+
+        if ((!firstTile&& isResolve) || (firstTile && !isResolve))
         {
-            Debug.Log(playerEntered+" "+ collision);
+            //playerEntered contient le premier joueur à entrer en collision avec la tuile
             if (playerEntered == null)
             {
                 playerEntered = collision;
+                timerEnable = true;
                 timer = timerTime;
+                sourceTile.GetComponent<Renderer>().material.SetColor("_Color", Color.yellow);
+                
             }
+            //si un deuxième joueur entre en collision on commence le timer
             else if (playerEntered != collision)
             {
+                timerEnable = false;
                 playerEntered = null;
                 if (timer > 0)
                 {
-                    Debug.Log("oui");
-                    transform.parent.GetComponent<EndTile>().check = true;
+
+                    ChangeColour(Color.green);
+                    transform.parent.GetComponent<MarelleWon>().isResolve = true;
+                    
                 }
                 else
                 {
-                    Debug.Log("non");
-                    transform.parent.GetComponent<EndTile>().check = false;
+
+                    transform.parent.GetComponent<MarelleWon>().isResolve = false;
                     
                 }
 
@@ -68,6 +88,13 @@ public class MarelleTile : MonoBehaviour
         }
 
 
+
+    }
+
+    private void ChangeColour(Color color)
+    {
+        tileMaterial1.SetColor("_Color", color);
+        tileMaterial2.SetColor("_Color", color);
     }
 
 
