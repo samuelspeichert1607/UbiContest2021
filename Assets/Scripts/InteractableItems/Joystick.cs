@@ -10,7 +10,11 @@ public class Joystick : InteractableItem
     
     [SerializeField] private CustomController target;
     [SerializeField] private TextRenderer textRenderer;
-    
+
+    private new void Start()
+    {
+        base.Start();
+    }
     
     // Update is called once per frame
     void Update()
@@ -66,6 +70,7 @@ public class Joystick : InteractableItem
 
     public override void OnPlayerEnterRange()
     {
+        FindTextRendererOfPlayerInRange();
         textRenderer.ShowInfoText(toStartInteractText);   
     }
 
@@ -87,5 +92,10 @@ public class Joystick : InteractableItem
                 OnInteractStart();
             }
         }
+    }
+
+    private void FindTextRendererOfPlayerInRange()
+    {
+        textRenderer = GetInRangePlayer().GetComponentInChildren<TextRenderer>();
     }
 }

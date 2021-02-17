@@ -14,6 +14,8 @@ public class NetworkController : MonoBehaviourPunCallbacks
     [SerializeField]
     private byte MaxPlayers = 4;
 
+    [SerializeField] private string sceneNameToLoadOnStart;
+
     private void Start()
     {
         PhotonNetwork.ConnectUsingSettings();
@@ -47,7 +49,7 @@ public class NetworkController : MonoBehaviourPunCallbacks
     {
         base.OnJoinedRoom();
 
-        SceneManager.LoadScene("Puzzle_ASpotInTheDark");
+        SceneManager.LoadScene(sceneNameToLoadOnStart);
     }
 
     private void Status(string msg)

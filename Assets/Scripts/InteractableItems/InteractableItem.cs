@@ -27,7 +27,7 @@ public class InteractableItem : MonoBehaviour
 
     private GameObject[] players;
 
-    private void Start()
+    protected void Start()
     {
         players = GameObject.FindGameObjectsWithTag("Player");
         toStartInteractText = String.Join(" ", InteractPreButtonText, InteractButtonName, InteractPostButtonText);
