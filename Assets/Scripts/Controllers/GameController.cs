@@ -9,6 +9,6 @@ public class GameController : MonoBehaviourPun
     private void Awake()
     {
         int i = PhotonNetwork.CurrentRoom.PlayerCount - 1;
-        PhotonNetwork.Instantiate("TheCube", spawnPoints[i].position, spawnPoints[i].rotation);
+        PhotonNetwork.Instantiate("Player", spawnPoints[i].position, spawnPoints[i].rotation);
     }
 }

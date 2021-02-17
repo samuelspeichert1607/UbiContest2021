@@ -1,8 +1,8 @@
 using System;
-using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
+using Photon.Pun;
 
 namespace UI_Elements
 {
@@ -51,7 +51,8 @@ namespace UI_Elements
         public void LogOut()
         {
             Debug.Log("Logging out");
-            // SceneManager.LoadScene(0); //Laoding back the menu scene
+            PhotonNetwork.Disconnect();
+            PhotonNetwork.LoadLevel(0);
         }
 
         public void OpenValidationMenu()

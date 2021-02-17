@@ -47,7 +47,7 @@ public class NetworkController : MonoBehaviourPunCallbacks
     {
         base.OnJoinedRoom();
 
-        SceneManager.LoadScene("TestConnectivity");
+        SceneManager.LoadScene("Puzzle_ASpotInTheDark");
     }
 
     private void Status(string msg)
