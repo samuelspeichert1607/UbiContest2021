@@ -15,11 +15,11 @@ public class PS4Controller : IController
     }
     public float GetRightAxisX()
     {
-        return Input.GetAxis("Mouse ScrollWheel");
+        return Input.GetAxis("PS4RightX");
     }
     public float GetRightAxisY()
     {
-        return Input.GetAxis("DpadX");
+        return -1 * Input.GetAxis("DpadX");
     }
     public bool GetButtonDown(string button)
     {
