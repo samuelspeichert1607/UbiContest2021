@@ -40,7 +40,7 @@ public class InteractableItem : MonoBehaviour
 
     private void Update()
     {
-        PickController();
+
     }
 
     protected void CheckIfAPlayerIsInRange()
@@ -134,7 +134,7 @@ public class InteractableItem : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, interactRadius);
     }
     
-    private void PickController()
+    public void PickController()
     {
         string currentController = Input.GetJoystickNames()[0];
         if (controllerPicker.IsDifferentController(currentController))

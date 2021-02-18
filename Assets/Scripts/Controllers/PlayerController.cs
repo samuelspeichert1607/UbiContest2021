@@ -22,9 +22,9 @@ public class PlayerController : CustomController
     // Start is called before the first frame update
     void Start()
     {
-        // photonView = GetComponent<PhotonView>();
+        photonView = GetComponent<PhotonView>();
         cam = transform.GetChild(0).gameObject;
-        // cam.GetComponent<Camera>().enabled = photonView.IsMine;
+        cam.GetComponent<Camera>().enabled = photonView.IsMine;
         controller = GetComponent<CharacterController>();
         eulerAngleX = cam.transform.position.y;
         controllerPicker = new ControllerPicker();
@@ -33,7 +33,7 @@ public class PlayerController : CustomController
     // Update is called once per frame
     void Update()
     {
-        // if (!photonView.IsMine) return;
+        if (!photonView.IsMine) return;
         
         string controllerUsed = Input.GetJoystickNames()[0];
         PickController(controllerUsed);

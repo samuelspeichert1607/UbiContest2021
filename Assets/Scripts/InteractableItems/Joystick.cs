@@ -19,6 +19,7 @@ public class Joystick : InteractableItem
     // Update is called once per frame
     void Update()
     {
+        PickController();
         CheckIfAPlayerIsInRange();
         if (hasPlayerEnteredRange())
         {
