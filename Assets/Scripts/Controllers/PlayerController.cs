@@ -15,27 +15,29 @@ public class PlayerController : CustomController
     private PhotonView photonView;
     
     private IController userController;
-    private string previousController;
+    private ControllerPicker controllerPicker;
 
     private float eulerAngleX;
 
     // Start is called before the first frame update
     void Start()
     {
-        photonView = GetComponent<PhotonView>();
+        // photonView = GetComponent<PhotonView>();
         cam = transform.GetChild(0).gameObject;
-        cam.GetComponent<Camera>().enabled = photonView.IsMine;
+        // cam.GetComponent<Camera>().enabled = photonView.IsMine;
         controller = GetComponent<CharacterController>();
         eulerAngleX = cam.transform.position.y;
+        controllerPicker = new ControllerPicker();
     }
 
     // Update is called once per frame
     void Update()
     {
-        //if (!photonView.IsMine) return;
-        string[] controllers = Input.GetJoystickNames();
-        SwapController(controllers);
+        // if (!photonView.IsMine) return;
         
+        string controllerUsed = Input.GetJoystickNames()[0];
+        PickController(controllerUsed);
+
         float rotationY = userController.GetRightAxisY();
 
         //on limite la rotation
@@ -82,24 +84,12 @@ public class PlayerController : CustomController
         controller.Move(new Vector3(0, velocityY, 0) * Time.deltaTime);
     }
 
-    private void SwapController(string[] controllers)
+    private void PickController(string controllerUsed)
     {
-        if (previousController != controllers[0])
+        if (controllerPicker.IsDifferentController(controllerUsed))
         {
-            // Peut-être à ajuster pour les manettes 3rd party qui fonctionnent comme des manettes de xbox
-            if (controllers[0] == "Controller (Xbox One For Windows)")
-            {
-                userController = new XboxController();
-                previousController = controllers[0];
-            }
-
-            else if (controllers[0] == "Wireless Controller")
-            {
-                userController = new PS4Controller();
-                previousController = controllers[0];
-            }
+            userController = controllerPicker.PickController(controllerUsed);
         }
-        
     }
     
 }

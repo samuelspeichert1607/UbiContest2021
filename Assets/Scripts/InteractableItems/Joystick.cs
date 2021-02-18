@@ -10,11 +10,11 @@ public class Joystick : InteractableItem
     
     [SerializeField] private CustomController target;
     [SerializeField] private TextRenderer textRenderer;
-    
-    
+
     // Update is called once per frame
     void Update()
     {
+
         CheckIfAPlayerIsInRange();
         if (hasPlayerEnteredRange())
         {
@@ -31,7 +31,7 @@ public class Joystick : InteractableItem
 
         if (isInteractedWith)
         {
-            target.Move(Input.GetAxis("Vertical"), Input.GetAxis("Horizontal"), Time.deltaTime);
+            target.Move(UserController.GetLeftAxisY(), UserController.GetLeftAxisX(), Time.deltaTime);
             //Animation of the joystick would go here
         }
 
@@ -76,7 +76,7 @@ public class Joystick : InteractableItem
 
     public override void OnPlayerInRange()
     {
-        if (Input.GetButtonDown(InteractButtonName))
+        if (UserController.GetButtonDown(InteractButtonName))
         {
             if (isInteractedWith)
             {
@@ -88,4 +88,5 @@ public class Joystick : InteractableItem
             }
         }
     }
+    
 }

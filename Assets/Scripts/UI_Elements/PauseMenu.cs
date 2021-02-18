@@ -17,15 +17,20 @@ namespace UI_Elements
         [SerializeField] 
         private GameObject onPauseFirstSelected, onValidationFirstSelected, onReturnFromValidationFirstSelected;
 
+        private ControllerPicker controllerPicker;
+        private IController userController;
+
         public void Start()
         {
+            controllerPicker = new ControllerPicker();
             pauseMenu.SetActive(false);
         }
 
         public void Update()
         {
+            PickController();
             //TODO there is a better way to map this probably
-            if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Joystick1Button7))
+            if (Input.GetKeyDown(KeyCode.Escape) || userController.GetButtonDown("Button7"))
             {
                 pauseUnPause();
                 if (validationMenu.activeSelf)
@@ -72,7 +77,14 @@ namespace UI_Elements
             EventSystem.current.SetSelectedGameObject(null);
             EventSystem.current.SetSelectedGameObject(gameObjectToSelect);
         }
-
-
+    
+        private void PickController()
+        {
+            string currentController = Input.GetJoystickNames()[0];
+            if (controllerPicker.IsDifferentController(currentController))
+            {
+                userController = controllerPicker.PickController(currentController);
+            }
+        }
     }
 }

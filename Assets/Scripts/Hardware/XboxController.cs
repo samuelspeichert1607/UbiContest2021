@@ -32,6 +32,14 @@ public class XboxController : IController
         {
             case "Jump":
                 return Input.GetButtonDown("Jump");
+            case "B":
+                return Input.GetButtonDown("B");
+            case "XboxStart":
+                return Input.GetButtonDown("XboxStart");
+            case "Submit":
+                return Input.GetButtonDown("Submit");
+            case "Cancel":
+                return Input.GetButtonDown("Cancel");
             default:
                 return false;
         }

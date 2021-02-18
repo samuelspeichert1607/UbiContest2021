@@ -27,6 +27,14 @@ public class PS4Controller : IController
         {
             case "Jump" :
                 return Input.GetButtonDown("B");
+            case "B":
+                return Input.GetButtonDown("X");
+            case "Button7":
+                return Input.GetButtonDown("Button9");
+            case "Submit":
+                return Input.GetButtonDown("B");
+            case "Cancel":
+                return Input.GetButtonDown("X");
             default:
                 return false;
         }
