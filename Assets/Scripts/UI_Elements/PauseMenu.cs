@@ -1,8 +1,8 @@
 using System;
-using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
+using Photon.Pun;
 
 namespace UI_Elements
 {
@@ -10,6 +10,8 @@ namespace UI_Elements
     {
         [SerializeField]
         private GameObject pauseMenu;
+        // private PhotonView photonView;
+        private CustomController playerController;
         
         [SerializeField]
         private GameObject validationMenu;
@@ -23,13 +25,17 @@ namespace UI_Elements
         public void Start()
         {
             controllerPicker = new ControllerPicker();
+            // photonView = GetComponent<PhotonView>();
             pauseMenu.SetActive(false);
+            playerController = GetComponentInParent<CustomController>();
         }
 
         public void Update()
         {
             PickController();
             //TODO there is a better way to map this probably
+            //// if (photonView.IsMine)
+            // {
             if (Input.GetKeyDown(KeyCode.Escape) || userController.GetButtonDown("Button7"))
             {
                 pauseUnPause();
@@ -37,26 +43,40 @@ namespace UI_Elements
                 {
                     validationMenu.SetActive(false);
                 }
-            }
+            } 
+            // }
         }
 
         public void pauseUnPause()
         {
             if (!pauseMenu.activeInHierarchy)
             {
-                pauseMenu.SetActive(true);
-                SelectObject(onPauseFirstSelected);
+                Pause();
             }
             else
             {
-                pauseMenu.SetActive(false);
+                UnPause();
             }
+        }
+
+        private void Pause()
+        {
+            pauseMenu.SetActive(true);
+            playerController.disableMovement();
+            SelectObject(onPauseFirstSelected);
+        }
+
+        private void UnPause()
+        {
+            playerController.allowMovement();
+            pauseMenu.SetActive(false);
         }
 
         public void LogOut()
         {
             Debug.Log("Logging out");
-            // SceneManager.LoadScene(0); //Laoding back the menu scene
+            PhotonNetwork.Disconnect();
+            PhotonNetwork.LoadLevel(0);
         }
 
         public void OpenValidationMenu()

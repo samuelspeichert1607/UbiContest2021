@@ -16,8 +16,8 @@ public class SpotlightController : CustomController
 
     public override void Move(float verticalMotion, float horizontalMotion, float timeElapsed)
     {
-        controller.Move(transform.forward * (verticalMotion * timeElapsed * movementSpeed));
-        controller.Move(transform.right * (horizontalMotion * timeElapsed * movementSpeed));
+        controller.Move(- transform.forward * (verticalMotion * timeElapsed * movementSpeed));
+        controller.Move(- transform.right * (horizontalMotion * timeElapsed * movementSpeed));
     }
 
 }
