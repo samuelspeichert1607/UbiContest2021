@@ -20,10 +20,7 @@
         }
 
         //https://forum.unity.com/threads/change-the-value-of-a-toggle-without-triggering-onvaluechanged.275056/#post-2750271
-        #if !UNITY_2019_1_OR_NEWER
         private static Toggle.ToggleEvent emptyToggleEvent = new Toggle.ToggleEvent();
-        #endif
-
         // added to 2019.1 https://docs.unity3d.com/2019.1/Documentation/ScriptReference/UI.Toggle.SetIsOnWithoutNotify.html
         public static void SetValue(this Toggle toggle, bool isOn)
         {
@@ -37,10 +34,7 @@
             #endif
         }
 
-        #if !UNITY_2019_1_OR_NEWER
         private static Slider.SliderEvent emptySliderEvent = new Slider.SliderEvent();
-        #endif
-
         public static void SetValue(this Slider slider, float v)
         {
             #if UNITY_2019_1_OR_NEWER
@@ -50,26 +44,6 @@
             slider.onValueChanged = emptySliderEvent;
             slider.value = v;
             slider.onValueChanged = originalEvent;
-            #endif
-        }
-
-        #if !UNITY_2019_1_OR_NEWER
-        private static InputField.OnChangeEvent emptyInputFieldEvent = new InputField.OnChangeEvent();
-        private static InputField.SubmitEvent emptyInputFieldSubmitEvent = new InputField.SubmitEvent();
-        #endif
-
-        public static void SetValue(this InputField inputField, string v)
-        {
-            #if UNITY_2019_1_OR_NEWER
-            inputField.SetTextWithoutNotify(v);
-            #else
-            InputField.OnChangeEvent origianlEvent = inputField.onValueChanged;
-            InputField.SubmitEvent originalSubmitEvent = inputField.onEndEdit;
-            inputField.onValueChanged = emptyInputFieldEvent;
-            inputField.onEndEdit = emptyInputFieldSubmitEvent;
-            inputField.text = v;
-            inputField.onValueChanged = origianlEvent;
-            inputField.onEndEdit = originalSubmitEvent;
             #endif
         }
 

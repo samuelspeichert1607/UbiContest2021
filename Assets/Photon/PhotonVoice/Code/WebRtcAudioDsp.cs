@@ -5,7 +5,6 @@ using UnityEngine;
 namespace Photon.Voice.Unity
 {
     [RequireComponent(typeof(Recorder))]
-    [DisallowMultipleComponent]
     public class WebRtcAudioDsp : VoiceComponent
     {
         #region Private Fields

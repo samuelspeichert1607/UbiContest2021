@@ -86,7 +86,7 @@ public class ServerSettingsInspector : Editor
             EditorGUI.indentLevel++;
 
             //Realtime APP ID
-            this.BuildAppIdField(settingsSp.FindPropertyRelative("AppIdRealtime"), "App Id PUN");
+            this.BuildAppIdField(settingsSp.FindPropertyRelative("AppIdRealtime"));
 
             if (PhotonEditorUtils.HasChat)
             {
@@ -123,8 +123,8 @@ public class ServerSettingsInspector : Editor
 
         if (!string.IsNullOrEmpty(PhotonNetwork.BestRegionSummaryInPreferences))
         {
-            this.regionsPrefsList = PhotonNetwork.BestRegionSummaryInPreferences.Split(new[] {';'}, StringSplitOptions.RemoveEmptyEntries);
-            if (this.regionsPrefsList.Length < 2)
+            this.regionsPrefsList = PhotonNetwork.BestRegionSummaryInPreferences.Split(';');
+            if (this.regionsPrefsList == null || this.regionsPrefsList.Length == 0 || string.IsNullOrEmpty(this.regionsPrefsList[0]))
             {
                 this.prefLabel = notAvailableLabel;
             }
@@ -238,16 +238,12 @@ public class ServerSettingsInspector : Editor
             this.rpcCrc = this.RpcListHashCode().ToString("X");
         }
 
-        #region Simple Settings
+        #region emotitron Settings
 
         /// Conditional Simple Sync Settings DrawGUI - Uses reflection to avoid having to hard connect the libraries
         var SettingsScriptableObjectBaseType = GetType("Photon.Utilities.SettingsScriptableObjectBase");
         if (SettingsScriptableObjectBaseType != null)
         {
-            EditorGUILayout.GetControlRect(false, 3);
-
-            EditorGUILayout.LabelField("Simple Extension Settings", (GUIStyle)"BoldLabel");
-
             var drawAllMethod = SettingsScriptableObjectBaseType.GetMethod("DrawAllSettings");
 
             if (drawAllMethod != null && this != null)
@@ -287,19 +283,10 @@ public class ServerSettingsInspector : Editor
         return hashCode;
     }
 
-    private void BuildAppIdField(SerializedProperty property, string label = null)
+    private void BuildAppIdField(SerializedProperty property)
     {
         EditorGUILayout.BeginHorizontal();
-
-        if (label != null)
-        {
-            EditorGUILayout.PropertyField(property, new GUIContent(label), GUILayout.MinWidth(32));
-        }
-        else
-        {
-            EditorGUILayout.PropertyField(property, GUILayout.MinWidth(32));
-        }
-
+        EditorGUILayout.PropertyField(property, GUILayout.MinWidth(32));
         string appId = property.stringValue;
         string url = "https://dashboard.photonengine.com/en-US/PublicCloud";
         if (!string.IsNullOrEmpty(appId))

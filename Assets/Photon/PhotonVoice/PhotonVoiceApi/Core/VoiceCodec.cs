@@ -32,10 +32,10 @@ namespace Photon.Voice
         Action<ArraySegment<byte>, FrameFlags> Output { set; }
         /// <summary>Returns next encoded data frame (if such output supported).</summary>
         ArraySegment<byte> DequeueOutput(out FrameFlags flags);
+        /// <summary>Codec may override some settings like video resolution after creation.</summary>
+        VoiceInfo Info { get; }
         /// <summary>Forces an encoder to flush and produce frame with EndOfStream flag (in output queue).</summary>
         void EndOfStream();
-
-        I GetPlatformAPI<I>() where I : class;
     }
 
     /// <summary>Interface for an encoder which consumes input data via explicit call.</summary>
@@ -56,12 +56,6 @@ namespace Photon.Voice
         string Error { get; }
         /// <summary>Consumes the given encoded data.</summary>
         void Input(byte[] buf, FrameFlags flags);
-    }
-
-    /// <summary>Interface for an decoder which outputs data via explicit call.</summary>
-    public interface IDecoderDirect<B> : IDecoder
-    {
-        Action<B> Output { get; set; }
     }
 
     // Buffer for IEncoderDirect encoding images
@@ -85,9 +79,10 @@ namespace Photon.Voice
         public int Stride;
     }
 
-    public interface IDecoderQueuedOutputImageNative : IDecoderDirect<ImageOutputBuf>
+    public interface IDecoderQueuedOutputImageNative : IDecoder
     {
         ImageFormat OutputImageFormat { get; set; }
+        Flip OutputImageFlip { get; set; }
         // if provided, decoder writes output to it 
         Func<int, int, IntPtr> OutputImageBufferGetter { get; set; }
     }

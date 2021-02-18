@@ -6,14 +6,10 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using AOT;
 
 namespace Photon.Voice
 {
-    public class MonoPInvokeCallbackAttribute : System.Attribute
-    {
-        private Type type;
-        public MonoPInvokeCallbackAttribute(Type t) { type = t; }
-    }
     /// <summary>Enumerates microphones available on device.
     /// </summary>
     public class AudioInEnumerator : IDisposable

@@ -48,7 +48,7 @@ namespace Photon.Pun
 
 
         [NonSerialized]
-        private int ownerActorNr; // TODO maybe changing this should trigger "Was Transferred"!?
+        private int ownerActorNr; // TODO maybe changing this should trigger "Was Transfered"!?
 
         [FormerlySerializedAs("group")]
         public byte Group = 0;
@@ -277,19 +277,13 @@ namespace Photon.Pun
         [FormerlySerializedAs("instantiationId")]
         public int InstantiationId; // if the view was instantiated with a GO, this GO has a instantiationID (first view's viewID)
 
-        [Obsolete("Renamed. Use IsRoomView instead")]
-        public bool IsSceneView
-        {
-            get { return this.IsRoomView; }
-        }
-        
-        /// <summary>True if the PhotonView was loaded with the scene (game object) or instantiated with InstantiateRoomObject.</summary>
+        /// <summary>True if the PhotonView was loaded with the scene (game object) or instantiated with InstantiateSceneObject.</summary>
         /// <remarks>
-        /// Room objects are not owned by a particular player but belong to the scene. Thus they don't get destroyed when their
+        /// Scene objects are not owned by a particular player but belong to the scene. Thus they don't get destroyed when their
         /// creator leaves the game and the current Master Client can control them (whoever that is).
         /// The ownerId is 0 (player IDs are 1 and up).
         /// </remarks>
-        public bool IsRoomView
+        public bool IsSceneView
         {
             get { return this.CreatorActorNr == 0; }
         }
@@ -360,8 +354,6 @@ namespace Photon.Pun
             this.ownerActorNr = newOwnerId;
             this.AmOwner = newOwner == PhotonNetwork.LocalPlayer;
 
-            UpdateCallbackLists();
-
             if (newOwner != prevOwner)
                 if (!ReferenceEquals(OnOwnerChangeCallbacks, null))
                     for (int i = 0, cnt = OnOwnerChangeCallbacks.Count; i < cnt; ++i)
@@ -397,7 +389,7 @@ namespace Photon.Pun
         {
             var prevController = controller;
 
-            // Room objects (ownerId 0) must change controller
+            // Scene objects (ownerId 0) must change controller
             if (owner == null || this.ownerActorNr == 0 || this.owner.IsInactive)
             {
                 var masterclient = PhotonNetwork.MasterClient;
@@ -654,7 +646,7 @@ namespace Photon.Pun
                 if (PhotonNetwork.LogLevel >= PunLogLevel.Informational)
                 {
                     Debug.LogWarning("Attempting to RequestOwnership of GameObject '" + name + "' viewId: " + ViewID +
-                        ", but PhotonView.OwnershipTransfer is set to Fixed.");
+                        ", but PhotonView.OwnershipTranfer is set to Fixed.");
                 }
             }
         }
@@ -697,10 +689,10 @@ namespace Photon.Pun
                 {
                     if (OwnershipTransfer == OwnershipOption.Fixed)
                         Debug.LogWarning("Attempting to TransferOwnership of GameObject '" + name + "' viewId: " + ViewID +
-                            " without the authority to do so. TransferOwnership is not allowed if PhotonView.OwnershipTransfer is set to Fixed.");
+                            " without the authority to do so. TransferOwnership is not allowed if PhotonView.OwnershipTranfer is set to Fixed.");
                     else if (OwnershipTransfer == OwnershipOption.Request)
                         Debug.LogWarning("Attempting to TransferOwnership of GameObject '" + name + "' viewId: " + ViewID +
-                           " without the authority to do so. PhotonView.OwnershipTransfer is set to Request, so only the controller of this object can TransferOwnership.");
+                           " without the authority to do so. PhotonView.OwnershipTranfer is set to Request, so only the controller of this object can TransferOwnership.");
                 }
             }
         }
@@ -801,7 +793,7 @@ namespace Photon.Pun
         }
 
         /// <summary>
-        /// Call a RPC method of this GameObject on remote clients of this room (or on all, including this client).
+        /// Call a RPC method of this GameObject on remote clients of this room (or on all, inclunding this client).
         /// </summary>
         /// <remarks>
         /// [Remote Procedure Calls](@ref rpcManual) are an essential tool in making multiplayer games with PUN.
@@ -850,7 +842,7 @@ namespace Photon.Pun
         }
 
         /// <summary>
-        /// Call a RPC method of this GameObject on remote clients of this room (or on all, including this client).
+        /// Call a RPC method of this GameObject on remote clients of this room (or on all, inclunding this client).
         /// </summary>
         /// <remarks>
         /// [Remote Procedure Calls](@ref rpcManual) are an essential tool in making multiplayer games with PUN.
@@ -895,7 +887,7 @@ namespace Photon.Pun
 
         public override string ToString()
         {
-            return string.Format("View {0}{3} on {1} {2}", this.ViewID, (this.gameObject != null) ? this.gameObject.name : "GO==null", (this.IsRoomView) ? "(scene)" : string.Empty, this.Prefix > 0 ? "lvl" + this.Prefix : "");
+            return string.Format("View {0}{3} on {1} {2}", this.ViewID, (this.gameObject != null) ? this.gameObject.name : "GO==null", (this.IsSceneView) ? "(scene)" : string.Empty, this.Prefix > 0 ? "lvl" + this.Prefix : "");
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿namespace Photon.Voice.Unity
 {
     [System.Serializable]
-    public struct NativeAndroidMicrophoneSettings
+    public class NativeAndroidMicrophoneSettings
     {
         public bool AcousticEchoCancellation;
         public bool AutomaticGainControl;

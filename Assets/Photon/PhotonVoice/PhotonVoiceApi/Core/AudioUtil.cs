@@ -758,7 +758,7 @@ namespace Photon.Voice
     public interface IAudioOut<T>
     {
         bool IsPlaying { get; }
-        void Start(int frequency, int channels, int frameSamplesPerChannel);
+        void Start(int frequency, int channels, int frameSamplesPerChannel, int playDelayMs);
         void Flush();
         void Stop();
         void Push(T[] frame);

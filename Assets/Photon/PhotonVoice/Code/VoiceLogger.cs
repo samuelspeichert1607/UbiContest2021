@@ -111,8 +111,7 @@ namespace Photon.Voice.Unity
 
         private string GetTimestamp()
         {
-            //return System.DateTime.UtcNow.ToString("s");
-            return System.DateTime.UtcNow.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss");
+            return System.DateTime.UtcNow.ToString("s");
         }
 
         #if UNITY_EDITOR

@@ -285,10 +285,11 @@ namespace Photon.Pun
             // display note when synchronized triggers are detected.
             if (isUsingTriggers)
             {
-                EditorGUILayout.HelpBox("When using triggers, make sure this component is last in the stack. " +
-                                "If you still experience issues, implement triggers as a regular RPC " +
-                                "or in custom IPunObservable component instead.", MessageType.Warning);
-               
+                GUILayout.BeginHorizontal(GUI.skin.box);
+                GUILayout.Label("When using triggers, make sure this component is last in the stack.\n" +
+                                "If you still experience issues, implement triggers as a regular RPC \n" +
+                                "or in custom IPunObservable component instead");
+                GUILayout.EndHorizontal();
             }
         }
     }

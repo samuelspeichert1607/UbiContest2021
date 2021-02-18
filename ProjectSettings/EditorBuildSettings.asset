@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Menu.unity
     guid: 229d9f137f1e15f408fa7fcb3ec2f93f
   - enabled: 1
-    path: Assets/Scenes/TestAnthony.unity
-    guid: c37456e5afa23d94a90aceeeffab3c79
+    path: Assets/Scenes/Lobby.unity
+    guid: dc99ea55ecb1d7047bd31309bdf0e127
+  - enabled: 1
+    path: Assets/Scenes/SpotInDark_blocking.unity
+    guid: eb3bdd2de8ef0474b923df11940b0bf4
   m_configObjects: {}

@@ -89,14 +89,6 @@ namespace Photon.Voice.Unity
         [SerializeField]
         private int globalPlaybackDelay = 200;
 
-        [SerializeField]
-        private PlaybackDelaySettings globalPlaybackDelaySettings = new PlaybackDelaySettings
-        {
-            MinDelaySoft = PlaybackDelaySettings.DEFAULT_LOW,
-            MaxDelaySoft = PlaybackDelaySettings.DEFAULT_HIGH,
-            MaxDelayHard = PlaybackDelaySettings.DEFAULT_MAX
-        };
-
         private List<Speaker> linkedSpeakers = new List<Speaker>();
 
         #endregion
@@ -305,18 +297,18 @@ namespace Photon.Voice.Unity
             }
         }
 
-        [Obsolete("Use SetGlobalPlaybackDelayConfiguration methods instead")]
-        public int GlobalPlaybackDelay 
+        public int GlobalPlaybackDelay
         {
             get
             {
-                return this.globalPlaybackDelaySettings.MinDelaySoft;
+                return this.globalPlaybackDelay;
             }
             set
             {
-                if (value >= 0 && value <= this.globalPlaybackDelaySettings.MaxDelaySoft)
+                this.globalPlaybackDelay = value;
+                for (int i = 0; i < this.linkedSpeakers.Count; i++)
                 {
-                    this.globalPlaybackDelaySettings.MinDelaySoft = value;
+                    this.linkedSpeakers[i].PlayDelayMs = this.globalPlaybackDelay;
                 }
             }
         }
@@ -338,33 +330,6 @@ namespace Photon.Voice.Unity
                 {
                     PlayerPrefs.SetString(PlayerPrefsKey, value);
                 }
-            }
-        }
-
-        /// <summary>Gets the global value in ms above which the audio player tries to keep the delay.</summary>
-        public int GlobalPlaybackDelayMinSoft
-        {
-            get
-            {
-                return this.globalPlaybackDelaySettings.MinDelaySoft;
-            }
-        }
-
-        /// <summary>Gets the global value in ms below which the audio player tries to keep the delay.</summary>
-        public int GlobalPlaybackDelayMaxSoft
-        {
-            get
-            {
-                return this.globalPlaybackDelaySettings.MaxDelaySoft;
-            }
-        }
-
-        /// <summary>Gets the global value in ms that audio play delay will not exceed.</summary>
-        public int GlobalPlaybackDelayMaxHard
-        {
-            get
-            {
-                return this.globalPlaybackDelaySettings.MaxDelayHard;
             }
         }
 
@@ -453,43 +418,6 @@ namespace Photon.Voice.Unity
                 return;
             }
             rec.Init(this);
-        }
-
-        /// <summary>
-        /// Sets the global configuration for the playback behaviour in case of delays.
-        /// </summary>
-        /// <param name="gpds">Playback delay configuration struct.</param>
-        public void SetPlaybackDelaySettings(PlaybackDelaySettings gpds)
-        {
-            this.SetGlobalPlaybackDelaySettings(gpds.MinDelaySoft, gpds.MaxDelaySoft, gpds.MaxDelayHard);
-        }
-
-        /// <summary>
-        /// Sets the global configuration for the playback behaviour in case of delays.
-        /// </summary>
-        /// <param name="low">In milliseconds, audio player tries to keep the playback delay above this value.</param>
-        /// <param name="high">In milliseconds, audio player tries to keep the playback below above this value.</param>
-        /// <param name="max">In milliseconds, audio player guarantees that the playback delay never exceeds this value.</param>
-        public void SetGlobalPlaybackDelaySettings(int low, int high, int max)
-        {
-            if (low >= 0 && low < high)
-            {
-                if (max < high)
-                {
-                    max = high;
-                }
-                this.globalPlaybackDelaySettings.MinDelaySoft = low;
-                this.globalPlaybackDelaySettings.MaxDelaySoft = high;
-                this.globalPlaybackDelaySettings.MaxDelayHard = max;
-                for (int i = 0; i < this.linkedSpeakers.Count; i++)
-                {
-                    this.linkedSpeakers[i].SetPlaybackDelaySettings(this.globalPlaybackDelaySettings);
-                }
-            }
-            else if (this.Logger.IsErrorEnabled)
-            {
-                this.Logger.LogError("Wrong playback delay config values, make sure 0 <= Low < High, low={0}, high={1}, max={2}", low, high, max);
-            }
         }
 
         #endregion
@@ -651,14 +579,6 @@ namespace Photon.Voice.Unity
         
         private void OnRemoteVoiceInfo(int channelId, int playerId, byte voiceId, VoiceInfo voiceInfo, ref RemoteVoiceOptions options)
         {
-            if (voiceInfo.Codec != Codec.AudioOpus)
-            {
-                if (this.Logger.IsDebugEnabled)
-                {
-                    this.Logger.LogInfo("OnRemoteVoiceInfo skipped as coded {4} is not Opus, channel {0} player {1} voice #{2} userData {3}", channelId, playerId, voiceId, voiceInfo.UserData, voiceInfo.Codec);
-                }
-                return;
-            }
             if (this.Logger.IsInfoEnabled)
             {
                 this.Logger.LogInfo("OnRemoteVoiceInfo channel {0} player {1} voice #{2} userData {3}", channelId, playerId, voiceId, voiceInfo.UserData);
@@ -792,7 +712,7 @@ namespace Photon.Voice.Unity
                 {
                     speaker.LogLevel = this.GlobalSpeakersLogLevel;
                 }
-                speaker.SetPlaybackDelaySettings(this.globalPlaybackDelaySettings);
+                speaker.PlayDelayMs = this.GlobalPlaybackDelay;
                 #if UNITY_PS4 || UNITY_SHARLIN
                 speaker.PlayStationUserID = this.PlayStationUserID;
                 #endif
@@ -867,28 +787,6 @@ namespace Photon.Voice.Unity
                 this.primaryRecorderInitialized = this.primaryRecorder.IsInitialized;
             }
         }
-
-        #if UNITY_EDITOR
-        private void OnValidate()
-        {
-            if (this.globalPlaybackDelay > 0)
-            {
-                if (this.globalPlaybackDelaySettings.MinDelaySoft != this.globalPlaybackDelay)
-                {
-                    this.globalPlaybackDelaySettings.MinDelaySoft = this.globalPlaybackDelay;
-                    if (this.globalPlaybackDelaySettings.MaxDelaySoft <= this.globalPlaybackDelaySettings.MinDelaySoft)
-                    {
-                        this.globalPlaybackDelaySettings.MaxDelaySoft = 2 * this.globalPlaybackDelaySettings.MinDelaySoft;
-                        if (this.globalPlaybackDelaySettings.MaxDelayHard < this.globalPlaybackDelaySettings.MaxDelaySoft)
-                        {
-                            this.globalPlaybackDelaySettings.MaxDelayHard = this.globalPlaybackDelaySettings.MaxDelaySoft + 1000;
-                        }
-                    }
-                }
-                this.globalPlaybackDelay = -1;
-            }
-        }
-        #endif
 
         #endregion
     }

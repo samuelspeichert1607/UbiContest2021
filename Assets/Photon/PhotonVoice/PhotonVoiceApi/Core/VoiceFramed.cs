@@ -14,6 +14,9 @@ using System.Collections.Generic;
 using System.IO;
 #endif
 using System.Threading;
+#if NETFX_CORE
+using Windows.System.Threading;
+#endif
 
 namespace Photon.Voice
 {
@@ -224,7 +227,7 @@ namespace Photon.Voice
             {
                 voiceClient.transport.LogInfo(LogPrefix + ": Starting data encode thread");
 #if NETFX_CORE
-                Windows.System.Threading.ThreadPool.RunAsync((x) =>
+                ThreadPool.RunAsync((x) =>
                 {
                     PushDataAsyncThread();
                 });

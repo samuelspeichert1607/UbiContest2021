@@ -11,6 +11,8 @@
 using System;
 using System.Linq;
 using System.Collections.Generic;
+using Photon.Voice.Unity;
+using System.Threading;
 
 namespace Photon.Voice
 {
@@ -201,7 +203,7 @@ namespace Photon.Voice
         /// <remarks>
         /// audioSourceDesc.SamplingRate and voiceInfo.SamplingRate may do not match. Automatic resampling will occur in this case.
         /// </remarks>
-        public LocalVoiceAudio<T> CreateLocalVoiceAudio<T>(VoiceInfo voiceInfo, IAudioDesc audioSourceDesc, IEncoder encoder, int channelId = 0)
+        public LocalVoiceAudio<T> CreateLocalVoiceAudio<T>(VoiceInfo voiceInfo, IAudioDesc audioSourceDesc, int channelId = 0, IEncoder encoder = null)
         {
             return (LocalVoiceAudio<T>)createLocalVoice(channelId, (vId, chId) => LocalVoiceAudio<T>.Create(this, vId, encoder, voiceInfo, audioSourceDesc, chId));
         }
@@ -219,40 +221,14 @@ namespace Photon.Voice
         /// <remarks>
         /// audioSourceDesc.SamplingRate and voiceInfo.SamplingRate may do not match. Automatic resampling will occur in this case.
         /// </remarks>
-        public LocalVoice CreateLocalVoiceAudioFromSource(VoiceInfo voiceInfo, IAudioDesc source, AudioSampleType sampleType, IEncoder encoder = null, int channelId = 0)
+        public LocalVoice CreateLocalVoiceAudioFromSource(VoiceInfo voiceInfo, IAudioDesc source, AudioSampleType sampleType, int channelId = 0, IEncoder encoder = null)
         {
-            // resolve AudioSampleType.Source to concrete type for encoder creation
-            if (sampleType == AudioSampleType.Source)
-            {
-                if (source is IAudioPusher<float> || source is IAudioReader<float>)
-                {
-                    sampleType = AudioSampleType.Float;
-                }
-                else if (source is IAudioPusher<short> || source is IAudioReader<short>)
-                {
-                    sampleType = AudioSampleType.Short;
-                }
-            }
-
-            if (encoder == null)
-            {
-                switch (sampleType)
-                {
-                    case AudioSampleType.Float:
-                        encoder = Platform.CreateDefaultAudioEncoder<float>(transport, voiceInfo);
-                        break;
-                    case AudioSampleType.Short:
-                        encoder = Platform.CreateDefaultAudioEncoder<short>(transport, voiceInfo);
-                        break;
-                }    
-            }
-                
             if (source is IAudioPusher<float>)
             {
                 if (sampleType == AudioSampleType.Short)
                 {
                     transport.LogInfo("[PV] Creating local voice with source samples type conversion from IAudioPusher float to short.");
-                    var localVoice = CreateLocalVoiceAudio<short>(voiceInfo, source, encoder, channelId);
+                    var localVoice = CreateLocalVoiceAudio<short>(voiceInfo, source, channelId, encoder);
                     // we can safely reuse the same buffer in callbacks from native code
                     // 
                     var bufferFactory = new FactoryReusableArray<float>(0);
@@ -265,7 +241,7 @@ namespace Photon.Voice
                 }
                 else
                 {
-                    var localVoice = CreateLocalVoiceAudio<float>(voiceInfo, source, encoder, channelId);
+                    var localVoice = CreateLocalVoiceAudio<float>(voiceInfo, source, channelId, encoder);
                     ((IAudioPusher<float>)source).SetCallback(buf => localVoice.PushDataAsync(buf), localVoice.BufferFactory);
                     return localVoice;
                 }
@@ -275,7 +251,7 @@ namespace Photon.Voice
                 if (sampleType == AudioSampleType.Float)
                 {
                     transport.LogInfo("[PV] Creating local voice with source samples type conversion from IAudioPusher short to float.");
-                    var localVoice = CreateLocalVoiceAudio<float>(voiceInfo, source, encoder, channelId);
+                    var localVoice = CreateLocalVoiceAudio<float>(voiceInfo, source, channelId, encoder);
                     // we can safely reuse the same buffer in callbacks from native code
                     // 
                     var bufferFactory = new FactoryReusableArray<short>(0);
@@ -289,7 +265,7 @@ namespace Photon.Voice
                 }
                 else
                 {
-                    var localVoice = CreateLocalVoiceAudio<short>(voiceInfo, source, encoder, channelId);
+                    var localVoice = CreateLocalVoiceAudio<short>(voiceInfo, source, channelId, encoder);
                     ((IAudioPusher<short>)source).SetCallback(buf => localVoice.PushDataAsync(buf), localVoice.BufferFactory);
                     return localVoice;
                 }
@@ -299,13 +275,13 @@ namespace Photon.Voice
                 if (sampleType == AudioSampleType.Short)
                 {
                     transport.LogInfo("[PV] Creating local voice with source samples type conversion from IAudioReader float to short.");
-                    var localVoice = CreateLocalVoiceAudio<short>(voiceInfo, source, encoder, channelId);
+                    var localVoice = CreateLocalVoiceAudio<short>(voiceInfo, source, channelId, encoder);
                     localVoice.LocalUserServiceable = new BufferReaderPushAdapterAsyncPoolFloatToShort(localVoice, source as IAudioReader<float>);
                     return localVoice;
                 }
                 else
                 {
-                    var localVoice = CreateLocalVoiceAudio<float>(voiceInfo, source, encoder, channelId);
+                    var localVoice = CreateLocalVoiceAudio<float>(voiceInfo, source, channelId, encoder);
                     localVoice.LocalUserServiceable = new BufferReaderPushAdapterAsyncPool<float>(localVoice, source as IAudioReader<float>);
                     return localVoice;
                 }
@@ -315,13 +291,13 @@ namespace Photon.Voice
                 if (sampleType == AudioSampleType.Float)
                 {
                     transport.LogInfo("[PV] Creating local voice with source samples type conversion from IAudioReader short to float.");
-                    var localVoice = CreateLocalVoiceAudio<float>(voiceInfo, source, encoder, channelId);
+                    var localVoice = CreateLocalVoiceAudio<float>(voiceInfo, source, channelId, encoder);
                     localVoice.LocalUserServiceable = new BufferReaderPushAdapterAsyncPoolShortToFloat(localVoice, source as IAudioReader<short>);
                     return localVoice;
                 }
                 else
                 {
-                    var localVoice = CreateLocalVoiceAudio<short>(voiceInfo, source, encoder, channelId);
+                    var localVoice = CreateLocalVoiceAudio<short>(voiceInfo, source, channelId, encoder);
                     localVoice.LocalUserServiceable = new BufferReaderPushAdapterAsyncPool<short>(localVoice, source as IAudioReader<short>);
                     return localVoice;
                 }
@@ -341,7 +317,7 @@ namespace Photon.Voice
         /// <param name="channelId">Transport channel specific to transport.</param>
         /// <param name="encoder">Encoder compressing video data. Set to null to use default VP8 implementation.</param>
         /// <returns>Outgoing stream handler.</returns>
-        public LocalVoiceVideo CreateLocalVoiceVideo(VoiceInfo voiceInfo, IEncoder encoder, int channelId = 0)
+        public LocalVoiceVideo CreateLocalVoiceVideo(VoiceInfo voiceInfo, int channelId = 0, IEncoder encoder = null)
         {
             return (LocalVoiceVideo)createLocalVoice(channelId, (vId, chId) => new LocalVoiceVideo(this, encoder, vId, voiceInfo, chId));
         }
@@ -563,7 +539,7 @@ namespace Photon.Voice
 
                 this.transport.LogInfo("[PV] ch#" + this.channelStr(channelId) + " p#" + this.playerStr(playerId) + " v#" + voiceId + " Info received: " + info.ToString() + " ev=" + eventNumber);
 
-                RemoteVoiceOptions options = new RemoteVoiceOptions() { OutputImageFormat = ImageFormat.Undefined };
+                RemoteVoiceOptions options = new RemoteVoiceOptions() { OutputImageFormat = ImageFormat.Undefined, OutputImageFlip = Flip.Undefined };
                 if (this.OnRemoteVoiceInfoAction != null)
                 {
                     this.OnRemoteVoiceInfoAction(channelId, playerId, voiceId, info, ref options);
