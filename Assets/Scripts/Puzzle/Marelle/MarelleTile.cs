@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
-public class MarelleTile : MonoBehaviour
+public class MarelleTile : MonoBehaviourPun, IPunObservable
 {
 
     
@@ -52,12 +53,12 @@ public class MarelleTile : MonoBehaviour
     {
         
         bool isResolve = transform.parent.GetComponent<MarelleWon>().isResolve;
-        
+        //
 
         if ((!firstTile&& isResolve) || (firstTile && !isResolve))
         {
             //playerEntered contient le premier joueur à entrer en collision avec la tuile
-            if (playerEntered == null)
+            if (playerEntered == null || firstTile)//hmm
             {
                 playerEntered = collision;
                 timerEnable = true;
@@ -95,7 +96,21 @@ public class MarelleTile : MonoBehaviour
     {
         tileMaterial1.SetColor("_Color", color);
         tileMaterial2.SetColor("_Color", color);
+
     }
 
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            stream.SendNext(tileMaterial1);
+            stream.SendNext(tileMaterial2);
+        }
+        else if (stream.IsReading)
+        {
+            tileMaterial1 = (Material)stream.ReceiveNext();
+            tileMaterial2 = (Material)stream.ReceiveNext();
+        }
+    }
 
 }
