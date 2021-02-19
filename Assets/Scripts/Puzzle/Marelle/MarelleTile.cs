@@ -17,7 +17,8 @@ public class MarelleTile : MonoBehaviourPun, IPunObservable
     private float timer =0;
     private bool timerEnable = false;
 
-    private GameObject playerEntered=null;
+    private GameObject tileEntered=null;
+    //private GameObject playerExited = null;
 
     
 
@@ -39,8 +40,9 @@ public class MarelleTile : MonoBehaviourPun, IPunObservable
             }
             else
             {
-                ChangeColour(Color.red);
+                ChangeColor(Color.red);
                 timer = 0;
+                tileEntered = null;
             }
         }
 
@@ -49,50 +51,69 @@ public class MarelleTile : MonoBehaviourPun, IPunObservable
     }
 
 
-    public void CollisionDetected(GameObject collision,GameObject sourceTile)
+    public void CollisionDetected(GameObject sourceTile) //quand on échoue la premier tuile marche pas si le meme joueur saute en premier 2 fois
     {
-        
-        bool isResolve = transform.parent.GetComponent<MarelleWon>().isResolve;
-        //
 
-        if ((!firstTile&& isResolve) || (firstTile && !isResolve))
+        bool isResolve = transform.parent.GetComponent<MarelleWon>().isResolve;
+
+
+        if ((!firstTile && isResolve) || (firstTile && !isResolve))
         {
-            //playerEntered contient le premier joueur à entrer en collision avec la tuile
-            if (playerEntered == null || firstTile)//hmm
+
+            if (tileEntered == null)
             {
-                playerEntered = collision;
+                tileEntered = sourceTile;
                 timerEnable = true;
                 timer = timerTime;
                 sourceTile.GetComponent<Renderer>().material.SetColor("_Color", Color.yellow);
-                
             }
-            //si un deuxième joueur entre en collision on commence le timer
-            else if (playerEntered != collision)
+
+            else if (tileEntered != sourceTile)
             {
                 timerEnable = false;
-                playerEntered = null;
+                tileEntered = null;
                 if (timer > 0)
                 {
 
-                    ChangeColour(Color.green);
+                    ChangeColor(Color.green);
                     transform.parent.GetComponent<MarelleWon>().isResolve = true;
-                    
+
                 }
                 else
                 {
 
                     transform.parent.GetComponent<MarelleWon>().isResolve = false;
-                    
+
                 }
 
             }
+
         }
+        //else if (!firstTile)
+        //{
+        //    ChangeColor(Color.red);
+        //}
 
 
 
     }
 
-    private void ChangeColour(Color color)
+    //public void CollisionExited(GameObject player)
+    //{
+    //    if (playerExited == null)
+    //    {
+    //        playerExited = player;
+    //    }
+    //    else if (playerExited!= player)
+    //    {
+    //        playerExited = null;
+    //        ChangeColor(Color.white);
+    //    }
+
+
+    //}
+
+    private void ChangeColor(Color color)
     {
         tileMaterial1.SetColor("_Color", color);
         tileMaterial2.SetColor("_Color", color);
