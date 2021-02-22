@@ -10,25 +10,32 @@ namespace Puzzle.HumanPencil
         [SerializeField]
         private GameObject brush;
         [SerializeField]
-        private GameObject drawingTarget;
+        private GameObject drawingPoint;
+        [SerializeField] 
+        private GameObject drawingSurface;
+        
 
         private const float Tolerance = 0.001f;
+        private float _maxDrawingDistance = 0.5f;
         private LineRenderer _currentLineRenderer;
         private Vector3 _lastPoint;
         private bool _isDrawing = false;
-        // private bool _canDraw = false;
+        private bool _canDraw = false;
         
 
         public void Draw()
         {
-            if (_isDrawing)
+            if (IsAllowedToDraw())
             {
-                PlaceNewPoint();
-            }
-            else
-            {
-                CreateBrush();
-                _isDrawing = true;
+                if (_isDrawing)
+                {
+                    PlaceNewPoint();
+                }
+                else
+                {
+                    CreateBrush();
+                    _isDrawing = true;
+                }
             }
         }
 
@@ -78,14 +85,29 @@ namespace Puzzle.HumanPencil
 
         private Vector3 CapturePoint()
         {
-            return drawingTarget.transform.position;
+            return drawingPoint.transform.position;
         }
 
-        // public bool IsAllowedToDraw()
-        // {
-        //     return _canDraw;
-        // }
-        //
+        private bool IsAllowedToDraw()
+        {
+            return IsDrawingPointOverDrawingSurface();
+        }
+
+        private bool IsDrawingPointOverDrawingSurface()
+        {
+            RaycastHit hit;
+            if (Physics.Raycast(drawingPoint.transform.position, Vector3.down, out hit, _maxDrawingDistance))
+            {
+                Debug.Log(hit.collider.name);
+                if (hit.collider.name == drawingSurface.name)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
         // public void ToggleDrawing()
         // {
         //     _canDraw = !_canDraw;
@@ -100,6 +122,6 @@ namespace Puzzle.HumanPencil
         // {
         //     _canDraw = false;
         // }
-        //
+        
     }
 }

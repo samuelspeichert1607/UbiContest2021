@@ -45,6 +45,7 @@ namespace Puzzle.HumanPencil
 
             if (IsInteractedWith)
             {
+                
                 if (Input.GetAxis(drawingAxisName) > 0)
                 {
                     _lineDrawer.Draw();

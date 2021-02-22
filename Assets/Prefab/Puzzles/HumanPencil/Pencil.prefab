@@ -98,7 +98,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   brush: {fileID: 4692908856508772414, guid: b31c3cf21f4f00945a84f16609fd8118, type: 3}
-  drawingTarget: {fileID: 3385479832246857674}
+  drawingPoint: {fileID: 3385479832246857674}
+  drawingSurface: {fileID: 0}
 --- !u!1 &6679823147427093186
 GameObject:
   m_ObjectHideFlags: 0

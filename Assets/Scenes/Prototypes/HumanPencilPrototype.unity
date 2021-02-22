@@ -709,6 +709,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &1727394868 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7687796978070383016, guid: fdfb6cb0ed60d04469f47102653766ff, type: 3}
+  m_PrefabInstance: {fileID: 1523553842569964116}
+  m_PrefabAsset: {fileID: 0}
 --- !u!43 &1787591543
 Mesh:
   m_ObjectHideFlags: 0
@@ -968,6 +973,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 390253054}
+    - target: {fileID: 4786227351912872216, guid: fdfb6cb0ed60d04469f47102653766ff, type: 3}
+      propertyPath: drawingSurface
+      value: 
+      objectReference: {fileID: 1727394868}
     - target: {fileID: 4914141639840891356, guid: fdfb6cb0ed60d04469f47102653766ff, type: 3}
       propertyPath: m_Mesh
       value: 
