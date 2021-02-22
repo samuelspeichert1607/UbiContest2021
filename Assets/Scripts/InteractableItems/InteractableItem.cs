@@ -1,133 +1,139 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
-public class InteractableItem : MonoBehaviour
+namespace InteractableItems
 {
-    public string Name;
-    public string InteractPreButtonText;
-    public string InteractPostButtonText;
-    public string InteractButtonName = "B";
-    public string InteractionStopPostButtonText;
-    public float interactRadius = 3f;
+    public class InteractableItem : MonoBehaviour
+    {
+        // public string Name;
+        public string interactPreButtonText;
+        public string interactPostButtonText;
+        public string interactButtonName = "B";
+        public string interactionStopPostButtonText;
+        public float interactRadius = 3f;
 
-    protected bool isInteractedWith = false;
-    protected bool hasPlayerInRange = false;
-    protected string toStartInteractText;
-    protected string toEndInteractText;
+        protected bool IsInteractedWith = false;
+        protected bool HasPlayerInRange = false;
+        protected string ToStartInteractText;
+        protected string ToEndInteractText;
+        protected TextRenderer TextRenderer;
     
-    private GameObject inRangePlayer;
+        private GameObject _inRangePlayer;
     
-    private bool previousPlayerRangeState = false;
-    private bool playerHasEnteredRange = false;
-    private bool playerHasLeftRange = false;
+        private bool _previousPlayerRangeState = false;
+        private bool _playerHasEnteredRange = false;
+        private bool _playerHasLeftRange = false;
 
 
-    private GameObject[] players;
+        private GameObject[] _players;
 
-    protected void Start()
-    {
-        players = GameObject.FindGameObjectsWithTag("Player");
-        toStartInteractText = String.Join(" ", InteractPreButtonText, InteractButtonName, InteractPostButtonText);
-        toEndInteractText = String.Join(" ", InteractPreButtonText, InteractButtonName, InteractionStopPostButtonText);
-    }
-
-    private void Update()
-    {
-
-    }
-
-    protected void CheckIfAPlayerIsInRange()
-    {
-        previousPlayerRangeState = hasPlayerInRange;
-        foreach (GameObject player in players)
+        protected void Start()
         {
-            float distance = Vector3.Distance(player.transform.position, transform.position);
-            if (distance <= interactRadius)
+            _players = GameObject.FindGameObjectsWithTag("Player");
+            ToStartInteractText = String.Join(" ", interactPreButtonText, interactButtonName, interactPostButtonText);
+            ToEndInteractText = String.Join(" ", interactPreButtonText, interactButtonName, interactionStopPostButtonText);
+        }
+
+        private void Update()
+        {
+        
+        }
+
+        protected void CheckIfAPlayerIsInRange()
+        {
+            _previousPlayerRangeState = HasPlayerInRange;
+            foreach (GameObject player in _players)
             {
-                hasPlayerInRange = true;
-                inRangePlayer = player;
-                UpdatePlayerRangeState();
-                return;
+                float distance = Vector3.Distance(player.transform.position, transform.position);
+                if (distance <= interactRadius)
+                {
+                    HasPlayerInRange = true;
+                    _inRangePlayer = player;
+                    UpdatePlayerRangeState();
+                    return;
+                }
+            }
+            HasPlayerInRange = false;
+            UpdatePlayerRangeState();
+        }
+    
+    
+
+        private void UpdatePlayerRangeState()
+        {
+            if (_previousPlayerRangeState == HasPlayerInRange)
+            {
+                _playerHasEnteredRange = false;
+                _playerHasLeftRange = false;
+            }
+
+            if (!_previousPlayerRangeState && HasPlayerInRange)
+            {
+                _playerHasEnteredRange = true;
+                _playerHasLeftRange = false;
+            }
+            if (_previousPlayerRangeState && !HasPlayerInRange)
+            {
+                _playerHasEnteredRange = false;
+                _playerHasLeftRange = true;
             }
         }
-        hasPlayerInRange = false;
-        UpdatePlayerRangeState();
-    }
-    
-    
 
-    private void UpdatePlayerRangeState()
-    {
-        if (previousPlayerRangeState == hasPlayerInRange)
+        protected GameObject GetInRangePlayer()
         {
-            playerHasEnteredRange = false;
-            playerHasLeftRange = false;
+            // if (inRangePlayer == null)
+            // {
+            //     throw new NullReferenceException();
+            // }
+            return _inRangePlayer;
         }
 
-        if (!previousPlayerRangeState && hasPlayerInRange)
+
+        public virtual void OnInteractStart()
         {
-            playerHasEnteredRange = true;
-            playerHasLeftRange = false;
+        
         }
-        if (previousPlayerRangeState && !hasPlayerInRange)
+
+        public virtual void OnInteractEnd()
         {
-            playerHasEnteredRange = false;
-            playerHasLeftRange = true;
+        
         }
-    }
-
-    protected GameObject GetInRangePlayer()
-    {
-        // if (inRangePlayer == null)
-        // {
-        //     throw new NullReferenceException();
-        // }
-        return inRangePlayer;
-    }
-
-
-    public virtual void OnInteractStart()
-    {
-        
-    }
-
-    public virtual void OnInteractEnd()
-    {
-        
-    }
     
-    public virtual void OnPlayerEnterRange()
-    {
+        public virtual void OnPlayerEnterRange()
+        {
 
-    }
+        }
 
-    public virtual void OnPlayerInRange()
-    {
+        public virtual void OnPlayerInRange()
+        {
         
-    }
+        }
 
-    public virtual void OnPlayerExitRange()
-    {
+        public virtual void OnPlayerExitRange()
+        {
         
-    }
+        }
     
-    protected bool hasPlayerEnteredRange()
-    {
-        return playerHasEnteredRange;
-    }
+        protected bool hasPlayerEnteredRange()
+        {
+            return _playerHasEnteredRange;
+        }
 
-    protected bool hasPlayerLeftRange()
-    {
-        return playerHasLeftRange;
-    }
-
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, interactRadius);
-    }
+        protected bool hasPlayerLeftRange()
+        {
+            return _playerHasLeftRange;
+        }
     
+        protected void FindTextRendererOfPlayerInRange()
+        {
+            TextRenderer = GetInRangePlayer().GetComponentInChildren<TextRenderer>();
+        }
+
+        private void OnDrawGizmosSelected()
+        {
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawWireSphere(transform.position, interactRadius);
+        }
+    
+    }
 }

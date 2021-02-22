@@ -109,11 +109,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9612333bfade31f449fee19029433a02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: 
-  InteractPreButtonText: 
-  InteractPostButtonText: 
-  InteractButtonName: B
-  InteractionStopPostButtonText: 
+  interactPreButtonText: Press
+  interactPostButtonText: to push button
+  interactButtonName: B
+  interactionStopPostButtonText: 
   interactRadius: 3
-  textRenderer: {fileID: 0}
-  pressingTime: 0
+  pressingTime: 0.1

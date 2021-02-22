@@ -1,16 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Timers;
+using InteractableItems;
 using UnityEngine;
 
 public class PressableButton : InteractableItem
 {
     // Start is called before the first frame update
-    
-    [SerializeField] private TextRenderer textRenderer;
     [SerializeField] private float pressingTime;
 
-    private void Start()
+    private new void Start()
     {
         base.Start();   
     }
@@ -27,7 +26,7 @@ public class PressableButton : InteractableItem
         {
             OnPlayerExitRange();
         }
-        else if (hasPlayerInRange)
+        else if (HasPlayerInRange)
         {
             OnPlayerInRange();
         }
@@ -35,44 +34,39 @@ public class PressableButton : InteractableItem
     
     public override void OnInteractStart()
     {
-        isInteractedWith = true;
+        IsInteractedWith = true;
         Invoke("OnInteractEnd", pressingTime);
-        textRenderer.CloseInfoText();
+        TextRenderer.CloseInfoText();
     }
     
 
     public override void OnInteractEnd()
     {
-        isInteractedWith = false;
-        textRenderer.ShowInfoText(toStartInteractText);
+        IsInteractedWith = false;
+        TextRenderer.ShowInfoText(ToStartInteractText);
     }
 
     public override void OnPlayerEnterRange()
     {
         FindTextRendererOfPlayerInRange();
-        textRenderer.ShowInfoText(toStartInteractText);   
+        TextRenderer.ShowInfoText(ToStartInteractText);   
     }
 
     public override void OnPlayerExitRange()
     {
-        textRenderer.CloseInfoText();
+        TextRenderer.CloseInfoText();
     }
     
     public bool IsPressed()
     {
-        return isInteractedWith;
+        return IsInteractedWith;
     }
 
     public override void OnPlayerInRange()
     {
-        if (Input.GetButtonDown(InteractButtonName) && !isInteractedWith)
+        if (Input.GetButtonDown(interactButtonName) && !IsInteractedWith)
         {
             OnInteractStart();
         }
-    }
-
-    private void FindTextRendererOfPlayerInRange()
-    {
-        textRenderer = GetInRangePlayer().GetComponentInChildren<TextRenderer>();
     }
 }
