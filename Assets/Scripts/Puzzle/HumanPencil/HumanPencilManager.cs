@@ -10,6 +10,8 @@ public class HumanPencilManager : MonoBehaviour
 
     [SerializeField] 
     private GameObject pencil;
+
+    // [SerializeField] private GameObject[] displayMonitors;
     
     private Vector3 pencilInitialPosition;
     private LineDrawer _lineDrawer;
@@ -31,6 +33,7 @@ public class HumanPencilManager : MonoBehaviour
             ResetPuzzle();
         }
     }
+    
 
     private void ResetPuzzle()
     {

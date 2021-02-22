@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using NUnit.Framework.Constraints;
 using UnityEngine;
 
@@ -9,23 +10,24 @@ namespace Puzzle.HumanPencil
     {
         
         [SerializeField]
-        private GameObject brush;
-        [SerializeField]
         private GameObject drawingPoint;
         [SerializeField] 
         private GameObject drawingSurface;
+        [SerializeField] 
+        private DrawableSurface[] displayMonitors;
         
+        private DrawableSurface mainDrawableSurface; 
         private float _maxDrawingDistance = 0.5f;
         private float _drawingSurfaceWidth = 0.2f;
 
         private const float NewPointDistanceTolerance = 0.001f;
-        private LineRenderer _currentLineRenderer;
         private Vector3 _lastPoint;
         private bool _isDrawing = false;
 
-        private List<GameObject> brushes = new List<GameObject>();
-        // private bool _canDraw = false;
-        
+        public void Start()
+        {
+            mainDrawableSurface = drawingSurface.GetComponent<DrawableSurface>();
+        }
 
         public void Draw()
         {
@@ -47,39 +49,43 @@ namespace Puzzle.HumanPencil
         {
             _isDrawing = false;
         }
+        
 
         private void CreateBrush() 
         {
-            GameObject brushInstance = Instantiate(brush);
-            brushes.Add(brushInstance);
-            _currentLineRenderer = brushInstance.GetComponent<LineRenderer>();
-            
             Vector3 newPoint = CapturePoint();
-
-            _currentLineRenderer.SetPosition(0, newPoint);
-            _currentLineRenderer.SetPosition(1, newPoint);
+            mainDrawableSurface.CreateBrush(newPoint);
+            AddBrushOnSecondaryDisplays(newPoint);
         }
 
+        private void AddBrushOnSecondaryDisplays(Vector3 newPoint)
+        {
+            Vector3 referenceTransformToUpperLeftCorner = newPoint - drawingSurface.transform.position;
+            foreach (DrawableSurface monitor in displayMonitors)
+            {
+                monitor.CreateBrushRelativeToSelf(referenceTransformToUpperLeftCorner, drawingSurface.transform.eulerAngles);
+            }
+        }
+        
         private void PlaceNewPoint() 
         {
             Vector3 newPoint = CapturePoint();
             if (IsNewPointDistinctFromLastPoint(newPoint)) 
             {
-                AddAPoint(newPoint);
+                mainDrawableSurface.AddAPoint(newPoint);
+                PlaceNewPointOnSecondaryDisplays(newPoint);
                 _lastPoint = newPoint;
             }
         }
 
-        private void AddAPoint(Vector3 pointPos) 
+        private void PlaceNewPointOnSecondaryDisplays(Vector3 newPoint)
         {
-            var positionCount = _currentLineRenderer.positionCount;
-            
-            positionCount++;
-            _currentLineRenderer.positionCount = positionCount;
-            int positionIndex = positionCount - 1;
-            _currentLineRenderer.SetPosition(positionIndex, pointPos);
+            Vector3 referenceTransformToUpperLeftCorner = newPoint - drawingSurface.transform.position;
+            foreach (DrawableSurface monitor in displayMonitors)
+            {
+                monitor.AddAPointRelativeToSelf(referenceTransformToUpperLeftCorner, drawingSurface.transform.eulerAngles);
+            }
         }
-
 
         private bool IsNewPointDistinctFromLastPoint(Vector3 newPoint)
         {
@@ -115,26 +121,12 @@ namespace Puzzle.HumanPencil
 
         public void ClearAllDrawing()
         {
-            foreach (GameObject brush in brushes)
+            mainDrawableSurface.ClearDrawing();
+            foreach (DrawableSurface monitor in displayMonitors)
             {
-                Destroy(brush);
+                monitor.ClearDrawing();
             }
         }
-
-        // public void ToggleDrawing()
-        // {
-        //     _canDraw = !_canDraw;
-        // }
-        //
-        // public void AllowDrawing()
-        // {
-        //     _canDraw = true;
-        // }
-        //
-        // public void PreventDrawing()
-        // {
-        //     _canDraw = false;
-        // }
         
     }
 }
