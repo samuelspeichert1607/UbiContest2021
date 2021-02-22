@@ -45,7 +45,10 @@ namespace Puzzle.HumanPencil
 
             if (IsInteractedWith)
             {
-                
+                if (TextRenderer.IsClosed())
+                {
+                    TextRenderer.ShowInfoText( _toDrawText + "\n" + ToEndInteractText);
+                }
                 if (Input.GetAxis(drawingAxisName) > 0)
                 {
                     _lineDrawer.Draw();

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using NUnit.Framework.Constraints;
 using UnityEngine;
 
@@ -14,13 +15,16 @@ namespace Puzzle.HumanPencil
         [SerializeField] 
         private GameObject drawingSurface;
         
-
-        private const float Tolerance = 0.001f;
         private float _maxDrawingDistance = 0.5f;
+        private float _drawingSurfaceWidth = 0.2f;
+
+        private const float NewPointDistanceTolerance = 0.001f;
         private LineRenderer _currentLineRenderer;
         private Vector3 _lastPoint;
         private bool _isDrawing = false;
-        private bool _canDraw = false;
+
+        private List<GameObject> brushes = new List<GameObject>();
+        // private bool _canDraw = false;
         
 
         public void Draw()
@@ -47,24 +51,13 @@ namespace Puzzle.HumanPencil
         private void CreateBrush() 
         {
             GameObject brushInstance = Instantiate(brush);
+            brushes.Add(brushInstance);
             _currentLineRenderer = brushInstance.GetComponent<LineRenderer>();
             
             Vector3 newPoint = CapturePoint();
 
             _currentLineRenderer.SetPosition(0, newPoint);
             _currentLineRenderer.SetPosition(1, newPoint);
-        }
-
-
-        private void AddAPoint(Vector3 pointPos) 
-        {
-            var positionCount = _currentLineRenderer.positionCount;
-            
-            positionCount++;
-            _currentLineRenderer.positionCount = positionCount;
-            int positionIndex = positionCount - 1;
-            _currentLineRenderer.SetPosition(positionIndex, pointPos);
-            Debug.Log("Adding point " + pointPos);
         }
 
         private void PlaceNewPoint() 
@@ -77,15 +70,28 @@ namespace Puzzle.HumanPencil
             }
         }
 
+        private void AddAPoint(Vector3 pointPos) 
+        {
+            var positionCount = _currentLineRenderer.positionCount;
+            
+            positionCount++;
+            _currentLineRenderer.positionCount = positionCount;
+            int positionIndex = positionCount - 1;
+            _currentLineRenderer.SetPosition(positionIndex, pointPos);
+        }
+
+
         private bool IsNewPointDistinctFromLastPoint(Vector3 newPoint)
         {
             float distance = Vector3.Distance(newPoint, _lastPoint);
-            return (distance > Tolerance);
+            return (distance > NewPointDistanceTolerance);
         }
 
         private Vector3 CapturePoint()
         {
-            return drawingPoint.transform.position;
+            Vector3 newPoint = drawingPoint.transform.position; 
+            newPoint.y = drawingSurface.transform.position.y + _drawingSurfaceWidth;
+            return newPoint;
         }
 
         private bool IsAllowedToDraw()
@@ -98,7 +104,6 @@ namespace Puzzle.HumanPencil
             RaycastHit hit;
             if (Physics.Raycast(drawingPoint.transform.position, Vector3.down, out hit, _maxDrawingDistance))
             {
-                Debug.Log(hit.collider.name);
                 if (hit.collider.name == drawingSurface.name)
                 {
                     return true;
@@ -106,6 +111,14 @@ namespace Puzzle.HumanPencil
             }
 
             return false;
+        }
+
+        public void ClearAllDrawing()
+        {
+            foreach (GameObject brush in brushes)
+            {
+                Destroy(brush);
+            }
         }
 
         // public void ToggleDrawing()
