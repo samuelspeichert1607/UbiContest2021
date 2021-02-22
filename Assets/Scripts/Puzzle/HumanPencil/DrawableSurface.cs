@@ -58,11 +58,20 @@ public class DrawableSurface : MonoBehaviour
     {
         Vector3 monitorULCorner = transform.position;
         Vector3 angles = transform.eulerAngles - referenceSurfaceEulerAngles;
-        return RotatePointAroundPivot(referenceTransformToUpperLeftCorner, monitorULCorner, angles);
+        
+        // angles.y = 270;
+        // angles.z = -180;
+        // angles.x = -90;
+        // Vector3 adjustedTransform = RotatePointAroundOrigin(referenceTransformToUpperLeftCorner, angles);
+        //TODO this is an ugly abomination but I don't know how to fix the rotation correctly. 
+        Vector3 adjustedTransform = new Vector3(referenceTransformToUpperLeftCorner.y, -referenceTransformToUpperLeftCorner.x,
+            referenceTransformToUpperLeftCorner.z);
+        return monitorULCorner + adjustedTransform;
     }
     
-    private Vector3 RotatePointAroundPivot(Vector3 point, Vector3 pivot, Vector3 angles) {
-        return Quaternion.Euler(angles) * (point - pivot) + pivot;
+    private Vector3 RotatePointAroundOrigin(Vector3 point, Vector3 angles)
+    {
+        return Quaternion.Euler(angles) * point;
     }
 
 }
