@@ -19,12 +19,11 @@ namespace UI_Elements
         [SerializeField] 
         private GameObject onPauseFirstSelected, onValidationFirstSelected, onReturnFromValidationFirstSelected;
 
-        private ControllerPicker controllerPicker;
-        private IController userController;
+        private ControllerManager controllerManager;
 
         public void Start()
         {
-            controllerPicker = new ControllerPicker();
+            controllerManager = GetComponent<ControllerManager>();
             // photonView = GetComponent<PhotonView>();
             pauseMenu.SetActive(false);
             playerController = GetComponentInParent<CustomController>();
@@ -32,11 +31,10 @@ namespace UI_Elements
 
         public void Update()
         {
-            PickController();
             //TODO there is a better way to map this probably
             //// if (photonView.IsMine)
             // {
-            if (Input.GetKeyDown(KeyCode.Escape) || userController.GetButtonDown("Button7"))
+            if (Input.GetKeyDown(KeyCode.Escape) || controllerManager.GetButtonDown("Button7"))
             {
                 pauseUnPause();
                 if (validationMenu.activeSelf)
@@ -97,14 +95,6 @@ namespace UI_Elements
             EventSystem.current.SetSelectedGameObject(null);
             EventSystem.current.SetSelectedGameObject(gameObjectToSelect);
         }
-    
-        private void PickController()
-        {
-            string currentController = Input.GetJoystickNames()[0];
-            if (controllerPicker.IsDifferentController(currentController))
-            {
-                userController = controllerPicker.PickController(currentController);
-            }
-        }
+        
     }
 }

@@ -4,8 +4,6 @@ using UnityEngine;
 public class XboxController : IController
 {
 
-    public XboxController() { }
-
     public float GetLeftAxisX()
     {
         return Input.GetAxis("Horizontal");

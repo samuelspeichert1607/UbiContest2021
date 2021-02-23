@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class PS4Controller : IController
 {
-    public PS4Controller() {}
 
     public float GetLeftAxisX()
     {

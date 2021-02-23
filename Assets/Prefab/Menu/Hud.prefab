@@ -1957,6 +1957,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6847951498784567376}
   - component: {fileID: 6847951498784567379}
+  - component: {fileID: 6249402309052246418}
   m_Layer: 0
   m_Name: PauseManager
   m_TagString: Untagged
@@ -1995,6 +1996,18 @@ MonoBehaviour:
   onPauseFirstSelected: {fileID: 6847951498304509609}
   onValidationFirstSelected: {fileID: 6847951499611807468}
   onReturnFromValidationFirstSelected: {fileID: 6847951498583394900}
+--- !u!114 &6249402309052246418
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6847951498784567377}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8688972652696894ca0a72513d7a937e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6847951498810474225
 GameObject:
   m_ObjectHideFlags: 0
