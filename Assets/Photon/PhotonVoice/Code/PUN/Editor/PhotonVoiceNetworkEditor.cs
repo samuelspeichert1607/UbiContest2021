@@ -10,6 +10,7 @@
         private SerializedProperty autoConnectAndJoinSp;
         private SerializedProperty autoLeaveAndDisconnectSp;
         private SerializedProperty usePunAppSettingsSp;
+        private SerializedProperty usePunAuthValuesSp;
         private SerializedProperty workInOfflineModeSp;
 
         protected override void OnEnable()
@@ -18,6 +19,7 @@
             this.autoConnectAndJoinSp = this.serializedObject.FindProperty("AutoConnectAndJoin");
             this.autoLeaveAndDisconnectSp = this.serializedObject.FindProperty("AutoLeaveAndDisconnect");
             this.usePunAppSettingsSp = this.serializedObject.FindProperty("usePunAppSettings");
+            this.usePunAuthValuesSp = this.serializedObject.FindProperty("usePunAuthValues");
             this.workInOfflineModeSp = this.serializedObject.FindProperty("WorkInOfflineMode");
         }
 
@@ -48,6 +50,7 @@
             {
                 base.DisplayAppSettings();
             }
+            EditorGUILayout.PropertyField(this.usePunAuthValuesSp, new GUIContent("Use PUN's Auth Values", "Use the same Authentication Values From PUN client"));
         }
     }
 }

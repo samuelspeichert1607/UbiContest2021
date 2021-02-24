@@ -49,7 +49,7 @@ namespace Photon.Voice
 		{
 			return new VoiceInfo()
 			{
-				Codec = Codec.Raw,
+				Codec = codec,
 				SamplingRate = (int)samplingRate,
 				Channels = channels,
 				FrameDurationUs = (int)frameDurationUs,
@@ -58,26 +58,6 @@ namespace Photon.Voice
 		}
 
 #if PHOTON_VOICE_VIDEO_ENABLE
-		/// <summary>
-		/// Helper for VP8 stream info creation.
-		/// </summary>
-		/// <param name="bitrate">Stream bitrate.</param>
-		/// <param name="width">Streamed video width. If 0, width and height of video source used (no rescaling).</param>
-		/// <param name="heigth">Streamed video height. If -1, aspect ratio preserved during rescaling.</param>
-		/// <param name="userdata">Optional user data. Should be serializable by Photon.</param>        
-		/// <returns>VoiceInfo instance.</returns>
-		static public VoiceInfo CreateVideoVP8(int bitrate, int width = -1, int heigth = -1, object userdata = null)
-        {
-            return new VoiceInfo()
-            {
-                Codec = Codec.VideoVP8,
-                Bitrate = bitrate,
-                Width = width,
-                Height = heigth,
-                UserData = userdata,
-            };
-        }
-
         /// <summary>
         /// Helper for VP9 stream info creation.
         /// </summary>
@@ -86,7 +66,7 @@ namespace Photon.Voice
         /// <param name="heigth">Streamed video height. If -1, aspect ratio preserved during rescaling.</param>
         /// <param name="userdata">Optional user data. Should be serializable by Photon.</param>        
         /// <returns>VoiceInfo instance.</returns>
-        static public VoiceInfo CreateVideo(Codec codec, int bitrate, int width = -1, int heigth = -1, object userdata = null)
+        static public VoiceInfo CreateVideo(Codec codec, int bitrate, int width, int heigth, int fps, int keyFrameInt, object userdata = null)
         {
             return new VoiceInfo()
             {
@@ -94,6 +74,8 @@ namespace Photon.Voice
                 Bitrate = bitrate,
                 Width = width,
                 Height = heigth,
+                FPS = fps,
+                KeyFrameInt = keyFrameInt,
                 UserData = userdata,
             };
         }
@@ -101,7 +83,7 @@ namespace Photon.Voice
 #endif
         public override string ToString()
         {
-            return "c=" + Codec + " f=" + SamplingRate + " ch=" + Channels + " d=" + FrameDurationUs + " s=" + FrameSize + " b=" + Bitrate + " w=" + Width + " h=" + Height + " ud=" + UserData;
+            return "c=" + Codec + " f=" + SamplingRate + " ch=" + Channels + " d=" + FrameDurationUs + " s=" + FrameSize + " b=" + Bitrate + " w=" + Width + " h=" + Height + " fps=" + FPS + " kfi=" + KeyFrameInt + " ud=" + UserData;
         }
 
         public Codec Codec { get; set; }
@@ -113,10 +95,14 @@ namespace Photon.Voice
         public int FrameDurationUs { get; set; }
         /// <summary>Target bitrate (in bits/second).</summary>
         public int Bitrate { get; set; }
-        /// <summary>Video width (optional).</summary>
+        /// <summary>Video width.</summary>
         public int Width { get; set; }
-        /// <summary>Video height (optional)</summary>
+        /// <summary>Video height</summary>
         public int Height { get; set; }
+        /// <summary>Video frames per second</summary>
+        public int FPS { get; set; }
+        /// <summary>Video keyframe interval in frames</summary>
+        public int KeyFrameInt { get; set; }
         /// <summary>Optional user data. Should be serializable by Photon.</summary>
         public object UserData { get; set; }
 

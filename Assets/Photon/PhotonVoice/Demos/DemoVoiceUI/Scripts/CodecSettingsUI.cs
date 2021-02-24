@@ -7,6 +7,7 @@
 
     public class CodecSettingsUI : MonoBehaviour
     {
+        #pragma warning disable 649
         [SerializeField]
         private Dropdown frameDurationDropdown;
         [SerializeField]
@@ -15,6 +16,7 @@
         private InputField bitrateInputField;
         [SerializeField]
         private Recorder recorder;
+        #pragma warning restore 649
 
         private static readonly List<string> frameDurationOptions = new List<string>
         {

@@ -21,7 +21,7 @@ namespace Photon.Voice
             /// <param name="frequency">Frequency of the generated tone (in Hz).</param>
             /// <param name="samplingRate">Sampling rate of the audio signal (in Hz).</param>
             /// <param name="channels">Number of channels in the audio signal.</param>
-            public ToneAudioReader(Func<double> clockSec = null, double frequency = 440, int samplingRate = 441000, int channels = 2)
+            public ToneAudioReader(Func<double> clockSec = null, double frequency = 440, int samplingRate = 48000, int channels = 2)
             {                
                 this.clockSec = clockSec == null ? () => DateTime.Now.Ticks / 10000000.0 : clockSec;
                 this.samplingRate = samplingRate;
@@ -99,7 +99,7 @@ namespace Photon.Voice
             /// <param name="bufSizeMs">Size of buffers to push (in milliseconds).</param>
             /// <param name="samplingRate">Sampling rate of the audio signal (in Hz).</param>
             /// <param name="channels">Number of channels in the audio signal.</param>
-            public ToneAudioPusher(int frequency = 440, int bufSizeMs = 100, int samplingRate = 441000, int channels = 2)
+            public ToneAudioPusher(int frequency = 440, int bufSizeMs = 100, int samplingRate = 48000, int channels = 2)
             {
                 this.samplingRate = samplingRate;
                 this.channels = channels;
@@ -180,11 +180,14 @@ namespace Photon.Voice
 
             public void Dispose()
             {
+                if (timer != null)
+                {
 #if NETFX_CORE
-                timer.Stop();
+                    timer.Stop();
 #else
-                timer.Close();
+                    timer.Close();
 #endif
+                }
             }
         }
     }

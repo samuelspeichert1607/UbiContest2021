@@ -75,6 +75,9 @@ namespace Photon.Voice.Unity.Demos.DemoVoiceUI
         private Toggle streamAudioClipToggle;
 
         [SerializeField]
+        private Toggle audioToneToggle;
+
+        [SerializeField]
         private Toggle dspToggle;
 
         [SerializeField]
@@ -102,7 +105,13 @@ namespace Photon.Voice.Unity.Demos.DemoVoiceUI
         private InputField roomNameInputField;
 
         [SerializeField]
-        private InputField globalPlaybackDelayInputField;
+        private InputField globalMinDelaySoftInputField;
+        
+        [SerializeField]
+        private InputField globalMaxDelaySoftInputField;
+        
+        [SerializeField]
+        private InputField globalMaxDelayHardInputField;
 
         [SerializeField]
         private int rttYellowThreshold = 100;
@@ -261,12 +270,33 @@ namespace Photon.Voice.Unity.Demos.DemoVoiceUI
 
         private void ToggleAudioClipStreaming(bool isOn)
         {
-            this.microphoneSetupGameObject.SetActive(!isOn);
+            this.microphoneSetupGameObject.SetActive(!isOn && !this.audioToneToggle.isOn);
             if (isOn)
             {
+                this.audioToneToggle.SetValue(false);
                 this.voiceConnection.PrimaryRecorder.SourceType = Recorder.InputSourceType.AudioClip;
             }
-            else
+            else if (!this.audioToneToggle.isOn)
+            {
+                this.voiceConnection.PrimaryRecorder.SourceType = Recorder.InputSourceType.Microphone;
+            }
+            if (this.voiceConnection.PrimaryRecorder.RequiresRestart)
+            {
+                this.voiceConnection.PrimaryRecorder.RestartRecording();
+            }
+        }
+
+        private void ToggleAudioToneFactory(bool isOn)
+        {
+            this.microphoneSetupGameObject.SetActive(!isOn && !this.streamAudioClipToggle.isOn);
+            if (isOn)
+            {
+                this.streamAudioClipToggle.SetValue(false);
+                this.dspToggle.isOn = false;
+                this.voiceConnection.PrimaryRecorder.InputFactory = () => new AudioUtil.ToneAudioReader<float>();
+                this.voiceConnection.PrimaryRecorder.SourceType = Recorder.InputSourceType.Factory;
+            }
+            else if (!this.streamAudioClipToggle.isOn)
             {
                 this.voiceConnection.PrimaryRecorder.SourceType = Recorder.InputSourceType.Microphone;
             }
@@ -292,16 +322,48 @@ namespace Photon.Voice.Unity.Demos.DemoVoiceUI
             this.compressionGainText.text = string.Concat("Compression Gain: ", agcCompressionGain);
         }
 
-        private void OnGlobalPlaybackDelayChanged(string newPlaybackDelayString)
+        private void OnGlobalPlaybackDelayMinSoftChanged(string newMinDelaySoftString)
         {
-            int newPlaybackDelayValue;
-            if (int.TryParse(newPlaybackDelayString, out newPlaybackDelayValue) && newPlaybackDelayValue > 0)
+            int newMinDelaySoftValue;
+            int newMaxDelaySoftValue = this.voiceConnection.GlobalPlaybackDelayMaxSoft;
+            int newMaxDelayHardValue = this.voiceConnection.GlobalPlaybackDelayMaxHard;
+            if (int.TryParse(newMinDelaySoftString, out newMinDelaySoftValue) && newMinDelaySoftValue >= 0 && newMinDelaySoftValue < newMaxDelaySoftValue)
             {
-                this.voiceConnection.GlobalPlaybackDelay = newPlaybackDelayValue;
+                this.voiceConnection.SetGlobalPlaybackDelaySettings(newMinDelaySoftValue, newMaxDelaySoftValue, newMaxDelayHardValue);
             }
             else
             {
-                this.globalPlaybackDelayInputField.text = this.voiceConnection.GlobalPlaybackDelay.ToString();
+                this.globalMinDelaySoftInputField.text = this.voiceConnection.GlobalPlaybackDelayMinSoft.ToString();
+            }
+        }
+
+        private void OnGlobalPlaybackDelayMaxSoftChanged(string newMaxDelaySoftString)
+        {
+            int newMinDelaySoftValue = this.voiceConnection.GlobalPlaybackDelayMinSoft;
+            int newMaxDelaySoftValue;
+            int newMaxDelayHardValue = this.voiceConnection.GlobalPlaybackDelayMaxHard;
+            if (int.TryParse(newMaxDelaySoftString, out newMaxDelaySoftValue) && newMaxDelaySoftValue > newMinDelaySoftValue)
+            {
+                this.voiceConnection.SetGlobalPlaybackDelaySettings(newMinDelaySoftValue, newMaxDelaySoftValue, newMaxDelayHardValue);
+            }
+            else
+            {
+                this.globalMaxDelaySoftInputField.text = this.voiceConnection.GlobalPlaybackDelayMaxSoft.ToString();
+            }
+        }
+
+        private void OnGlobalPlaybackDelayMaxHardChanged(string newMaxDelayHardString)
+        {
+            int newMinDelaySoftValue = this.voiceConnection.GlobalPlaybackDelayMinSoft;
+            int newMaxDelaySoftValue = this.voiceConnection.GlobalPlaybackDelayMaxSoft;
+            int newMaxDelayHardValue;
+            if (int.TryParse(newMaxDelayHardString, out newMaxDelayHardValue) && newMaxDelayHardValue >= newMaxDelaySoftValue)
+            {
+                this.voiceConnection.SetGlobalPlaybackDelaySettings(newMinDelaySoftValue, newMaxDelaySoftValue, newMaxDelayHardValue);
+            }
+            else
+            {
+                this.globalMaxDelayHardInputField.text = this.voiceConnection.GlobalPlaybackDelayMaxHard.ToString();
             }
         }
 
@@ -433,6 +495,7 @@ namespace Photon.Voice.Unity.Demos.DemoVoiceUI
             this.photonVadToggle.SetSingleOnValueChangedCallback(this.TogglePhotonVAD);
             this.aecHighPassToggle.SetSingleOnValueChangedCallback(this.ToggleAecHighPass);
             this.noiseSuppressionToggle.SetSingleOnValueChangedCallback(this.ToggleNoiseSuppression);
+            this.audioToneToggle.SetSingleOnValueChangedCallback(this.ToggleAudioToneFactory);
 
             this.agcCompressionGainSlider.SetSingleOnValueChangedCallback(this.OnAgcCompressionGainChanged);
 
@@ -440,9 +503,19 @@ namespace Photon.Voice.Unity.Demos.DemoVoiceUI
 
             this.roomNameInputField.SetSingleOnEndEditCallback(this.JoinOrCreateRoom);
 
-            this.globalPlaybackDelayInputField.SetSingleOnEndEditCallback(this.OnGlobalPlaybackDelayChanged);
+            #if UNITY_EDITOR
+            this.globalMinDelaySoftInputField.SetSingleOnValueChangedCallback(this.OnGlobalPlaybackDelayMinSoftChanged);
+            this.globalMaxDelaySoftInputField.SetSingleOnValueChangedCallback(this.OnGlobalPlaybackDelayMaxSoftChanged);
+            this.globalMaxDelayHardInputField.SetSingleOnValueChangedCallback(this.OnGlobalPlaybackDelayMaxHardChanged);
+
+            this.reverseStreamDelayInputField.SetSingleOnValueChangedCallback(this.OnReverseStreamDelayChanged);
+            #else
+            this.globalMinDelaySoftInputField.SetSingleOnEndEditCallback(this.OnGlobalPlaybackDelayMinSoftChanged);
+            this.globalMaxDelaySoftInputField.SetSingleOnEndEditCallback(this.OnGlobalPlaybackDelayMaxSoftChanged);
+            this.globalMaxDelayHardInputField.SetSingleOnEndEditCallback(this.OnGlobalPlaybackDelayMaxHardChanged);
 
             this.reverseStreamDelayInputField.SetSingleOnEndEditCallback(this.OnReverseStreamDelayChanged);
+            #endif
         }
 
         private void InitUiValues()
@@ -453,8 +526,11 @@ namespace Photon.Voice.Unity.Demos.DemoVoiceUI
             this.encryptionToggle.SetValue(this.voiceConnection.PrimaryRecorder.Encrypt);
             this.streamAudioClipToggle.SetValue(this.voiceConnection.PrimaryRecorder.SourceType ==
                                                 Recorder.InputSourceType.AudioClip);
-            this.microphoneSetupGameObject.SetActive(!this.streamAudioClipToggle.isOn);
-            this.globalPlaybackDelayInputField.text = this.voiceConnection.GlobalPlaybackDelay.ToString();
+            this.audioToneToggle.SetValue(this.voiceConnection.PrimaryRecorder.SourceType == Recorder.InputSourceType.Factory);
+            this.microphoneSetupGameObject.SetActive(!this.streamAudioClipToggle.isOn && !this.audioToneToggle.isOn);
+            this.globalMinDelaySoftInputField.SetValue(this.voiceConnection.GlobalPlaybackDelayMinSoft.ToString());
+            this.globalMaxDelaySoftInputField.SetValue(this.voiceConnection.GlobalPlaybackDelayMaxSoft.ToString());
+            this.globalMaxDelayHardInputField.SetValue(this.voiceConnection.GlobalPlaybackDelayMaxHard.ToString());
             if (this.webRtcDspGameObject != null)
             {
                 #if UNITY_EDITOR_WIN || UNITY_EDITOR_OSX || !UNITY_EDITOR && (UNITY_IOS || UNITY_ANDROID || UNITY_STANDALONE_OSX || UNITY_STANDALONE_WIN)

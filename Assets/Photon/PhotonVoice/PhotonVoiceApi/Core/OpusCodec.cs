@@ -52,7 +52,7 @@ namespace Photon.Voice
         }
 
         abstract public class Encoder<T> : IEncoderDirect<T[]>
-        {        
+        {
             protected OpusEncoder encoder;
             protected bool disposed;
             protected Encoder(VoiceInfo i, ILogger logger)
@@ -122,7 +122,10 @@ namespace Photon.Voice
 
             protected abstract ArraySegment<byte> encodeTyped(T[] buf);
 
-            public VoiceInfo Info { get; }
+            public I GetPlatformAPI<I>() where I : class
+            {
+                return null;
+            }
 
             public void Dispose()
             {
@@ -135,7 +138,6 @@ namespace Photon.Voice
                     disposed = true;
                 }
             }
-
         }
 
         public class EncoderFloat : Encoder<float>
@@ -187,8 +189,6 @@ namespace Photon.Voice
             public string Error { get; private set; }
 
             private Action<FrameOut<T>> output;
-
-            public VoiceInfo Info { get; }
 
             public void Dispose()
             {

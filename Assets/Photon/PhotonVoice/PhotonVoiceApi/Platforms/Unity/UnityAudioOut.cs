@@ -7,6 +7,17 @@ namespace Photon.Voice.Unity
     // May consume audio packets in thread other than Unity's main thread
     public class UnityAudioOut : IAudioOut<float>
     {
+        public struct PlayDelayConfig
+        {
+            public int Low  { get; set; } // ms: Audio player tries to keep the delay above this value.
+            public int High { get; set; } // ms: Audio player tries to keep the delay below this value.
+            public int Max  { get; set; } // ms: Audio player guarantees that the delay never exceeds this value.
+
+            static public PlayDelayConfig Default = new PlayDelayConfig { Low = 200, High = 400, Max = 1000 };
+        }
+        const int SCALE_FACTOR_STEPS = 1;
+        const int SCALE_FACTROR_PER_STEP_PERC = 5;
+
         private int frameSamples;
         private int frameSize;
         private int bufferSamples;
@@ -18,13 +29,11 @@ namespace Photon.Voice.Unity
         private int playLoopCount;
 
         private readonly AudioSource source;
+        PlayDelayConfig playDelayConfig;
         private int channels;
         private bool started;
         private bool flushed = true;
-
-        const int MAX_DELAY_MS = 3000;
-        const int RESAMPLE_RAMP_END_MS = 2000;
-
+        
         private int targetDelaySamples;
         private int upperTargetDelaySamples;       // correct if higher: gradually move to target via input frames resampling
         private int lowerTargetDelaySamples;       // correct if lower: set to targetit (and produce a gap in playback), it could be gradual move too but we don't have enough space for this because we set target as low as possible
@@ -37,9 +46,10 @@ namespace Photon.Voice.Unity
 
         float[] zeroFrame;
         float[] resampledFrame;
-        public UnityAudioOut(AudioSource audioSource, ILogger logger, string logPrefix, bool debugInfo)
+        public UnityAudioOut(AudioSource audioSource, PlayDelayConfig playDelayConfig, ILogger logger, string logPrefix, bool debugInfo)
         {            
             this.source = audioSource;
+            this.playDelayConfig = playDelayConfig;
             this.logger = logger;
             this.logPrefix = logPrefix;
             this.debugInfo = debugInfo;
@@ -51,29 +61,40 @@ namespace Photon.Voice.Unity
             get { return started && !this.flushed; }
         }
 
-        public void Start(int frequency, int channels, int frameSamples, int playDelayMs)
+        public void Start(int frequency, int channels, int frameSamples)
         {
             //frequency = (int)(frequency * 1.2); // underrun test
             //frequency = (int)(frequency / 1.2); // overrun test
 
+
             this.channels = channels;
-            this.bufferSamples = 2 * MAX_DELAY_MS * frequency / 1000; // make sure we have enough soace
+            // add 1 frame samples to make sure that we have something to play when delay set to 0
+            this.lowerTargetDelaySamples = playDelayConfig.Low * frequency / 1000 + frameSamples;
+            this.upperTargetDelaySamples = playDelayConfig.High * frequency / 1000 + frameSamples;
+            if (this.upperTargetDelaySamples < lowerTargetDelaySamples + 2 * frameSamples)
+            {
+                this.upperTargetDelaySamples = lowerTargetDelaySamples + 2 * frameSamples;
+            }
+
+            this.targetDelaySamples = (this.lowerTargetDelaySamples + this.upperTargetDelaySamples) / 2;
+
+            int resampleRampEndMs = playDelayConfig.Max;
+
+            this.maxDelaySamples = playDelayConfig.Max * frequency / 1000;
+            if (this.maxDelaySamples < this.upperTargetDelaySamples)
+            {
+                this.maxDelaySamples = this.upperTargetDelaySamples;
+            }
+                                    
+            this.resampleRampEndDelaySamples = resampleRampEndMs * frequency / 1000;
+            if (this.resampleRampEndDelaySamples  < this.upperTargetDelaySamples)
+            {
+                this.resampleRampEndDelaySamples = this.upperTargetDelaySamples;
+            }
+
+			this.bufferSamples = (int)(2L * this.maxDelaySamples * frequency / 1000); // make sure we have enough soace
             this.frameSamples = frameSamples;
             this.frameSize = frameSamples * channels;
-
-            this.source.loop = true;
-            // using streaming clip leads to too long delays
-            this.source.clip = AudioClip.Create("UnityAudioOut", bufferSamples, channels, frequency, false);
-            this.started = true;
-
-            // add 1 frame samples to make sure that we have something to play when delay set to 0
-            int playDelaySamples = playDelayMs * frequency / 1000 + frameSamples;
-            this.lowerTargetDelaySamples = playDelaySamples;
-            this.targetDelaySamples = playDelaySamples + playDelaySamples / 2;
-            this.upperTargetDelaySamples = 2 * playDelaySamples;
-
-            this.maxDelaySamples = MAX_DELAY_MS * frequency / 1000;
-            this.resampleRampEndDelaySamples = RESAMPLE_RAMP_END_MS * frequency / 1000;
 
             this.clipWriteSamplePos = this.targetDelaySamples;
 
@@ -85,9 +106,14 @@ namespace Photon.Voice.Unity
             this.zeroFrame = new float[this.frameSize];
             this.resampledFrame = new float[this.frameSize];
 
+            this.source.loop = true;
+            // using streaming clip leads to too long delays
+            this.source.clip = AudioClip.Create("UnityAudioOut", bufferSamples, channels, frequency, false);
+            this.started = true;
+
             this.source.Play();
 
-            this.logger.LogWarning("{0} UnityAudioOut Start: overrun bs={1} ch={2} f={3} ltds={4} tds={5} utds={6} mds={7}, rreds={8}", this.logPrefix, bufferSamples, channels, frequency, lowerTargetDelaySamples, targetDelaySamples, upperTargetDelaySamples, maxDelaySamples, resampleRampEndDelaySamples);
+            this.logger.LogDebug("{0} UnityAudioOut Start: overrun bs={1} ch={2} f={3} ltds={4} tds={5} utds={6} mds={7}, rreds={8}", this.logPrefix, bufferSamples, channels, frequency, lowerTargetDelaySamples, targetDelaySamples, upperTargetDelaySamples, maxDelaySamples, resampleRampEndDelaySamples);
         }
 
         Queue<float[]> frameQueue = new Queue<float[]>();
@@ -119,7 +145,7 @@ namespace Photon.Voice.Unity
                     {
                         if (this.debugInfo)
                         {
-                            this.logger.LogWarning("{0} UnityAudioOut overrun {1} {2} {3} {4} {5} {6}", this.logPrefix, lowerTargetDelaySamples, upperTargetDelaySamples, lagSamples, playSamplePos, this.clipWriteSamplePos, playSamplePos + targetDelaySamples);
+                            this.logger.LogDebug("{0} UnityAudioOut overrun {1} {2} {3} {4} {5} {6}", this.logPrefix, lowerTargetDelaySamples, upperTargetDelaySamples, lagSamples, playSamplePos, this.clipWriteSamplePos, playSamplePos + targetDelaySamples);
                         }
                         this.clipWriteSamplePos = playSamplePos + maxDelaySamples;
                         lagSamples = maxDelaySamples;
@@ -128,7 +154,7 @@ namespace Photon.Voice.Unity
                     {
                         if (this.debugInfo)
                         {
-                            this.logger.LogWarning("{0} UnityAudioOut underrun {1} {2} {3} {4} {5} {6}", this.logPrefix, lowerTargetDelaySamples, upperTargetDelaySamples, lagSamples, playSamplePos, this.clipWriteSamplePos, playSamplePos + targetDelaySamples);
+                            this.logger.LogDebug("{0} UnityAudioOut underrun {1} {2} {3} {4} {5} {6}", this.logPrefix, lowerTargetDelaySamples, upperTargetDelaySamples, lagSamples, playSamplePos, this.clipWriteSamplePos, playSamplePos + targetDelaySamples);
                         }
                         this.clipWriteSamplePos = playSamplePos + targetDelaySamples;
                         lagSamples = targetDelaySamples;
@@ -146,7 +172,7 @@ namespace Photon.Voice.Unity
                             if (catchingUp)
                             {
                                 catchingUp = false;
-                                this.logger.LogWarning("{0} UnityAudioOut stream sync reset {1} {2} {3} {4} {5} {6}", this.logPrefix, lowerTargetDelaySamples, upperTargetDelaySamples, lagSamples, playSamplePos, this.clipWriteSamplePos, playSamplePos + targetDelaySamples);
+                                this.logger.LogDebug("{0} UnityAudioOut stream sync reset {1} {2} {3} {4} {5} {6}", this.logPrefix, lowerTargetDelaySamples, upperTargetDelaySamples, lagSamples, playSamplePos, this.clipWriteSamplePos, playSamplePos + targetDelaySamples);
                             }
                             return;
                         }
@@ -163,24 +189,23 @@ namespace Photon.Voice.Unity
                         if (lagSamples > upperTargetDelaySamples && !catchingUp)
                         {
                             catchingUp = true;
-                            this.logger.LogWarning("{0} UnityAudioOut stream sync started {1} {2} {3} {4} {5} {6}", this.logPrefix, lowerTargetDelaySamples, upperTargetDelaySamples, lagSamples, playSamplePos, this.clipWriteSamplePos, playSamplePos + targetDelaySamples);
+                            this.logger.LogDebug("{0} UnityAudioOut stream sync started {1} {2} {3} {4} {5} {6}", this.logPrefix, lowerTargetDelaySamples, upperTargetDelaySamples, lagSamples, playSamplePos, this.clipWriteSamplePos, playSamplePos + targetDelaySamples);
                         }
 
                         if (lagSamples <= targetDelaySamples && catchingUp)
                         {
                             catchingUp = false;
-                            this.logger.LogWarning("{0} UnityAudioOut stream sync finished {1} {2} {3} {4} {5} {6}", this.logPrefix, lowerTargetDelaySamples, upperTargetDelaySamples, lagSamples, playSamplePos, this.clipWriteSamplePos, playSamplePos + targetDelaySamples);
+                            this.logger.LogDebug("{0} UnityAudioOut stream sync finished {1} {2} {3} {4} {5} {6}", this.logPrefix, lowerTargetDelaySamples, upperTargetDelaySamples, lagSamples, playSamplePos, this.clipWriteSamplePos, playSamplePos + targetDelaySamples);
                         }
 
                         if (catchingUp)
-                        {
-                            const int STEPS = 3;
+                        {                            
                             int resampledLen = frame.Length;
-                            int k = STEPS * (lagSamples - targetDelaySamples) / (resampleRampEndDelaySamples - targetDelaySamples);
-                            if (k >= STEPS) k = STEPS - 1;
+                            int k = SCALE_FACTOR_STEPS * (lagSamples - targetDelaySamples) / (resampleRampEndDelaySamples - targetDelaySamples);
+                            if (k >= SCALE_FACTOR_STEPS) k = SCALE_FACTOR_STEPS - 1;
                             if (k >= 0)
                             {
-                                resampledLen = frame.Length * (100 - 5*(k + 1)) / 100;                                
+                                resampledLen = frame.Length * (100 - SCALE_FACTROR_PER_STEP_PERC * (k + 1)) / 100;                                
                             }
                             
                             AudioUtil.Resample(frame, resampledFrame, resampledLen, channels);
@@ -200,7 +225,7 @@ namespace Photon.Voice.Unity
                             this.source.clip.SetData(frame, this.clipWriteSamplePos % this.bufferSamples);
                             this.clipWriteSamplePos += frame.Length / this.channels;
                         }
-                        framePool.Release(frame);
+                        framePool.Release(frame, frame.Length);
                     }
                 }
 

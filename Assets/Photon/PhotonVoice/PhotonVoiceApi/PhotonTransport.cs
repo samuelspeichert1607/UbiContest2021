@@ -24,6 +24,8 @@ namespace Photon.Voice
             Bitrate = 5,
             Width = 6,
             Height = 7,
+            FPS = 8,
+            KeyFrameInt = 9,
             UserData = 10,
             EventNumber = 11,
             Codec = 12,
@@ -55,6 +57,8 @@ namespace Photon.Voice
                     { (byte)EventParam.Bitrate, v.Info.Bitrate },
                     { (byte)EventParam.Width, v.Info.Width },
                     { (byte)EventParam.Height, v.Info.Height },
+                    { (byte)EventParam.FPS, v.Info.FPS },
+                    { (byte)EventParam.KeyFrameInt, v.Info.KeyFrameInt },
                     { (byte)EventParam.UserData, v.Info.UserData },
                     { (byte)EventParam.EventNumber, v.evNumber }
 
@@ -146,6 +150,8 @@ namespace Photon.Voice
             // check to keep compatibility with old clients
             if (h.ContainsKey((byte)EventParam.Width)) i.Width = (int)h[(byte)EventParam.Width];
             if (h.ContainsKey((byte)EventParam.Height)) i.Height = (int)h[(byte)EventParam.Height];
+            if (h.ContainsKey((byte)EventParam.FPS)) i.FPS = (int)h[(byte)EventParam.FPS];
+            if (h.ContainsKey((byte)EventParam.KeyFrameInt)) i.KeyFrameInt = (int)h[(byte)EventParam.KeyFrameInt];
             i.UserData = h[(byte)EventParam.UserData];
 
             return i;

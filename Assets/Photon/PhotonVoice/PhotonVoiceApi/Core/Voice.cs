@@ -12,9 +12,6 @@ using System;
 
 using System.Collections.Generic;
 using System.Threading;
-#if NETFX_CORE
-using Windows.System.Threading;
-#endif
 
 namespace Photon.Voice
 {
@@ -109,11 +106,6 @@ namespace Photon.Voice
         /// <summary>Optional user object attached to LocalVoice. its Service() will be called at each VoiceClient.Service() call.</summary>
         public IServiceable LocalUserServiceable { get; set; }
 
-        virtual public IEncoder CreateDefaultEncoder(VoiceInfo info)
-        {
-            throw new UnsupportedCodecException("LocalVoice.CreateDefaultEncoder", info.Codec, Logger);
-        }
-
         /// <summary>
         /// If true, outgoing stream routed back to client via server same way as for remote client's streams.
         /// Can be swithed any time. OnRemoteVoiceInfoAction and OnRemoteVoiceRemoveAction are triggered if required.
@@ -173,13 +165,11 @@ namespace Photon.Voice
             this.id = id;
             if (encoder == null)
             {
-                voiceClient.transport.LogInfo(LogPrefix + ": Creating default encoder");
-                this.encoder = CreateDefaultEncoder(voiceInfo);
+                var m = LogPrefix + ": encoder is null";
+                voiceClient.transport.LogError(m);
+                throw new ArgumentNullException("encoder");
             }
-            else
-            {
-                this.encoder = encoder;
-            }
+            this.encoder = encoder;
             this.encoder.Output = sendFrame;
         }
 
@@ -333,7 +323,6 @@ namespace Photon.Voice
         public IDecoder Decoder { get; set; }
 
         public ImageFormat OutputImageFormat { get; set; }
-        public Flip OutputImageFlip { get; set; }
 
         internal enum OutputType { None, Float, Short, Image };
         internal OutputType outType { get; private set; }
@@ -362,7 +351,7 @@ namespace Photon.Voice
             this.lastEvNumber = lastEventNumber;
 
 #if NETFX_CORE
-            ThreadPool.RunAsync((x) =>
+            Windows.System.Threading.ThreadPool.RunAsync((x) =>
             {
                 decodeThread();
             });
@@ -504,27 +493,25 @@ namespace Photon.Voice
 #if PHOTON_VOICE_VIDEO_ENABLE
                 case RemoteVoiceOptions.OutputType.Image:
                     voiceClient.transport.LogInfo(LogPrefix + ": Creating default decoder for output type = " + options.outType);
-                    IDecoderQueuedOutputImageNative vd;
+                    IDecoderQueuedOutputImageNative vd = null;
                     switch (Info.Codec)
                     {
                         case Codec.VideoVP8:
                         case Codec.VideoVP9:
-                            vd = new VPxCodec.Decoder(options.output as Action<ImageOutputBuf>, voiceClient.transport);
+                            vd = new VPxCodec.Decoder(voiceClient.transport);
+                            vd.Output = options.output as Action<ImageOutputBuf>;
                             break;
                         case Codec.VideoH264:
-                            vd = new FFmpegCodec.Decoder(options.output as Action<ImageOutputBuf>, voiceClient.transport);
+                            //vd = new FFmpegCodec.Decoder(voiceClient.transport);
+                            //vd.Output = options.output as Action<ImageOutputBuf>;
                             break;
                         default:
                             voiceClient.transport.LogError(LogPrefix + ": Action<ImageOutputBuf> output set for not video decoder (output type = " + options.outType + ")");
                             return null;
                     }
-                    if (options.OutputImageFormat != ImageFormat.Undefined)
+                    if (vd != null && options.OutputImageFormat != ImageFormat.Undefined)
                     {
                         vd.OutputImageFormat = options.OutputImageFormat;
-                    }
-                    if (options.OutputImageFlip != Flip.Undefined)
-                    {
-                        vd.OutputImageFlip = options.OutputImageFlip;
                     }
                     return vd;
 #endif

@@ -5,11 +5,14 @@
 
     public class SidebarToggle : MonoBehaviour
     {
+        #pragma warning disable 649
         [SerializeField]
         private Button sidebarButton;
         
         [SerializeField]
         private RectTransform panelsHolder;
+        #pragma warning restore 649
+
         private float sidebarWidth = 300f; // todo: get width dynamically at runtime
 
         private bool sidebarOpen = true;
