@@ -25,7 +25,6 @@ public class InteractableItem : MonoBehaviour
     private bool playerHasLeftRange = false;
 
     protected IController UserController;
-    private ControllerPicker controllerPicker;
 
 
     private GameObject[] players;
@@ -35,7 +34,6 @@ public class InteractableItem : MonoBehaviour
         players = GameObject.FindGameObjectsWithTag("Player");
         toStartInteractText = String.Join(" ", InteractPreButtonText, InteractButtonName, InteractPostButtonText);
         toEndInteractText = String.Join(" ", InteractPreButtonText, InteractButtonName, InteractionStopPostButtonText);
-        controllerPicker = new ControllerPicker();
     }
 
     private void Update()
@@ -133,14 +131,5 @@ public class InteractableItem : MonoBehaviour
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, interactRadius);
     }
-    
-    public void PickController()
-    {
-        string currentController = Input.GetJoystickNames()[0];
-        if (controllerPicker.IsDifferentController(currentController))
-        {
-            UserController = controllerPicker.PickController(currentController);
-        }
-    }
-    
+
 }

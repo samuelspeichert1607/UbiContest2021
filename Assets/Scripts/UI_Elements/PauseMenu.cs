@@ -34,7 +34,7 @@ namespace UI_Elements
             //TODO there is a better way to map this probably
             //// if (photonView.IsMine)
             // {
-            if (Input.GetKeyDown(KeyCode.Escape) || controllerManager.GetButtonDown("Button7"))
+            if (Input.GetKeyDown(KeyCode.Escape) || controllerManager.GetButtonDown("Start"))
             {
                 pauseUnPause();
                 if (validationMenu.activeSelf)
