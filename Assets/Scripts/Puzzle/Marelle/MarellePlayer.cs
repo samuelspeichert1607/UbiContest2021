@@ -10,7 +10,6 @@ public class MarellePlayer : MonoBehaviour
     private bool enterBool = true;
     private GameObject colliderObject = null;
 
-    // Update is called once per frame
     void Update()
     {
         RaycastHit hit;

@@ -85,7 +85,7 @@ public class Joystick : InteractableItem
 
     public override void OnPlayerInRange()
     {
-        if (controllerManager.GetButtonDown(InteractButtonName))
+        if (controllerManager.GetButtonDown(interactButtonName))
         {
             if (IsInteractedWith)
             {

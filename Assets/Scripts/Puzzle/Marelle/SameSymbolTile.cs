@@ -46,14 +46,6 @@ public class SameSymbolTile : ParentTile
             }
         }
 
-        if (Input.GetButtonDown("Fire1") && testBool)
-        {
-            CollisionDetected(transform.GetChild(1).gameObject);
-            testBool = false;
-            //transform.GetChild(1).GetComponent<Renderer>().material.SetColor("_Color", Color.white);
-            CollisionExited(transform.GetChild(1).gameObject);
-
-        }
 
     }
 
@@ -62,7 +54,6 @@ public class SameSymbolTile : ParentTile
        
         if (transform.parent.GetComponent<MarelleWon>().unlockCollision)
         {
-            //collision biz, mettre in print ici pour voir
             bool isResolve = transform.parent.GetComponent<MarelleWon>().isResolve;
             testBool = true;
 
@@ -87,7 +78,6 @@ public class SameSymbolTile : ParentTile
                         transform.parent.GetComponent<MarelleWon>().isResolve = true;
                         if (lastTile)
                         {
-                            //transform.parent.GetChild(0).GetComponent<MovingWall>().CanMove = true;
                             transform.parent.GetComponent<MarelleWon>().gameWon();
                         }
 

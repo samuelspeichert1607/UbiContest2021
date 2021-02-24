@@ -20,9 +20,9 @@ namespace InteractableItems
     
         private GameObject _inRangePlayer;
     
-    private bool previousPlayerRangeState = false;
-    private bool playerHasEnteredRange = false;
-    private bool playerHasLeftRange = false;
+    private bool _previousPlayerRangeState = false;
+    private bool _playerHasEnteredRange = false;
+    private bool _playerHasLeftRange = false;
 
     protected IController UserController;
 
