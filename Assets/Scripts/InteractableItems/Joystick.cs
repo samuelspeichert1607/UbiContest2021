@@ -10,7 +10,6 @@ public class Joystick : InteractableItem
 {
     
     [SerializeField] private CustomController target;
-    private TextRenderer textRenderer;
 
     private ControllerManager controllerManager;
 
@@ -49,7 +48,7 @@ public class Joystick : InteractableItem
     {
         IsInteractedWith = true;
         TogglePlayerController();
-        textRenderer.ShowInfoText(ToEndInteractText);
+        TextRenderer.ShowInfoText(ToEndInteractText);
     }
 
     private void TogglePlayerController()
@@ -69,18 +68,18 @@ public class Joystick : InteractableItem
     {
         IsInteractedWith = false;
         TogglePlayerController();
-        textRenderer.ShowInfoText(ToStartInteractText);
+        TextRenderer.ShowInfoText(ToStartInteractText);
     }
 
     public override void OnPlayerEnterRange()
     {
         FindTextRendererOfPlayerInRange();
-        textRenderer.ShowInfoText(ToStartInteractText);   
+        TextRenderer.ShowInfoText(ToStartInteractText);   
     }
 
     public override void OnPlayerExitRange()
     {
-        textRenderer.CloseInfoText();
+        TextRenderer.CloseInfoText();
     }
 
     public override void OnPlayerInRange()

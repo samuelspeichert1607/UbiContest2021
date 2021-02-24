@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
-public abstract class ParentTile : MonoBehaviour
+public abstract class ParentTile : MonoBehaviourPun//, IPunObservable
 {
 
     private GameObject tileExited = null;
@@ -33,4 +34,19 @@ public abstract class ParentTile : MonoBehaviour
             }
         }
     }
+
+    //public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    //{
+    //    //if (stream.IsWriting)
+    //    //{
+    //    //    stream.SendNext(tileMaterial1);
+    //    //    stream.SendNext(tileMaterial2);
+    //    //}
+    //    //else if (stream.IsReading)
+    //    //{
+    //    //    tileMaterial1 = (Material)stream.ReceiveNext();
+    //    //    tileMaterial2 = (Material)stream.ReceiveNext();
+    //    //}
+    //}
+
 }
