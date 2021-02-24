@@ -1,5 +1,7 @@
 using Photon.Pun;
 using UnityEngine;
+using System;
+using UnityEngine.EventSystems;
 
 public class PlayerController : CustomController
 {
@@ -12,6 +14,8 @@ public class PlayerController : CustomController
     private GameObject cam;
     private float velocityY = -1;
     private PhotonView photonView;
+    
+    private ControllerManager controllerManager;
 
     private float eulerAngleX;
 
@@ -23,16 +27,16 @@ public class PlayerController : CustomController
         cam.GetComponent<Camera>().enabled = photonView.IsMine;
         controller = GetComponent<CharacterController>();
         eulerAngleX = cam.transform.position.y;
+        controllerManager = GetComponent<ControllerManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
         if (!photonView.IsMine) return;
+        
 
-        string[] controllers = Input.GetJoystickNames();
-
-        float rotationY = Input.GetAxis("RotateY");
+        float rotationY = controllerManager.GetRightAxisY();
 
         //on limite la rotation
         if (canMove)
@@ -46,7 +50,7 @@ public class PlayerController : CustomController
             }
 
             //on tourne le joueur selon l'axe x du joystick droit
-            transform.Rotate(new Vector3(0, Input.GetAxis("RotateX"), 0) * (Time.deltaTime * RotationSpeed), Space.World);
+            transform.Rotate(new Vector3(0, controllerManager.GetRightAxisX(), 0) * (Time.deltaTime * RotationSpeed), Space.World);
 
             if (controller.isGrounded)
             {
@@ -56,7 +60,7 @@ public class PlayerController : CustomController
                     velocityY = -1;
                 }
 
-                if (Input.GetButtonDown("Jump"))
+                if (controllerManager.GetButtonDown("Jump"))
                 {
                     velocityY = jumpValue;
                 }
@@ -67,7 +71,7 @@ public class PlayerController : CustomController
             }
 
             //le joueur se deplace
-            Move(Input.GetAxis("Vertical"), Input.GetAxis("Horizontal"), Time.deltaTime);
+            Move(controllerManager.GetLeftAxisY(), controllerManager.GetLeftAxisX(), Time.deltaTime);
         }
     }
 
@@ -77,4 +81,5 @@ public class PlayerController : CustomController
         controller.Move(transform.right * (horizontalMotion * timeElapsed * playerSpeed));
         controller.Move(new Vector3(0, velocityY, 0) * Time.deltaTime);
     }
+
 }

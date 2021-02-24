@@ -27,6 +27,11 @@ public class TextRenderer : MonoBehaviour
         textContainer.SetActive(false);
         textField.text = "";
     }
+
+    public bool IsClosed()
+    {
+        return !textContainer.activeSelf;
+    }
     
     
 }

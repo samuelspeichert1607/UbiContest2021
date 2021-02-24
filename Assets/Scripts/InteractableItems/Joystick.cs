@@ -1,19 +1,23 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using InteractableItems;
 using UnityEngine;
-using static InteractableItem;
+using static InteractableItems.InteractableItem;
 using static CustomController;
 
 public class Joystick : InteractableItem
 {
     
     [SerializeField] private CustomController target;
-    [SerializeField] private TextRenderer textRenderer;
+    private TextRenderer textRenderer;
+
+    private ControllerManager controllerManager;
 
     private new void Start()
     {
         base.Start();
+        controllerManager = GetComponent<ControllerManager>();
     }
     
     // Update is called once per frame
@@ -28,14 +32,14 @@ public class Joystick : InteractableItem
         {
             OnPlayerExitRange();
         }
-        else if (hasPlayerInRange)
+        else if (HasPlayerInRange)
         {
             OnPlayerInRange();
         }
 
-        if (isInteractedWith)
+        if (IsInteractedWith)
         {
-            target.Move(Input.GetAxis("Vertical"), Input.GetAxis("Horizontal"), Time.deltaTime);
+            target.Move(controllerManager.GetLeftAxisY(), controllerManager.GetLeftAxisX(), Time.deltaTime);
             //Animation of the joystick would go here
         }
 
@@ -43,9 +47,9 @@ public class Joystick : InteractableItem
 
     public override void OnInteractStart()
     {
-        isInteractedWith = true;
+        IsInteractedWith = true;
         TogglePlayerController();
-        textRenderer.ShowInfoText(toEndInteractText);
+        textRenderer.ShowInfoText(ToEndInteractText);
     }
 
     private void TogglePlayerController()
@@ -63,15 +67,15 @@ public class Joystick : InteractableItem
 
     public override void OnInteractEnd()
     {
-        isInteractedWith = false;
+        IsInteractedWith = false;
         TogglePlayerController();
-        textRenderer.ShowInfoText(toStartInteractText);
+        textRenderer.ShowInfoText(ToStartInteractText);
     }
 
     public override void OnPlayerEnterRange()
     {
         FindTextRendererOfPlayerInRange();
-        textRenderer.ShowInfoText(toStartInteractText);   
+        textRenderer.ShowInfoText(ToStartInteractText);   
     }
 
     public override void OnPlayerExitRange()
@@ -81,9 +85,9 @@ public class Joystick : InteractableItem
 
     public override void OnPlayerInRange()
     {
-        if (Input.GetButtonDown(InteractButtonName))
+        if (controllerManager.GetButtonDown(InteractButtonName))
         {
-            if (isInteractedWith)
+            if (IsInteractedWith)
             {
                 OnInteractEnd();   
             }
@@ -92,10 +96,5 @@ public class Joystick : InteractableItem
                 OnInteractStart();
             }
         }
-    }
-
-    private void FindTextRendererOfPlayerInRange()
-    {
-        textRenderer = GetInRangePlayer().GetComponentInChildren<TextRenderer>();
     }
 }

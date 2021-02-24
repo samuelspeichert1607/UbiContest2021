@@ -19,8 +19,11 @@ namespace UI_Elements
         [SerializeField] 
         private GameObject onPauseFirstSelected, onValidationFirstSelected, onReturnFromValidationFirstSelected;
 
+        private ControllerManager controllerManager;
+
         public void Start()
         {
+            controllerManager = GetComponent<ControllerManager>();
             // photonView = GetComponent<PhotonView>();
             pauseMenu.SetActive(false);
             playerController = GetComponentInParent<CustomController>();
@@ -28,17 +31,17 @@ namespace UI_Elements
 
         public void Update()
         {
-            // if (photonView.IsMine)
+            //TODO there is a better way to map this probably
+            //// if (photonView.IsMine)
             // {
-                //TODO there is a better way to map this probably
-                if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Joystick1Button7))
+            if (Input.GetKeyDown(KeyCode.Escape) || controllerManager.GetButtonDown("Start"))
+            {
+                pauseUnPause();
+                if (validationMenu.activeSelf)
                 {
-                    pauseUnPause();
-                    if (validationMenu.activeSelf)
-                    {
-                        validationMenu.SetActive(false);
-                    }
+                    validationMenu.SetActive(false);
                 }
+            } 
             // }
         }
 
@@ -92,7 +95,6 @@ namespace UI_Elements
             EventSystem.current.SetSelectedGameObject(null);
             EventSystem.current.SetSelectedGameObject(gameObjectToSelect);
         }
-
-
+        
     }
 }
