@@ -8,6 +8,8 @@ public interface IController
     public float GetLeftAxisY();
     public float GetRightAxisX();
     public float GetRightAxisY();
+    public float GetLTriggerAxis();
+    public float GetRTriggerAxis();
     public bool GetButtonDown(string button);
 
 }

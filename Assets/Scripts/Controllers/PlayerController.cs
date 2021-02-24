@@ -1,6 +1,7 @@
 using Photon.Pun;
 using UnityEngine;
 using System;
+using UnityEngine.EventSystems;
 
 public class PlayerController : CustomController
 {

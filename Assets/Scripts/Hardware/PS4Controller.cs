@@ -8,18 +8,32 @@ public class PS4Controller : IController
     {
         return Input.GetAxis("Horizontal");
     }
+    
     public float GetLeftAxisY()
     {
         return Input.GetAxis("Vertical");
     }
+    
     public float GetRightAxisX()
     {
         return Input.GetAxis("PS4RightX");
     }
+    
     public float GetRightAxisY()
     {
         return -1 * Input.GetAxis("DpadX");
     }
+    
+    public float GetLTriggerAxis()
+    {
+        return Input.GetAxis("RotateX");
+    }
+    
+    public float GetRTriggerAxis()
+    {
+        return Input.GetAxis("RotateY");
+    }
+
     public bool GetButtonDown(string button)
     {
         switch (button)
@@ -28,12 +42,16 @@ public class PS4Controller : IController
                 return Input.GetButtonDown("B");
             case "B":
                 return Input.GetButtonDown("X");
-            case "Button7":
+            case "Start":
                 return Input.GetButtonDown("Button9");
             case "Submit":
                 return Input.GetButtonDown("B");
             case "Cancel":
                 return Input.GetButtonDown("X");
+            case "LBumper":
+                return Input.GetButtonDown("LBumper");
+            case "RBumper":
+                return Input.GetButtonDown("RBumper");
             default:
                 return false;
         }
