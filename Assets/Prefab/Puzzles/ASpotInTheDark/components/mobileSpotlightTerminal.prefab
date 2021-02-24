@@ -139,14 +139,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06f0b942eb499b7459dd4f70b9c8b7e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: 
-  InteractPreButtonText: Press
-  InteractPostButtonText: 
-  InteractButtonName: B
-  InteractionStopPostButtonText: 
+  interactPreButtonText: Press
+  interactPostButtonText: to control spotlight
+  interactButtonName: B
+  interactionStopPostButtonText: to stop controlling spotlight
   interactRadius: 4
   target: {fileID: 0}
-  textRenderer: {fileID: 0}
 --- !u!1001 &4684103154604991207
 PrefabInstance:
   m_ObjectHideFlags: 0
