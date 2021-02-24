@@ -108,17 +108,6 @@ namespace Photon.Voice
             }
         }
 
-        override public IEncoder CreateDefaultEncoder(VoiceInfo info)
-        {
-            switch (info.Codec)
-            {
-                case Codec.AudioOpus:
-                    return OpusCodec.Factory.CreateEncoder<T[]>(info, Logger);
-                default:
-                    throw new UnsupportedCodecException("LocalVoiceAudio.CreateDefaultEncoder<" + (new T[1])[0].GetType() + ">", info.Codec, Logger);
-            }
-        }
-
     	public virtual AudioUtil.IVoiceDetector VoiceDetector { get { return voiceDetector; } }
         protected AudioUtil.VoiceDetector<T> voiceDetector;
         protected AudioUtil.VoiceDetectorCalibration<T> voiceDetectorCalibration;

@@ -5,13 +5,19 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Menu.unity
     guid: 229d9f137f1e15f408fa7fcb3ec2f93f
   - enabled: 1
     path: Assets/Scenes/Lobby.unity
     guid: dc99ea55ecb1d7047bd31309bdf0e127
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/SpotInDark_blocking.unity
     guid: eb3bdd2de8ef0474b923df11940b0bf4
+  - enabled: 1
+    path: Assets/Scenes/TestElie.unity
+    guid: a673ecba0e21c0f45bcce75a999a6608
+  - enabled: 0
+    path: Assets/Scenes/TestConnectivity.unity
+    guid: 8e8e55f3eef1b1d46b56aa015c38b81a
   m_configObjects: {}

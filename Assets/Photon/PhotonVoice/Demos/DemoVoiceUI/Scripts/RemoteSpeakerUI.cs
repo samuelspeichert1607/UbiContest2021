@@ -17,7 +17,11 @@
         [SerializeField]
         private Image remoteIsTalking;
         [SerializeField]
-        private InputField playbackDelayInputField;
+        private InputField minDelaySoftInputField;
+        [SerializeField]
+        private InputField maxDelaySoftInputField;
+        [SerializeField]
+        private InputField maxDelayHardInputField;
         [SerializeField]
         private Text bufferLagText;
         #pragma warning restore 649
@@ -28,22 +32,58 @@
         protected virtual void Start()
         {
             this.speaker = this.GetComponent<Speaker>();
-            this.playbackDelayInputField.text = this.speaker.PlayDelayMs.ToString();
-            this.playbackDelayInputField.SetSingleOnEndEditCallback(this.OnPlaybackDelayChanged);
+            this.minDelaySoftInputField.text = this.speaker.PlaybackDelayMinSoft.ToString();
+            this.minDelaySoftInputField.SetSingleOnEndEditCallback(this.OnMinDelaySoftChanged);
+            this.maxDelaySoftInputField.text = this.speaker.PlaybackDelayMaxSoft.ToString();
+            this.maxDelaySoftInputField.SetSingleOnEndEditCallback(this.OnMaxDelaySoftChanged);
+            this.maxDelayHardInputField.text = this.speaker.PlaybackDelayMaxHard.ToString();
+            this.maxDelayHardInputField.SetSingleOnEndEditCallback(this.OnMaxDelayHardChanged);
             this.SetNickname();
             this.SetMutedState();
         }
 
-        private void OnPlaybackDelayChanged(string newPlaybackDelayString)
+        private void OnMinDelaySoftChanged(string newMinDelaySoftString)
         {
-            int newPlaybackDelayValue;
-            if (int.TryParse(newPlaybackDelayString, out newPlaybackDelayValue) && newPlaybackDelayValue > 0)
+            int newMinDelaySoftValue;
+            int newMaxDelaySoftValue = this.speaker.PlaybackDelayMaxSoft;
+            int newMaxDelayHardValue = this.speaker.PlaybackDelayMaxHard;
+            if (int.TryParse(newMinDelaySoftString, out newMinDelaySoftValue) && newMinDelaySoftValue >= 0 && newMinDelaySoftValue < newMaxDelaySoftValue)
             {
-                this.speaker.PlayDelayMs = newPlaybackDelayValue;
+                this.speaker.SetPlaybackDelaySettings(newMinDelaySoftValue, newMaxDelaySoftValue, newMaxDelayHardValue);
             }
             else
             {
-                this.playbackDelayInputField.text = this.speaker.PlayDelayMs.ToString();
+                this.minDelaySoftInputField.text = this.speaker.PlaybackDelayMinSoft.ToString();
+            }
+        }
+
+        private void OnMaxDelaySoftChanged(string newMaxDelaySoftString)
+        {
+            int newMinDelaySoftValue = this.speaker.PlaybackDelayMinSoft;
+            int newMaxDelaySoftValue;
+            int newMaxDelayHardValue = this.speaker.PlaybackDelayMaxHard;
+            if (int.TryParse(newMaxDelaySoftString, out newMaxDelaySoftValue) && newMinDelaySoftValue < newMaxDelaySoftValue)
+            {
+                this.speaker.SetPlaybackDelaySettings(newMinDelaySoftValue, newMaxDelaySoftValue, newMaxDelayHardValue);
+            }
+            else
+            {
+                this.maxDelaySoftInputField.text = this.speaker.PlaybackDelayMaxSoft.ToString();
+            }
+        }
+
+        private void OnMaxDelayHardChanged(string newMaxDelayHardString)
+        {
+            int newMinDelaySoftValue = this.speaker.PlaybackDelayMinSoft;
+            int newMaxDelaySoftValue = this.speaker.PlaybackDelayMaxSoft;
+            int newMaxDelayHardValue;
+            if (int.TryParse(newMaxDelayHardString, out newMaxDelayHardValue) && newMaxDelayHardValue >= newMaxDelaySoftValue)
+            {
+                this.speaker.SetPlaybackDelaySettings(newMinDelaySoftValue, newMaxDelaySoftValue, newMaxDelayHardValue);
+            }
+            else
+            {
+                this.maxDelayHardInputField.text = this.speaker.PlaybackDelayMaxHard.ToString();
             }
         }
 

@@ -16,6 +16,7 @@ namespace Photon.Voice
         private int maxDevPlayDelaySamples;
         private int targetPlayDelaySamples;
 
+        int playDelayMs;
         private readonly ILogger logger;
         private readonly string logPrefix;
         private readonly bool debugInfo;
@@ -24,8 +25,9 @@ namespace Photon.Voice
 
         private T[] emptyFrame;
 
-        public AudioSyncBuffer(ILogger logger, string logPrefix, bool debugInfo)
+        public AudioSyncBuffer(int playDelayMs, ILogger logger, string logPrefix, bool debugInfo)
         {
+            this.playDelayMs = playDelayMs;
             this.logger = logger;
             this.logPrefix = logPrefix;
             this.debugInfo = debugInfo;
@@ -53,7 +55,7 @@ namespace Photon.Voice
         }
 
         // Can be called on runnig AudioSyncBuffer to reuse it for other parameters
-        public void Start(int sampleRate, int channels, int frameSamples, int playDelayMs)
+        public void Start(int sampleRate, int channels, int frameSamples)
         {
             lock (this)
             {

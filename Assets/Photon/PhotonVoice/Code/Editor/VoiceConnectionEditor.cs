@@ -29,7 +29,7 @@ namespace Photon.Voice.Unity.Editor
         private SerializedProperty autoCreateSpeakerIfNotFoundSp;
         private SerializedProperty globalRecordersLogLevelSp;
         private SerializedProperty globalSpeakersLogLevelSp;
-        private SerializedProperty globalPlaybackDelaySp;
+        private SerializedProperty globalPlayDelaySettingsSp;
 
         protected virtual void OnEnable()
         {
@@ -54,7 +54,7 @@ namespace Photon.Voice.Unity.Editor
             this.autoCreateSpeakerIfNotFoundSp = this.serializedObject.FindProperty("AutoCreateSpeakerIfNotFound");
             this.globalRecordersLogLevelSp = this.serializedObject.FindProperty("globalRecordersLogLevel");
             this.globalSpeakersLogLevelSp = this.serializedObject.FindProperty("globalSpeakersLogLevel");
-            this.globalPlaybackDelaySp = this.serializedObject.FindProperty("globalPlaybackDelay");
+            this.globalPlayDelaySettingsSp = this.serializedObject.FindProperty("globalPlaybackDelaySettings");
         }
 
         public override void OnInspectorGUI()
@@ -79,10 +79,11 @@ namespace Photon.Voice.Unity.Editor
                 this.connection.SpeakerPrefab = EditorGUILayout.ObjectField(new GUIContent("Speaker Prefab",
                         "Prefab that contains Speaker component to be instantiated when receiving a new remote audio source info"), this.connection.SpeakerPrefab, 
                     typeof(GameObject), false) as GameObject;
-                this.connection.GlobalPlaybackDelay = EditorGUILayout.IntField(
-                    new GUIContent("Playback Delay (ms)",
-                        "playback delay in milliseconds to be used by default on Speaker components."),
-                    this.connection.GlobalPlaybackDelay);
+                EditorGUILayout.PropertyField(this.globalPlayDelaySettingsSp, new GUIContent("Global Playback Delay Configuration", "Remote audio stream playback delay to compensate packets latency variations."), true);
+                this.connection.SetGlobalPlaybackDelaySettings(
+                    this.globalPlayDelaySettingsSp.FindPropertyRelative("MinDelaySoft").intValue, 
+                    this.globalPlayDelaySettingsSp.FindPropertyRelative("MaxDelaySoft").intValue,
+                    this.globalPlayDelaySettingsSp.FindPropertyRelative("MaxDelayHard").intValue); 
             }
             else
             {
@@ -123,7 +124,7 @@ namespace Photon.Voice.Unity.Editor
                 {
                     Debug.LogError("SpeakerPrefab must have a component of type Speaker in its hierarchy.", this);
                 }
-                EditorGUILayout.PropertyField(this.globalPlaybackDelaySp, new GUIContent("Playback Delay (ms)", "playback delay in milliseconds to be used by default on Speaker components."));
+                EditorGUILayout.PropertyField(this.globalPlayDelaySettingsSp, new GUIContent("Global Playback Delay Settings", "Remote audio stream playback delay to compensate packets latency variations."), true);
             }
             if (!this.connection.Client.IsConnected)
             {

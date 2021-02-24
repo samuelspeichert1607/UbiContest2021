@@ -9,7 +9,7 @@
     {
         private Speaker speaker;
 
-        private SerializedProperty playDelayMsSp;
+        private SerializedProperty playbackDelaySettingsSp;
         private SerializedProperty playbackOnlyWhenEnabledSp;
 
         #region AnimationCurve
@@ -36,7 +36,7 @@
         {
             this.speaker = this.target as Speaker;
             this.audioSource = this.speaker.GetComponent<AudioSource>();
-            this.playDelayMsSp = this.serializedObject.FindProperty("playDelayMs");
+            this.playbackDelaySettingsSp = this.serializedObject.FindProperty("playbackDelaySettings");
             this.playbackOnlyWhenEnabledSp = this.serializedObject.FindProperty("playbackOnlyWhenEnabled");
         }
 
@@ -52,16 +52,15 @@
 
             EditorGUI.BeginChangeCheck();
 
+            EditorGUILayout.PropertyField(this.playbackDelaySettingsSp, new GUIContent("Playback Delay Settings", "Remote audio stream playback delay to compensate packets latency variations."), true);
             if (PhotonVoiceEditorUtils.IsInTheSceneInPlayMode(this.speaker.gameObject))
             {
-                this.speaker.PlayDelayMs = EditorGUILayout.IntField(new GUIContent("Playback Delay (ms)",
-                    "Remote audio stream playback delay to compensate packets latency variations. Try 100 - 200 if sound is choppy. Default is 200ms"), this.speaker.PlayDelayMs);
+                this.speaker.SetPlaybackDelaySettings(this.playbackDelaySettingsSp.FindPropertyRelative("MinDelaySoft").intValue, this.playbackDelaySettingsSp.FindPropertyRelative("MaxDelaySoft").intValue, this.playbackDelaySettingsSp.FindPropertyRelative("MaxDelayHard").intValue);
                 this.speaker.PlaybackOnlyWhenEnabled = EditorGUILayout.Toggle(new GUIContent("Playback Only When Enabled", "If true, component will work only when enabled and active in hierarchy."),
                     this.speaker.PlaybackOnlyWhenEnabled);
             }
             else
             {
-                EditorGUILayout.PropertyField(this.playDelayMsSp, new GUIContent("Playback Delay (ms)", "Remote audio stream playback delay to compensate packets latency variations. Try 100 - 200 if sound is choppy. Default is 200ms"));
                 EditorGUILayout.PropertyField(this.playbackOnlyWhenEnabledSp, new GUIContent("Playback Only When Enabled", "If true, component will work only when enabled and active in hierarchy."));
             }
 

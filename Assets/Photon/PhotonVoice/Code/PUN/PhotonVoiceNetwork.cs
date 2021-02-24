@@ -52,13 +52,18 @@ namespace Photon.Voice.PUN
         };
         private bool clientCalledConnectAndJoin;
         private bool clientCalledDisconnect;
+        private bool clientCalledConnectOnly;
         private bool internalDisconnect;
+        private bool internalConnect;
         private static object instanceLock = new object();
         private static PhotonVoiceNetwork instance;
         private static bool instantiated;
 
         [SerializeField]
         private bool usePunAppSettings = true;
+
+        [SerializeField]
+        private bool usePunAuthValues = true;
 
         #endregion
 
@@ -159,6 +164,21 @@ namespace Photon.Voice.PUN
             }
         }
 
+        /// <summary>
+        /// Whether or not to use the same PhotonNetwork.AuthValues in PhotonVoiceNetwork.Instance.Client.AuthValues.
+        /// </summary>
+        public bool UsePunAuthValues
+        {
+            get
+            {
+                return this.usePunAuthValues;
+            }
+            set
+            {
+                this.usePunAuthValues = value;
+            }
+        }
+
         #endregion
 
         #region Public Methods
@@ -205,6 +225,7 @@ namespace Photon.Voice.PUN
             }
             this.clientCalledDisconnect = true;
             this.clientCalledConnectAndJoin = false;
+            this.clientCalledConnectOnly = false;
             this.Client.Disconnect();
         }
 
@@ -229,6 +250,7 @@ namespace Photon.Voice.PUN
             PhotonNetwork.NetworkingClient.StateChanged += this.OnPunStateChanged;
             this.FollowPun(); // in case this is enabled or activated late
             this.clientCalledConnectAndJoin = false;
+            this.clientCalledConnectOnly = false;
             this.clientCalledDisconnect = false;
             this.internalDisconnect = false;
         }
@@ -278,6 +300,18 @@ namespace Photon.Voice.PUN
                 {
                     this.clientCalledDisconnect = this.Client.DisconnectedCause == DisconnectCause.DisconnectByClientLogic;
                 }
+            } 
+            else if (toState == ClientState.ConnectedToMasterServer)
+            {
+                if (this.internalConnect)
+                {
+                    this.internalConnect = false;
+                } 
+                else if (!this.clientCalledConnectOnly && !this.clientCalledConnectAndJoin)
+                {
+                    this.clientCalledConnectOnly = true;
+                    this.clientCalledDisconnect = false;
+                } 
             }
             this.FollowPun(toState);
         }
@@ -356,9 +390,16 @@ namespace Photon.Voice.PUN
                     {
                         this.Logger.LogInfo("PUN joined room, now connecting Voice client");
                     }
-                    if (!this.Connect() && this.Logger.IsErrorEnabled)
+                    if (!this.Connect())
                     {
-                        this.Logger.LogError("Connecting to server failed.");
+                        if (this.Logger.IsErrorEnabled)
+                        {
+                            this.Logger.LogError("Connecting to server failed.");
+                        }
+                    }
+                    else
+                    {
+                        this.internalConnect = this.AutoConnectAndJoin && !this.clientCalledConnectOnly && !this.clientCalledConnectAndJoin;
                     }
                     break;
                 case ClientState.ConnectedToMasterServer:
@@ -385,22 +426,33 @@ namespace Photon.Voice.PUN
 
         private bool Connect()
         {
-            AppSettings settings = this.Settings;
+            AppSettings settings = null;
+
             if (this.usePunAppSettings)
             {
-                if (string.IsNullOrEmpty(this.Client.UserId) && PhotonNetwork.NetworkingClient != null && !string.IsNullOrEmpty(PhotonNetwork.NetworkingClient.UserId))
+                settings = new AppSettings();
+                settings = PhotonNetwork.PhotonServerSettings.AppSettings.CopyTo(settings); // creates an independent copy (cause we need to modify it slightly)
+                if (!string.IsNullOrEmpty(PhotonNetwork.CloudRegion))
                 {
-                    this.Client.UserId = PhotonNetwork.NetworkingClient.UserId;
-                }
-                settings = PhotonNetwork.PhotonServerSettings.AppSettings;
-                if (settings != null && string.IsNullOrEmpty(settings.FixedRegion) && !string.IsNullOrEmpty(PhotonNetwork.CloudRegion))
-                {
-                    settings.FixedRegion = PhotonNetwork.CloudRegion;
-                    bool result = this.ConnectUsingSettings(settings);
-                    settings.FixedRegion = null;
-                    return result;
+                    settings.FixedRegion = PhotonNetwork.CloudRegion; // makes sure the voice connection follows into the same cloud region (as PUN uses now).
                 }
             }
+
+            // use the same user, authentication, auth-mode and encryption as PUN
+            if (this.UsePunAuthValues)
+            {
+                if (PhotonNetwork.AuthValues != null)
+                {
+                    if (this.Client.AuthValues == null)
+                    {
+                        this.Client.AuthValues = new AuthenticationValues();
+                    }
+                    this.Client.AuthValues = PhotonNetwork.AuthValues.CopyTo(this.Client.AuthValues);
+                }
+                this.Client.AuthMode = PhotonNetwork.NetworkingClient.AuthMode;
+                this.Client.EncryptionMode = PhotonNetwork.NetworkingClient.EncryptionMode;
+            }
+
             return this.ConnectUsingSettings(settings);
         }
 
@@ -454,6 +506,15 @@ namespace Photon.Voice.PUN
                         }
                     }
                 }
+                else if (this.ClientState == ClientState.ConnectedToMasterServer && this.AutoLeaveAndDisconnect && !this.clientCalledConnectAndJoin && !this.clientCalledConnectOnly)
+                {
+                    if (this.Logger.IsWarningEnabled)
+                    {
+                        this.Logger.LogWarning("Unexpected: PUN and Voice clients have the same client state: ConnectedToMasterServer, Disconnecting Voice client.");
+                    }
+                    this.internalDisconnect = true;
+                    this.Client.Disconnect();
+                }
                 return;
             }
             if (PhotonNetwork.InRoom)
@@ -463,7 +524,7 @@ namespace Photon.Voice.PUN
                     this.ConnectOrJoin();
                 }
             }
-            else if (this.Client.InRoom && this.AutoLeaveAndDisconnect && !this.clientCalledConnectAndJoin)
+            else if (this.Client.InRoom && this.AutoLeaveAndDisconnect && !this.clientCalledConnectAndJoin && !this.clientCalledConnectOnly)
             {
                 if (this.Logger.IsInfoEnabled)
                 {

@@ -1,5 +1,41 @@
 Photon Voice 2 Change Log
 
+v2.22.3 (December 10th, 2020)
+   PUN2: v2.26 (1bb4b17)
+   PhotonVoiceApi: revision 5901
+   CHANGED: skipping linking incoming remote streams with codec other than opus.
+
+v2.22.2 (December 2nd, 2020)
+   PUN2: v2.25.1 (cc3faf8)
+   PhotonVoiceApi: revision 5901
+   FIXED: [PhotonVoiceApi macOS, iOS] AudioInPusher: 'pushCallback' null check added in native callback to avoid NullReferenceException if SetCallback() gets called later than native input starts to produce samples.
+   FIXED: [PhotonVoiceApi Windows] WindowsAudioInPusher.SetCallback(): 'pushCallback' is initialized last to make sure that null check in native callback guards all members.
+
+v2.22.1 (November 29th, 2020)
+   PUN2: v2.24 (b503239)
+   PhotonVoiceApi: revision 5897
+   FIXED: broken leftover code after renaming in Speaker.
+   FIXED: [>=Unity 2019.1] incorrect method name in UiExtensions : InputField.SetTextWithoutNotify instead of InputField.SetValueWithoutNotify.
+   FIXED: more CS649 warnings.
+   CHANGED: fields used in Unity 2019.1 or higher wrapped in #ifdef.
+   CHANGED: moved macOS voice libs under same folder "Assets\Photon\PhotonVoice\PhotonVoiceLibs\OSX".
+   ADDED: PhotonVoiceNetwork private flags to support manual explicit voice client connect calls (e.g. ConnectUsingSettings).
+   CHANGED: VoiceLogger timestamp format as an attempt to fix exception in Thai calendar/culture.
+   REMOVED: minor, cleanup unused using in PhotonVoiceNetwork.
+
+v2.22 (November 20th, 2020)
+   PUN2: v2.23 (9c75048)
+   PhotonVoiceApi: revision 5856
+   FIXED: Speaker.StartPlayback should fail if Speaker is not enabled/active and PlaybackOnlyWhenEnabled is used.
+   ADDED: [BREAKING] PhotonVoiceNetwork.UsePunAuthValues (default true): if used Photon Voice client will use the same AuthValues as PUN client. AuthMode and EncrytionMode are applied also now.
+   ADDED: PlaybackDelaySettings which makes old PlayDelayMs/GlobalPlaybackDelay obsolete. Playback delay is now finetuned using 3 parameters. This should help fix the "high pitch" issue when player tries to catch up and does resampling.
+   ADDED: Speaker.playbackExplicitlyStopped flag to make sure Speaker playback does not auto start again when not needed.
+   CHANGED: NativeAndroidMicrophoneSettings to struct.
+   ADDED: DisallowMultipleComponent attribute to Speaker, Recorder and WebRtcAudioDsp.
+   ADDED: minor check to detect and log case where PUN & Voice clients are both connected to MasterServer.
+   ADDED: [DemoVoiceUI] new AudioTone factory source to test playback delay.
+   ADDED: [DemoVoiceUI] new playback delay settings.
+
 v2.21 (September 8th, 2020)
    PUN2: v2.22 (9b9f51f5)
    PhotonVoiceApi: revision 5731

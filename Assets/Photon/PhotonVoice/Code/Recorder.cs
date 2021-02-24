@@ -25,6 +25,7 @@ namespace Photon.Voice.Unity
     /// </summary>
     [AddComponentMenu("Photon Voice/Recorder")]
     [HelpURL("https://doc.photonengine.com/en-us/voice/v2/getting-started/recorder")]
+    [DisallowMultipleComponent]
     public class Recorder : VoiceComponent
     {
         public const int MIN_OPUS_BITRATE = 6000;
@@ -1143,7 +1144,7 @@ namespace Photon.Voice.Unity
         /// <returns>If a change has been made.</returns>
         public bool SetAndroidNativeMicrophoneSettings(NativeAndroidMicrophoneSettings nams)
         {
-            return nams != null && this.SetAndroidNativeMicrophoneSettings(nams.AcousticEchoCancellation, nams.AutomaticGainControl,
+            return this.SetAndroidNativeMicrophoneSettings(nams.AcousticEchoCancellation, nams.AutomaticGainControl,
                 nams.NoiseSuppression);
         }
         /// <summary>
@@ -1608,18 +1609,18 @@ namespace Photon.Voice.Unity
             }
             #endif
             this.photonMicChangeNotifier = new AudioInChangeNotifier(this.PhotonMicrophoneChangeDetected, this.Logger);
-            if (this.photonMicChangeNotifier.IsSupported && this.photonMicChangeNotifier.Error == null)
+            if (this.photonMicChangeNotifier.IsSupported)
             {
-                this.subscribedToSystemChangesPhoton = true;
-                if (this.Logger.IsInfoEnabled)
+                if (this.photonMicChangeNotifier.Error == null)
                 {
-                    this.Logger.LogInfo("Subscribed to audio in change notifications via Photon plugin.");
+                    this.subscribedToSystemChangesPhoton = true;
+                    if (this.Logger.IsInfoEnabled)
+                    {
+                        this.Logger.LogInfo("Subscribed to audio in change notifications via Photon plugin.");
+                    }
+                    return;
                 }
-                return;
-            }
-            if (this.Logger.IsErrorEnabled) 
-            {
-                if (this.photonMicChangeNotifier.IsSupported && this.photonMicChangeNotifier.Error != null)
+                if (this.Logger.IsErrorEnabled)
                 {
                     this.Logger.LogError("Error creating instance of photonMicChangeNotifier: {0}", this.photonMicChangeNotifier.Error);
                 }
@@ -1647,8 +1648,18 @@ namespace Photon.Voice.Unity
             }
             if (this.subscribedToSystemChangesPhoton)
             {
-                this.photonMicChangeNotifier.Dispose();
-                this.photonMicChangeNotifier = null;
+                if (this.photonMicChangeNotifier == null)
+                {
+                    if (this.Logger.IsErrorEnabled)
+                    {
+                        this.Logger.LogError("Unexpected: photonMicChangeNotifier is null while subscribedToSystemChangesPhoton is true.");
+                    }
+                }
+                else
+                {
+                    this.photonMicChangeNotifier.Dispose();
+                    this.photonMicChangeNotifier = null;
+                }
                 this.subscribedToSystemChangesPhoton = false;
                 if (this.Logger.IsInfoEnabled)
                 {
