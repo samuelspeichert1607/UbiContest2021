@@ -129,6 +129,7 @@ namespace InteractableItems
     
         protected void FindTextRendererOfPlayerInRange()
         {
+            var tt = GetInRangePlayer().GetComponentInChildren<TextRenderer>();
             TextRenderer = GetInRangePlayer().GetComponentInChildren<TextRenderer>();
         }
 
