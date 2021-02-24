@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 1929904232721159928}
   - component: {fileID: 6901835542848895997}
   - component: {fileID: 2936145040822824435}
-  - component: {fileID: 2936145040822824433}
   - component: {fileID: 3135248616800827076}
   - component: {fileID: 2936145040367851707}
+  - component: {fileID: 8214696434990059298}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -138,27 +138,12 @@ MonoBehaviour:
   prefixField: -1
   observableSearch: 2
   Synchronization: 3
-  OwnershipTransfer: 0
+  OwnershipTransfer: 1
   ObservedComponents:
-  - {fileID: 2936145040822824433}
+  - {fileID: 8214696434990059298}
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &2936145040822824433
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 94079502671558852}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SynchronizePosition: 1
-  m_SynchronizeRotation: 1
-  m_SynchronizeScale: 1
 --- !u!114 &3135248616800827076
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -194,6 +179,21 @@ MonoBehaviour:
   AutoCreateRecorderIfNotFound: 0
   UsePrimaryRecorder: 1
   SetupDebugSpeaker: 0
+--- !u!114 &8214696434990059298
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 94079502671558852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 1
 --- !u!1 &2936145040535477351
 GameObject:
   m_ObjectHideFlags: 0
