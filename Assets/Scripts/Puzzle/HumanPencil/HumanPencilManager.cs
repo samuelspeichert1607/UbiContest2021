@@ -11,9 +11,7 @@ public class HumanPencilManager : MonoBehaviour
     [SerializeField] 
     private GameObject pencil;
 
-    // [SerializeField] private GameObject[] displayMonitors;
-    
-    private Vector3 pencilInitialPosition;
+    private Vector3 _pencilInitialPosition;
     private LineDrawer _lineDrawer;
     private Pencil _pencil;
     
@@ -22,7 +20,7 @@ public class HumanPencilManager : MonoBehaviour
     {
         _lineDrawer = pencil.GetComponent<LineDrawer>();
         _pencil = pencil.GetComponent<Pencil>();
-        pencilInitialPosition = pencil.transform.position;
+        _pencilInitialPosition = pencil.transform.position;
     }
 
     // Update is called once per frame
@@ -38,6 +36,6 @@ public class HumanPencilManager : MonoBehaviour
     private void ResetPuzzle()
     {
         _lineDrawer.ClearAllDrawing();
-        _pencil.transform.position = pencilInitialPosition;
+        _pencil.transform.position = _pencilInitialPosition;
     }
 }

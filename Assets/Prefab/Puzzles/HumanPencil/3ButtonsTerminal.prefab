@@ -57,6 +57,9 @@ MonoBehaviour:
     PressableButton: {fileID: 8804796838759090737}
     pressingSequence: 2
   delayBeforeRetry: 5
+  _actionablesOnSuccess:
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1001 &329688872907384162
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -15,7 +15,8 @@ public class ButtonsTerminal : MonoBehaviour
 {
     [SerializeField] private ButtonLightPair[] _buttonsLightPairs;
     [SerializeField] private float delayBeforeRetry;
-    
+    [SerializeField] private Actionable[] _actionablesOnSuccess;
+
     private int nextExpectedPressedButton;
     private bool isLocked = false;
 
@@ -59,7 +60,10 @@ public class ButtonsTerminal : MonoBehaviour
         nextExpectedPressedButton++;
         if (nextExpectedPressedButton == _buttonsLightPairs.Length)
         {
-            Debug.Log("Game has succeeded!");
+            foreach (Actionable actionable in _actionablesOnSuccess)
+            {
+                actionable.OnAction();
+            }
         }
     }
 
