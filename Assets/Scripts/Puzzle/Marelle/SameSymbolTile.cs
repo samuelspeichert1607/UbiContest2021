@@ -49,7 +49,7 @@ public class SameSymbolTile : ParentTile
 
     }
 
-    public override void CollisionDetected(GameObject sourceTile) //quand on échoue la premier tuile marche pas si le meme joueur saute en premier 2 fois
+    public override void CollisionDetected(GameObject sourceTile) //quand on ï¿½choue la premier tuile marche pas si le meme joueur saute en premier 2 fois
     {
        
         if (transform.parent.GetComponent<MarelleWon>().unlockCollision)
@@ -96,10 +96,6 @@ public class SameSymbolTile : ParentTile
             }
 
         }
-
-
-
-
     }
 
 

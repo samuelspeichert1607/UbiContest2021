@@ -22,6 +22,7 @@ public class DrawableSurface : MonoBehaviourPun, IPunObservable
 
         brushes.Add(brushInstance);
         photonView.RPC("CreateRemoteBrush", RpcTarget.Others, brushInstance);
+        photonView.RPC("CreateRemoteBrush", RpcTarget.Others, (GameObject) brushInstance);
     }
     
     public void AddAPoint(Vector3 pointPos) 
@@ -107,6 +108,6 @@ public class DrawableSurface : MonoBehaviourPun, IPunObservable
     [PunRPC]
     void EraseRemote()
     {
-        ClearDrawing();
+         ClearDrawing();
     }
 }
