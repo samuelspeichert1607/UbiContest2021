@@ -1,7 +1,8 @@
-﻿using System;
-using UnityEditorInternal;
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
+using Photon.Pun;
 
 namespace UI_Elements
 {
@@ -9,51 +10,91 @@ namespace UI_Elements
     {
         [SerializeField]
         private GameObject pauseMenu;
+        // private PhotonView photonView;
+        private CustomController playerController;
         
         [SerializeField]
         private GameObject validationMenu;
-    
-        private bool _isPaused = false;
+
+        [SerializeField] 
+        private GameObject onPauseFirstSelected, onValidationFirstSelected, onReturnFromValidationFirstSelected;
+
+        private ControllerManager controllerManager;
+
+        public void Start()
+        {
+            controllerManager = GetComponent<ControllerManager>();
+            // photonView = GetComponent<PhotonView>();
+            pauseMenu.SetActive(false);
+            playerController = GetComponentInParent<CustomController>();
+        }
 
         public void Update()
         {
             //TODO there is a better way to map this probably
-            if (Input.GetKeyDown(KeyCode.Escape))
+            //// if (photonView.IsMine)
+            // {
+            if (Input.GetKeyDown(KeyCode.Escape) || controllerManager.GetButtonDown("Start"))
             {
-                _isPaused = !_isPaused;
+                pauseUnPause();
                 if (validationMenu.activeSelf)
                 {
                     validationMenu.SetActive(false);
                 }
-            }
+            } 
+            // }
+        }
 
-            if (_isPaused)
+        public void pauseUnPause()
+        {
+            if (!pauseMenu.activeInHierarchy)
             {
-                TriggerPauseOn();
+                Pause();
             }
             else
             {
-                TriggerPauseOff();
+                UnPause();
             }
         }
 
-        public void TriggerPauseOn()
+        private void Pause()
         {
             pauseMenu.SetActive(true);
-            _isPaused = true;
+            playerController.disableMovement();
+            SelectObject(onPauseFirstSelected);
         }
-    
-        public void TriggerPauseOff()
+
+        private void UnPause()
         {
+            playerController.allowMovement();
             pauseMenu.SetActive(false);
-            _isPaused = false;
         }
 
         public void LogOut()
         {
             Debug.Log("Logging out");
-            // SceneManager.LoadScene(0); //Laoding back the menu scene
+            PhotonNetwork.Disconnect();
+            PhotonNetwork.LoadLevel(0);
         }
-    
+
+        public void OpenValidationMenu()
+        {
+            validationMenu.SetActive(true);
+            SelectObject(onValidationFirstSelected);
+        }
+
+        public void CloseValidationMenu()
+        {
+            validationMenu.SetActive(false);
+            SelectObject(onReturnFromValidationFirstSelected);
+        }
+        
+
+        private void SelectObject(GameObject gameObjectToSelect)
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject(gameObjectToSelect);
+        }
+        
     }
 }
