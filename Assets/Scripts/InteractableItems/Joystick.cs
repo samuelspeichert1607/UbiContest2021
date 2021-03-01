@@ -38,7 +38,7 @@ public class Joystick : InteractableItem
 
         if (IsInteractedWith)
         {
-            target.Move(controllerManager.GetLeftAxisY(), controllerManager.GetLeftAxisX(), Time.deltaTime);
+            target.MoveAtMaxSpeed(controllerManager.GetLeftAxisY(), controllerManager.GetLeftAxisX(), Time.deltaTime);
             //Animation of the joystick would go here
         }
 

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4431572637935185257}
   - component: {fileID: 2454722442041005094}
   - component: {fileID: 340260269570391763}
+  - component: {fileID: 4963175989326121046}
   m_Layer: 0
   m_Name: PlayerForTest
   m_TagString: Untagged
@@ -80,10 +81,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91e851c0155957d4c9f22b4130cf421c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerSpeed: 10
-  RotationSpeed: 110
-  jumpValue: 5
+  maxPlayerSpeed: 6
+  rotationSpeed: 110
+  jumpValue: 6
   gravity: -9.81
+  airborneAcceleration: 5
+--- !u!114 &4963175989326121046
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4431572637935185263}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8688972652696894ca0a72513d7a937e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4431572638461766814
 GameObject:
   m_ObjectHideFlags: 0
