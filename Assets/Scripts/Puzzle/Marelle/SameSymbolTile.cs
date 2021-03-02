@@ -38,26 +38,34 @@ public class SameSymbolTile : ParentTile
             else
             {
 
-                ChangeColor(Color.red);
+                //ChangeColor(Color.red);
+                transform.parent.GetComponent<MarelleWon>().gameLost();
                 timerEnable = false;
                 timer = 0;
                 tileEntered = null;
                 transform.parent.GetComponent<MarelleWon>().isResolve = false;
             }
         }
+        if (Input.GetButtonDown("Fire2") && testBool)
+        {
+            Debug.Log("dadsadadadadada");
+            CollisionDetected(transform.GetChild(1).gameObject);
+            testBool = false;
 
+
+        }
 
     }
 
     public override void CollisionDetected(GameObject sourceTile) //quand on échoue la premier tuile marche pas si le meme joueur saute en premier 2 fois
     {
        
-        if (transform.parent.GetComponent<MarelleWon>().unlockCollision)
+        if ((transform.parent.GetComponent<MarelleWon>().unlockCollision || firstTile) && !(sourceTile.GetComponent<Renderer>().material.color==Color.green))
         {
             bool isResolve = transform.parent.GetComponent<MarelleWon>().isResolve;
             testBool = true;
 
-            if ((!firstTile && isResolve) || (firstTile && !isResolve))
+            if ((!firstTile && isResolve) || (firstTile && !isResolve)) //je pense qu<il sert 'a rien maintenant mais j,ai peur d<y toucher
             {
                 if (tileEntered == null)
                 {
@@ -65,6 +73,7 @@ public class SameSymbolTile : ParentTile
                     timerEnable = true;
                     timer = timerTime;
                     sourceTile.GetComponent<Renderer>().material.SetColor("_Color", Color.yellow);
+                    
                 }
 
                 else if (tileEntered != sourceTile)
@@ -80,6 +89,10 @@ public class SameSymbolTile : ParentTile
                         {
                             transform.parent.GetComponent<MarelleWon>().gameWon();
                         }
+                        else if (firstTile)
+                        {
+                            transform.parent.GetComponent<MarelleWon>().resetMarelle();
+                        }
 
                     }
 
@@ -88,7 +101,8 @@ public class SameSymbolTile : ParentTile
             }
             else if (!firstTile)
             {
-                ChangeColor(Color.red);
+                //ChangeColor(Color.red);
+                transform.parent.GetComponent<MarelleWon>().gameLost();
             }
             else
             {

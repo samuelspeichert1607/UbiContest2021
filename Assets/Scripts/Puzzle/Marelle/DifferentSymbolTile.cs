@@ -8,7 +8,8 @@ public class DifferentSymbolTile : ParentTile
     {
         if (transform.parent.GetComponent<MarelleWon>().unlockCollision)
         {
-            ChangeColor(Color.red);
+            //ChangeColor(Color.red);
+            transform.parent.GetComponent<MarelleWon>().gameLost();
             transform.parent.GetComponent<MarelleWon>().isResolve = false;
         }
     }

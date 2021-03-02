@@ -27,4 +27,47 @@ public class MarelleWon : MonoBehaviour
 
 
     }
+
+    public void gameLost()
+    {
+        unlockCollision = false;
+        for (int i = 1; i < transform.childCount - 2; i++)
+        {
+
+            for (int j = 0; j < transform.GetChild(i).childCount; j++)
+            {
+                Transform tile = transform.GetChild(i).GetChild(j);
+                if (i == 1)
+                {
+                    tile.GetComponent<Renderer>().material.SetColor("_Color", Color.cyan);
+                }
+                else
+                {
+                    tile.GetComponent<Renderer>().material.SetColor("_Color", Color.red);
+                    tile.GetComponent<TileGoUpDown>().CanGoDown = true;
+                }
+                
+            }
+        }
+    }
+
+    public void resetMarelle()
+    {
+        unlockCollision = true;
+        for (int i = 2; i < transform.childCount - 2; i++)
+        {
+
+            for (int j = 0; j < transform.GetChild(i).childCount; j++)
+            {
+                Transform tile = transform.GetChild(i).GetChild(j);
+                Debug.Log(tile.name);
+                tile.GetComponent<Renderer>().material.SetColor("_Color", Color.white);
+                tile.GetComponent<TileGoUpDown>().CanGoUp = true;
+
+
+
+
+            }
+        }
+    }
 }
