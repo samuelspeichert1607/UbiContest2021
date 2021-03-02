@@ -13,6 +13,9 @@ public class PlayerController : CustomController
     [SerializeField]
     [Range(0.01f, 5)]
     private float airborneAcceleration;
+    [SerializeField]
+    private float landingTime;
+
 
     private CharacterController controller;
     private GameObject cam;
@@ -23,6 +26,7 @@ public class PlayerController : CustomController
 
     private float eulerAngleX;
     private bool wasGrounded = true;
+    private bool isLanding = false;
 
     // Start is called before the first frame update
     void Start()
@@ -60,6 +64,16 @@ public class PlayerController : CustomController
 
             if (controller.isGrounded)
             {
+                if (isLanding)
+                {
+                    verticalMotion *= 0.5f;
+                    horizontalMotion *= 0.5f;
+                }
+
+                if (!wasGrounded)
+                {
+                    StartLanding();
+                }
                 //je sais que c'est bizarre mais, si je reset la velocite a 0, le controller.isGrounded ne fonctionne pas -_-
                 if (playerSpeed.y < -1)
                 {
@@ -84,8 +98,18 @@ public class PlayerController : CustomController
                 Move(playerSpeed, Time.deltaTime);
                 wasGrounded = false;
             }
-            
         }
+    }
+    
+    private void StartLanding()
+    {
+        isLanding = true;
+        Invoke("EndLanding", landingTime);
+    }
+
+    private void EndLanding()
+    {
+        isLanding = false;
     }
     
     public override void Move(Vector3 speed, float timeElapsed)
