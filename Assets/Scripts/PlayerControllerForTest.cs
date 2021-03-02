@@ -13,6 +13,8 @@ public class PlayerControllerForTest : CustomController
     [SerializeField]
     [Range(0.01f, 5)]
     private float airborneAcceleration;
+    [SerializeField]
+    private float landingTime;
 
     private CharacterController controller;
     private GameObject cam;
@@ -20,6 +22,7 @@ public class PlayerControllerForTest : CustomController
 
     private ControllerManager controllerManager;
     private bool wasGrounded = true;
+    private bool isLanding = false;
 
     private float eulerAngleX;
 
@@ -41,7 +44,7 @@ public class PlayerControllerForTest : CustomController
             float rotationY = controllerManager.GetRightAxisY();
             float verticalMotion = controllerManager.GetLeftAxisY();
             float horizontalMotion = controllerManager.GetLeftAxisX();
-            
+
             //on limite la rotation
             if ((Mathf.Abs(eulerAngleX) < 90) || (eulerAngleX >= 90 && rotationY > 0) ||
                 (eulerAngleX <= -90 && rotationY < 0))
@@ -52,9 +55,18 @@ public class PlayerControllerForTest : CustomController
 
             //on tourne le joueur selon l'axe x du joystick droit
             transform.Rotate(new Vector3(0, controllerManager.GetRightAxisX(), 0) * (Time.deltaTime * rotationSpeed), Space.World);
-
             if (controller.isGrounded)
             {
+                if (isLanding)
+                {
+                    verticalMotion *= 0.5f;
+                    horizontalMotion *= 0.5f;
+                }
+
+                if (!wasGrounded)
+                {
+                    StartLanding();
+                }
                 //je sais que c'est bizarre mais, si je reset la velocite a 0, le controller.isGrounded ne fonctionne pas -_-
                 if (playerSpeed.y < -1)
                 {
@@ -82,7 +94,18 @@ public class PlayerControllerForTest : CustomController
             
         }
     }
-    
+
+    private void StartLanding()
+    {
+        isLanding = true;
+        Invoke("EndLanding", landingTime);
+    }
+
+    private void EndLanding()
+    {
+        isLanding = false;
+    }
+
     public override void Move(Vector3 speed, float timeElapsed)
     {
         controller.Move(speed * timeElapsed);
