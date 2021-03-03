@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7851216294849003222}
   - component: {fileID: 4980762524187886208}
   - component: {fileID: 2342399990991955881}
+  - component: {fileID: 8655335574121456017}
   m_Layer: 0
   m_Name: Tile4.6 (4)
   m_TagString: MarelleTile
@@ -95,6 +96,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8655335574121456017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9399684063730476}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 476f1c7ea5b73cd43957b3a10c102912, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CanGoUp: 0
+  CanGoDown: 0
 --- !u!1 &1128604828569387472
 GameObject:
   m_ObjectHideFlags: 0
@@ -107,6 +122,7 @@ GameObject:
   - component: {fileID: 5139639879164417990}
   - component: {fileID: 1983638150372679419}
   - component: {fileID: 698090897661314030}
+  - component: {fileID: 3084371196337348002}
   m_Layer: 0
   m_Name: Tile4.1 (1)
   m_TagString: MarelleTile
@@ -190,6 +206,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3084371196337348002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1128604828569387472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 476f1c7ea5b73cd43957b3a10c102912, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CanGoUp: 0
+  CanGoDown: 0
 --- !u!1 &1141410703487991063
 GameObject:
   m_ObjectHideFlags: 0
@@ -202,6 +232,7 @@ GameObject:
   - component: {fileID: 4487697801631105477}
   - component: {fileID: 5239807109102706743}
   - component: {fileID: 2294900242421898310}
+  - component: {fileID: 2215454678320675323}
   m_Layer: 0
   m_Name: Tile3.6
   m_TagString: MarelleTile
@@ -285,6 +316,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2215454678320675323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1141410703487991063}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 476f1c7ea5b73cd43957b3a10c102912, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CanGoUp: 0
+  CanGoDown: 0
 --- !u!1 &1258873586600557276
 GameObject:
   m_ObjectHideFlags: 0
@@ -297,6 +342,7 @@ GameObject:
   - component: {fileID: 4704914844787720624}
   - component: {fileID: 9186619195619288234}
   - component: {fileID: 5280209221472903062}
+  - component: {fileID: 8448504019281637135}
   m_Layer: 0
   m_Name: Tile4.3 (2)
   m_TagString: MarelleTile
@@ -380,6 +426,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8448504019281637135
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1258873586600557276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 476f1c7ea5b73cd43957b3a10c102912, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CanGoUp: 0
+  CanGoDown: 0
 --- !u!1 &1620406880415476174
 GameObject:
   m_ObjectHideFlags: 0
@@ -392,6 +452,7 @@ GameObject:
   - component: {fileID: 7991943293322501919}
   - component: {fileID: 7934526149710228049}
   - component: {fileID: 2340003917630753629}
+  - component: {fileID: 1081483974699738684}
   m_Layer: 0
   m_Name: Tile4.6 (2)
   m_TagString: MarelleTile
@@ -475,6 +536,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1081483974699738684
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1620406880415476174}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 476f1c7ea5b73cd43957b3a10c102912, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CanGoUp: 0
+  CanGoDown: 0
 --- !u!1 &1968351482983601310
 GameObject:
   m_ObjectHideFlags: 0
@@ -487,6 +562,7 @@ GameObject:
   - component: {fileID: 944247438964780051}
   - component: {fileID: 1792123237704411377}
   - component: {fileID: 2988974174233159908}
+  - component: {fileID: 7954479116256552323}
   m_Layer: 0
   m_Name: Tile4.4 (1)
   m_TagString: MarelleTile
@@ -570,6 +646,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7954479116256552323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1968351482983601310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 476f1c7ea5b73cd43957b3a10c102912, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CanGoUp: 0
+  CanGoDown: 0
 --- !u!1 &2027422360266330875
 GameObject:
   m_ObjectHideFlags: 0
@@ -582,6 +672,7 @@ GameObject:
   - component: {fileID: 4584002368509994207}
   - component: {fileID: 213810390685324637}
   - component: {fileID: 3492532231674322370}
+  - component: {fileID: 5054788353942497259}
   m_Layer: 0
   m_Name: Tile1.3 (1)
   m_TagString: MarelleTile
@@ -665,6 +756,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &5054788353942497259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2027422360266330875}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 476f1c7ea5b73cd43957b3a10c102912, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CanGoUp: 0
+  CanGoDown: 0
 --- !u!1 &2073814684632216270
 GameObject:
   m_ObjectHideFlags: 0
@@ -677,6 +782,7 @@ GameObject:
   - component: {fileID: 5018811296279496624}
   - component: {fileID: 4830005303168362348}
   - component: {fileID: 6433945292841087675}
+  - component: {fileID: 1566930169826815752}
   m_Layer: 0
   m_Name: Tile4.4
   m_TagString: MarelleTile
@@ -760,6 +866,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1566930169826815752
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2073814684632216270}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 476f1c7ea5b73cd43957b3a10c102912, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CanGoUp: 0
+  CanGoDown: 0
 --- !u!1 &2655951523316556735
 GameObject:
   m_ObjectHideFlags: 0
@@ -772,6 +892,7 @@ GameObject:
   - component: {fileID: 3125342343664406914}
   - component: {fileID: 570794676109410378}
   - component: {fileID: 410475972252649997}
+  - component: {fileID: 8161545246784381647}
   m_Layer: 0
   m_Name: Tile4.6 (3)
   m_TagString: MarelleTile
@@ -855,6 +976,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8161545246784381647
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2655951523316556735}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 476f1c7ea5b73cd43957b3a10c102912, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CanGoUp: 0
+  CanGoDown: 0
 --- !u!1 &2879081100902657066
 GameObject:
   m_ObjectHideFlags: 0
@@ -867,6 +1002,7 @@ GameObject:
   - component: {fileID: 8304242105965710531}
   - component: {fileID: 5405811314031695602}
   - component: {fileID: 3485072787480804960}
+  - component: {fileID: 5218734808553406406}
   m_Layer: 0
   m_Name: Tile4.4 (2)
   m_TagString: MarelleTile
@@ -950,6 +1086,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &5218734808553406406
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2879081100902657066}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 476f1c7ea5b73cd43957b3a10c102912, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CanGoUp: 0
+  CanGoDown: 0
 --- !u!1 &3229988631766171317
 GameObject:
   m_ObjectHideFlags: 0
@@ -962,6 +1112,7 @@ GameObject:
   - component: {fileID: 5139421735253751775}
   - component: {fileID: 1217444603541090166}
   - component: {fileID: 8605353099693857904}
+  - component: {fileID: 8785249640420621851}
   m_Layer: 0
   m_Name: Tile4.3 (1)
   m_TagString: MarelleTile
@@ -1045,6 +1196,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8785249640420621851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3229988631766171317}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 476f1c7ea5b73cd43957b3a10c102912, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CanGoUp: 0
+  CanGoDown: 0
 --- !u!1 &3396862254935980330
 GameObject:
   m_ObjectHideFlags: 0
@@ -1057,6 +1222,7 @@ GameObject:
   - component: {fileID: 3518860293920866962}
   - component: {fileID: 479907816363009787}
   - component: {fileID: 6561521458237511969}
+  - component: {fileID: 365562169685056987}
   m_Layer: 0
   m_Name: Tile4.3 (2)
   m_TagString: MarelleTile
@@ -1140,6 +1306,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &365562169685056987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3396862254935980330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 476f1c7ea5b73cd43957b3a10c102912, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CanGoUp: 0
+  CanGoDown: 0
 --- !u!1 &3430277374845246562
 GameObject:
   m_ObjectHideFlags: 0
@@ -1152,6 +1332,7 @@ GameObject:
   - component: {fileID: 3155909203284755812}
   - component: {fileID: 8881072753390736699}
   - component: {fileID: 1572387650727117146}
+  - component: {fileID: 1093136152105820408}
   m_Layer: 0
   m_Name: Tile3.3
   m_TagString: MarelleTile
@@ -1235,6 +1416,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1093136152105820408
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3430277374845246562}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 476f1c7ea5b73cd43957b3a10c102912, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CanGoUp: 0
+  CanGoDown: 0
 --- !u!1 &3449138053338337504
 GameObject:
   m_ObjectHideFlags: 0
@@ -1437,6 +1632,7 @@ GameObject:
   - component: {fileID: 3673965953059775986}
   - component: {fileID: 2655091324723184353}
   - component: {fileID: 5662816385200951082}
+  - component: {fileID: 4209211470285213308}
   m_Layer: 0
   m_Name: Tile4.3 (3)
   m_TagString: MarelleTile
@@ -1520,6 +1716,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4209211470285213308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3933454254554883473}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 476f1c7ea5b73cd43957b3a10c102912, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CanGoUp: 0
+  CanGoDown: 0
 --- !u!1 &4020644934884903859
 GameObject:
   m_ObjectHideFlags: 0
@@ -1532,6 +1742,7 @@ GameObject:
   - component: {fileID: 3754102884448637389}
   - component: {fileID: 4810476940802435809}
   - component: {fileID: 1647907794064321159}
+  - component: {fileID: 2186767742419463938}
   m_Layer: 0
   m_Name: Tile4.3 (3)
   m_TagString: MarelleTile
@@ -1615,6 +1826,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2186767742419463938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4020644934884903859}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 476f1c7ea5b73cd43957b3a10c102912, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CanGoUp: 0
+  CanGoDown: 0
 --- !u!1 &4040077268695454575
 GameObject:
   m_ObjectHideFlags: 0
@@ -1722,6 +1947,7 @@ GameObject:
   - component: {fileID: 6004939769935043908}
   - component: {fileID: 2365130855249522613}
   - component: {fileID: 2844510183298163046}
+  - component: {fileID: 3876359819497216304}
   m_Layer: 0
   m_Name: Tile1.2 (2)
   m_TagString: MarelleTile
@@ -1805,6 +2031,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3876359819497216304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4259434506268418344}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 476f1c7ea5b73cd43957b3a10c102912, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CanGoUp: 0
+  CanGoDown: 0
 --- !u!1 &4363528038889399403
 GameObject:
   m_ObjectHideFlags: 0
@@ -1912,6 +2152,7 @@ GameObject:
   - component: {fileID: 2262705896116625284}
   - component: {fileID: 6625091770739856106}
   - component: {fileID: 1577390758370702094}
+  - component: {fileID: 7805903065272167099}
   m_Layer: 0
   m_Name: Tile1.1 (1)
   m_TagString: MarelleTile
@@ -1995,6 +2236,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7805903065272167099
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4513090201846269235}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 476f1c7ea5b73cd43957b3a10c102912, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CanGoUp: 0
+  CanGoDown: 0
 --- !u!1 &4601617967378568405
 GameObject:
   m_ObjectHideFlags: 0
@@ -2244,6 +2499,7 @@ GameObject:
   - component: {fileID: 7128731054415270852}
   - component: {fileID: 8748778994533765449}
   - component: {fileID: 7733638833972027606}
+  - component: {fileID: 9043588110398475132}
   m_Layer: 0
   m_Name: Tile4.4 (3)
   m_TagString: MarelleTile
@@ -2327,6 +2583,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &9043588110398475132
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5019384414021187184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 476f1c7ea5b73cd43957b3a10c102912, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CanGoUp: 0
+  CanGoDown: 0
 --- !u!1 &5435573669557929548
 GameObject:
   m_ObjectHideFlags: 0
@@ -2339,6 +2609,7 @@ GameObject:
   - component: {fileID: 8476325761341741120}
   - component: {fileID: 7381136892451799600}
   - component: {fileID: 266657669977757954}
+  - component: {fileID: 8907559884277564037}
   m_Layer: 0
   m_Name: Tile1.3
   m_TagString: MarelleTile
@@ -2422,6 +2693,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8907559884277564037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5435573669557929548}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 476f1c7ea5b73cd43957b3a10c102912, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CanGoUp: 0
+  CanGoDown: 0
 --- !u!1 &5493130481403604432
 GameObject:
   m_ObjectHideFlags: 0
@@ -2434,6 +2719,7 @@ GameObject:
   - component: {fileID: 7872669359248566087}
   - component: {fileID: 8600904321274309530}
   - component: {fileID: 732265701312513447}
+  - component: {fileID: 4245008163328679760}
   m_Layer: 0
   m_Name: Tile4.3
   m_TagString: MarelleTile
@@ -2517,6 +2803,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4245008163328679760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5493130481403604432}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 476f1c7ea5b73cd43957b3a10c102912, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CanGoUp: 0
+  CanGoDown: 0
 --- !u!1 &5670704412257034238
 GameObject:
   m_ObjectHideFlags: 0
@@ -2529,6 +2829,7 @@ GameObject:
   - component: {fileID: 4423613508329406641}
   - component: {fileID: 4821484875429136278}
   - component: {fileID: 6672838174658533375}
+  - component: {fileID: 3238341168952571511}
   m_Layer: 0
   m_Name: Tile3.4
   m_TagString: MarelleTile
@@ -2612,6 +2913,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3238341168952571511
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5670704412257034238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 476f1c7ea5b73cd43957b3a10c102912, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CanGoUp: 0
+  CanGoDown: 0
 --- !u!1 &5741747197776349122
 GameObject:
   m_ObjectHideFlags: 0
@@ -2719,6 +3034,7 @@ GameObject:
   - component: {fileID: 5655001024371522430}
   - component: {fileID: 8931519852976241551}
   - component: {fileID: 3914919115367703054}
+  - component: {fileID: 106950685623936235}
   m_Layer: 0
   m_Name: Tile1.4 (1)
   m_TagString: MarelleTile
@@ -2802,6 +3118,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &106950685623936235
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5882297427407922170}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 476f1c7ea5b73cd43957b3a10c102912, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CanGoUp: 0
+  CanGoDown: 0
 --- !u!1 &6294554789383479478
 GameObject:
   m_ObjectHideFlags: 0
@@ -2909,6 +3239,7 @@ GameObject:
   - component: {fileID: 5975209735285956670}
   - component: {fileID: 6190296469334663778}
   - component: {fileID: 7962254940231412815}
+  - component: {fileID: 8704635876310828799}
   m_Layer: 0
   m_Name: Tile1.2 (3)
   m_TagString: MarelleTile
@@ -2992,6 +3323,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8704635876310828799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6423345708392795924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 476f1c7ea5b73cd43957b3a10c102912, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CanGoUp: 0
+  CanGoDown: 0
 --- !u!1 &6714033237346466925
 GameObject:
   m_ObjectHideFlags: 0
@@ -3004,6 +3349,7 @@ GameObject:
   - component: {fileID: 5079059654191574446}
   - component: {fileID: 8710571943742441966}
   - component: {fileID: 7248476185612232078}
+  - component: {fileID: 8251988831556045892}
   m_Layer: 0
   m_Name: Tile1.3 (2)
   m_TagString: MarelleTile
@@ -3087,6 +3433,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8251988831556045892
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6714033237346466925}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 476f1c7ea5b73cd43957b3a10c102912, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CanGoUp: 0
+  CanGoDown: 0
 --- !u!1 &7097287179241300731
 GameObject:
   m_ObjectHideFlags: 0
@@ -3099,6 +3459,7 @@ GameObject:
   - component: {fileID: 5584301527665902729}
   - component: {fileID: 4193892563876357436}
   - component: {fileID: 2750830550798645071}
+  - component: {fileID: 4496898747090576385}
   m_Layer: 0
   m_Name: Tile1.2 (1)
   m_TagString: MarelleTile
@@ -3182,6 +3543,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4496898747090576385
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7097287179241300731}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 476f1c7ea5b73cd43957b3a10c102912, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CanGoUp: 0
+  CanGoDown: 0
 --- !u!1 &7243722772745152580
 GameObject:
   m_ObjectHideFlags: 0
@@ -3194,6 +3569,7 @@ GameObject:
   - component: {fileID: 3122050281309712086}
   - component: {fileID: 4845760704100152832}
   - component: {fileID: 5736746961355098277}
+  - component: {fileID: 9051024934168026549}
   m_Layer: 0
   m_Name: Tile3.7
   m_TagString: MarelleTile
@@ -3277,6 +3653,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &9051024934168026549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7243722772745152580}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 476f1c7ea5b73cd43957b3a10c102912, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CanGoUp: 0
+  CanGoDown: 0
 --- !u!1 &7304703947319490510
 GameObject:
   m_ObjectHideFlags: 0
@@ -3289,6 +3679,7 @@ GameObject:
   - component: {fileID: 6666433430040494331}
   - component: {fileID: 8907899969296501304}
   - component: {fileID: 3967272919970960945}
+  - component: {fileID: 606997487411514282}
   m_Layer: 0
   m_Name: Tile4.3 (1)
   m_TagString: MarelleTile
@@ -3372,6 +3763,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &606997487411514282
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7304703947319490510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 476f1c7ea5b73cd43957b3a10c102912, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CanGoUp: 0
+  CanGoDown: 0
 --- !u!1 &7530351489756284524
 GameObject:
   m_ObjectHideFlags: 0
@@ -3384,6 +3789,7 @@ GameObject:
   - component: {fileID: 4370335150149914615}
   - component: {fileID: 2994393212226252316}
   - component: {fileID: 8997409079542163192}
+  - component: {fileID: 1078327557083845761}
   m_Layer: 0
   m_Name: Tile4.1 (2)
   m_TagString: MarelleTile
@@ -3467,6 +3873,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1078327557083845761
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7530351489756284524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 476f1c7ea5b73cd43957b3a10c102912, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CanGoUp: 0
+  CanGoDown: 0
 --- !u!1 &7535732111163153523
 GameObject:
   m_ObjectHideFlags: 0
@@ -3479,6 +3899,7 @@ GameObject:
   - component: {fileID: 3508116151129605807}
   - component: {fileID: 2822890707925550864}
   - component: {fileID: 6025708590902322009}
+  - component: {fileID: 4666474724925660820}
   m_Layer: 0
   m_Name: Tile3.5
   m_TagString: MarelleTile
@@ -3562,6 +3983,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4666474724925660820
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7535732111163153523}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 476f1c7ea5b73cd43957b3a10c102912, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CanGoUp: 0
+  CanGoDown: 0
 --- !u!1 &7823246032213397907
 GameObject:
   m_ObjectHideFlags: 0
@@ -3764,6 +4199,7 @@ GameObject:
   - component: {fileID: 616495761586827201}
   - component: {fileID: 4728675482411607777}
   - component: {fileID: 5337970751577223737}
+  - component: {fileID: 1833003712719370780}
   m_Layer: 0
   m_Name: Tile4.6
   m_TagString: MarelleTile
@@ -3847,6 +4283,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1833003712719370780
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8076115162975542131}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 476f1c7ea5b73cd43957b3a10c102912, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CanGoUp: 0
+  CanGoDown: 0
 --- !u!1 &8128210805999366759
 GameObject:
   m_ObjectHideFlags: 0
@@ -3859,6 +4309,7 @@ GameObject:
   - component: {fileID: 3768226528908911796}
   - component: {fileID: 1131379173435282971}
   - component: {fileID: 8106215333426124051}
+  - component: {fileID: 8706041724378338604}
   m_Layer: 0
   m_Name: Tile3.6
   m_TagString: MarelleTile
@@ -3942,6 +4393,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8706041724378338604
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8128210805999366759}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 476f1c7ea5b73cd43957b3a10c102912, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CanGoUp: 0
+  CanGoDown: 0
 --- !u!1 &8169129684726368115
 GameObject:
   m_ObjectHideFlags: 0
@@ -3954,6 +4419,7 @@ GameObject:
   - component: {fileID: 2879497457935008124}
   - component: {fileID: 6074174111465518712}
   - component: {fileID: 5310781662098930744}
+  - component: {fileID: 3273443775168427378}
   m_Layer: 0
   m_Name: Tile1.4
   m_TagString: MarelleTile
@@ -4037,6 +4503,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3273443775168427378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8169129684726368115}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 476f1c7ea5b73cd43957b3a10c102912, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CanGoUp: 0
+  CanGoDown: 0
 --- !u!1 &8205417094546035488
 GameObject:
   m_ObjectHideFlags: 0
@@ -4049,6 +4529,7 @@ GameObject:
   - component: {fileID: 8205417094546035421}
   - component: {fileID: 8205417094546035423}
   - component: {fileID: 8205417094546035422}
+  - component: {fileID: 5081984443291165400}
   m_Layer: 0
   m_Name: Tile2.1
   m_TagString: MarelleTile
@@ -4132,6 +4613,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &5081984443291165400
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8205417094546035488}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 476f1c7ea5b73cd43957b3a10c102912, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CanGoUp: 0
+  CanGoDown: 0
 --- !u!1 &8205417094563819786
 GameObject:
   m_ObjectHideFlags: 0
@@ -4193,6 +4688,7 @@ GameObject:
   - component: {fileID: 8205417094602904451}
   - component: {fileID: 8205417094602904453}
   - component: {fileID: 8205417094602904452}
+  - component: {fileID: 2282607537199009561}
   m_Layer: 0
   m_Name: Tile3.1
   m_TagString: MarelleTile
@@ -4276,6 +4772,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2282607537199009561
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8205417094602904454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 476f1c7ea5b73cd43957b3a10c102912, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CanGoUp: 0
+  CanGoDown: 0
 --- !u!1 &8205417094603907045
 GameObject:
   m_ObjectHideFlags: 0
@@ -4343,6 +4853,7 @@ GameObject:
   - component: {fileID: 8205417094678032246}
   - component: {fileID: 8205417094678032248}
   - component: {fileID: 8205417094678032251}
+  - component: {fileID: 209603458277963819}
   m_Layer: 0
   m_Name: Tile3.5
   m_TagString: MarelleTile
@@ -4426,6 +4937,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &209603458277963819
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8205417094678032253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 476f1c7ea5b73cd43957b3a10c102912, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CanGoUp: 0
+  CanGoDown: 0
 --- !u!1 &8205417094791815936
 GameObject:
   m_ObjectHideFlags: 0
@@ -4438,6 +4963,7 @@ GameObject:
   - component: {fileID: 8205417094791815996}
   - component: {fileID: 8205417094791815999}
   - component: {fileID: 8205417094791815998}
+  - component: {fileID: 5841154416498190221}
   m_Layer: 0
   m_Name: Tile4.3
   m_TagString: MarelleTile
@@ -4521,6 +5047,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &5841154416498190221
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8205417094791815936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 476f1c7ea5b73cd43957b3a10c102912, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CanGoUp: 0
+  CanGoDown: 0
 --- !u!1 &8205417094940051689
 GameObject:
   m_ObjectHideFlags: 0
@@ -4573,12 +5113,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 8205417094940051689}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2412d5d4ab3adba458ee5f3e3a9323bb, type: 3}
+  m_Script: {fileID: 11500000, guid: 82e79b3a5f9b1f844a98f2dd8b858b0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   isResolve: 0
-  timerTime: 2
-  unlockCollision: 1
+  timerTime: 1.5
+  hasCollisionUnlocked: 1
 --- !u!1 &8205417094976278852
 GameObject:
   m_ObjectHideFlags: 0
@@ -4648,6 +5188,7 @@ GameObject:
   - component: {fileID: 8205417095206137082}
   - component: {fileID: 8205417095206137084}
   - component: {fileID: 8205417095206137087}
+  - component: {fileID: 4335159609642003350}
   m_Layer: 0
   m_Name: Tile2.4
   m_TagString: MarelleTile
@@ -4731,6 +5272,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4335159609642003350
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8205417095206137025}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 476f1c7ea5b73cd43957b3a10c102912, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CanGoUp: 0
+  CanGoDown: 0
 --- !u!1 &8205417095261673107
 GameObject:
   m_ObjectHideFlags: 0
@@ -4792,6 +5347,7 @@ GameObject:
   - component: {fileID: 8205417095415813162}
   - component: {fileID: 8205417095415813164}
   - component: {fileID: 8205417095415813167}
+  - component: {fileID: 4274826507193775168}
   m_Layer: 0
   m_Name: Tile3.4
   m_TagString: MarelleTile
@@ -4875,6 +5431,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4274826507193775168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8205417095415813169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 476f1c7ea5b73cd43957b3a10c102912, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CanGoUp: 0
+  CanGoDown: 0
 --- !u!1 &8205417095535228513
 GameObject:
   m_ObjectHideFlags: 0
@@ -4936,6 +5506,7 @@ GameObject:
   - component: {fileID: 8205417095549878223}
   - component: {fileID: 8205417095549878225}
   - component: {fileID: 8205417095549878224}
+  - component: {fileID: 196222754041347643}
   m_Layer: 0
   m_Name: Tile3.4
   m_TagString: MarelleTile
@@ -5019,6 +5590,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &196222754041347643
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8205417095549878226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 476f1c7ea5b73cd43957b3a10c102912, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CanGoUp: 0
+  CanGoDown: 0
 --- !u!1 &8205417095616062439
 GameObject:
   m_ObjectHideFlags: 0
@@ -5031,6 +5616,7 @@ GameObject:
   - component: {fileID: 8205417095616062432}
   - component: {fileID: 8205417095616062434}
   - component: {fileID: 8205417095616062437}
+  - component: {fileID: 4519038347485161995}
   m_Layer: 0
   m_Name: Tile2.2
   m_TagString: MarelleTile
@@ -5114,6 +5700,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4519038347485161995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8205417095616062439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 476f1c7ea5b73cd43957b3a10c102912, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CanGoUp: 0
+  CanGoDown: 0
 --- !u!1 &8205417095623812493
 GameObject:
   m_ObjectHideFlags: 0
@@ -5126,6 +5726,7 @@ GameObject:
   - component: {fileID: 8205417095623812486}
   - component: {fileID: 8205417095623812488}
   - component: {fileID: 8205417095623812491}
+  - component: {fileID: 3963251766310784340}
   m_Layer: 0
   m_Name: Tile2.3
   m_TagString: MarelleTile
@@ -5209,6 +5810,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3963251766310784340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8205417095623812493}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 476f1c7ea5b73cd43957b3a10c102912, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CanGoUp: 0
+  CanGoDown: 0
 --- !u!1 &8205417095640647846
 GameObject:
   m_ObjectHideFlags: 0
@@ -5373,6 +5988,7 @@ GameObject:
   - component: {fileID: 8205417095844408733}
   - component: {fileID: 8205417095844408732}
   - component: {fileID: 8205417095844408735}
+  - component: {fileID: 591754551878912787}
   m_Layer: 0
   m_Name: Tile4.4
   m_TagString: MarelleTile
@@ -5456,6 +6072,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &591754551878912787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8205417095844408801}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 476f1c7ea5b73cd43957b3a10c102912, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CanGoUp: 0
+  CanGoDown: 0
 --- !u!1 &8205417095855207512
 GameObject:
   m_ObjectHideFlags: 0
@@ -5468,6 +6098,7 @@ GameObject:
   - component: {fileID: 8205417095855207509}
   - component: {fileID: 8205417095855207511}
   - component: {fileID: 8205417095855207510}
+  - component: {fileID: 8043088370724995282}
   m_Layer: 0
   m_Name: Tile4.2
   m_TagString: MarelleTile
@@ -5551,6 +6182,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8043088370724995282
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8205417095855207512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 476f1c7ea5b73cd43957b3a10c102912, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CanGoUp: 0
+  CanGoDown: 0
 --- !u!1 &8205417095907162332
 GameObject:
   m_ObjectHideFlags: 0
@@ -5563,6 +6208,7 @@ GameObject:
   - component: {fileID: 8205417095907162329}
   - component: {fileID: 8205417095907162331}
   - component: {fileID: 8205417095907162330}
+  - component: {fileID: 1065057141780544084}
   m_Layer: 0
   m_Name: Tile1.1
   m_TagString: MarelleTile
@@ -5646,6 +6292,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1065057141780544084
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8205417095907162332}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 476f1c7ea5b73cd43957b3a10c102912, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CanGoUp: 0
+  CanGoDown: 0
 --- !u!1 &8205417095925088192
 GameObject:
   m_ObjectHideFlags: 0
@@ -5705,6 +6365,7 @@ GameObject:
   - component: {fileID: 8205417096067764906}
   - component: {fileID: 8205417096067764908}
   - component: {fileID: 8205417096067764911}
+  - component: {fileID: 2288122633652490460}
   m_Layer: 0
   m_Name: Tile3.3
   m_TagString: MarelleTile
@@ -5788,6 +6449,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2288122633652490460
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8205417096067764913}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 476f1c7ea5b73cd43957b3a10c102912, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CanGoUp: 0
+  CanGoDown: 0
 --- !u!1 &8205417096082521539
 GameObject:
   m_ObjectHideFlags: 0
@@ -5847,6 +6522,7 @@ GameObject:
   - component: {fileID: 8205417096111723997}
   - component: {fileID: 8205417096111723999}
   - component: {fileID: 8205417096111723998}
+  - component: {fileID: 9002858439463882027}
   m_Layer: 0
   m_Name: Tile3.2
   m_TagString: MarelleTile
@@ -5930,6 +6606,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &9002858439463882027
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8205417096111724064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 476f1c7ea5b73cd43957b3a10c102912, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CanGoUp: 0
+  CanGoDown: 0
 --- !u!1 &8205417096132509744
 GameObject:
   m_ObjectHideFlags: 0
@@ -5942,6 +6632,7 @@ GameObject:
   - component: {fileID: 8205417096132509741}
   - component: {fileID: 8205417096132509743}
   - component: {fileID: 8205417096132509742}
+  - component: {fileID: 8980034788306885622}
   m_Layer: 0
   m_Name: Tile1.2
   m_TagString: MarelleTile
@@ -6025,6 +6716,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8980034788306885622
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8205417096132509744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 476f1c7ea5b73cd43957b3a10c102912, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CanGoUp: 0
+  CanGoDown: 0
 --- !u!1 &8364045555571104316
 GameObject:
   m_ObjectHideFlags: 0
@@ -6037,6 +6742,7 @@ GameObject:
   - component: {fileID: 5463573555340030351}
   - component: {fileID: 3525428697294131150}
   - component: {fileID: 6970314396898333522}
+  - component: {fileID: 7982527111574683176}
   m_Layer: 0
   m_Name: Tile4.5 (1)
   m_TagString: MarelleTile
@@ -6120,6 +6826,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7982527111574683176
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8364045555571104316}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 476f1c7ea5b73cd43957b3a10c102912, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CanGoUp: 0
+  CanGoDown: 0
 --- !u!1 &8459920577802918541
 GameObject:
   m_ObjectHideFlags: 0
@@ -6132,6 +6852,7 @@ GameObject:
   - component: {fileID: 3590171585094242061}
   - component: {fileID: 3268240170509438682}
   - component: {fileID: 2613501979872027542}
+  - component: {fileID: 1456924403037396327}
   m_Layer: 0
   m_Name: Tile4.6 (1)
   m_TagString: MarelleTile
@@ -6215,6 +6936,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1456924403037396327
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8459920577802918541}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 476f1c7ea5b73cd43957b3a10c102912, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CanGoUp: 0
+  CanGoDown: 0
 --- !u!1 &8552899820872600316
 GameObject:
   m_ObjectHideFlags: 0
@@ -6227,6 +6962,7 @@ GameObject:
   - component: {fileID: 3508755636394765481}
   - component: {fileID: 1144245280706174349}
   - component: {fileID: 590021560093595696}
+  - component: {fileID: 2485990556202148340}
   m_Layer: 0
   m_Name: Tile1.3 (3)
   m_TagString: MarelleTile
@@ -6310,6 +7046,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2485990556202148340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8552899820872600316}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 476f1c7ea5b73cd43957b3a10c102912, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CanGoUp: 0
+  CanGoDown: 0
 --- !u!1 &8604228068305475970
 GameObject:
   m_ObjectHideFlags: 0
@@ -6322,6 +7072,7 @@ GameObject:
   - component: {fileID: 6220644737947414319}
   - component: {fileID: 307845450392341396}
   - component: {fileID: 3144449508458245414}
+  - component: {fileID: 1801413137325522469}
   m_Layer: 0
   m_Name: Tile4.2 (1)
   m_TagString: MarelleTile
@@ -6405,6 +7156,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1801413137325522469
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8604228068305475970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 476f1c7ea5b73cd43957b3a10c102912, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CanGoUp: 0
+  CanGoDown: 0
 --- !u!1 &8677421899839452353
 GameObject:
   m_ObjectHideFlags: 0
@@ -6417,6 +7182,7 @@ GameObject:
   - component: {fileID: 647003611155342777}
   - component: {fileID: 714921058538014143}
   - component: {fileID: 7227869146605559660}
+  - component: {fileID: 599953885798291952}
   m_Layer: 0
   m_Name: Tile4.5
   m_TagString: MarelleTile
@@ -6500,6 +7266,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &599953885798291952
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8677421899839452353}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 476f1c7ea5b73cd43957b3a10c102912, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CanGoUp: 0
+  CanGoDown: 0
 --- !u!1 &8912719232065189405
 GameObject:
   m_ObjectHideFlags: 0
