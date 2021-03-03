@@ -8,7 +8,7 @@ public class MarellePlayer : MonoBehaviour
 {
     [SerializeField] private float raycastRange = 0.1f;
     [SerializeField] private GameObject bottomObject;
-    private bool enterBool = true;
+    private bool hasExited = true;
 
     private bool wasMute = false;
 
@@ -27,19 +27,19 @@ public class MarellePlayer : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(bottomObject.transform.position, Vector3.down, out hit, raycastRange))
         {
-
-
-            if (enterBool)
+            colliderObject = hit.collider.gameObject;
+            if (wasMute && colliderObject.tag != "MutePlateforme")
             {
-                colliderObject = hit.collider.gameObject;
-                if (wasMute && colliderObject.tag != "MutePlateforme")
-                {
-                    speaker.SetActive(true);
-                    wasMute = false;
-                    sound.Play();
+                speaker.SetActive(true);
+                wasMute = false;
+                sound.Play();
 
-                }
-                enterBool = false;
+            }
+
+            if (hasExited)
+            {
+
+                hasExited = false;
                 switch (colliderObject.tag)
                 {
                     case "MarelleTile":
@@ -63,7 +63,7 @@ public class MarellePlayer : MonoBehaviour
         }
         else
         {
-            enterBool = true;
+            hasExited = true;
 
         }
 
