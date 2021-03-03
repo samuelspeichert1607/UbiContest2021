@@ -238,6 +238,7 @@ MonoBehaviour:
   m_SynchronizePosition: 1
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
+  m_UseLocal: 0
 --- !u!114 &48639159
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1877,6 +1878,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 579916413637093351, guid: fdfb6cb0ed60d04469f47102653766ff, type: 3}
+      propertyPath: interactRadius
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1406526680792860990, guid: fdfb6cb0ed60d04469f47102653766ff, type: 3}
       propertyPath: m_Mesh
       value: 
