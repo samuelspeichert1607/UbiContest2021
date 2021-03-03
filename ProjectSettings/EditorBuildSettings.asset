@@ -14,7 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SpotInDark_blocking.unity
     guid: eb3bdd2de8ef0474b923df11940b0bf4
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/TestElie.unity
     guid: a673ecba0e21c0f45bcce75a999a6608
   - enabled: 0
