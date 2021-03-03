@@ -9,7 +9,7 @@ public class TileGoUpDown : MonoBehaviour
 
     private float initialY;
     private int speed = 25;
-    private float minY = -12;
+    private float minY = -4;
 
     private void Start()
     {

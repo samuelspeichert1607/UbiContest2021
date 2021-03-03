@@ -17,7 +17,7 @@ public class SameSymbolTile : ParentTile
 
     private GameObject tileEntered = null;
 
-    //bool testBool = false;
+    bool testBool = false;
     private MarelleController marelleController;
 
     void Start()
@@ -44,13 +44,13 @@ public class SameSymbolTile : ParentTile
                 marelleController.isResolve = false;
             }
         }
-        //if (Input.GetButtonDown("Fire2") && testBool)
-        //{
-        //    CollisionDetected(transform.GetChild(1).gameObject);
-        //    testBool = false;
+        if (Input.GetButtonDown("Fire2") && testBool)
+        {
+            CollisionDetected(transform.GetChild(1).gameObject);
+            testBool = false;
 
 
-        //}
+        }
 
     }
 
@@ -59,7 +59,7 @@ public class SameSymbolTile : ParentTile
         Material sourceMat = sourceTile.GetComponent<Renderer>().material;
         if ((marelleController.hasCollisionUnlocked || firstTile) && !(sourceMat.color==Color.green))
         {
-            //testBool = true;
+            testBool = true;
 
             //if ((!firstTile && isResolve) || (firstTile && !isResolve)) //je pense qu<il sert 'a rien maintenant mais j,ai peur d<y toucher
             //{
