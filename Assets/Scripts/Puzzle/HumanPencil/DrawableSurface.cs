@@ -1,8 +1,8 @@
-using System.Collections;
+using Photon.Pun;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DrawableSurface : MonoBehaviour
+public class DrawableSurface : MonoBehaviourPun, IPunObservable
 {
     [SerializeField]
     private GameObject brush;
@@ -12,13 +12,13 @@ public class DrawableSurface : MonoBehaviour
     
     public void CreateBrush(Vector3 referencePoint)
     {
-        GameObject brushInstance = Instantiate(brush);
+        GameObject brushInstance = PhotonNetwork.Instantiate("Brush", brush.transform.position, brush.transform.rotation);
         _currentLineRenderer = brushInstance.GetComponent<LineRenderer>();
             
 
         _currentLineRenderer.SetPosition(0, referencePoint);
         _currentLineRenderer.SetPosition(1, referencePoint);
-
+        
         brushes.Add(brushInstance);
     }
     
@@ -36,7 +36,7 @@ public class DrawableSurface : MonoBehaviour
     {
         foreach (GameObject brush in brushes)
         {
-            Destroy(brush);
+            PhotonNetwork.Destroy(brush);
         }
     }
 
@@ -74,4 +74,21 @@ public class DrawableSurface : MonoBehaviour
         return Quaternion.Euler(angles) * point;
     }
 
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            Debug.Log("Is Writing");
+            //stream.SendNext(transform.position);
+            //stream.SendNext(transform.eulerAngles);
+        }
+        else if (stream.IsReading)
+        {
+            Debug.Log("Is Reading");
+            // _currentLineRenderer.SetPositions((Vector3[])stream.ReceiveNext());
+            /*transform.position = (Vector3)stream.ReceiveNext();
+            transform.eulerAngles = (Vector3)stream.ReceiveNext();*/
+
+        }
+    }
 }
