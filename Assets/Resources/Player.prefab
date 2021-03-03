@@ -261,12 +261,12 @@ GameObject:
   - component: {fileID: 4816625168846147316}
   - component: {fileID: 4816625168846147315}
   - component: {fileID: 6721870700765312956}
-  - component: {fileID: 8926367757358570825}
   - component: {fileID: 4303385723231824844}
   - component: {fileID: 2075387171875053641}
   - component: {fileID: 507341764179454266}
   - component: {fileID: 2801088373525635566}
   - component: {fileID: 8906482117743955676}
+  - component: {fileID: 1333270210939410858}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -324,24 +324,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0.9, z: 0}
---- !u!114 &8926367757358570825
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4816625168846147317}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 91e851c0155957d4c9f22b4130cf421c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxPlayerSpeed: 6
-  rotationSpeed: 110
-  jumpValue: 6
-  gravity: -9.81
-  airborneAcceleration: 5
-  landingTime: 0.1
 --- !u!114 &4303385723231824844
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -426,6 +408,24 @@ MonoBehaviour:
   AutoCreateRecorderIfNotFound: 0
   UsePrimaryRecorder: 1
   SetupDebugSpeaker: 0
+--- !u!114 &1333270210939410858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4816625168846147317}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc243d50075da584897471087ea56f90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxPlayerSpeed: 6
+  rotationSpeed: 110
+  jumpValue: 6
+  gravity: -9.81
+  airborneAcceleration: 5
+  landingTime: 0.1
 --- !u!1 &7939137518127453690
 GameObject:
   m_ObjectHideFlags: 0
