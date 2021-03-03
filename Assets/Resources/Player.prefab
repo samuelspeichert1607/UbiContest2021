@@ -515,6 +515,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Speaker
       objectReference: {fileID: 0}
+    - target: {fileID: 1738928202141472191, guid: d80a83c9a7ea13a4bb5ea7590592ffe1, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5037639469788012423, guid: d80a83c9a7ea13a4bb5ea7590592ffe1, type: 3}
       propertyPath: MaxDistance
       value: 50

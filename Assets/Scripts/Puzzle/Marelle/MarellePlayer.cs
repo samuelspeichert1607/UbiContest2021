@@ -13,12 +13,12 @@ public class MarellePlayer : MonoBehaviour
     private bool wasMute = false;
 
     private GameObject colliderObject = null;
-    private GameObject speaker;
+    private AudioSource speaker;
     private AudioSource sound;
 
     private void Start()
     {
-        speaker = transform.GetChild(1).gameObject;
+        speaker = transform.GetChild(1).gameObject.GetComponent<AudioSource>();
     }
     void Update()
     {
@@ -28,11 +28,13 @@ public class MarellePlayer : MonoBehaviour
         if (Physics.Raycast(bottomObject.transform.position, Vector3.down, out hit, raycastRange))
         {
             colliderObject = hit.collider.gameObject;
-            if (wasMute && colliderObject.tag != "MutePlateforme")
+            if (wasMute && !colliderObject.CompareTag("MutePlateforme"))
             {
-                speaker.SetActive(true);
+                speaker.mute = false;
+                //speaker.SetActive(true);
                 wasMute = false;
                 sound.Play();
+                
 
             }
 
@@ -51,7 +53,8 @@ public class MarellePlayer : MonoBehaviour
                             sound = colliderObject.GetComponent<AudioSource>();
                             sound.Play();
                             wasMute = true;
-                            speaker.SetActive(false);
+                            //speaker.SetActive(false);
+                            speaker.mute = true;
                         }
                         break;
                 }
