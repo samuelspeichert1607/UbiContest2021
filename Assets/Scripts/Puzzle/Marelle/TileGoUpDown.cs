@@ -8,7 +8,7 @@ public class TileGoUpDown : MonoBehaviour
     public bool CanGoDown = false;
 
     private float initialY;
-    private int speed = 25;//mettre [ca dans marelleWon
+    private int speed = 25;
     private float minY = -12;
 
     private void Start()

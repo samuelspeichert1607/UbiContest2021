@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 
-public abstract class ParentTile : MonoBehaviourPun, IPunObservable
+public abstract class ParentTile : MonoBehaviourPun
 {
 
-    //private GameObject tileExited = null;
     public abstract void CollisionDetected(GameObject sourceTile);
 
 
@@ -19,37 +18,5 @@ public abstract class ParentTile : MonoBehaviourPun, IPunObservable
 
     }
 
-
-    //public void CollisionExited(GameObject sourceTile)
-    //{
-    //    if (transform.parent.GetComponent<MarelleWon>().unlockCollision)
-    //    {
-    //        sourceTile.GetComponent<Renderer>().material.SetColor("_Color", Color.white);
-    //        if (tileExited == null)
-    //        {
-    //            tileExited = sourceTile;
-    //        }
-    //        else if (sourceTile != tileExited)
-    //        {
-    //            tileExited = null;
-    //            ChangeColor(Color.white);
-
-    //        }
-    //    }
-    //}
-
-    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-    {
-        //if (stream.IsWriting)
-        //{
-        //    stream.SendNext(tileMaterial1);
-        //    stream.SendNext(tileMaterial2);
-        //}
-        //else if (stream.IsReading)
-        //{
-        //    tileMaterial1 = (Material)stream.ReceiveNext();
-        //    tileMaterial2 = (Material)stream.ReceiveNext();
-        //}
-    }
 
 }

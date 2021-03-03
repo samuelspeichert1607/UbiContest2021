@@ -60,7 +60,6 @@ public class MarelleWon : MonoBehaviour
             for (int j = 0; j < transform.GetChild(i).childCount; j++)
             {
                 Transform tile = transform.GetChild(i).GetChild(j);
-                Debug.Log(tile.name);
                 tile.GetComponent<Renderer>().material.SetColor("_Color", Color.white);
                 tile.GetComponent<TileGoUpDown>().CanGoUp = true;
 

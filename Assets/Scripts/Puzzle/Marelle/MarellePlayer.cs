@@ -2,30 +2,43 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+
 public class MarellePlayer : MonoBehaviour
 {
-    [SerializeField] private float muteRaycast = 3;
     [SerializeField] private float raycastRange = 0.1f;
     [SerializeField] private GameObject bottomObject;
     private bool enterBool = true;
+
+    private bool wasMute = false;
+
     private GameObject colliderObject = null;
     private GameObject speaker;
+    private AudioSource sound;
 
-    private float rayRange;
     private void Start()
     {
         speaker = transform.GetChild(1).gameObject;
-        rayRange = raycastRange;
     }
     void Update()
     {
+
+        
         RaycastHit hit;
-        if (Physics.Raycast(bottomObject.transform.position, Vector3.down, out hit, rayRange))
+        if (Physics.Raycast(bottomObject.transform.position, Vector3.down, out hit, raycastRange))
         {
 
-            colliderObject = hit.collider.gameObject;
+
             if (enterBool)
             {
+                colliderObject = hit.collider.gameObject;
+                if (wasMute && colliderObject.tag != "MutePlateforme")
+                {
+                    speaker.SetActive(true);
+                    wasMute = false;
+                    sound.Play();
+
+                }
                 enterBool = false;
                 switch (colliderObject.tag)
                 {
@@ -33,29 +46,38 @@ public class MarellePlayer : MonoBehaviour
                         colliderObject.transform.parent.GetComponent<ParentTile>().CollisionDetected(colliderObject);
                         break;
                     case "MutePlateforme":
-                        speaker.SetActive(false);
-                        rayRange = muteRaycast; //je change la range pour qu<on reste muter quand on saute
+                        if (!wasMute)
+                        {
+                            sound = colliderObject.GetComponent<AudioSource>();
+                            sound.Play();
+                            wasMute = true;
+                            speaker.SetActive(false);
+                        }
                         break;
                 }
+
+
             }
-            //if (enterBool && colliderObject.tag == "MarelleTile")
-            //{
-            //    enterBool = false;
-            //    colliderObject.transform.parent.GetComponent<ParentTile>().CollisionDetected(colliderObject);
 
-
-            //}
 
         }
         else
         {
-            if (colliderObject != null && colliderObject.tag == "MutePlateforme")
-            {
-                speaker.SetActive(true);
-                rayRange = raycastRange;
-            }
             enterBool = true;
-            colliderObject = null;
+
         }
+
+        //RaycastHit borderHit;
+        //if(Physics.Raycast(bottomObject.transform.position,Vector3.down,out borderHit, noJumpRayRange))
+        //{
+        //    borderBool = true;//on veut entrer une fois dans le else if
+        //}
+        //else if(borderBool)
+        //{
+        //    borderBool = false;
+        //    
+        //}
     }
+
+
 }
