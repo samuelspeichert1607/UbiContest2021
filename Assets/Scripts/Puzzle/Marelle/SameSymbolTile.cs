@@ -18,12 +18,12 @@ public class SameSymbolTile : ParentTile
     private GameObject tileEntered = null;
 
     //bool testBool = false;
-    private MarelleWon marelleWon;
+    private MarelleController marelleController;
 
     void Start()
     {
-        marelleWon = transform.parent.GetComponent<MarelleWon>();
-        timerTime = marelleWon.timerTime;
+        marelleController = transform.parent.GetComponent<MarelleController>();
+        timerTime = marelleController.timerTime;
     }
 
 
@@ -37,11 +37,11 @@ public class SameSymbolTile : ParentTile
             }
             else
             {
-                marelleWon.gameLost();
+                marelleController.gameLost();
                 timerEnable = false;
                 timer = 0;
                 tileEntered = null;
-                marelleWon.isResolve = false;
+                marelleController.isResolve = false;
             }
         }
         //if (Input.GetButtonDown("Fire2") && testBool)
@@ -57,7 +57,7 @@ public class SameSymbolTile : ParentTile
     public override void CollisionDetected(GameObject sourceTile) 
     {
         Material sourceMat = sourceTile.GetComponent<Renderer>().material;
-        if ((marelleWon.unlockCollision || firstTile) && !(sourceMat.color==Color.green))
+        if ((marelleController.hasCollisionUnlocked || firstTile) && !(sourceMat.color==Color.green))
         {
             //testBool = true;
 
@@ -80,14 +80,14 @@ public class SameSymbolTile : ParentTile
                     {
 
                         ChangeColor(Color.green);
-                        marelleWon.isResolve = true;
+                        marelleController.isResolve = true;
                         if (lastTile)
                         {
-                        marelleWon.gameWon();
+                        marelleController.gameWon();
                         }
                         else if (firstTile)
                         {
-                        marelleWon.resetMarelle();
+                        marelleController.resetMarelle();
                         }
 
                     }
@@ -98,7 +98,7 @@ public class SameSymbolTile : ParentTile
             else if (!firstTile)
             {
 
-                marelleWon.gameLost();
+                marelleController.gameLost();
             }
             else
             {

@@ -2,19 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MarelleWon : MonoBehaviour
+public class MarelleController : MonoBehaviour
 {
     public bool isResolve =false;
     public float timerTime;
-    public bool unlockCollision =true;
+    public bool hasCollisionUnlocked =true;
 
     private void Start() //sinon il est 'a false et je ne sais pas pourquoi
     {
-        unlockCollision = true;
+        hasCollisionUnlocked = true;
     }
     public void gameWon()
     {
-        unlockCollision = false;
+        hasCollisionUnlocked = false;
         transform.GetChild(0).GetComponent<MovingWall>().CanMove = true;
         for (int i = 1; i < transform.childCount - 2; i++)
         {
@@ -30,7 +30,7 @@ public class MarelleWon : MonoBehaviour
 
     public void gameLost()
     {
-        unlockCollision = false;
+        hasCollisionUnlocked = false;
         for (int i = 1; i < transform.childCount - 2; i++)
         {
 
@@ -53,7 +53,7 @@ public class MarelleWon : MonoBehaviour
 
     public void resetMarelle()
     {
-        unlockCollision = true;
+        hasCollisionUnlocked = true;
         for (int i = 2; i < transform.childCount - 2; i++)
         {
 
