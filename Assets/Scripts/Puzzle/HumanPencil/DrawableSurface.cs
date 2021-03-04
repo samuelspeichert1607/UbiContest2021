@@ -2,42 +2,50 @@ using Photon.Pun;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DrawableSurface : MonoBehaviourPun, IPunObservable
+public class DrawableSurface : MonoBehaviourPunCallbacks
 {
     [SerializeField]
     private GameObject brush;
     
     private List<GameObject> brushes = new List<GameObject>();
     private LineRenderer _currentLineRenderer;
-    
+    private PhotonView photonView;
+
     public void CreateBrush(Vector3 referencePoint)
     {
-        GameObject brushInstance = PhotonNetwork.Instantiate("Brush", brush.transform.position, brush.transform.rotation);
+        GameObject brushInstance = PhotonNetwork.Instantiate("Brush",brush.transform.position, brush.transform.rotation);
         _currentLineRenderer = brushInstance.GetComponent<LineRenderer>();
-            
+
 
         _currentLineRenderer.SetPosition(0, referencePoint);
         _currentLineRenderer.SetPosition(1, referencePoint);
-        
+
         brushes.Add(brushInstance);
+        photonView = PhotonView.Get(this);
+
+        photonView.RPC("CreateRemoteBrush", RpcTarget.Others, referencePoint);
     }
-    
-    public void AddAPoint(Vector3 pointPos) 
+
+    public void AddAPoint(Vector3 pointPos)
     {
+        photonView = PhotonView.Get(this);
         var positionCount = _currentLineRenderer.positionCount;
-            
+
         positionCount++;
         _currentLineRenderer.positionCount = positionCount;
         int positionIndex = positionCount - 1;
         _currentLineRenderer.SetPosition(positionIndex, pointPos);
+        photonView.RPC("AddRemotePoint", RpcTarget.Others, pointPos);
     }
 
     public void ClearDrawing()
     {
+        photonView = PhotonView.Get(this);
         foreach (GameObject brush in brushes)
         {
             PhotonNetwork.Destroy(brush);
         }
+        photonView.RPC("EraseRemote", RpcTarget.Others);
     }
 
     public void CreateBrushRelativeToSelf(Vector3 referenceTransformToUpperLeftCorner, Vector3 referenceSurfaceEulerAngles)
@@ -74,21 +82,44 @@ public class DrawableSurface : MonoBehaviourPun, IPunObservable
         return Quaternion.Euler(angles) * point;
     }
 
-    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    [PunRPC]
+    void CreateRemoteBrush(Vector3 referencePoint)
+    {
+        GameObject brushInstance = PhotonNetwork.Instantiate("Brush", brush.transform.position, brush.transform.rotation);
+        _currentLineRenderer = brushInstance.GetComponent<LineRenderer>();
+
+        _currentLineRenderer.SetPosition(0, referencePoint);
+        _currentLineRenderer.SetPosition(1, referencePoint);
+
+        brushes.Add(brush);
+    }
+
+    [PunRPC]
+    void EraseRemote()
+    {
+        ClearDrawing();
+    }
+
+    [PunRPC]
+    void AddRemotePoint(Vector3 pointPos)
+    {
+        var positionCount = _currentLineRenderer.positionCount;
+
+        positionCount++;
+        _currentLineRenderer.positionCount = positionCount;
+        int positionIndex = positionCount - 1;
+        _currentLineRenderer.SetPosition(positionIndex, pointPos);
+    }
+
+    /*public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         if (stream.IsWriting)
         {
-            Debug.Log("Is Writing");
-            //stream.SendNext(transform.position);
-            //stream.SendNext(transform.eulerAngles);
+
         }
         else if (stream.IsReading)
         {
-            Debug.Log("Is Reading");
-            // _currentLineRenderer.SetPositions((Vector3[])stream.ReceiveNext());
-            /*transform.position = (Vector3)stream.ReceiveNext();
-            transform.eulerAngles = (Vector3)stream.ReceiveNext();*/
 
         }
-    }
+    }*/
 }
