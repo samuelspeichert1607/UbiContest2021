@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4963175989326121046}
   m_Layer: 0
   m_Name: PlayerForTest
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -87,6 +87,7 @@ MonoBehaviour:
   gravity: -9.81
   airborneAcceleration: 5
   landingTime: 0
+  preJumpingTime: 0
 --- !u!114 &4963175989326121046
 MonoBehaviour:
   m_ObjectHideFlags: 0

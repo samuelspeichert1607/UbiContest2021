@@ -54,7 +54,7 @@ public class PlayerController : CustomController
             float horizontalMotion = controllerManager.GetLeftAxisX();
             
             //on limite la rotation
-            if (CameraCanRotate(rotationY))
+            if (CanCameraRotate(rotationY))
             {
                 eulerAngleX -= rotationY * Time.deltaTime * rotationSpeed;
                 cam.transform.localEulerAngles = new Vector3(eulerAngleX, 0, 0);
@@ -102,7 +102,7 @@ public class PlayerController : CustomController
         }
     }
 
-    private bool CameraCanRotate(float rotationY)
+    private bool CanCameraRotate(float rotationY)
     {
         xAxisRotationScope = 70;
         return (Mathf.Abs(eulerAngleX) < xAxisRotationScope) || 

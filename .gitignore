@@ -2,6 +2,9 @@
 # Created by https://www.toptal.com/developers/gitignore/api/windows,unity,visualstudio,rider,linux
 # Edit at https://www.toptal.com/developers/gitignore?templates=windows,unity,visualstudio,rider,linux
 
+Assets/LevelAssets/*
+Assets/Textures/*
+
 ### Linux ###
 *~
 
@@ -537,3 +540,5 @@ MigrationBackup/
 
 .idea/.idea.UbiContest2021/riderModule.iml
 >>>>>>> origin/develop
+
+Assets/Textures/

@@ -15,6 +15,8 @@ public class PlayerControllerForTest : CustomController
     private float airborneAcceleration;
     [SerializeField]
     private float landingTime;
+    [SerializeField]
+    private float preJumpingTime;
 
     private CharacterController controller;
     private GameObject cam;
@@ -28,6 +30,9 @@ public class PlayerControllerForTest : CustomController
     private float yAxisRotationScope = 0.0f;
     private float xAxisRotationScope = 70.0f;
 
+    private float jumpingStartTime;
+    private bool isInitiatingAJump = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -40,63 +45,76 @@ public class PlayerControllerForTest : CustomController
     // Update is called once per frame
     void Update()
     {
+        UpdateCameraRotation();
+        
+        float verticalMotion = controllerManager.GetLeftAxisY();
+        float horizontalMotion = controllerManager.GetLeftAxisX();
 
-        if (canMove)
+        if (controller.isGrounded)
         {
-            float rotationY = controllerManager.GetRightAxisY();
-            float verticalMotion = controllerManager.GetLeftAxisY();
-            float horizontalMotion = controllerManager.GetLeftAxisX();
-
-            //on limite la rotation
-            if (CameraCanRotate(rotationY))
+            if (isLanding)
             {
-                eulerAngleX -= rotationY * Time.deltaTime * rotationSpeed;
-                cam.transform.localEulerAngles = new Vector3(eulerAngleX, 0, 0);
+                verticalMotion *= 0.5f;
+                horizontalMotion *= 0.5f;
             }
 
-            //on tourne le joueur selon l'axe x du joystick droit
-            transform.Rotate(new Vector3(0, controllerManager.GetRightAxisX(), 0) * (Time.deltaTime * rotationSpeed), Space.World);
-            if (controller.isGrounded)
+            if (!wasGrounded)
             {
-                if (isLanding)
-                {
-                    verticalMotion *= 0.5f;
-                    horizontalMotion *= 0.5f;
-                }
+                StartLanding();
+            }
+            //je sais que c'est bizarre mais, si je reset la velocite a 0, le controller.isGrounded ne fonctionne pas -_-
+            if (playerSpeed.y < -1)
+            {
+                playerSpeed.y = -1;
+            }
 
-                if (!wasGrounded)
-                {
-                    StartLanding();
-                }
-                //je sais que c'est bizarre mais, si je reset la velocite a 0, le controller.isGrounded ne fonctionne pas -_-
-                if (playerSpeed.y < -1)
-                {
-                    playerSpeed.y = -1;
-                }
-
+            if (canMove)
+            {
                 if (controllerManager.GetButtonDown("Jump"))
                 {
                     playerSpeed.y = jumpValue;
+                    InitiateJumping();
                 }
+
                 wasGrounded = true;
                 MoveAtMaxSpeed(verticalMotion, horizontalMotion, Time.deltaTime);
             }
-            else
+        }
+        else
+        {
+            if (wasGrounded)
             {
-                if (wasGrounded)
-                {
-                    SetInitialJumpSpeed(verticalMotion, horizontalMotion);
-                }
-                playerSpeed.y += gravity * Time.deltaTime;
-                AdjustAirborneSpeed(verticalMotion, horizontalMotion);
-                Move(playerSpeed, Time.deltaTime);
-                wasGrounded = false;
+                SetInitialJumpSpeed(verticalMotion, horizontalMotion);
             }
-            
+            playerSpeed.y += gravity * Time.deltaTime;
+            AdjustAirborneSpeed(verticalMotion, horizontalMotion);
+            Move(playerSpeed, Time.deltaTime);
+            wasGrounded = false;
         }
     }
-    
-    private bool CameraCanRotate(float rotationY)
+
+    private void UpdateCameraRotation()
+    {
+        float rotationY = controllerManager.GetRightAxisY();
+        float rotationX = controllerManager.GetRightAxisX();
+        //on limite la rotation
+        if (CanCameraRotate(rotationY))
+        {
+            eulerAngleX -= rotationY * Time.deltaTime * rotationSpeed;
+            cam.transform.localEulerAngles = new Vector3(eulerAngleX, 0, 0);
+        }
+
+        //on tourne le joueur selon l'axe x du joystick droit
+        transform.Rotate(new Vector3(0, rotationX, 0) * (Time.deltaTime * rotationSpeed), Space.World);
+    }
+
+    private void InitiateJumping()
+    {
+        jumpingStartTime = Time.time;
+        isInitiatingAJump = true;
+    }
+
+    private bool CanCameraRotate(float rotationY)
     {
         xAxisRotationScope = 70;
         return (Mathf.Abs(eulerAngleX) < xAxisRotationScope) || 

@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 372265979038971967}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 1, z: 3}
+  m_LocalScale: {x: 1, y: 0.5, z: 2}
   m_Children: []
   m_Father: {fileID: 5221385531198937647}
   m_RootOrder: 0
@@ -113,6 +113,18 @@ MonoBehaviour:
   interactionStopPostButtonText: to stop controlling spotlight
   interactRadius: 3
   target: {fileID: 0}
+--- !u!114 &2958380275980992670
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3467013750326426598}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8688972652696894ca0a72513d7a937e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5563849537209947369
 GameObject:
   m_ObjectHideFlags: 0
@@ -162,7 +174,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3510461882451247691, guid: a45474f58bcbccb45aa1199deb23739c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.5
+      value: 0.274
       objectReference: {fileID: 0}
     - target: {fileID: 3510461882451247691, guid: a45474f58bcbccb45aa1199deb23739c, type: 3}
       propertyPath: m_LocalPosition.z
