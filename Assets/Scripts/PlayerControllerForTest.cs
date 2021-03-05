@@ -25,6 +25,8 @@ public class PlayerControllerForTest : CustomController
     private bool isLanding = false;
 
     private float eulerAngleX;
+    private float yAxisRotationScope = 0.0f;
+    private float xAxisRotationScope = 70.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -46,8 +48,7 @@ public class PlayerControllerForTest : CustomController
             float horizontalMotion = controllerManager.GetLeftAxisX();
 
             //on limite la rotation
-            if ((Mathf.Abs(eulerAngleX) < 90) || (eulerAngleX >= 90 && rotationY > 0) ||
-                (eulerAngleX <= -90 && rotationY < 0))
+            if (CameraCanRotate(rotationY))
             {
                 eulerAngleX -= rotationY * Time.deltaTime * rotationSpeed;
                 cam.transform.localEulerAngles = new Vector3(eulerAngleX, 0, 0);
@@ -93,6 +94,14 @@ public class PlayerControllerForTest : CustomController
             }
             
         }
+    }
+    
+    private bool CameraCanRotate(float rotationY)
+    {
+        xAxisRotationScope = 70;
+        return (Mathf.Abs(eulerAngleX) < xAxisRotationScope) || 
+               (eulerAngleX >= xAxisRotationScope && rotationY > yAxisRotationScope) ||
+               (eulerAngleX <= -xAxisRotationScope && rotationY < yAxisRotationScope);
     }
 
     private void StartLanding()

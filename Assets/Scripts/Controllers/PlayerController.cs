@@ -25,6 +25,8 @@ public class PlayerController : CustomController
     private ControllerManager controllerManager;
 
     private float eulerAngleX;
+    private float yAxisRotationScope = 0.0f;
+    private float xAxisRotationScope = 70.0f;
     private bool wasGrounded = true;
     private bool isLanding = false;
 
@@ -52,8 +54,7 @@ public class PlayerController : CustomController
             float horizontalMotion = controllerManager.GetLeftAxisX();
             
             //on limite la rotation
-            if ((Mathf.Abs(eulerAngleX) < 90) || (eulerAngleX >= 90 && rotationY > 0) ||
-                (eulerAngleX <= -90 && rotationY < 0))
+            if (CameraCanRotate(rotationY))
             {
                 eulerAngleX -= rotationY * Time.deltaTime * rotationSpeed;
                 cam.transform.localEulerAngles = new Vector3(eulerAngleX, 0, 0);
@@ -100,7 +101,15 @@ public class PlayerController : CustomController
             }
         }
     }
-    
+
+    private bool CameraCanRotate(float rotationY)
+    {
+        xAxisRotationScope = 70;
+        return (Mathf.Abs(eulerAngleX) < xAxisRotationScope) || 
+               (eulerAngleX >= xAxisRotationScope && rotationY > yAxisRotationScope) ||
+               (eulerAngleX <= -xAxisRotationScope && rotationY < yAxisRotationScope);
+    }
+
     private void StartLanding()
     {
         isLanding = true;
