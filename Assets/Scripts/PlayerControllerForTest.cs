@@ -36,6 +36,8 @@ public class PlayerControllerForTest : CustomController
     private float jumpingStartTime;
     private bool isInitiatingAJump = false;
     private bool mustPlayLandingPhase;
+    
+    private Animator animator;
 
     // Start is called before the first frame update
     void Start()
@@ -44,6 +46,8 @@ public class PlayerControllerForTest : CustomController
         controller = GetComponent<CharacterController>();
         eulerAngleX = cam.transform.position.y;
         controllerManager = GetComponent<ControllerManager>();
+        playerSpeed = new Vector3(0,-1,0);
+        animator = GetComponentInChildren<Animator>();
     }
 
     // Update is called once per frame
@@ -86,7 +90,7 @@ public class PlayerControllerForTest : CustomController
                 }
 
                 wasGrounded = true;
-                MoveAtMaxSpeed(verticalMotion, horizontalMotion, Time.deltaTime);
+                MoveOnGround(verticalMotion, horizontalMotion);
             }
         }
         else
@@ -102,7 +106,7 @@ public class PlayerControllerForTest : CustomController
             wasGrounded = false;
         }
     }
-
+    
     private void UpdateIfMustPlayLandingPhase()
     {
         if (playerSpeed.y <= - minimalFallingSpeedForLandingPhase)
@@ -120,6 +124,7 @@ public class PlayerControllerForTest : CustomController
         jumpingStartTime = Time.time;
         isInitiatingAJump = true;
         Invoke(nameof(CheckForShortJump), 2.0f * jumpingImpulseTime / 3.0f);
+        Jump();
     }
 
     private void CheckForShortJump()
@@ -175,6 +180,35 @@ public class PlayerControllerForTest : CustomController
     private void EndLanding()
     {
         isLanding = false;
+        
+    }
+    
+    private void MoveOnGround(float verticalMotion, float horizontalMotion)
+    {
+        if (verticalMotion == 0f)
+        {
+            if (horizontalMotion < 0f)
+            {
+                StrafeLeft();
+            }
+            else if (horizontalMotion > 0f)
+            {
+                StrafeRight();
+            }
+            else
+            {
+                Idle();
+            }
+        }
+        else if (verticalMotion >= 0.99f)
+        {
+            Run();
+        }
+        else
+        {
+            Walk();
+        }
+        MoveAtMaxSpeed(verticalMotion, horizontalMotion, Time.deltaTime);
     }
 
     public override void Move(Vector3 speed, float timeElapsed)
@@ -219,5 +253,36 @@ public class PlayerControllerForTest : CustomController
         }
         return speedValue;
     }
+    
+    private void Idle()
+    {
+        animator.SetFloat("Speed", 0, 0.1f, Time.deltaTime);
+    }
+
+    private void Walk()
+    {
+        animator.SetFloat("Speed", 0.5f, 0.1f, Time.deltaTime);
+    }
+
+    private void StrafeLeft()
+    {
+        animator.SetFloat("Speed", 2f, 0.1f, Time.deltaTime);
+    }
+
+    private void StrafeRight()
+    {
+        animator.SetFloat("Speed", 1.5f, 0.1f, Time.deltaTime);
+    }
+
+    private void Run()
+    {
+        animator.SetFloat("Speed", 1, 0.1f, Time.deltaTime);
+    }
+
+    private void Jump()
+    {
+        animator.SetTrigger("Jump");
+    }
+    
 
 }

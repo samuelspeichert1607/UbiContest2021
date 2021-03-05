@@ -11,7 +11,7 @@ public class PlayerController : CustomController
     [SerializeField] private int jumpValue;
     [SerializeField] private float gravity = -9.81f;
     [SerializeField]
-    [Range(0.01f, 5)]
+    [Range(0.01f, 10)]
     private float airborneAcceleration;
     [SerializeField]
     private float landingTime;
@@ -33,10 +33,12 @@ public class PlayerController : CustomController
     private float xAxisRotationScope = 70.0f;
     private bool wasGrounded = true;
     private bool isLanding = false;
-    
-    private float jumpingStartTime;
     private bool isInitiatingAJump = false;
     private bool mustPlayLandingPhase;
+    
+    private float jumpingStartTime;
+    
+    private Animator animator;
 
     // Start is called before the first frame update
     void Start()
@@ -48,6 +50,7 @@ public class PlayerController : CustomController
         eulerAngleX = cam.transform.position.y;
         controllerManager = GetComponent<ControllerManager>();
         playerSpeed = new Vector3(0,-1,0);
+        animator = GetComponentInChildren<Animator>();
     }
 
     // Update is called once per frame
@@ -92,7 +95,7 @@ public class PlayerController : CustomController
                 }
 
                 wasGrounded = true;
-                MoveAtMaxSpeed(verticalMotion, horizontalMotion, Time.deltaTime);
+                MoveOnGround(verticalMotion, horizontalMotion);
             }
         }
         else
@@ -126,6 +129,7 @@ public class PlayerController : CustomController
         jumpingStartTime = Time.time;
         isInitiatingAJump = true;
         Invoke(nameof(CheckForShortJump), 2.0f * jumpingImpulseTime / 3.0f);
+        Jump();
     }
 
     private void CheckForShortJump()
@@ -183,6 +187,34 @@ public class PlayerController : CustomController
         isLanding = false;
     }
     
+    private void MoveOnGround(float verticalMotion, float horizontalMotion)
+    {
+        if (verticalMotion == 0f)
+        {
+            if (horizontalMotion < 0f)
+            {
+                StrafeLeft();
+            }
+            else if (horizontalMotion > 0f)
+            {
+                StrafeRight();
+            }
+            else
+            {
+                Idle();
+            }
+        }
+        else if (verticalMotion >= 0.99f)
+        {
+            Run();
+        }
+        else
+        {
+            Walk();
+        }
+        MoveAtMaxSpeed(verticalMotion, horizontalMotion, Time.deltaTime);
+    }
+    
     public override void Move(Vector3 speed, float timeElapsed)
     {
         controller.Move(speed * timeElapsed);
@@ -225,5 +257,36 @@ public class PlayerController : CustomController
         }
         return speedValue;
     }
+    
+    private void Idle()
+    {
+        animator.SetFloat("Speed", 0, 0.1f, Time.deltaTime);
+    }
+
+    private void Walk()
+    {
+        animator.SetFloat("Speed", 0.5f, 0.1f, Time.deltaTime);
+    }
+
+    private void StrafeLeft()
+    {
+        animator.SetFloat("Speed", 2f, 0.1f, Time.deltaTime);
+    }
+
+    private void StrafeRight()
+    {
+        animator.SetFloat("Speed", 1.5f, 0.1f, Time.deltaTime);
+    }
+
+    private void Run()
+    {
+        animator.SetFloat("Speed", 1, 0.1f, Time.deltaTime);
+    }
+
+    private void Jump()
+    {
+        animator.SetTrigger("Jump");
+    }
+
 
 }
