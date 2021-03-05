@@ -2,9 +2,6 @@
 # Created by https://www.toptal.com/developers/gitignore/api/windows,unity,visualstudio,rider,linux
 # Edit at https://www.toptal.com/developers/gitignore?templates=windows,unity,visualstudio,rider,linux
 
-Assets/LevelAssets/*
-Assets/Textures/*
-
 ### Linux ###
 *~
 
@@ -532,13 +529,14 @@ MigrationBackup/
 .ionide/
 
 # End of https://www.toptal.com/developers/gitignore/api/windows,unity,visualstudio,rider,linux
-<<<<<<< HEAD
 /Assets/Photon/PhotonVoice/PhotonVoiceLibs/x86_64
 =======
 
 .idea/.idea.UbiContest2021/.idea/
 
 .idea/.idea.UbiContest2021/riderModule.iml
->>>>>>> origin/develop
 
-Assets/Textures/
+Assets/LevelAssets/*
+Assets/Textures/*
+Assets/Anims/*
+Assets/Models/*

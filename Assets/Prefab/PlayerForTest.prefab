@@ -84,10 +84,11 @@ MonoBehaviour:
   maxPlayerSpeed: 6
   rotationSpeed: 110
   jumpValue: 6
-  gravity: -9.81
-  airborneAcceleration: 5
-  landingTime: 0
-  preJumpingTime: 0
+  gravity: -15
+  airborneAcceleration: 7
+  landingTime: 0.1
+  jumpingImpulseTime: 0.2
+  minimalFallingSpeedForLandingPhase: 5
 --- !u!114 &4963175989326121046
 MonoBehaviour:
   m_ObjectHideFlags: 0

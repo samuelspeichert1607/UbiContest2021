@@ -30,6 +30,11 @@ public class ControllerManager : MonoBehaviour
     {
         return userController.GetButtonDown(button);
     }
+    
+    public bool GetButton(string button)
+    {
+        return userController.GetButton(button);
+    }
 
     public float GetLeftAxisY()
     {
