@@ -1,5 +1,6 @@
 using Photon.Pun;
 using System.Collections.Generic;
+using Photon.Pun;
 using UnityEngine;
 
 public class DrawableSurface : MonoBehaviourPunCallbacks
@@ -80,6 +81,12 @@ public class DrawableSurface : MonoBehaviourPunCallbacks
     private Vector3 RotatePointAroundOrigin(Vector3 point, Vector3 angles)
     {
         return Quaternion.Euler(angles) * point;
+    }
+    
+    [PunRPC]
+    void CreateRemoteBrush(object brush)
+    {
+        brushes.Add((GameObject) brush);
     }
 
     [PunRPC]
