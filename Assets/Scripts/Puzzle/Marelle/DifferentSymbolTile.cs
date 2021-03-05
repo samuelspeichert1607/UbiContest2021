@@ -6,10 +6,11 @@ public class DifferentSymbolTile : ParentTile
 {
     public override void CollisionDetected(GameObject sourceTile)
     {
-        if (transform.parent.GetComponent<MarelleWon>().unlockCollision)
+        MarelleController marelleController = transform.parent.GetComponent<MarelleController>();
+        if (marelleController.hasCollisionUnlocked)
         {
-            ChangeColor(Color.red);
-            transform.parent.GetComponent<MarelleWon>().isResolve = false;
+            marelleController.gameLost();
+            marelleController.isResolve = false;
         }
     }
 }
