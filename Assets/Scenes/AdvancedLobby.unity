@@ -1136,6 +1136,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _createRoomMenu: {fileID: 1809350829}
+  _roomListingMenu: {fileID: 1736684566}
 --- !u!1 &325154277
 GameObject:
   m_ObjectHideFlags: 0
@@ -1148,8 +1149,9 @@ GameObject:
   - component: {fileID: 325154281}
   - component: {fileID: 325154280}
   - component: {fileID: 325154279}
+  - component: {fileID: 325154282}
   m_Layer: 5
-  m_Name: LeaveRoom
+  m_Name: LeaveRoomMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1219,9 +1221,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: CreateRoomMenu, Assembly-CSharp
-        m_MethodName: OnClick_CreateRoom
+      - m_Target: {fileID: 325154282}
+        m_TargetAssemblyTypeName: LeaveRoomMenu, Assembly-CSharp
+        m_MethodName: OnClick_LeaveRoom
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1266,6 +1268,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 325154277}
   m_CullTransparentMesh: 0
+--- !u!114 &325154282
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 325154277}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c11bd57cfe092554d8b59fc52ed20c72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &374516041
 GameObject:
   m_ObjectHideFlags: 0
@@ -2506,7 +2520,7 @@ GameObject:
   - component: {fileID: 1736684565}
   - component: {fileID: 1736684566}
   m_Layer: 5
-  m_Name: RoomListings
+  m_Name: RoomListingsMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2606,8 +2620,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1936497790}
+  - component: {fileID: 1936497791}
   m_Layer: 5
-  m_Name: RoomListings
+  m_Name: PlayerListingsMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2633,6 +2648,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1936497791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1936497789}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da98ddcdbae0dea4daba78917fc786b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _content: {fileID: 837652958}
+  _playerListing: {fileID: 3014256631609097282, guid: 8f02a0c0e84ade142b35c5ee37bdca87, type: 3}
 --- !u!1 &1981985353
 GameObject:
   m_ObjectHideFlags: 0
@@ -2834,3 +2863,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53fda0ebc954ac546ae2abc8367067c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playerListingsMenu: {fileID: 1936497791}
+  _leaveRoomMenu: {fileID: 325154282}
