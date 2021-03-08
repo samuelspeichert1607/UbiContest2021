@@ -8,11 +8,12 @@ public class MarellePlayer : MonoBehaviour
 {
     [SerializeField] private float raycastRange = 0.1f;
     [SerializeField] private GameObject bottomObject;
-    private bool hasExited = true;
+    //private bool hasExited = true;
 
     private bool wasMute = false;
 
     private GameObject colliderObject = null;
+    private GameObject previousColliderObject = null;
     private AudioSource speaker;
     private AudioSource sound;
 
@@ -28,6 +29,7 @@ public class MarellePlayer : MonoBehaviour
         if (Physics.Raycast(bottomObject.transform.position, Vector3.down, out hit, raycastRange))
         {
             colliderObject = hit.collider.gameObject;
+
             if (wasMute && !colliderObject.CompareTag("MutePlateforme"))
             {
                 speaker.mute = false;
@@ -38,10 +40,14 @@ public class MarellePlayer : MonoBehaviour
 
             }
 
-            if (hasExited)
+            if (previousColliderObject == null ^ (previousColliderObject != null && previousColliderObject != colliderObject))
             {
-
-                hasExited = false;
+                if (previousColliderObject!=null && previousColliderObject.CompareTag("PressurePlate"))
+                {
+                    previousColliderObject.GetComponent<PressurePlate>().CollisionExited();
+                }
+                previousColliderObject = colliderObject;
+                //hasExited = false;
                 switch (colliderObject.tag)
                 {
                     case "MarelleTile":
@@ -57,6 +63,10 @@ public class MarellePlayer : MonoBehaviour
                             speaker.mute = true;
                         }
                         break;
+                    case "PressurePlate":
+                        colliderObject.GetComponent<PressurePlate>().CollisionDetected();
+                        break;
+
                 }
 
 
@@ -66,7 +76,13 @@ public class MarellePlayer : MonoBehaviour
         }
         else
         {
-            hasExited = true;
+            if (colliderObject!=null && colliderObject.CompareTag("PressurePlate"))
+            {
+                colliderObject.GetComponent<PressurePlate>().CollisionExited();
+            }
+            //hasExited = true;
+            colliderObject = null;
+
 
         }
 

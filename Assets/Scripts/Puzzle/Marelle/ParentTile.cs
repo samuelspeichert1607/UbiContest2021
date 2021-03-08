@@ -13,7 +13,7 @@ public abstract class ParentTile : MonoBehaviourPun
     {
         for (int i = 0; i < transform.childCount; i++)
         {
-            transform.GetChild(i).GetComponent<Renderer>().material.SetColor("_Color", color);
+            transform.GetChild(i).GetChild(0).GetComponent<Renderer>().material.SetColor("_Color", color);
         }
 
     }

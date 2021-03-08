@@ -148,7 +148,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4816625168038301677}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!1 &4816625168403844868
 GameObject:
   m_ObjectHideFlags: 0
@@ -517,6 +517,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1738928202141472191, guid: d80a83c9a7ea13a4bb5ea7590592ffe1, type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5037639469788012423, guid: d80a83c9a7ea13a4bb5ea7590592ffe1, type: 3}
+      propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5037639469788012423, guid: d80a83c9a7ea13a4bb5ea7590592ffe1, type: 3}

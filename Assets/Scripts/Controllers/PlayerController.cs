@@ -44,23 +44,30 @@ public class PlayerController : CustomController
     void Update()
     {
         if (!photonView.IsMine) return;
-        
+        float rotationY = controllerManager.GetRightAxisY();
+        if ((Mathf.Abs(eulerAngleX) < 90) || (eulerAngleX >= 90 && rotationY > 0) ||
+    (eulerAngleX <= -90 && rotationY < 0))
+        {
+            eulerAngleX -= rotationY * Time.deltaTime * rotationSpeed;
+            cam.transform.localEulerAngles = new Vector3(eulerAngleX, 0, 0);
+        }
+        transform.Rotate(new Vector3(0, controllerManager.GetRightAxisX(), 0) * (Time.deltaTime * rotationSpeed), Space.World);
         if (canMove)
         {
-            float rotationY = controllerManager.GetRightAxisY();
+            //float rotationY = controllerManager.GetRightAxisY();
             float verticalMotion = controllerManager.GetLeftAxisY();
             float horizontalMotion = controllerManager.GetLeftAxisX();
             
             //on limite la rotation
-            if ((Mathf.Abs(eulerAngleX) < 90) || (eulerAngleX >= 90 && rotationY > 0) ||
-                (eulerAngleX <= -90 && rotationY < 0))
-            {
-                eulerAngleX -= rotationY * Time.deltaTime * rotationSpeed;
-                cam.transform.localEulerAngles = new Vector3(eulerAngleX, 0, 0);
-            }
+            //if ((Mathf.Abs(eulerAngleX) < 90) || (eulerAngleX >= 90 && rotationY > 0) ||
+            //    (eulerAngleX <= -90 && rotationY < 0))
+            //{
+            //    eulerAngleX -= rotationY * Time.deltaTime * rotationSpeed;
+            //    cam.transform.localEulerAngles = new Vector3(eulerAngleX, 0, 0);
+            //}
 
             //on tourne le joueur selon l'axe x du joystick droit
-            transform.Rotate(new Vector3(0, controllerManager.GetRightAxisX(), 0) * (Time.deltaTime * rotationSpeed), Space.World);
+            //transform.Rotate(new Vector3(0, controllerManager.GetRightAxisX(), 0) * (Time.deltaTime * rotationSpeed), Space.World);
 
             if (controller.isGrounded)
             {
