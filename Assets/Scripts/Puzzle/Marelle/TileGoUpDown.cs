@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class TileGoUpDown : MonoBehaviour
 {
+    //'a modifier quand j,aurai un prefab;
     public bool CanGoUp = false;
     public bool CanGoDown = false;
 
     private float initialY;
-    private int speed = 25;
-    private float minY = -4;
+    private int speed = 5;
+    private float minY = -1;
 
     private void Start()
     {
@@ -30,7 +31,7 @@ public class TileGoUpDown : MonoBehaviour
         {
 
             transform.position -= new Vector3(0, Time.deltaTime * speed, 0);
-            if (transform.position.y <= minY)
+            if (transform.position.y <= minY) //initialY-minY
             {
                 CanGoDown = false;
             }

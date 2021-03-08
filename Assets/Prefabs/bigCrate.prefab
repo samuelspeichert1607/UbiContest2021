@@ -1,7 +1,7 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!64 &7254122281746768882
-MeshCollider:
+--- !u!65 &1777267334359200658
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -10,10 +10,9 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 38019173270196670, guid: e1d3ae56c02b1684fba2003adfdf167c, type: 3}
+  serializedVersion: 2
+  m_Size: {x: 68.33618, y: 68.33618, z: 68.33618}
+  m_Center: {x: 3.6520851e-13, y: 34.2657, z: 0.000015258789}
 --- !u!1 &5334122935337224696
 GameObject:
   m_ObjectHideFlags: 0
