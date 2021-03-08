@@ -39,6 +39,11 @@ public class PlayerListingsMenu : MonoBehaviourPunCallbacks
 
     private void GetCurrentRoomPlayers()
     {
+        if (!PhotonNetwork.IsConnected)
+            return;
+        if (PhotonNetwork.CurrentRoom == null || PhotonNetwork.CurrentRoom.Players == null)
+            return;
+
         foreach (KeyValuePair<int,Player> playerInfo in PhotonNetwork.CurrentRoom.Players)
         {
             AddPlayerListing(playerInfo.Value);
@@ -76,6 +81,16 @@ public class PlayerListingsMenu : MonoBehaviourPunCallbacks
         {
             Destroy(_listings[index].gameObject);
             _listings.RemoveAt(index);
+        }
+    }
+
+    public void OnClick_StartGame()
+    {
+        if(PhotonNetwork.IsMasterClient)
+        {
+            PhotonNetwork.CurrentRoom.IsOpen = false;
+            PhotonNetwork.CurrentRoom.IsVisible = false;
+            PhotonNetwork.LoadLevel(1);
         }
     }
     

@@ -17,7 +17,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/TestElie.unity
     guid: a673ecba0e21c0f45bcce75a999a6608
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Prototypes/HumanPencilPrototype.unity
     guid: d5ea56f4581d0664b9e882e50f1955a4
   m_configObjects: {}

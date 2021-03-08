@@ -53,10 +53,6 @@ public class RoomListingsMenu : MonoBehaviourPunCallbacks
                         _listings.Add(listing);
                     }
                 }
-                else
-                {
-                    //Modify Listing here
-                }
             }
         }
     }
