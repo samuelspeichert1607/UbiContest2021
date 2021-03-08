@@ -4,7 +4,7 @@ using UnityEngine;
 
 
 
-public class PuzzleMechanics : MonoBehaviour
+public class CollisionController : MonoBehaviour
 {
     [SerializeField] private float raycastRange = 0.1f;
     [SerializeField] private GameObject bottomObject;
