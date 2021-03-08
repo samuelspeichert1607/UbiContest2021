@@ -12,7 +12,9 @@ namespace Puzzle.HumanPencil
         public string drawingPostText;
         
         [SerializeField] private string drawingAxisName;
-        
+        private float distancePlayerPencil = 1;
+
+
         private string _toDrawText;
         private Transform _initialParent;
         private LineDrawer _lineDrawer;
@@ -58,6 +60,7 @@ namespace Puzzle.HumanPencil
                    _lineDrawer.StopDrawing(); 
                 }
             }
+
         }
         public override void OnPlayerInRange()
         {
@@ -104,7 +107,9 @@ namespace Puzzle.HumanPencil
 
         private void AppendSelfToPlayer()
         {
-            this.gameObject.transform.SetParent(GetInRangePlayer().transform);
+            Transform player = GetInRangePlayer().transform;
+            this.gameObject.transform.SetParent(player);
+            transform.position = player.position + player.forward  + new Vector3(0, player.gameObject.GetComponent<BoxCollider>().bounds.size.y/2, 0);
         }
 
         private void DetachSelfFromPlayer()

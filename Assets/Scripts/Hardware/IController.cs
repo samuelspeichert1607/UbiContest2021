@@ -12,4 +12,5 @@ public interface IController
     public float GetRTriggerAxis();
     public bool GetButtonDown(string button);
 
+    bool GetButton(string button);
 }

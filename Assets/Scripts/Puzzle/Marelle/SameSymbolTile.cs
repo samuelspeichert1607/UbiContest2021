@@ -56,7 +56,7 @@ public class SameSymbolTile : ParentTile
 
     public override void CollisionDetected(GameObject sourceTile) 
     {
-        Material sourceMat = sourceTile.GetComponent<Renderer>().material;
+        Material sourceMat = sourceTile.transform.GetChild(0).GetComponent<Renderer>().material;
         if ((marelleController.hasCollisionUnlocked || firstTile) && !(sourceMat.color==Color.green))
         {
             testBool = true;

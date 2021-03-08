@@ -11,10 +11,14 @@ public class PlayerControllerForTest : CustomController
     [SerializeField] private int jumpValue;
     [SerializeField] private float gravity = -9.81f;
     [SerializeField]
-    [Range(0.01f, 5)]
+    [Range(0.01f, 10)]
     private float airborneAcceleration;
     [SerializeField]
     private float landingTime;
+    [SerializeField]
+    private float jumpingImpulseTime;
+    [SerializeField] 
+    private float minimalFallingSpeedForLandingPhase;
 
     private CharacterController controller;
     private GameObject cam;
@@ -25,6 +29,15 @@ public class PlayerControllerForTest : CustomController
     private bool isLanding = false;
 
     private float eulerAngleX;
+    private float yAxisRotationScope = 0.0f;
+    private float xAxisRotationScope = 70.0f;
+    
+
+    private float jumpingStartTime;
+    private bool isInitiatingAJump = false;
+    private bool mustPlayLandingPhase;
+    
+    private Animator animator;
 
     // Start is called before the first frame update
     void Start()
@@ -33,66 +46,129 @@ public class PlayerControllerForTest : CustomController
         controller = GetComponent<CharacterController>();
         eulerAngleX = cam.transform.position.y;
         controllerManager = GetComponent<ControllerManager>();
+        playerSpeed = new Vector3(0,-1,0);
+        animator = GetComponentInChildren<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        UpdateCameraRotation();
+        
+        float verticalMotion = controllerManager.GetLeftAxisY();
+        float horizontalMotion = controllerManager.GetLeftAxisX();
 
-        if (canMove)
+        if (isInitiatingAJump)
         {
-            float rotationY = controllerManager.GetRightAxisY();
-            float verticalMotion = controllerManager.GetLeftAxisY();
-            float horizontalMotion = controllerManager.GetLeftAxisX();
-
-            //on limite la rotation
-            if ((Mathf.Abs(eulerAngleX) < 90) || (eulerAngleX >= 90 && rotationY > 0) ||
-                (eulerAngleX <= -90 && rotationY < 0))
+            UpdateJumpingImpulse();
+        }
+        
+        if (controller.isGrounded)
+        {
+            if (isLanding)
             {
-                eulerAngleX -= rotationY * Time.deltaTime * rotationSpeed;
-                cam.transform.localEulerAngles = new Vector3(eulerAngleX, 0, 0);
+                verticalMotion *= 0.5f;
+                horizontalMotion *= 0.5f;
             }
 
-            //on tourne le joueur selon l'axe x du joystick droit
-            transform.Rotate(new Vector3(0, controllerManager.GetRightAxisX(), 0) * (Time.deltaTime * rotationSpeed), Space.World);
-            if (controller.isGrounded)
+            if (!wasGrounded && mustPlayLandingPhase)
             {
-                if (isLanding)
-                {
-                    verticalMotion *= 0.5f;
-                    horizontalMotion *= 0.5f;
-                }
-
-                if (!wasGrounded)
-                {
-                    StartLanding();
-                }
-                //je sais que c'est bizarre mais, si je reset la velocite a 0, le controller.isGrounded ne fonctionne pas -_-
-                if (playerSpeed.y < -1)
-                {
-                    playerSpeed.y = -1;
-                }
-
-                if (controllerManager.GetButtonDown("Jump"))
-                {
-                    playerSpeed.y = jumpValue;
-                }
-                wasGrounded = true;
-                MoveAtMaxSpeed(verticalMotion, horizontalMotion, Time.deltaTime);
-            }
-            else
-            {
-                if (wasGrounded)
-                {
-                    SetInitialJumpSpeed(verticalMotion, horizontalMotion);
-                }
-                playerSpeed.y += gravity * Time.deltaTime;
-                AdjustAirborneSpeed(verticalMotion, horizontalMotion);
-                Move(playerSpeed, Time.deltaTime);
-                wasGrounded = false;
+                StartLanding();
             }
             
+            //je sais que c'est bizarre mais, si je reset la velocite a 0, le controller.isGrounded ne fonctionne pas -_-
+            if (playerSpeed.y < -1)
+            {
+                playerSpeed.y = -1;
+            }
+
+            if (canMove)
+            {
+                if (controllerManager.GetButtonDown("Jump") && !isInitiatingAJump)
+                {
+                    InitiateJumping();
+                }
+
+                wasGrounded = true;
+                MoveOnGround(verticalMotion, horizontalMotion);
+            }
         }
+        else
+        {
+            UpdateIfMustPlayLandingPhase();
+            if (wasGrounded)
+            {
+                SetInitialJumpHorizontalSpeed(verticalMotion, horizontalMotion);
+            }
+            playerSpeed.y += gravity * Time.deltaTime;
+            AdjustAirborneSpeed(verticalMotion, horizontalMotion);
+            Move(playerSpeed, Time.deltaTime);
+            wasGrounded = false;
+        }
+    }
+    
+    private void UpdateIfMustPlayLandingPhase()
+    {
+        if (playerSpeed.y <= - minimalFallingSpeedForLandingPhase)
+        {
+            mustPlayLandingPhase = true;
+        }
+        else
+        {
+            mustPlayLandingPhase = false;
+        }
+    }
+
+    private void InitiateJumping()
+    {
+        jumpingStartTime = Time.time;
+        isInitiatingAJump = true;
+        Invoke(nameof(CheckForShortJump), 2.0f * jumpingImpulseTime / 3.0f);
+        Jump();
+    }
+
+    private void CheckForShortJump()
+    {
+        if (controllerManager.GetButton("Jump")) return;
+        isInitiatingAJump = false;
+    }
+    
+    private void UpdateJumpingImpulse()
+    {
+        float fractionOfImpulseCompleted = ( Time.time - jumpingStartTime) / jumpingImpulseTime;
+
+        if (fractionOfImpulseCompleted >= 1)
+        {
+            playerSpeed.y = jumpValue;
+            isInitiatingAJump = false;
+        }
+        else
+        {
+            playerSpeed.y = fractionOfImpulseCompleted * jumpValue;
+        }
+        
+    }
+
+    private void UpdateCameraRotation()
+    {
+        float rotationY = controllerManager.GetRightAxisY();
+        float rotationX = controllerManager.GetRightAxisX();
+        //on limite la rotation
+        if (CanCameraRotate(rotationY))
+        {
+            eulerAngleX -= rotationY * Time.deltaTime * rotationSpeed;
+            cam.transform.localEulerAngles = new Vector3(eulerAngleX, 0, 0);
+        }
+
+        //on tourne le joueur selon l'axe x du joystick droit
+        transform.Rotate(new Vector3(0, rotationX, 0) * (Time.deltaTime * rotationSpeed), Space.World);
+    }
+
+    private bool CanCameraRotate(float rotationY)
+    {
+        return (Mathf.Abs(eulerAngleX) < xAxisRotationScope) || 
+               (eulerAngleX >= xAxisRotationScope && rotationY > yAxisRotationScope) ||
+               (eulerAngleX <= -xAxisRotationScope && rotationY < yAxisRotationScope);
     }
 
     private void StartLanding()
@@ -104,6 +180,35 @@ public class PlayerControllerForTest : CustomController
     private void EndLanding()
     {
         isLanding = false;
+        
+    }
+    
+    private void MoveOnGround(float verticalMotion, float horizontalMotion)
+    {
+        if (verticalMotion == 0f)
+        {
+            if (horizontalMotion < 0f)
+            {
+                StrafeLeft();
+            }
+            else if (horizontalMotion > 0f)
+            {
+                StrafeRight();
+            }
+            else
+            {
+                Idle();
+            }
+        }
+        else if (verticalMotion >= 0.99f)
+        {
+            Run();
+        }
+        else
+        {
+            Walk();
+        }
+        MoveAtMaxSpeed(verticalMotion, horizontalMotion, Time.deltaTime);
     }
 
     public override void Move(Vector3 speed, float timeElapsed)
@@ -127,7 +232,7 @@ public class PlayerControllerForTest : CustomController
         playerSpeed.z = CapAtMaxSpeed(playerSpeed.z + speedIncrement.z);
     }
 
-    private void SetInitialJumpSpeed(float verticalMotion, float horizontalMotion)
+    private void SetInitialJumpHorizontalSpeed(float verticalMotion, float horizontalMotion)
     {
         var transform1 = transform;
         Vector3 initialJumpSpeed = transform1.right * (maxPlayerSpeed * horizontalMotion);
@@ -148,5 +253,36 @@ public class PlayerControllerForTest : CustomController
         }
         return speedValue;
     }
+    
+    private void Idle()
+    {
+        animator.SetFloat("Speed", 0, 0.1f, Time.deltaTime);
+    }
+
+    private void Walk()
+    {
+        animator.SetFloat("Speed", 0.5f, 0.1f, Time.deltaTime);
+    }
+
+    private void StrafeLeft()
+    {
+        animator.SetFloat("Speed", 2f, 0.1f, Time.deltaTime);
+    }
+
+    private void StrafeRight()
+    {
+        animator.SetFloat("Speed", 1.5f, 0.1f, Time.deltaTime);
+    }
+
+    private void Run()
+    {
+        animator.SetFloat("Speed", 1, 0.1f, Time.deltaTime);
+    }
+
+    private void Jump()
+    {
+        animator.SetTrigger("Jump");
+    }
+    
 
 }
