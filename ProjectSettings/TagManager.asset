@@ -6,6 +6,8 @@ TagManager:
   tags:
   - MarelleTile
   - MutePlateforme
+  - PressurePlate
+  - LightPlate
   layers:
   - Default
   - TransparentFX
