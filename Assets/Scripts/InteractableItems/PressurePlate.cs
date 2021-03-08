@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class PressurePlate : MonoBehaviour
 {
     private float speed=5;
-    private float heighDifferenceWhenDown = 2;
+    private float heightDifferenceWhenDown = 2;
     public bool goUp = false;
     public bool goDown = false;
     // Update is called once per frame
@@ -24,7 +24,7 @@ public abstract class PressurePlate : MonoBehaviour
         {
 
             transform.localPosition -= new Vector3(0, Time.deltaTime * speed, 0);
-            if (transform.localPosition.y <= -heighDifferenceWhenDown)
+            if (transform.localPosition.y <= -heightDifferenceWhenDown)
             {
                 goDown = false;
             }
