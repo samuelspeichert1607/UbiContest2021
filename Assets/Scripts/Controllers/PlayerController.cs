@@ -161,12 +161,12 @@ public class PlayerController : CustomController
         //on limite la rotation
         if (CanCameraRotate(rotationY))
         {
-            eulerAngleX -= rotationY * Time.deltaTime * rotationSpeed;
+            eulerAngleX -= rotationY * Time.deltaTime * GlobalSettings.RotationSpeed;
             cam.transform.localEulerAngles = new Vector3(eulerAngleX, 0, 0);
         }
 
         //on tourne le joueur selon l'axe x du joystick droit
-        transform.Rotate(new Vector3(0, rotationX, 0) * (Time.deltaTime * rotationSpeed), Space.World);
+        transform.Rotate(new Vector3(0, rotationX, 0) * (Time.deltaTime * GlobalSettings.RotationSpeed), Space.World);
     }
 
     private bool CanCameraRotate(float rotationY)
