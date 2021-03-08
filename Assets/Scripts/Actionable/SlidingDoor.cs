@@ -87,7 +87,7 @@ public class SlidingDoor : Actionable
         if (isTranslating)
         {
             float fractionOfTransition = (Time.time - startTime) * movementSpeed / movingDistance;
-            slide1.transform.position = Vector3.Lerp(startingPosition, startingPosition - (movingDirection * movingDistance), fractionOfTransition);
+            slide1.transform.position = Vector3.Lerp(startingPosition, startingPosition + (movingDirection * movingDistance), fractionOfTransition);
             slide2.transform.position = Vector3.Lerp(startingPosition, destination, fractionOfTransition);
             //transform.position = Vector3.Lerp(startingPosition, destination, fractionOfTransition);
             if (fractionOfTransition >= 1)

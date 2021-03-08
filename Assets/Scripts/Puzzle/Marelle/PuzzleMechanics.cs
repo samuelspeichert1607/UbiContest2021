@@ -4,11 +4,10 @@ using UnityEngine;
 
 
 
-public class MarellePlayer : MonoBehaviour
+public class PuzzleMechanics : MonoBehaviour
 {
     [SerializeField] private float raycastRange = 0.1f;
     [SerializeField] private GameObject bottomObject;
-    //private bool hasExited = true;
 
     private bool wasMute = false;
 
@@ -33,7 +32,6 @@ public class MarellePlayer : MonoBehaviour
             if (wasMute && !colliderObject.CompareTag("MutePlateforme"))
             {
                 speaker.mute = false;
-                //speaker.SetActive(true);
                 wasMute = false;
                 sound.Play();
                 
@@ -47,7 +45,6 @@ public class MarellePlayer : MonoBehaviour
                     previousColliderObject.GetComponent<PressurePlate>().CollisionExited();
                 }
                 previousColliderObject = colliderObject;
-                //hasExited = false;
                 switch (colliderObject.tag)
                 {
                     case "MarelleTile":
@@ -59,7 +56,6 @@ public class MarellePlayer : MonoBehaviour
                             sound = colliderObject.GetComponent<AudioSource>();
                             sound.Play();
                             wasMute = true;
-                            //speaker.SetActive(false);
                             speaker.mute = true;
                         }
                         break;
@@ -80,22 +76,11 @@ public class MarellePlayer : MonoBehaviour
             {
                 colliderObject.GetComponent<PressurePlate>().CollisionExited();
             }
-            //hasExited = true;
             colliderObject = null;
 
 
         }
 
-        //RaycastHit borderHit;
-        //if(Physics.Raycast(bottomObject.transform.position,Vector3.down,out borderHit, noJumpRayRange))
-        //{
-        //    borderBool = true;//on veut entrer une fois dans le else if
-        //}
-        //else if(borderBool)
-        //{
-        //    borderBool = false;
-        //    
-        //}
     }
 
 

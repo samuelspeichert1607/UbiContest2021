@@ -8,10 +8,13 @@ public class MarelleController : MonoBehaviour
     public bool isResolve =false;
     public float timerTime;
     public bool hasCollisionUnlocked =true;
+    private Color initialColor;
 
     private void Start() //sinon il est 'a false et je ne sais pas pourquoi
     {
         hasCollisionUnlocked = true;
+        initialColor = GetComponentInChildren<Renderer>().material.color;
+
     }
     public void gameWon()
     {
@@ -26,7 +29,7 @@ public class MarelleController : MonoBehaviour
 
             for (int j = 0; j < transform.GetChild(i).childCount; j++)
             {
-                transform.GetChild(i).GetChild(j).GetChild(0).GetComponent<Renderer>().material.SetColor("_Color", Color.green);
+                transform.GetChild(i).GetChild(j).GetComponentInChildren<Renderer>().material.SetColor("_Color", Color.green);
             }
         }
 
@@ -44,11 +47,11 @@ public class MarelleController : MonoBehaviour
                 Transform tile = transform.GetChild(i).GetChild(j);
                 if (i == 0)
                 {
-                    tile.GetChild(0).GetComponent<Renderer>().material.SetColor("_Color", Color.cyan);
+                    tile.GetComponentInChildren<Renderer>().material.SetColor("_Color", Color.cyan);
                 }
                 else
                 {
-                    tile.GetChild(0).GetComponent<Renderer>().material.SetColor("_Color", Color.red);
+                    tile.GetComponentInChildren<Renderer>().material.SetColor("_Color", Color.red);
                     tile.GetComponent<TileGoUpDown>().CanGoDown = true;
                 }
                 
@@ -65,7 +68,7 @@ public class MarelleController : MonoBehaviour
             for (int j = 0; j < transform.GetChild(i).childCount; j++)
             {
                 Transform tile = transform.GetChild(i).GetChild(j);
-                tile.GetChild(0).GetComponent<Renderer>().material.SetColor("_Color", Color.white);
+                tile.GetComponentInChildren<Renderer>().material.SetColor("_Color", initialColor);
                 tile.GetComponent<TileGoUpDown>().CanGoUp = true;
 
 
