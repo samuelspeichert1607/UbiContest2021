@@ -8,7 +8,7 @@ public class PlayerControllerForTest : CustomController
     [SerializeField] private float gravity = -9.81f;
     [SerializeField] [Range(0.01f, 10)] private float airborneAcceleration;
     [SerializeField] private float landingTime = 0.1f;
-    [SerializeField] private float minimalJumpTime = 0.25f;
+    [SerializeField] private float minimalJumpingAscensionTime = 0.25f;
     [SerializeField] private float onJumpingReleaseDecelerationFactor = 15f;
     [SerializeField] private float onAirborneNoMotionDecelerationFactor = 5f;
     [SerializeField] private float minimalFallingSpeedForLandingPhase = 5f;
@@ -196,7 +196,7 @@ public class PlayerControllerForTest : CustomController
     
     private void UpdateJumpingImpulse()
     {
-        if (minimalJumpTime < Time.time - _jumpingStartTime)
+        if (minimalJumpingAscensionTime < Time.time - _jumpingStartTime)
         {
             if (!_controllerManager.GetButton("Jump"))
             {
