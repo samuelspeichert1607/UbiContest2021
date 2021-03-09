@@ -28,7 +28,7 @@ public class PlayerController : CustomController
     private float xAxisRotationScope = 70.0f;
     private bool _wasGrounded = true;
     private bool _isLanding;
-    private bool _isInitiatingAJump;
+    private bool _isInJumpingAscensionPhase;
     private bool _mustPlayLandingPhase;
     
     private float _jumpingStartTime;
@@ -60,7 +60,7 @@ public class PlayerController : CustomController
         float verticalMotion = _controllerManager.GetLeftAxisY();
         float horizontalMotion = _controllerManager.GetLeftAxisX();
 
-        if (_isInitiatingAJump)
+        if (_isInJumpingAscensionPhase)
         {
             UpdateJumpingImpulse();
         }
@@ -86,7 +86,7 @@ public class PlayerController : CustomController
 
             if (canMove)
             {
-                if (_controllerManager.GetButtonDown("Jump") && !_isInitiatingAJump)
+                if (_controllerManager.GetButtonDown("Jump") && !_isInJumpingAscensionPhase)
                 {
                     InitiateJumping();
                 }
@@ -196,7 +196,7 @@ public class PlayerController : CustomController
     private void InitiateJumping()
     {
         _jumpingStartTime = Time.time;
-        _isInitiatingAJump = true;
+        _isInJumpingAscensionPhase = true;
         _playerSpeed.y = jumpValue;
         Jump();
     }
@@ -214,7 +214,7 @@ public class PlayerController : CustomController
 
         if (_playerSpeed.y <= 0)
         {
-            _isInitiatingAJump = false;
+            _isInJumpingAscensionPhase = false;
         }
     }
     private void AdjustAirborneSpeed(float verticalMotion, float horizontalMotion)

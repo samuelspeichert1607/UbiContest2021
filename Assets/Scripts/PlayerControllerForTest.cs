@@ -28,7 +28,7 @@ public class PlayerControllerForTest : CustomController
     
 
     private float _jumpingStartTime;
-    private bool _isInitiatingAJump = false;
+    private bool _isInJumpingAscensionPhase = false;
     private bool _mustPlayLandingPhase;
     
     private Animator _animator;
@@ -54,7 +54,7 @@ public class PlayerControllerForTest : CustomController
         float verticalMotion = _controllerManager.GetLeftAxisY();
         float horizontalMotion = _controllerManager.GetLeftAxisX();
 
-        if (_isInitiatingAJump)
+        if (_isInJumpingAscensionPhase)
         {
             UpdateJumpingImpulse();
         }
@@ -80,7 +80,7 @@ public class PlayerControllerForTest : CustomController
 
             if (canMove)
             {
-                if (_controllerManager.GetButtonDown("Jump") && !_isInitiatingAJump)
+                if (_controllerManager.GetButtonDown("Jump") && !_isInJumpingAscensionPhase)
                 {
                     InitiateJumping();
                 }
@@ -190,7 +190,7 @@ public class PlayerControllerForTest : CustomController
     private void InitiateJumping()
     {
         _jumpingStartTime = Time.time;
-        _isInitiatingAJump = true;
+        _isInJumpingAscensionPhase = true;
         _playerSpeed.y = jumpValue;
         Jump();
     }
@@ -208,7 +208,7 @@ public class PlayerControllerForTest : CustomController
 
         if (_playerSpeed.y <= 0)
         {
-            _isInitiatingAJump = false;
+            _isInJumpingAscensionPhase = false;
         }
     }
     private void AdjustAirborneSpeed(float verticalMotion, float horizontalMotion)
