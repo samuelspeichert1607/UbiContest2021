@@ -227,14 +227,6 @@ public class PlayerController : CustomController
         controller.Move(new Vector3(0, playerSpeed.y, 0) * Time.deltaTime);
     }
     
-    private void AdjustAirborneSpeed(float verticalMotion, float horizontalMotion)
-    {
-        var transform1 = transform;
-        Vector3 speedIncrement = transform1.right * (airborneAcceleration * Time.deltaTime * horizontalMotion);
-        speedIncrement += transform1.forward * (airborneAcceleration * Time.deltaTime * verticalMotion);
-        playerSpeed.x = CapAtMaxSpeed(playerSpeed.x + speedIncrement.x);
-        playerSpeed.z = CapAtMaxSpeed(playerSpeed.z + speedIncrement.z);
-    }
 
     private void SetInitialJumpHorizontalSpeed(float verticalMotion, float horizontalMotion)
     {
@@ -244,18 +236,33 @@ public class PlayerController : CustomController
         playerSpeed.x = initialJumpSpeed.x;
         playerSpeed.z = initialJumpSpeed.z;
     }
-
-    private float CapAtMaxSpeed(float speedValue)
+    private void AdjustAirborneSpeed(float verticalMotion, float horizontalMotion)
     {
-        if (speedValue >= maxPlayerSpeed)
+        var transform1 = transform;
+        if (verticalMotion != 0 || horizontalMotion != 0)
         {
-            return maxPlayerSpeed;
+            Vector3 speedIncrement = transform1.right * (airborneAcceleration * Time.deltaTime * horizontalMotion);
+            speedIncrement += transform1.forward * (airborneAcceleration * Time.deltaTime * verticalMotion);
+            playerSpeed = CapPlayerSpeed(playerSpeed + speedIncrement);
         }
-        if (speedValue <= -maxPlayerSpeed)
+        else
         {
-            return -maxPlayerSpeed;
+            float initialSpeedMomentum = 1 - (airborneAcceleration * Time.deltaTime /5f);
+            playerSpeed.x *= initialSpeedMomentum;
+            playerSpeed.z *= initialSpeedMomentum;
         }
-        return speedValue;
+    }
+
+    private Vector3 CapPlayerSpeed(Vector3 incrementedPlayerSpeed)
+    {
+        Vector2 planeSpeed = new Vector2(incrementedPlayerSpeed.x, incrementedPlayerSpeed.z);
+        if (planeSpeed.magnitude  > maxPlayerSpeed)
+        {
+            Vector2 capedSpeed = planeSpeed.normalized * maxPlayerSpeed;
+            incrementedPlayerSpeed.x = capedSpeed.x;
+            incrementedPlayerSpeed.z = capedSpeed.y;
+        }
+        return incrementedPlayerSpeed;
     }
     
     private void Idle()
