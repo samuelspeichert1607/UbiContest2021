@@ -5,7 +5,6 @@ public class PlayerController : CustomController
 {
     
     [SerializeField] private float maxPlayerSpeed;
-    [SerializeField] private int rotationSpeed;
     [SerializeField] private int jumpValue;
     [SerializeField] private float gravity = -9.81f;
     [SerializeField] [Range(0.01f, 10)] private float airborneAcceleration;
@@ -128,12 +127,12 @@ public class PlayerController : CustomController
         //on limite la rotation
         if (CanCameraRotate(rotationY))
         {
-            _eulerAngleX -= rotationY * Time.deltaTime * rotationSpeed;
+            _eulerAngleX -= rotationY * Time.deltaTime * GlobalSettings.RotationSpeed;
             _camera.transform.localEulerAngles = new Vector3(_eulerAngleX, 0, 0);
         }
 
         //on tourne le joueur selon l'axe x du joystick droit
-        transform.Rotate(new Vector3(0, rotationX, 0) * (Time.deltaTime * rotationSpeed), Space.World);
+        transform.Rotate(new Vector3(0, rotationX, 0) * (Time.deltaTime * GlobalSettings.RotationSpeed), Space.World);
     }
 
     private bool CanCameraRotate(float rotationY)
