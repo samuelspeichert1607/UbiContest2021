@@ -1,7 +1,4 @@
 using UnityEngine;
-using System;
-using System.Timers;
-using UnityEngine.EventSystems;
 
 public class PlayerControllerForTest : CustomController
 {
@@ -10,44 +7,43 @@ public class PlayerControllerForTest : CustomController
     [SerializeField] private int rotationSpeed;
     [SerializeField] private int jumpValue;
     [SerializeField] private float gravity = -9.81f;
-    [SerializeField]
-    [Range(0.01f, 10)]
-    private float airborneAcceleration;
-    [SerializeField]
-    private float landingTime;
-    [SerializeField]
-    private float jumpingImpulseTime;
-    [SerializeField] 
-    private float minimalFallingSpeedForLandingPhase;
+    [SerializeField] [Range(0.01f, 10)] private float airborneAcceleration;
+    [SerializeField] private float landingTime = 0.1f;
+    [SerializeField] private float minimalJumpTime = 0.25f;
+    [SerializeField] private float onJumpingReleaseDecelerationFactor = 15f;
+    [SerializeField] private float onAirborneNoMotionDecelerationFactor = 5f;
+    [SerializeField] private float minimalFallingSpeedForLandingPhase = 5f;
 
-    private CharacterController controller;
-    private GameObject cam;
-    private Vector3 playerSpeed;
+    private CharacterController _controller;
+    private GameObject _camera;
+    private Vector3 _playerSpeed;
 
-    private ControllerManager controllerManager;
-    private bool wasGrounded = true;
-    private bool isLanding = false;
+    private ControllerManager _controllerManager;
+    private bool _wasGrounded = true;
+    private bool _isLanding;
 
-    private float eulerAngleX;
+    private float _eulerAngleX;
     private float yAxisRotationScope = 0.0f;
     private float xAxisRotationScope = 70.0f;
     
 
-    private float jumpingStartTime;
-    private bool isInitiatingAJump = false;
-    private bool mustPlayLandingPhase;
+    private float _jumpingStartTime;
+    private bool _isInitiatingAJump = false;
+    private bool _mustPlayLandingPhase;
     
-    private Animator animator;
+    private Animator _animator;
+    private static readonly int Jump1 = Animator.StringToHash("Jump");
+    private static readonly int Speed = Animator.StringToHash("Speed");
 
     // Start is called before the first frame update
     void Start()
     {
-        cam = transform.GetChild(0).gameObject;
-        controller = GetComponent<CharacterController>();
-        eulerAngleX = cam.transform.position.y;
-        controllerManager = GetComponent<ControllerManager>();
-        playerSpeed = new Vector3(0,-1,0);
-        animator = GetComponentInChildren<Animator>();
+        _camera = transform.GetChild(0).gameObject;
+        _controller = GetComponent<CharacterController>();
+        _eulerAngleX = _camera.transform.position.y;
+        _controllerManager = GetComponent<ControllerManager>();
+        _playerSpeed = new Vector3(0,-1,0);
+        _animator = GetComponentInChildren<Animator>();
     }
 
     // Update is called once per frame
@@ -55,109 +51,79 @@ public class PlayerControllerForTest : CustomController
     {
         UpdateCameraRotation();
         
-        float verticalMotion = controllerManager.GetLeftAxisY();
-        float horizontalMotion = controllerManager.GetLeftAxisX();
+        float verticalMotion = _controllerManager.GetLeftAxisY();
+        float horizontalMotion = _controllerManager.GetLeftAxisX();
 
-        if (isInitiatingAJump)
+        if (_isInitiatingAJump)
         {
             UpdateJumpingImpulse();
         }
         
-        if (controller.isGrounded)
+        if (_controller.isGrounded)
         {
-            if (isLanding)
+            if (_isLanding)
             {
                 verticalMotion *= 0.5f;
                 horizontalMotion *= 0.5f;
             }
 
-            if (!wasGrounded && mustPlayLandingPhase)
+            if (!_wasGrounded && _mustPlayLandingPhase)
             {
                 StartLanding();
             }
             
             //je sais que c'est bizarre mais, si je reset la velocite a 0, le controller.isGrounded ne fonctionne pas -_-
-            if (playerSpeed.y < -1)
+            if (_playerSpeed.y < -1)
             {
-                playerSpeed.y = -1;
+                _playerSpeed.y = -1;
             }
 
             if (canMove)
             {
-                if (controllerManager.GetButtonDown("Jump") && !isInitiatingAJump)
+                if (_controllerManager.GetButtonDown("Jump") && !_isInitiatingAJump)
                 {
                     InitiateJumping();
                 }
 
-                wasGrounded = true;
+                _wasGrounded = true;
                 MoveOnGround(verticalMotion, horizontalMotion);
             }
         }
         else
         {
             UpdateIfMustPlayLandingPhase();
-            if (wasGrounded)
+            if (_wasGrounded)
             {
                 SetInitialJumpHorizontalSpeed(verticalMotion, horizontalMotion);
             }
-            playerSpeed.y += gravity * Time.deltaTime;
+            _playerSpeed.y += gravity * Time.deltaTime;
             AdjustAirborneSpeed(verticalMotion, horizontalMotion);
-            Move(playerSpeed, Time.deltaTime);
-            wasGrounded = false;
+            Move(_playerSpeed, Time.deltaTime);
+            _wasGrounded = false;
         }
     }
     
     private void UpdateIfMustPlayLandingPhase()
     {
-        if (playerSpeed.y <= - minimalFallingSpeedForLandingPhase)
+        if (_playerSpeed.y <= - minimalFallingSpeedForLandingPhase)
         {
-            mustPlayLandingPhase = true;
+            _mustPlayLandingPhase = true;
         }
         else
         {
-            mustPlayLandingPhase = false;
+            _mustPlayLandingPhase = false;
         }
-    }
-
-    private void InitiateJumping()
-    {
-        jumpingStartTime = Time.time;
-        isInitiatingAJump = true;
-        Invoke(nameof(CheckForShortJump), 2.0f * jumpingImpulseTime / 3.0f);
-        Jump();
-    }
-
-    private void CheckForShortJump()
-    {
-        if (controllerManager.GetButton("Jump")) return;
-        isInitiatingAJump = false;
     }
     
-    private void UpdateJumpingImpulse()
-    {
-        float fractionOfImpulseCompleted = ( Time.time - jumpingStartTime) / jumpingImpulseTime;
-
-        if (fractionOfImpulseCompleted >= 1)
-        {
-            playerSpeed.y = jumpValue;
-            isInitiatingAJump = false;
-        }
-        else
-        {
-            playerSpeed.y = fractionOfImpulseCompleted * jumpValue;
-        }
-        
-    }
-
     private void UpdateCameraRotation()
     {
-        float rotationY = controllerManager.GetRightAxisY();
-        float rotationX = controllerManager.GetRightAxisX();
+        float rotationY = _controllerManager.GetRightAxisY();
+        float rotationX = _controllerManager.GetRightAxisX();
         //on limite la rotation
         if (CanCameraRotate(rotationY))
         {
-            eulerAngleX -= rotationY * Time.deltaTime * rotationSpeed;
-            cam.transform.localEulerAngles = new Vector3(eulerAngleX, 0, 0);
+            _eulerAngleX -= rotationY * Time.deltaTime * rotationSpeed;
+            _camera.transform.localEulerAngles = new Vector3(_eulerAngleX, 0, 0);
         }
 
         //on tourne le joueur selon l'axe x du joystick droit
@@ -166,21 +132,9 @@ public class PlayerControllerForTest : CustomController
 
     private bool CanCameraRotate(float rotationY)
     {
-        return (Mathf.Abs(eulerAngleX) < xAxisRotationScope) || 
-               (eulerAngleX >= xAxisRotationScope && rotationY > yAxisRotationScope) ||
-               (eulerAngleX <= -xAxisRotationScope && rotationY < yAxisRotationScope);
-    }
-
-    private void StartLanding()
-    {
-        isLanding = true;
-        Invoke("EndLanding", landingTime);
-    }
-
-    private void EndLanding()
-    {
-        isLanding = false;
-        
+        return (Mathf.Abs(_eulerAngleX) < xAxisRotationScope) || 
+               (_eulerAngleX >= xAxisRotationScope && rotationY > yAxisRotationScope) ||
+               (_eulerAngleX <= -xAxisRotationScope && rotationY < yAxisRotationScope);
     }
     
     private void MoveOnGround(float verticalMotion, float horizontalMotion)
@@ -213,14 +167,14 @@ public class PlayerControllerForTest : CustomController
 
     public override void Move(Vector3 speed, float timeElapsed)
     {
-        controller.Move(speed * timeElapsed);
+        _controller.Move(speed * timeElapsed);
     }
 
     public override void MoveAtMaxSpeed(float verticalMotion, float horizontalMotion, float timeElapsed)
     {
-        controller.Move(transform.forward * (verticalMotion * timeElapsed * maxPlayerSpeed));
-        controller.Move(transform.right * (horizontalMotion * timeElapsed * maxPlayerSpeed));
-        controller.Move(new Vector3(0, playerSpeed.y, 0) * Time.deltaTime);
+        _controller.Move(transform.forward * (verticalMotion * timeElapsed * maxPlayerSpeed));
+        _controller.Move(transform.right * (horizontalMotion * timeElapsed * maxPlayerSpeed));
+        _controller.Move(new Vector3(0, _playerSpeed.y, 0) * Time.deltaTime);
     }
     
 
@@ -229,8 +183,33 @@ public class PlayerControllerForTest : CustomController
         var transform1 = transform;
         Vector3 initialJumpSpeed = transform1.right * (maxPlayerSpeed * horizontalMotion);
         initialJumpSpeed += transform1.forward * (maxPlayerSpeed * verticalMotion);
-        playerSpeed.x = initialJumpSpeed.x;
-        playerSpeed.z = initialJumpSpeed.z;
+        _playerSpeed.x = initialJumpSpeed.x;
+        _playerSpeed.z = initialJumpSpeed.z;
+    }
+    
+    private void InitiateJumping()
+    {
+        _jumpingStartTime = Time.time;
+        _isInitiatingAJump = true;
+        _playerSpeed.y = jumpValue;
+        Jump();
+    }
+    
+    private void UpdateJumpingImpulse()
+    {
+        if (minimalJumpTime < Time.time - _jumpingStartTime)
+        {
+            if (!_controllerManager.GetButton("Jump"))
+            {
+                float initialSpeedMomentum = 1 - (onJumpingReleaseDecelerationFactor * Time.deltaTime);
+                _playerSpeed.y *= initialSpeedMomentum;
+            }
+        }
+
+        if (_playerSpeed.y <= 0)
+        {
+            _isInitiatingAJump = false;
+        }
     }
     private void AdjustAirborneSpeed(float verticalMotion, float horizontalMotion)
     {
@@ -239,13 +218,13 @@ public class PlayerControllerForTest : CustomController
         {
             Vector3 speedIncrement = transform1.right * (airborneAcceleration * Time.deltaTime * horizontalMotion);
             speedIncrement += transform1.forward * (airborneAcceleration * Time.deltaTime * verticalMotion);
-            playerSpeed = CapPlayerSpeed(playerSpeed + speedIncrement);
+            _playerSpeed = CapPlayerSpeed(_playerSpeed + speedIncrement);
         }
         else
         {
-            float initialSpeedMomentum = 1 - (airborneAcceleration * Time.deltaTime /5f);
-            playerSpeed.x *= initialSpeedMomentum;
-            playerSpeed.z *= initialSpeedMomentum;
+            float initialSpeedMomentum = 1 - (airborneAcceleration * Time.deltaTime /onAirborneNoMotionDecelerationFactor); 
+            _playerSpeed.x *= initialSpeedMomentum;
+            _playerSpeed.z *= initialSpeedMomentum;
         }
     }
 
@@ -260,35 +239,47 @@ public class PlayerControllerForTest : CustomController
         }
         return incrementedPlayerSpeed;
     }
+    
+    private void StartLanding()
+    {
+        _isLanding = true;
+        Invoke("EndLanding", landingTime);
+    }
+
+    private void EndLanding()
+    {
+        _isLanding = false;
+        
+    }
 
     private void Idle()
     {
-        animator.SetFloat("Speed", 0, 0.1f, Time.deltaTime);
+        _animator.SetFloat(Speed, 0, 0.1f, Time.deltaTime);
     }
 
     private void Walk()
     {
-        animator.SetFloat("Speed", 0.5f, 0.1f, Time.deltaTime);
+        _animator.SetFloat(Speed, 0.5f, 0.1f, Time.deltaTime);
     }
 
     private void StrafeLeft()
     {
-        animator.SetFloat("Speed", 2f, 0.1f, Time.deltaTime);
+        _animator.SetFloat(Speed, 2f, 0.1f, Time.deltaTime);
     }
 
     private void StrafeRight()
     {
-        animator.SetFloat("Speed", 1.5f, 0.1f, Time.deltaTime);
+        _animator.SetFloat(Speed, 1.5f, 0.1f, Time.deltaTime);
     }
 
     private void Run()
     {
-        animator.SetFloat("Speed", 1, 0.1f, Time.deltaTime);
+        _animator.SetFloat(Speed, 1, 0.1f, Time.deltaTime);
     }
 
     private void Jump()
     {
-        animator.SetTrigger("Jump");
+        _animator.SetTrigger(Jump1);
     }
     
 
