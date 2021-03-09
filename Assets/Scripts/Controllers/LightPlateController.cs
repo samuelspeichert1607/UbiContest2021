@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class LightPlateController : MonoBehaviour
@@ -31,18 +29,18 @@ public class LightPlateController : MonoBehaviour
             {
                 timerStart = false;
                 timer = 0;
-                
+
                 plate1Temp.ChangeColor(Color.red);
                 if (plate2Temp != null)
                 {
                     plate2Temp.ChangeColor(Color.red);
                 }
-                
+
             }
         }
     }
 
-  public void CollisionDetected(GameObject source)
+    public void CollisionDetected(GameObject source)
     {
 
         LightPlate sourceScript = source.GetComponent<LightPlate>();
@@ -56,21 +54,19 @@ public class LightPlateController : MonoBehaviour
         }
         else if (sourcePlate != source)
         {
-            
+
             plate2Temp = sourcePlate.GetComponent<LightPlate>();
-            plate1Temp.ChangeColor(Color.green);
-            plate2Temp.ChangeColor(Color.green);
 
             timerStart = false;
-            sourcePlate = null;
-            if(timer > 0)
+
+            if (timer > 0)
             {
-                sourceScript.ChangeColor(Color.red);
-                sourcePlate.GetComponent<LightPlate>().ChangeColor(Color.red);
+                sourceScript.ChangeColor(Color.green);
+                sourcePlate.GetComponent<LightPlate>().ChangeColor(Color.green);
 
                 lightSpot.enabled = true;
             }
-
+            sourcePlate = null;
 
         }
     }

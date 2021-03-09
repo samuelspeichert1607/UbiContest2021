@@ -22961,8 +22961,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ca817b6cdc264745a708f6afec45c3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  door1: {fileID: 0}
-  door2: {fileID: 0}
+  actionableObject: []
   penalityTimer: 0
   unlockedPlates: 1
   startPenalityTimer: 0
