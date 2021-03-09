@@ -14,12 +14,12 @@ public class StatusHUD : MonoBehaviour
     private static float _previousTimeLeft;
     private static int _previousPlayerCount;
     private Image oxygenFill;
-    private TextMeshProUGUI timerTextBox;
+    // private TextMeshProUGUI timerTextBox;
 
     void Start()
     {
-        oxygenFill = transform.GetChild(3).transform.GetComponent<Image>();
-        timerTextBox = transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>();
+        oxygenFill = transform.GetChild(transform.childCount - 1).transform.GetComponent<Image>();
+        // timerTextBox = transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>();
         
         // Big problème : le timer se reset à chaque entrée d'un deuxième joueur
         _timeLeft = timeLimit;
@@ -53,12 +53,12 @@ public class StatusHUD : MonoBehaviour
         {
             int minutes = Mathf.FloorToInt(_timeLeft / 60);
             int seconds = Mathf.FloorToInt(_timeLeft % 60);
-            timerTextBox.text = $"{minutes}:" + (seconds > 9 ? seconds.ToString() : "0" + seconds.ToString());
+            // timerTextBox.text = $"{minutes}:" + (seconds > 9 ? seconds.ToString() : "0" + seconds.ToString());
         }
         else
         {
             // To keep the timer from going to a negative value that would make the game crash
-            timerTextBox.text = "0:00";
+            // timerTextBox.text = "0:00";
             _timeLeft = -1;
         }
     }
