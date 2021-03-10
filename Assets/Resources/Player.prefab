@@ -447,11 +447,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxPlayerSpeed: 6
   rotationSpeed: 110
-  jumpValue: 6
+  jumpValue: 8
   gravity: -15
-  airborneAcceleration: 7
+  airborneAcceleration: 10
   landingTime: 0.1
-  jumpingImpulseTime: 0.2
+  minimalJumpTime: 0.25
+  onJumpingReleaseDecelerationFactor: 12
+  onAirborneNoMotionDecelerationFactor: 5
   minimalFallingSpeedForLandingPhase: 5
 --- !u!1 &7939137518127453690
 GameObject:
@@ -675,6 +677,26 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2674764888752016548, guid: d99000752cd7f634ea803c83a1bd9774, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2924800019664657211, guid: d99000752cd7f634ea803c83a1bd9774, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2924800019664657211, guid: d99000752cd7f634ea803c83a1bd9774, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2924800019664657211, guid: d99000752cd7f634ea803c83a1bd9774, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5609063175770616193, guid: d99000752cd7f634ea803c83a1bd9774, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5609063175770616193, guid: d99000752cd7f634ea803c83a1bd9774, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
