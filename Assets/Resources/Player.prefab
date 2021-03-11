@@ -451,7 +451,7 @@ MonoBehaviour:
   airborneAcceleration: 10
   landingTime: 0.1
   minimalJumpingAscensionTime: 0.25
-  onJumpingReleaseDecelerationFactor: 12
+  onJumpingReleaseDecelerationFactor: 8
   onAirborneNoMotionDecelerationFactor: 5
   minimalFallingSpeedForLandingPhase: 5
 --- !u!1 &7939137518127453690
