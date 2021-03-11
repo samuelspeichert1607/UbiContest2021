@@ -14,6 +14,8 @@ namespace Puzzle.HumanPencil
         [SerializeField] private string drawingAxisName;
         private float distancePlayerPencil = 1;
 
+        private ControllerManager controllerManager;
+
 
         private string _toDrawText;
         private Transform _initialParent;
@@ -26,6 +28,7 @@ namespace Puzzle.HumanPencil
             _toDrawText = String.Join(" ", drawingPreText , drawingAxisName, drawingPostText);
             _lineDrawer = GetComponent<LineDrawer>();
             _initialParent = this.gameObject.transform.parent;
+            controllerManager = GetComponent<ControllerManager>();
         }
 
         // Update is called once per frame
@@ -51,7 +54,7 @@ namespace Puzzle.HumanPencil
                 {
                     TextRenderer.ShowInfoText( _toDrawText + "\n" + ToEndInteractText);
                 }
-                if (Input.GetAxis(drawingAxisName) > 0)
+                if (controllerManager.GetAxis(drawingAxisName) > 0)
                 {
                     _lineDrawer.Draw();
                 }
@@ -64,7 +67,7 @@ namespace Puzzle.HumanPencil
         }
         public override void OnPlayerInRange()
         {
-            if (Input.GetButtonDown(interactButtonName))
+            if (controllerManager.GetButtonDown(interactButtonName))
             {
                 if (IsInteractedWith)
                 {
