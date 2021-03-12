@@ -17,7 +17,7 @@ public class SameSymbolTile : ParentTile
 
     private GameObject tileEntered = null;
 
-    bool testBool = false;
+    //bool testBool = false;
     private MarelleController marelleController;
 
     void Start()
@@ -37,50 +37,48 @@ public class SameSymbolTile : ParentTile
             }
             else
             {
+                
                 marelleController.gameLost();
                 timerEnable = false;
                 timer = 0;
                 tileEntered = null;
-                marelleController.isResolve = false;
             }
         }
-        if (Input.GetButtonDown("Fire2") && testBool)
-        {
-            CollisionDetected(transform.GetChild(1).gameObject);
-            testBool = false;
+        //if (Input.GetButtonDown("Fire2") && testBool)
+        //{
+        //    CollisionDetected(transform.GetChild(1).gameObject);
+        //    testBool = false;
 
 
-        }
+        //}
 
     }
 
     public override void CollisionDetected(GameObject sourceTile) 
     {
-        Material sourceMat = sourceTile.transform.GetChild(0).GetComponent<Renderer>().material;
+        
+        Material sourceMat = sourceTile.transform.GetComponent<TileGoUpDown>().tileRenderer.material;
         if ((marelleController.hasCollisionUnlocked || firstTile) && !(sourceMat.color==Color.green))
         {
-            testBool = true;
+            //testBool = true;
 
-            //if ((!firstTile && isResolve) || (firstTile && !isResolve)) //je pense qu<il sert 'a rien maintenant mais j,ai peur d<y toucher
-            //{
-                if (tileEntered == null)
+                if (tileEntered == null^tileEntered ==sourceTile)
                 {
                     tileEntered = sourceTile;
                     timerEnable = true;
                     timer = timerTime;
-                    sourceMat.SetColor("_Color", Color.yellow);
-                    
-                }
+                    ChangeColor(Color.yellow);
+
+            }
 
                 else if (tileEntered != sourceTile)
                 {
-                    timerEnable = false;
+                timerEnable = false;
                     tileEntered = null;
                     if (timer > 0)
                     {
 
                         ChangeColor(Color.green);
-                        marelleController.isResolve = true;
                         if (lastTile)
                         {
                         marelleController.gameWon();
@@ -94,7 +92,6 @@ public class SameSymbolTile : ParentTile
 
                 }
 
-           // }
             else if (!firstTile)
             {
 

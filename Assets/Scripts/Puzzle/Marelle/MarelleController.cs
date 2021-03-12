@@ -5,7 +5,6 @@ using UnityEngine;
 public class MarelleController : MonoBehaviour
 {
     [SerializeField] private Actionable[] actionableObject;
-    public bool isResolve =false;
     public float timerTime;
     public bool hasCollisionUnlocked =true;
     private Color initialColor;
@@ -13,23 +12,22 @@ public class MarelleController : MonoBehaviour
     private void Start() //sinon il est 'a false et je ne sais pas pourquoi
     {
         hasCollisionUnlocked = true;
-        initialColor = GetComponentInChildren<Renderer>().material.color;
+        initialColor = GetComponentInChildren<TileGoUpDown>().tileRenderer.material.color;
 
     }
     public void gameWon()
     {
         hasCollisionUnlocked = false;
-        //transform.GetChild(0).GetComponent<MovingWall>().CanMove = true;
         foreach (Actionable a in actionableObject)
         {
             a.OnAction();
         }
-        for (int i = 0; i < transform.childCount; i++)
+        foreach (Transform child in transform)
         {
 
-            for (int j = 0; j < transform.GetChild(i).childCount; j++)
+            foreach (Transform toddler in child)
             {
-                transform.GetChild(i).GetChild(j).GetComponentInChildren<Renderer>().material.SetColor("_Color", Color.green);
+                toddler.GetComponentInChildren<TileGoUpDown>().tileRenderer.material.SetColor("_Color", Color.green);
             }
         }
 
@@ -39,22 +37,18 @@ public class MarelleController : MonoBehaviour
     public void gameLost()
     {
         hasCollisionUnlocked = false;
-        for (int i = 0; i < transform.childCount ; i++)
+        foreach (Transform child in transform)
         {
 
-            for (int j = 0; j < transform.GetChild(i).childCount; j++)
+            foreach (Transform toddler in child)
             {
-                Transform tile = transform.GetChild(i).GetChild(j);
-                if (i == 0)
-                {
-                    tile.GetComponentInChildren<Renderer>().material.SetColor("_Color", Color.cyan);
-                }
-                else
-                {
-                    tile.GetComponentInChildren<Renderer>().material.SetColor("_Color", Color.red);
-                    tile.GetComponent<TileGoUpDown>().CanGoDown = true;
-                }
-                
+
+                Material tileMat = toddler.GetComponentInChildren<TileGoUpDown>().tileRenderer.material;
+
+                tileMat.SetColor("_Color", Color.red);
+
+                toddler.GetComponent<TileGoUpDown>().PlayAnimation();
+
             }
         }
     }
@@ -62,16 +56,12 @@ public class MarelleController : MonoBehaviour
     public void resetMarelle()
     {
         hasCollisionUnlocked = true;
-        for (int i = 1; i < transform.childCount; i++)
+        foreach (Transform child in transform)
         {
 
-            for (int j = 0; j < transform.GetChild(i).childCount; j++)
+            foreach (Transform toddler in child)
             {
-                Transform tile = transform.GetChild(i).GetChild(j);
-                tile.GetComponentInChildren<Renderer>().material.SetColor("_Color", initialColor);
-                tile.GetComponent<TileGoUpDown>().CanGoUp = true;
-
-
+                toddler.GetComponentInChildren<TileGoUpDown>().tileRenderer.material.SetColor("_Color", initialColor);
 
 
             }

@@ -22,7 +22,6 @@ public abstract class PressurePlate : MonoBehaviour
         }
         else if (goDown)
         {
-
             transform.localPosition -= new Vector3(0, Time.deltaTime * speed, 0);
             if (transform.localPosition.y <= -heightDifferenceWhenDown)
             {
@@ -31,7 +30,11 @@ public abstract class PressurePlate : MonoBehaviour
         }
     }
 
-    public abstract void CollisionDetected();
+    public void CollisionDetected()
+    {
+        goDown = true;
+        CollisionEntered();
+    }
 
     public void CollisionExited()
     {
@@ -40,4 +43,6 @@ public abstract class PressurePlate : MonoBehaviour
 
 
     }
+
+    public abstract void CollisionEntered();
 }

@@ -11,9 +11,9 @@ public abstract class ParentTile : MonoBehaviourPun
 
     public void ChangeColor(Color color)
     {
-        for (int i = 0; i < transform.childCount; i++)
+        foreach(Transform child in transform)
         {
-            transform.GetChild(i).GetChild(0).GetComponent<Renderer>().material.SetColor("_Color", color);
+            child.GetComponent<TileGoUpDown>().tileRenderer.material.SetColor("_Color", color);
         }
 
     }

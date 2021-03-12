@@ -4,20 +4,17 @@ using UnityEngine;
 
 public class LightPlate : PressurePlate
 {
-    private LightPlateController controller;
+    [SerializeField] private LightPlateController controller;
     private void Start()
     {
-        controller = transform.parent.parent.parent.GetComponent<LightPlateController>();
+        //controller = transform.parent.parent.parent.GetComponent<LightPlateController>();
     }
-    public override void CollisionDetected()
+    public override void CollisionEntered()
     {
         controller.CollisionDetected(this.gameObject);
-        goDown = true;
+        
 
     }
-    public void ChangeColor(Color color)
-    {
-        GetComponent<Renderer>().material.SetColor("_Color", color);
-    }
+
 
 }

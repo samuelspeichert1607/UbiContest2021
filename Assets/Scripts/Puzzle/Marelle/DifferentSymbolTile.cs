@@ -10,7 +10,6 @@ public class DifferentSymbolTile : ParentTile
         if (marelleController.hasCollisionUnlocked)
         {
             marelleController.gameLost();
-            marelleController.isResolve = false;
         }
     }
 }
