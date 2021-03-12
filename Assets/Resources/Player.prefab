@@ -446,13 +446,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxPlayerSpeed: 6
-  rotationSpeed: 110
   jumpValue: 8
   gravity: -15
   airborneAcceleration: 10
   landingTime: 0.1
-  minimalJumpTime: 0.25
-  onJumpingReleaseDecelerationFactor: 12
+  minimalJumpingAscensionTime: 0.25
+  onJumpingReleaseDecelerationFactor: 8
   onAirborneNoMotionDecelerationFactor: 5
   minimalFallingSpeedForLandingPhase: 5
 --- !u!1 &7939137518127453690
