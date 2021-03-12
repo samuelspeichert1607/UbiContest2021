@@ -234,7 +234,7 @@ MonoBehaviour:
   txtStatus: {fileID: 722413166}
   btnStart: {fileID: 1568334921}
   MaxPlayers: 4
-  sceneNameToLoadOnStart: HumanPencilPrototype
+  sceneNameToLoadOnStart: Game
 --- !u!4 &828601926
 Transform:
   m_ObjectHideFlags: 0

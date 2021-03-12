@@ -16,7 +16,6 @@ public class PressurePlateButton : PressurePlate
 
     public override void CollisionDetected()
     {
-
         goDown = true;
         if (controller.unlockedPlates)
         {
