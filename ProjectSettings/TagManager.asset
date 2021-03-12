@@ -5,7 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - MarelleTile
-  - MarelleDifferentTile
+  - MutePlateforme
+  - PressurePlate
+  - LightPlate
   layers:
   - Default
   - TransparentFX

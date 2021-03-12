@@ -56,4 +56,27 @@ public class PS4Controller : IController
                 return false;
         }
     }
+    
+    public bool GetButton(string button)
+    {
+        switch (button)
+        {
+            case "Jump" :
+                return Input.GetButton("B");
+            case "B":
+                return Input.GetButton("X");
+            case "Start":
+                return Input.GetButton("Button9");
+            case "Submit":
+                return Input.GetButton("B");
+            case "Cancel":
+                return Input.GetButton("X");
+            case "LBumper":
+                return Input.GetButton("LBumper");
+            case "RBumper":
+                return Input.GetButton("RBumper");
+            default:
+                return false;
+        }
+    }
 }

@@ -54,4 +54,27 @@ public class XboxController : IController
                 return false;
         }
     }
+    
+    public bool GetButton(string button)
+    {
+        switch (button)
+        {
+            case "Jump":
+                return Input.GetButton("Jump");
+            case "B":
+                return Input.GetButton("B");
+            case "Start":
+                return Input.GetButton("Start");
+            case "Submit":
+                return Input.GetButton("Submit");
+            case "Cancel":
+                return Input.GetButton("Cancel");
+            case "LBumper":
+                return Input.GetButton("LBumper");
+            case "RBumper":
+                return Input.GetButton("RBumper");
+            default:
+                return false;
+        }
+    }
 }

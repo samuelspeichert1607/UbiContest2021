@@ -529,11 +529,15 @@ MigrationBackup/
 .ionide/
 
 # End of https://www.toptal.com/developers/gitignore/api/windows,unity,visualstudio,rider,linux
-<<<<<<< HEAD
 /Assets/Photon/PhotonVoice/PhotonVoiceLibs/x86_64
 =======
 
 .idea/.idea.UbiContest2021/.idea/
 
 .idea/.idea.UbiContest2021/riderModule.iml
->>>>>>> origin/develop
+
+Assets/LevelAssets/*
+Assets/Textures/*
+Assets/Anims/*
+Assets/Models/*
+Assets/Model/*

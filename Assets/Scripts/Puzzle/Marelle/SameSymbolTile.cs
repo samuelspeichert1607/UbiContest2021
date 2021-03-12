@@ -18,12 +18,12 @@ public class SameSymbolTile : ParentTile
     private GameObject tileEntered = null;
 
     bool testBool = false;
-
+    private MarelleController marelleController;
 
     void Start()
     {
-        timerTime = transform.parent.GetComponent<MarelleWon>().timerTime;
-
+        marelleController = transform.parent.GetComponent<MarelleController>();
+        timerTime = marelleController.timerTime;
     }
 
 
@@ -37,34 +37,39 @@ public class SameSymbolTile : ParentTile
             }
             else
             {
-
-                ChangeColor(Color.red);
+                marelleController.gameLost();
                 timerEnable = false;
                 timer = 0;
                 tileEntered = null;
-                transform.parent.GetComponent<MarelleWon>().isResolve = false;
+                marelleController.isResolve = false;
             }
         }
+        if (Input.GetButtonDown("Fire2") && testBool)
+        {
+            CollisionDetected(transform.GetChild(1).gameObject);
+            testBool = false;
 
+
+        }
 
     }
 
-    public override void CollisionDetected(GameObject sourceTile) //quand on échoue la premier tuile marche pas si le meme joueur saute en premier 2 fois
+    public override void CollisionDetected(GameObject sourceTile) 
     {
-       
-        if (transform.parent.GetComponent<MarelleWon>().unlockCollision)
+        Material sourceMat = sourceTile.transform.GetChild(0).GetComponent<Renderer>().material;
+        if ((marelleController.hasCollisionUnlocked || firstTile) && !(sourceMat.color==Color.green))
         {
-            bool isResolve = transform.parent.GetComponent<MarelleWon>().isResolve;
             testBool = true;
 
-            if ((!firstTile && isResolve) || (firstTile && !isResolve))
-            {
+            //if ((!firstTile && isResolve) || (firstTile && !isResolve)) //je pense qu<il sert 'a rien maintenant mais j,ai peur d<y toucher
+            //{
                 if (tileEntered == null)
                 {
                     tileEntered = sourceTile;
                     timerEnable = true;
                     timer = timerTime;
-                    sourceTile.GetComponent<Renderer>().material.SetColor("_Color", Color.yellow);
+                    sourceMat.SetColor("_Color", Color.yellow);
+                    
                 }
 
                 else if (tileEntered != sourceTile)
@@ -75,20 +80,25 @@ public class SameSymbolTile : ParentTile
                     {
 
                         ChangeColor(Color.green);
-                        transform.parent.GetComponent<MarelleWon>().isResolve = true;
+                        marelleController.isResolve = true;
                         if (lastTile)
                         {
-                            transform.parent.GetComponent<MarelleWon>().gameWon();
+                        marelleController.gameWon();
+                        }
+                        else if (firstTile)
+                        {
+                        marelleController.resetMarelle();
                         }
 
                     }
 
                 }
 
-            }
+           // }
             else if (!firstTile)
             {
-                ChangeColor(Color.red);
+
+                marelleController.gameLost();
             }
             else
             {
@@ -96,8 +106,6 @@ public class SameSymbolTile : ParentTile
             }
 
         }
-
-
 
 
     }

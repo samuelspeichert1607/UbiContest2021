@@ -10,7 +10,7 @@ public class AudioManager : MonoBehaviour
 
     // Minimum volume value below which the audio is muted
     private float minVolume = -49;
-    public void setMasterVolume(float newVolume)
+    public void SetMasterVolume(float newVolume)
     {
         if (newVolume >= minVolume)
         {
@@ -23,7 +23,7 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public void setMusicVolume(float newVolume)
+    public void SetMusicVolume(float newVolume)
     {
         if (newVolume >= minVolume)
         {
@@ -36,7 +36,7 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public void setSfxVolume(float newVolume)
+    public void SetSfxVolume(float newVolume)
     {
         if (newVolume >= minVolume)
         {
@@ -45,6 +45,18 @@ public class AudioManager : MonoBehaviour
         else
         {
             mixer.SetFloat("sfxVolume", -80);
+        }
+    }
+
+    public void SetVcVolume(float newVolume)
+    {
+        if (newVolume >= minVolume)
+        {
+            mixer.SetFloat("vcVolume", newVolume);
+        }
+        else
+        {
+            mixer.SetFloat("vcVolume", -80);
         }
     }
 }

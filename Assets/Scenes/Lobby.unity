@@ -234,7 +234,7 @@ MonoBehaviour:
   txtStatus: {fileID: 722413166}
   btnStart: {fileID: 1568334921}
   MaxPlayers: 4
-  sceneNameToLoadOnStart: SpotInDark_blocking
+  sceneNameToLoadOnStart: Game
 --- !u!4 &828601926
 Transform:
   m_ObjectHideFlags: 0
@@ -705,7 +705,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!108 &1865873578
 Light:
   m_ObjectHideFlags: 0

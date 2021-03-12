@@ -38,7 +38,7 @@ public class Joystick : InteractableItem
 
         if (IsInteractedWith)
         {
-            target.Move(controllerManager.GetLeftAxisY(), controllerManager.GetLeftAxisX(), Time.deltaTime);
+            target.MoveAtMaxSpeed(controllerManager.GetLeftAxisY(), controllerManager.GetLeftAxisX(), Time.deltaTime);
             //Animation of the joystick would go here
         }
 
@@ -47,27 +47,32 @@ public class Joystick : InteractableItem
     public override void OnInteractStart()
     {
         IsInteractedWith = true;
-        TogglePlayerController();
+        LockPlayerMovement();
         TextRenderer.ShowInfoText(ToEndInteractText);
     }
 
-    private void TogglePlayerController()
+    private void AllowPlayerMovement()
     {
-        try
-        {
-            CustomController playerController = GetInRangePlayer().GetComponent<CustomController>();
-            playerController.ToggleMovement();
-        }
-        catch (NullReferenceException e)
-        {
-            Debug.Log("Error" + e.Message);
+        CustomController playerController = GetInRangePlayer().GetComponent<CustomController>();
+        if (!playerController.isMovementAllowed())
+        {    
+            playerController.allowMovement();
         }
     }
 
+    private void LockPlayerMovement()
+    {
+        CustomController playerController = GetInRangePlayer().GetComponent<CustomController>();
+        if (playerController.isMovementAllowed())
+        {    
+            playerController.disableMovement();
+        }
+    }
+    
     public override void OnInteractEnd()
     {
         IsInteractedWith = false;
-        TogglePlayerController();
+        AllowPlayerMovement();
         TextRenderer.ShowInfoText(ToStartInteractText);
     }
 
@@ -80,6 +85,9 @@ public class Joystick : InteractableItem
     public override void OnPlayerExitRange()
     {
         TextRenderer.CloseInfoText();
+        IsInteractedWith = false;
+        AllowPlayerMovement();
+        
     }
 
     public override void OnPlayerInRange()

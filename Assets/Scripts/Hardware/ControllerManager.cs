@@ -30,6 +30,11 @@ public class ControllerManager : MonoBehaviour
     {
         return userController.GetButtonDown(button);
     }
+    
+    public bool GetButton(string button)
+    {
+        return userController.GetButton(button);
+    }
 
     public float GetLeftAxisY()
     {
@@ -41,7 +46,8 @@ public class ControllerManager : MonoBehaviour
         if (IsDifferentController(newController))
         {
             // Peut-être à ajuster pour les manettes 3rd party qui fonctionnent comme des manettes de xbox
-            if (newController == "Controller (Xbox One For Windows)" || newController == "Afterglow Gamepad for Xbox 360")
+            if (newController == "Controller (Xbox One For Windows)" || newController == "Afterglow Gamepad for Xbox 360"
+            || (newController == "Controller (XBOX 360 For Windows"))
             {
                 userController = new XboxController();
             }

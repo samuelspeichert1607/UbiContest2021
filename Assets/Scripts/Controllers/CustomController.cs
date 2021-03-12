@@ -7,7 +7,12 @@ public class CustomController : MonoBehaviour
 {
 
     protected bool canMove = true;
-    public virtual void Move(float verticalMotion, float horizontalMotion, float timeElapsed)
+    public virtual void Move(Vector3 speed, float timeElapsed)
+    {
+        
+    }
+    
+    public virtual void MoveAtMaxSpeed(float verticalMotion, float horizontalMotion, float timeElapsed)
     {
         
     }
