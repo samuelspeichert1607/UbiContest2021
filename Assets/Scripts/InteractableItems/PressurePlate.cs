@@ -4,6 +4,10 @@ using UnityEngine;
 
 public abstract class PressurePlate : MonoBehaviour
 {
+    [SerializeField]
+    private AudioSource plateDownSound;
+    [SerializeField] 
+    private AudioSource plateUpSound;
     private float speed=5;
     private float heightDifferenceWhenDown = 2;
     public bool goUp = false;
@@ -31,13 +35,20 @@ public abstract class PressurePlate : MonoBehaviour
         }
     }
 
-    public abstract void CollisionDetected();
+    public void CollisionDetected()
+    {
+        plateDownSound.Play();
+        goDown = true;
+        CollisionEntered();
+    }
 
     public void CollisionExited()
     {
-
+        
+        plateUpSound.Play();
         goUp = true;
-
-
+        
     }
+
+    public abstract void CollisionEntered();
 }

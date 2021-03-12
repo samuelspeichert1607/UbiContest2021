@@ -9,10 +9,10 @@ public class LightPlate : PressurePlate
     {
         controller = transform.parent.parent.parent.GetComponent<LightPlateController>();
     }
-    public override void CollisionDetected()
+    public override void CollisionEntered()
     {
         controller.CollisionDetected(this.gameObject);
-        goDown = true;
+
 
     }
     public void ChangeColor(Color color)
