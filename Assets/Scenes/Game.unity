@@ -2210,6 +2210,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firstTile: 0
   lastTile: 0
+  otherTiles:
+  - {fileID: 1447516431}
 --- !u!1 &138398872
 GameObject:
   m_ObjectHideFlags: 0
@@ -11784,6 +11786,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firstTile: 0
   lastTile: 1
+  otherTiles:
+  - {fileID: 1253899014}
 --- !u!1001 &408103073
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24317,6 +24321,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firstTile: 0
   lastTile: 0
+  otherTiles:
+  - {fileID: 1610136167}
 --- !u!1 &1071668760
 GameObject:
   m_ObjectHideFlags: 0
@@ -29907,6 +29913,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firstTile: 1
   lastTile: 0
+  otherTiles: []
 --- !u!43 &1332841817
 Mesh:
   m_ObjectHideFlags: 0

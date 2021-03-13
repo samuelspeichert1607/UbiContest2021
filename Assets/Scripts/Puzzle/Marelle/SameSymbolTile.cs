@@ -9,6 +9,7 @@ public class SameSymbolTile : ParentTile
 
     [SerializeField] private bool firstTile = false;
     [SerializeField] private bool lastTile = false;
+    [SerializeField] private ParentTile[] otherTiles;
 
 
     private float timerTime;
@@ -78,14 +79,10 @@ public class SameSymbolTile : ParentTile
                     if (timer > 0)
                     {
 
-                        ChangeColor(Color.green);
-                        if (lastTile)
+                        ChangeColorToGreen();
+                    if (lastTile)
                         {
                         marelleController.gameWon();
-                        }
-                        else if (firstTile)
-                        {
-                        marelleController.resetMarelle();
                         }
 
                     }
@@ -99,7 +96,7 @@ public class SameSymbolTile : ParentTile
             }
             else
             {
-                ChangeColor(Color.green);
+                ChangeColorToGreen();
             }
 
         }
@@ -107,5 +104,12 @@ public class SameSymbolTile : ParentTile
 
     }
 
-
+    private void ChangeColorToGreen()
+    {
+        ChangeColor(Color.green);
+        foreach(ParentTile tile in otherTiles)
+        {
+            tile.ChangeColor(Color.green);
+        }
+    }
 }

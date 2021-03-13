@@ -4,21 +4,19 @@ using UnityEngine;
 
 public class TileGoUpDown : MonoBehaviour
 {
-    //'a modifier quand j,aurai un prefab;
-    //public bool CanGoUp = false;
-    //public bool CanGoDown = false;
+
     public Renderer tileRenderer;
 
     private Animation anim;
     private BoxCollider plateformeColider;
-
+    private Color defaultColor;
 
 
     private void Start()
     {
         plateformeColider = GetComponent<BoxCollider>();
         anim = GetComponentInChildren<Animation>();
-
+        defaultColor = tileRenderer.material.color;
     }
 
 
@@ -26,12 +24,14 @@ public class TileGoUpDown : MonoBehaviour
     {
         anim.Play();
         plateformeColider.enabled = false;
-        Invoke("EnableCollider", 1);
+        Invoke("ResetPlatform", 1);
         
     }
 
-    private void EnableCollider()
+    private void ResetPlatform()
     {
+        
         plateformeColider.enabled = true;
+        tileRenderer.material.SetColor("_Color", defaultColor);
     }
 }
