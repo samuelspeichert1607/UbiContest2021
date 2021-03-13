@@ -62,8 +62,8 @@ public class SameSymbolTile : ParentTile
         {
             //testBool = true;
 
-                if (tileEntered == null^tileEntered ==sourceTile)
-                {
+                if (tileEntered == null)//^tileEntered ==sourceTile
+            {
                     tileEntered = sourceTile;
                     timerEnable = true;
                     timer = timerTime;
