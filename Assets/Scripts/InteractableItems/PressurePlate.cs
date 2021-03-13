@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class PressurePlate : MonoBehaviour
+public class PressurePlate : MonoBehaviour
 {
     private float speed=5;
     private float heightDifferenceWhenDown = 2;
-    public bool goUp = false;
-    public bool goDown = false;
+    private bool goUp = false;
+    private bool goDown = false;
     // Update is called once per frame
     void Update()
     {
@@ -44,5 +44,8 @@ public abstract class PressurePlate : MonoBehaviour
 
     }
 
-    public abstract void CollisionEntered();
+    public virtual void CollisionEntered()
+    {
+
+    }
 }
