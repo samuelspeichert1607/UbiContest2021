@@ -10,6 +10,7 @@ public class LightPlateController : MonoBehaviour
     private Light lightSpot;
     private bool unlock = true;
 
+    private bool testBool =true;
     private void Start()
     {
         timer = timerTime;
@@ -32,12 +33,22 @@ public class LightPlateController : MonoBehaviour
 
             }
         }
+
+
+        if (Input.GetButtonDown("Fire2") && testBool)
+        {
+            CollisionDetected(transform.GetChild(1).gameObject);
+            testBool = false;
+
+
+        }
     }
 
     public void CollisionDetected(GameObject source)
     {
         if (unlock)
         {
+            testBool = true;
 
             if (sourcePlate == null || sourcePlate == source)
             {
