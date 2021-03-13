@@ -105,6 +105,7 @@ namespace Puzzle.HumanPencil
             TextRenderer.CloseInfoText();
         }
 
+        // Possibilité de append ca avec RPC
         private void AppendSelfToPlayer()
         {
             Transform player = GetInRangePlayer().transform;

@@ -17,14 +17,14 @@ namespace InteractableItems
         protected string ToStartInteractText;
         protected string ToEndInteractText;
         protected TextRenderer TextRenderer;
-    
-        private GameObject _inRangePlayer;
-    
-    private bool _previousPlayerRangeState = false;
-    private bool _playerHasEnteredRange = false;
-    private bool _playerHasLeftRange = false;
 
-    protected IController UserController;
+        private GameObject _inRangePlayer;
+
+        private bool _previousPlayerRangeState = false;
+        private bool _playerHasEnteredRange = false;
+        private bool _playerHasLeftRange = false;
+
+        protected IController UserController;
 
 
 
@@ -39,7 +39,7 @@ namespace InteractableItems
 
         private void Update()
         {
-        
+
         }
 
         protected void CheckIfAPlayerIsInRange()
@@ -59,8 +59,8 @@ namespace InteractableItems
             HasPlayerInRange = false;
             UpdatePlayerRangeState();
         }
-    
-    
+
+
 
         private void UpdatePlayerRangeState()
         {
@@ -94,14 +94,14 @@ namespace InteractableItems
 
         public virtual void OnInteractStart()
         {
-        
+
         }
 
         public virtual void OnInteractEnd()
         {
-        
+
         }
-    
+
         public virtual void OnPlayerEnterRange()
         {
 
@@ -109,14 +109,14 @@ namespace InteractableItems
 
         public virtual void OnPlayerInRange()
         {
-        
+
         }
 
         public virtual void OnPlayerExitRange()
         {
-        
+
         }
-    
+
         protected bool hasPlayerEnteredRange()
         {
             return _playerHasEnteredRange;
@@ -126,7 +126,7 @@ namespace InteractableItems
         {
             return _playerHasLeftRange;
         }
-    
+
         protected void FindTextRendererOfPlayerInRange()
         {
             TextRenderer = GetInRangePlayer().GetComponentInChildren<TextRenderer>();
@@ -137,6 +137,6 @@ namespace InteractableItems
             Gizmos.color = Color.yellow;
             Gizmos.DrawWireSphere(transform.position, interactRadius);
         }
-    
+
     }
 }

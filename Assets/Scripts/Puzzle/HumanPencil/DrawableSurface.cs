@@ -1,6 +1,5 @@
 using Photon.Pun;
 using System.Collections.Generic;
-using Photon.Pun;
 using UnityEngine;
 
 public class DrawableSurface : MonoBehaviourPunCallbacks
@@ -24,7 +23,7 @@ public class DrawableSurface : MonoBehaviourPunCallbacks
         brushes.Add(brushInstance);
         photonView = PhotonView.Get(this);
 
-        photonView.RPC("CreateRemoteBrush", RpcTarget.Others, referencePoint);
+        photonView.RPC("CreateRemoteBrush", RpcTarget.All, referencePoint);
     }
 
     public void AddAPoint(Vector3 pointPos)
@@ -36,7 +35,7 @@ public class DrawableSurface : MonoBehaviourPunCallbacks
         _currentLineRenderer.positionCount = positionCount;
         int positionIndex = positionCount - 1;
         _currentLineRenderer.SetPosition(positionIndex, pointPos);
-        photonView.RPC("AddRemotePoint", RpcTarget.Others, pointPos);
+        photonView.RPC("AddRemotePoint", RpcTarget.All, pointPos);
     }
 
     public void ClearDrawing()
@@ -46,7 +45,7 @@ public class DrawableSurface : MonoBehaviourPunCallbacks
         {
             PhotonNetwork.Destroy(brush);
         }
-        photonView.RPC("EraseRemote", RpcTarget.Others);
+        photonView.RPC("EraseRemote", RpcTarget.All);
     }
 
     public void CreateBrushRelativeToSelf(Vector3 referenceTransformToUpperLeftCorner, Vector3 referenceSurfaceEulerAngles)
@@ -83,11 +82,11 @@ public class DrawableSurface : MonoBehaviourPunCallbacks
         return Quaternion.Euler(angles) * point;
     }
     
-    [PunRPC]
+    /*[PunRPC]
     void CreateRemoteBrush(object brush)
     {
         brushes.Add((GameObject) brush);
-    }
+    }*/
 
     [PunRPC]
     void CreateRemoteBrush(Vector3 referencePoint)
@@ -117,16 +116,4 @@ public class DrawableSurface : MonoBehaviourPunCallbacks
         int positionIndex = positionCount - 1;
         _currentLineRenderer.SetPosition(positionIndex, pointPos);
     }
-
-    /*public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-    {
-        if (stream.IsWriting)
-        {
-
-        }
-        else if (stream.IsReading)
-        {
-
-        }
-    }*/
 }
