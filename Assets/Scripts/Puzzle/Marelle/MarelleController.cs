@@ -21,15 +21,6 @@ public class MarelleController : MonoBehaviour
         {
             a.OnAction();
         }
-        foreach (Transform child in transform)
-        {
-
-            foreach (Transform toddler in child)
-            {
-                toddler.GetComponentInChildren<TileGoUpDown>().tileRenderer.material.SetColor("_Color", Color.green);
-            }
-        }
-
 
     }
 

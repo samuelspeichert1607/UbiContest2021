@@ -4,10 +4,16 @@ using UnityEngine;
 
 public class DifferentSymbolTile : ParentTile
 {
+    private MarelleController marelleController;
+    private void Start()
+    {
+         marelleController = transform.parent.GetComponent<MarelleController>();
+    }
     public override void CollisionDetected(GameObject sourceTile)
     {
-        MarelleController marelleController = transform.parent.GetComponent<MarelleController>();
-        if (marelleController.hasCollisionUnlocked)
+        
+        
+        if (marelleController.hasCollisionUnlocked && sourceTile.transform.GetComponent<TileGoUpDown>().tileRenderer.material.color!=Color.green)
         {
             marelleController.gameLost();
         }

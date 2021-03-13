@@ -18,8 +18,7 @@ MonoBehaviour:
   observableSearch: 2
   Synchronization: 1
   OwnershipTransfer: 1
-  ObservedComponents:
-  - {fileID: 0}
+  ObservedComponents: []
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -93,7 +92,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.81, y: 0.14, z: 1.89}
+  m_Size: {x: 1.8, y: 0.1, z: 1.8}
   m_Center: {x: -1.3, y: 0, z: 0}
 --- !u!111 &8600161766522248609
 Animation:
