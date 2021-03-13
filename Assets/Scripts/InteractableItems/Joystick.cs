@@ -10,12 +10,14 @@ public class Joystick : InteractableItem
 {
     
     [SerializeField] private CustomController target;
+    // private AudioSource a;
 
     private ControllerManager controllerManager;
 
     private new void Start()
     {
         base.Start();
+        // a = target.GetComponent<AudioSource>();
         controllerManager = GetComponent<ControllerManager>();
     }
     
@@ -39,10 +41,19 @@ public class Joystick : InteractableItem
         if (IsInteractedWith)
         {
             target.MoveAtMaxSpeed(controllerManager.GetLeftAxisY(), controllerManager.GetLeftAxisX(), Time.deltaTime);
+            // PlaySound();
             //Animation of the joystick would go here
         }
 
     }
+
+    // public void PlaySound()
+    // {
+    //     if (!a.isPlaying)
+    //     {
+    //         a.Play();
+    //     }
+    // }
 
     public override void OnInteractStart()
     {
