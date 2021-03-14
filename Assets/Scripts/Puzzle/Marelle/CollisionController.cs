@@ -2,88 +2,116 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
+public class RayComponents : MonoBehaviour
+{
+    public Vector3 positionVec;
+    public GameObject previousObject;
+    
+    public RayComponents(Vector3 vec )
+    {
+        positionVec = vec;
+        previousObject = null;
+    }
+}
 
 public class CollisionController : MonoBehaviour
 {
     [SerializeField] private float raycastRange = 0.1f;
     [SerializeField] private GameObject bottomObject;
 
-    private bool wasMute = false;
-
-    private GameObject colliderObject = null;
-    private GameObject previousColliderObject = null;
     private AudioSource speaker;
     private AudioSource sound;
 
+    private Vector3 playerSize;
 
 
+    private RayComponents[] loopArray;
     private void Start()
     {
         speaker = transform.GetChild(1).gameObject.GetComponent<AudioSource>();
+        playerSize = GetComponent<BoxCollider>().bounds.size;
+
+        RayComponents[] temp = { new RayComponents(new Vector3()) , new RayComponents(new Vector3(0, 0, -playerSize.z)) ,
+            new RayComponents(new Vector3(0, 0, playerSize.z)) , new RayComponents(new Vector3(0, playerSize.x, 0)),
+        new RayComponents(new Vector3(0, -playerSize.x, 0))};
+
+        loopArray = temp; //sinon j<ai plein d<erreurs..
+
     }
     void Update()
     {
 
-        
-        RaycastHit hit;
-        if (Physics.Raycast(bottomObject.transform.position, Vector3.down, out hit, raycastRange))
+        Vector3 bottomCenterPos = bottomObject.transform.position;
+
+
+        foreach (RayComponents components in loopArray)
         {
-            colliderObject = hit.collider.gameObject;
+            RaycastHit hit;
 
-            if (wasMute && !colliderObject.CompareTag("MutePlateforme"))
+            if (Physics.Raycast(bottomCenterPos + components.positionVec, Vector3.down, out hit, raycastRange))
             {
-                speaker.mute = false;
-                wasMute = false;
-                sound.Play();
-                
-
-            }
-
-            if (previousColliderObject == null ^ (previousColliderObject != null && previousColliderObject != colliderObject))
-            {
-                if (previousColliderObject!=null && previousColliderObject.CompareTag("PressurePlate"))
+                GameObject obj = hit.collider.gameObject;
+                if (components.previousObject == null || components.previousObject != obj)
                 {
-                    previousColliderObject.GetComponent<PressurePlate>().CollisionExited();
-                }
-                previousColliderObject = colliderObject;
-                switch (colliderObject.tag)
-                {
-                    case "MarelleTile":
-                        colliderObject.transform.parent.GetComponent<ParentTile>().CollisionDetected(colliderObject);
-                        break;
-                    case "MutePlateforme":
-                        if (!wasMute)
-                        {
-                            sound = colliderObject.GetComponent<AudioSource>();
-                            sound.Play();
-                            wasMute = true;
-                            speaker.mute = true;
-                        }
-                        break;
-                    case "PressurePlate":
-                        colliderObject.GetComponent<PressurePlate>().CollisionDetected();
-                        break;
+                    components.previousObject = obj;
+                    CollisionManagement(obj);
+
+                    if (components.previousObject != null)
+                    {
+                        CollisionExitedManagement(components.previousObject);
+                    }
 
                 }
 
-
             }
-
-
-        }
-        else
-        {
-            if (colliderObject!=null && colliderObject.CompareTag("PressurePlate"))
+            else
             {
-                colliderObject.GetComponent<PressurePlate>().CollisionExited();
+                if (components.previousObject != null)
+                {
+                    CollisionExitedManagement(components.previousObject);
+                }
+                components.previousObject = null;
             }
-            colliderObject = null;
-
-
         }
+
 
     }
 
 
+    private void CollisionManagement(GameObject colliderObject)
+    {
+        
+        switch (colliderObject.tag)
+        {
+            case "MarelleTile":
+                colliderObject.transform.parent.GetComponent<ParentTile>().CollisionDetected(colliderObject);
+                break;
+            case "MutePlateforme":
+                sound = colliderObject.GetComponent<AudioSource>();
+                sound.Play();
+                speaker.mute = true;
+                break;
+            case "PressurePlate":
+                colliderObject.GetComponent<PressurePlate>().CollisionDetected();
+                break;
+
+        }
+    }
+
+    private void CollisionExitedManagement(GameObject colliderObject)
+    {
+        switch (colliderObject.tag)
+        {
+            case "PressurePlate":
+                colliderObject.GetComponent<PressurePlate>().CollisionExited();
+                break;
+            case "MutePlateforme":
+                speaker.mute = false;
+                sound.Play();
+                break;
+        }
+    }
+
 }
+
+

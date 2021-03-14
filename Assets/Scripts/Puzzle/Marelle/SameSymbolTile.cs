@@ -57,7 +57,6 @@ public class SameSymbolTile : ParentTile
 
     public override void CollisionDetected(GameObject sourceTile) 
     {
-        
         Material sourceMat = sourceTile.transform.GetComponent<TileGoUpDown>().tileRenderer.material;
         if ((marelleController.hasCollisionUnlocked || firstTile) && !(sourceMat.color==Color.green))
         {
@@ -95,13 +94,13 @@ public class SameSymbolTile : ParentTile
 
             else if (!firstTile)
             {
-
                 marelleController.gameLost();
             }
-            else
-            {
-                ChangeColorToGreen();
-            }
+            //else
+            //{
+            //    print("4");
+            //    ChangeColorToGreen();
+            //}
 
         }
 
