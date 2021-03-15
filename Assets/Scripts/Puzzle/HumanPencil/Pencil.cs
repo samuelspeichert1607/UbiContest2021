@@ -20,11 +20,13 @@ namespace Puzzle.HumanPencil
         private string _toDrawText;
         private Transform _initialParent;
         private LineDrawer _lineDrawer;
+        private PhotonView photonView;
 
         // Start is called before the first frame update
         private new void Start()
         {
             base.Start();
+            photonView = PhotonView.Get(this);
             _toDrawText = String.Join(" ", drawingPreText , drawingAxisName, drawingPostText);
             _lineDrawer = GetComponent<LineDrawer>();
             _initialParent = this.gameObject.transform.parent;
@@ -34,6 +36,7 @@ namespace Puzzle.HumanPencil
         // Update is called once per frame
         void Update()
         {
+            
             CheckIfAPlayerIsInRange();
             if (hasPlayerEnteredRange())
             {
@@ -108,8 +111,10 @@ namespace Puzzle.HumanPencil
             TextRenderer.CloseInfoText();
         }
 
+        // Possibilit� de append ca avec RPC
         private void AppendSelfToPlayer()
         {
+            photonView.RequestOwnership();
             Transform player = GetInRangePlayer().transform;
             this.gameObject.transform.SetParent(player);
             transform.position = player.position + player.forward  + new Vector3(0, player.gameObject.GetComponent<BoxCollider>().bounds.size.y/2, 0);

@@ -2,6 +2,16 @@ using UnityEngine;
 using Photon.Pun;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.Collections.Generic;
+using Photon.Realtime;
+
+[System.Serializable]
+public class DefaultRoom
+{
+    public string Name;
+    public string SceneNameToLoadOnStart;
+    public int MaxPlayers;
+}
 
 public class NetworkController : MonoBehaviourPunCallbacks
 {
@@ -9,17 +19,20 @@ public class NetworkController : MonoBehaviourPunCallbacks
     private Text txtStatus = null;
 
     [SerializeField]
-    private GameObject btnStart = null;
+    private GameObject[] btnStarts = null;
 
     [SerializeField]
     private byte MaxPlayers = 4;
 
-    [SerializeField] private string sceneNameToLoadOnStart;
+    [SerializeField]
+    private List<DefaultRoom> defaultRooms;
+
+    private string chosenRoomName;
 
     private void Start()
     {
         PhotonNetwork.ConnectUsingSettings();
-        btnStart.SetActive(false);
+        ChangeStateOfButton(false);
         Status("Connecting to Server");
     }
 
@@ -28,20 +41,24 @@ public class NetworkController : MonoBehaviourPunCallbacks
         base.OnConnectedToMaster();
 
         PhotonNetwork.AutomaticallySyncScene = true;
-        btnStart.SetActive(true);
+        ChangeStateOfButton(true);
         Status("Connecting to " + PhotonNetwork.ServerAddress);
     }
 
-    public void btnStart_Click()
+    public void btnStart_Click(int defaultRoomIndex)
     {
-        string roomName = "Room1";
-        Photon.Realtime.RoomOptions opts = new Photon.Realtime.RoomOptions();
+        DefaultRoom roomSettings = defaultRooms[defaultRoomIndex];
+
+        chosenRoomName = defaultRooms[defaultRoomIndex].SceneNameToLoadOnStart;
+
+        string roomName = roomSettings.Name;
+        RoomOptions opts = new RoomOptions();
         opts.IsOpen = true;
         opts.IsVisible = true;
-        opts.MaxPlayers = MaxPlayers;
+        opts.MaxPlayers = (byte)roomSettings.MaxPlayers;
 
         PhotonNetwork.JoinOrCreateRoom(roomName, opts, Photon.Realtime.TypedLobby.Default);
-        btnStart.SetActive(false);
+        ChangeStateOfButton(false);
         Status("Joining " + roomName);
     }
 
@@ -49,12 +66,21 @@ public class NetworkController : MonoBehaviourPunCallbacks
     {
         base.OnJoinedRoom();
 
-        SceneManager.LoadScene(sceneNameToLoadOnStart);
+        SceneManager.LoadScene(chosenRoomName);
     }
 
     private void Status(string msg)
     {
         Debug.Log(msg);
         txtStatus.text = msg;
+    }
+
+
+    private void ChangeStateOfButton(bool state)
+    {
+        foreach (GameObject btnStart in btnStarts)
+        {
+            btnStart.SetActive(state);
+        }
     }
 }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class PressurePlate : MonoBehaviour
+public class PressurePlate : MonoBehaviour
 {
     [SerializeField]
     private AudioClip plateDownSound;
@@ -12,19 +12,18 @@ public abstract class PressurePlate : MonoBehaviour
     private AudioSource audioSource;
     private float speed=5;
     private float heightDifferenceWhenDown = 2;
-    public bool goUp = false;
-    public bool goDown = false;
-
-    void Start()
-    {
-        // audioSource = GetComponent<AudioSource>();
-    }
+    private bool goUp = false;
+    private bool goDown = false;
     void Update()
     {
         if (goUp)
         {
-            transform.localPosition += new Vector3(0, Time.deltaTime * speed, 0);
-            if (transform.localPosition.y >= 0)
+            if (transform.localPosition.y < 0)
+            {
+                transform.localPosition += new Vector3(0, Time.deltaTime * speed, 0);
+            }
+           
+            else
             {
 
                 goUp = false;
@@ -32,9 +31,12 @@ public abstract class PressurePlate : MonoBehaviour
         }
         else if (goDown)
         {
-
-            transform.localPosition -= new Vector3(0, Time.deltaTime * speed, 0);
-            if (transform.localPosition.y <= -heightDifferenceWhenDown)
+            if (transform.localPosition.y > -heightDifferenceWhenDown)
+            {
+                transform.localPosition -= new Vector3(0, Time.deltaTime * speed, 0);
+            }
+            
+            else
             {
                 goDown = false;
             }
@@ -52,8 +54,13 @@ public abstract class PressurePlate : MonoBehaviour
     {
         audioSource.PlayOneShot(plateUpSound, 0.7f);
         goUp = true;
-        
+
+
     }
 
-    public abstract void CollisionEntered();
+    public virtual void CollisionEntered()
+    {
+
+        
+    }
 }

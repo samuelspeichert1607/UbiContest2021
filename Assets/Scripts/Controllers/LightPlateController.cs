@@ -8,9 +8,9 @@ public class LightPlateController : MonoBehaviour
 
     private GameObject sourcePlate = null;
     private Light lightSpot;
+    private bool unlock = true;
 
-    private LightPlate plate1Temp;
-    private LightPlate plate2Temp;
+    private bool testBool =true;
     private void Start()
     {
         timer = timerTime;
@@ -29,45 +29,69 @@ public class LightPlateController : MonoBehaviour
             {
                 timerStart = false;
                 timer = 0;
-
-                plate1Temp.ChangeColor(Color.red);
-                if (plate2Temp != null)
-                {
-                    plate2Temp.ChangeColor(Color.red);
-                }
+                ChangeColor(Color.red);
 
             }
+        }
+
+        //cheat code
+        if (Input.GetButtonDown("Fire2") && testBool)
+        {
+            CollisionDetected(transform.GetChild(1).gameObject);
+            testBool = false;
+
+
         }
     }
 
     public void CollisionDetected(GameObject source)
     {
-
-        LightPlate sourceScript = source.GetComponent<LightPlate>();
-        if (sourcePlate == null)
+        if (unlock)
         {
-            sourceScript.ChangeColor(Color.yellow);
-            plate1Temp = sourceScript;
-            sourcePlate = source;
-            timer = timerTime;
-            timerStart = true;
-        }
-        else if (sourcePlate != source)
-        {
+            testBool = true;
 
-            plate2Temp = sourcePlate.GetComponent<LightPlate>();
-
-            timerStart = false;
-
-            if (timer > 0)
+            if (sourcePlate == null || sourcePlate == source)
             {
-                sourceScript.ChangeColor(Color.green);
-                sourcePlate.GetComponent<LightPlate>().ChangeColor(Color.green);
+                ChangeColor(Color.yellow);
 
-                lightSpot.enabled = true;
+                sourcePlate = source;
+                timer = timerTime;
+                timerStart = true;
             }
-            sourcePlate = null;
+            else if (sourcePlate != source)
+            {
 
+
+
+                timerStart = false;
+
+                if (timer > 0)
+                {
+                    ChangeColor(Color.green);
+
+                    lightSpot.enabled = true;
+                }
+                sourcePlate = null;
+
+            }
+        }
+
+
+    }
+
+    private void ChangeColor(Color color)
+    {
+        if (color == Color.green)
+        {
+            unlock = false;
+        }
+        foreach (Transform child in transform)
+        {
+            if (child.name.Contains("pressure"))
+            {
+                child.GetComponentInChildren<Renderer>().material.SetColor("_Color", color);
+            }
+            
         }
     }
 }

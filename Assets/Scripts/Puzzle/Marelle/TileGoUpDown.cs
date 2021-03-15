@@ -4,37 +4,34 @@ using UnityEngine;
 
 public class TileGoUpDown : MonoBehaviour
 {
-    //'a modifier quand j,aurai un prefab;
-    public bool CanGoUp = false;
-    public bool CanGoDown = false;
 
-    private float initialY;
-    private int speed = 5;
-    private float minY = -1;
+    public Renderer tileRenderer;
+
+    private Animation anim;
+    private BoxCollider plateformeColider;
+    private Color defaultColor;
+
 
     private void Start()
     {
-        initialY = transform.position.y;
+        plateformeColider = GetComponent<BoxCollider>();
+        anim = GetComponentInChildren<Animation>();
+        defaultColor = tileRenderer.material.color;
     }
 
-    void Update()
-    {
-        if (CanGoUp)
-        {
-            transform.position += new Vector3(0, Time.deltaTime * speed, 0);
-            if (transform.position.y >= initialY)
-            {
-                CanGoUp = false;
-            }
-        }
-        else if (CanGoDown)
-        {
 
-            transform.position -= new Vector3(0, Time.deltaTime * speed, 0);
-            if (transform.position.y <= minY) //initialY-minY
-            {
-                CanGoDown = false;
-            }
-        }
+    public void PlayAnimation()
+    {
+        anim.Play();
+        plateformeColider.enabled = false;
+        Invoke("ResetPlatform", 1);
+        
+    }
+
+    private void ResetPlatform()
+    {
+        
+        plateformeColider.enabled = true;
+        tileRenderer.material.SetColor("_Color", defaultColor);
     }
 }

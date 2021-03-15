@@ -35,7 +35,7 @@ public class PressurePlateController : MonoBehaviour
     }
     public void won()
     {
-        changeColor(Color.green);
+        ChangeColor(Color.green);
         unlockedPlates = false;
         foreach (Actionable a in actionableObject)
         {
@@ -45,23 +45,23 @@ public class PressurePlateController : MonoBehaviour
     public void penality()
     {
         startPenalityTimer = true;
-        changeColor(Color.red);
+        ChangeColor(Color.red);
         unlockedPlates = false;
 
     }
     private void resetPlates()
     {
-        changeColor(initialColor);
+        ChangeColor(initialColor);
         timer = 0;
         unlockedPlates = true;
         startPenalityTimer = false;
     }
 
-    private void changeColor(Color color)
+    private void ChangeColor(Color color)
     {
-        for (int i = 0; i < transform.childCount; i++)
+        foreach (Transform child in transform)
         {
-            transform.GetChild(i).GetChild(0).GetChild(0).GetComponent<Renderer>().material.SetColor("_Color", color);
+            child.GetComponentInChildren<Renderer>().material.SetColor("_Color", color);
         }
     }
 }
