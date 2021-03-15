@@ -20,7 +20,7 @@ public class PressurePlateButton : PressurePlate
         if (controller.unlockedPlates)
         {
 
-            
+
             if (isTheRightOne)
             {
                 controller.won();

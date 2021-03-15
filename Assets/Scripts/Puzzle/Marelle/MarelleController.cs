@@ -5,6 +5,9 @@ using UnityEngine;
 public class MarelleController : MonoBehaviour
 {
     [SerializeField] private Actionable[] actionableObject;
+    [SerializeField] private AudioSource winSound;
+    [SerializeField] private AudioSource lossSound;
+    public bool isResolve =false;
     public float timerTime;
     public bool hasCollisionUnlocked =true;
 
@@ -16,6 +19,7 @@ public class MarelleController : MonoBehaviour
     }
     public void gameWon()
     {
+        winSound.Play();
         hasCollisionUnlocked = false;
         foreach (Actionable a in actionableObject)
         {
@@ -26,6 +30,7 @@ public class MarelleController : MonoBehaviour
 
     public void gameLost()
     {
+        lossSound.Play();
         hasCollisionUnlocked = false;
         foreach (Transform child in transform)
         {
