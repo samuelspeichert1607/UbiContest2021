@@ -96,11 +96,6 @@ public class SameSymbolTile : ParentTile
             {
                 marelleController.gameLost();
             }
-            //else
-            //{
-            //    print("4");
-            //    ChangeColorToGreen();
-            //}
 
         }
 

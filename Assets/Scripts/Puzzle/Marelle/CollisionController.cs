@@ -32,55 +32,71 @@ public class CollisionController : MonoBehaviour
         playerSize = GetComponent<BoxCollider>().bounds.size;
 
         RayComponents[] temp = { new RayComponents(new Vector3()) , new RayComponents(new Vector3(0, 0, -playerSize.z)) ,
-            new RayComponents(new Vector3(0, 0, playerSize.z)) , new RayComponents(new Vector3(0, playerSize.x, 0)),
-        new RayComponents(new Vector3(0, -playerSize.x, 0))};
+            new RayComponents(new Vector3(0, 0, playerSize.z)) , new RayComponents(new Vector3(playerSize.x, 0,0)),
+        new RayComponents(new Vector3(-playerSize.x, 0,0))};
 
         loopArray = temp; //sinon j<ai plein d<erreurs..
 
     }
+
+
+
     void Update()
     {
-
         Vector3 bottomCenterPos = bottomObject.transform.position;
-
-
+        List<GameObject> objectsInCollision = new List<GameObject>();
+        List<GameObject> objectsExited = new List<GameObject>();
         foreach (RayComponents components in loopArray)
         {
-            RaycastHit hit;
-
-            if (Physics.Raycast(bottomCenterPos + components.positionVec, Vector3.down, out hit, raycastRange))
+            Vector3 postemp;
+            if (components.positionVec.z != 0)
             {
-                GameObject obj = hit.collider.gameObject;
-                if (components.previousObject == null || components.previousObject != obj)
-                {
-                    components.previousObject = obj;
-                    CollisionManagement(obj);
-
-                    if (components.previousObject != null)
-                    {
-                        CollisionExitedManagement(components.previousObject);
-                    }
-
-                }
-
+                postemp = components.positionVec.z * transform.forward;
             }
             else
             {
-                if (components.previousObject != null)
+                postemp = components.positionVec.x * transform.right;
+            }
+            RaycastHit hit;
+
+            if (Physics.Raycast(bottomCenterPos + postemp, Vector3.down, out hit, raycastRange))
+            {
+                GameObject obj = hit.collider.gameObject;
+
+                if ((components.previousObject == null || components.previousObject != obj) && !objectsInCollision.Contains(obj))
                 {
+
+                    CollisionManagement(obj);
+
+                    if (components.previousObject != null && !(objectsInCollision.Contains(components.previousObject) || objectsExited.Contains(components.previousObject)))
+                    {
+                        objectsExited.Add(components.previousObject);
+                        CollisionExitedManagement(components.previousObject);
+                    }
+                    components.previousObject = obj;
+                }
+                objectsInCollision.Add(obj);
+            }
+            else
+            {
+                if (components.previousObject != null && !(objectsInCollision.Contains(components.previousObject) || objectsExited.Contains(components.previousObject)))
+                {
+                    objectsExited.Add(components.previousObject);
                     CollisionExitedManagement(components.previousObject);
                 }
                 components.previousObject = null;
             }
         }
 
-
     }
+
+
+
+
 
 
     private void CollisionManagement(GameObject colliderObject)
     {
-        
         switch (colliderObject.tag)
         {
             case "MarelleTile":
@@ -111,6 +127,8 @@ public class CollisionController : MonoBehaviour
                 break;
         }
     }
+
+
 
 }
 

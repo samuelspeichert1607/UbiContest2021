@@ -8,13 +8,16 @@ public class PressurePlate : MonoBehaviour
     private float heightDifferenceWhenDown = 2;
     private bool goUp = false;
     private bool goDown = false;
-    // Update is called once per frame
     void Update()
     {
         if (goUp)
         {
-            transform.localPosition += new Vector3(0, Time.deltaTime * speed, 0);
-            if (transform.localPosition.y >= 0)
+            if (transform.localPosition.y < 0)
+            {
+                transform.localPosition += new Vector3(0, Time.deltaTime * speed, 0);
+            }
+           
+            else
             {
 
                 goUp = false;
@@ -22,8 +25,12 @@ public class PressurePlate : MonoBehaviour
         }
         else if (goDown)
         {
-            transform.localPosition -= new Vector3(0, Time.deltaTime * speed, 0);
-            if (transform.localPosition.y <= -heightDifferenceWhenDown)
+            if (transform.localPosition.y > -heightDifferenceWhenDown)
+            {
+                transform.localPosition -= new Vector3(0, Time.deltaTime * speed, 0);
+            }
+            
+            else
             {
                 goDown = false;
             }
