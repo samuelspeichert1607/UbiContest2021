@@ -81,12 +81,6 @@ public class DrawableSurface : MonoBehaviourPunCallbacks
     {
         return Quaternion.Euler(angles) * point;
     }
-    
-    /*[PunRPC]
-    void CreateRemoteBrush(object brush)
-    {
-        brushes.Add((GameObject) brush);
-    }*/
 
     [PunRPC]
     void CreateRemoteBrush(Vector3 referencePoint)
