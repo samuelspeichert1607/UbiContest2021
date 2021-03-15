@@ -13,10 +13,10 @@ public class PlayerController : CustomController
     [SerializeField] private float onJumpingReleaseDecelerationFactor = 15f;
     [SerializeField] private float onAirborneNoMotionDecelerationFactor = 5f;
     [SerializeField] private float minimalFallingSpeedForLandingPhase = 5f;
-    [SerializeField] private AudioSource footStepSounds;
-    [SerializeField] private AudioSource jumpingSounds;
-    [SerializeField] private AudioSource landingSounds;
-    
+    [SerializeField] private AudioClip footStepSounds;
+    [SerializeField] private AudioClip jumpingSounds;
+    [SerializeField] private AudioClip landingSounds;
+    [SerializeField] private AudioSource audioSource;
 
     private CharacterController _controller;
     private GameObject _camera;
@@ -197,7 +197,7 @@ public class PlayerController : CustomController
     
     private void InitiateJumping()
     {
-        jumpingSounds.Play();
+        audioSource.PlayOneShot(jumpingSounds, 0.7f);
         _jumpingStartTime = Time.time;
         _isInJumpingAscensionPhase = true;
         _playerSpeed.y = jumpValue;
@@ -251,7 +251,7 @@ public class PlayerController : CustomController
     
     private void StartLanding()
     {
-        landingSounds.Play();
+        audioSource.PlayOneShot(landingSounds, 0.7f);
         _isLanding = true;
         Invoke("EndLanding", landingTime);
     }
