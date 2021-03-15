@@ -18,7 +18,7 @@ public class SameSymbolTile : ParentTile
 
     private GameObject tileEntered = null;
 
-    bool testBool = false;
+    //bool testBool = false;
     private MarelleController marelleController;
 
     void Start()
@@ -45,13 +45,14 @@ public class SameSymbolTile : ParentTile
                 tileEntered = null;
             }
         }
-        if (Input.GetButtonDown("Fire2") && testBool)
-        {
-            CollisionDetected(transform.GetChild(0).gameObject);
-            testBool = false;
+        //cheat code
+        //if (Input.GetButtonDown("Fire2") && testBool)
+        //{
+        //    CollisionDetected(transform.GetChild(0).gameObject);
+        //    testBool = false;
 
 
-        }
+        //}
 
     }
 
@@ -60,7 +61,7 @@ public class SameSymbolTile : ParentTile
         Material sourceMat = sourceTile.transform.GetComponent<TileGoUpDown>().tileRenderer.material;
         if ((marelleController.hasCollisionUnlocked || firstTile) && !(sourceMat.color==Color.green))
         {
-            testBool = true;
+            //testBool = true;
 
                 if (tileEntered == null)//^tileEntered ==sourceTile
             {

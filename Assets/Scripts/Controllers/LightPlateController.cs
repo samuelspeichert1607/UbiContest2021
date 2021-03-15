@@ -34,7 +34,7 @@ public class LightPlateController : MonoBehaviour
             }
         }
 
-
+        //cheat code
         if (Input.GetButtonDown("Fire2") && testBool)
         {
             CollisionDetected(transform.GetChild(1).gameObject);

@@ -24,7 +24,6 @@ public class CollisionController : MonoBehaviour
 
     private Vector3 playerSize;
 
-
     private RayComponents[] loopArray;
     private void Start()
     {
@@ -36,7 +35,6 @@ public class CollisionController : MonoBehaviour
         new RayComponents(new Vector3(-playerSize.x, 0,0))};
 
         loopArray = temp; //sinon j<ai plein d<erreurs..
-
     }
 
 
@@ -66,12 +64,12 @@ public class CollisionController : MonoBehaviour
                 if ((components.previousObject == null || components.previousObject != obj) && !objectsInCollision.Contains(obj))
                 {
 
-                    CollisionManagement(obj);
+                    CollisionManagement(obj,components.positionVec);
 
                     if (components.previousObject != null && !(objectsInCollision.Contains(components.previousObject) || objectsExited.Contains(components.previousObject)))
                     {
                         objectsExited.Add(components.previousObject);
-                        CollisionExitedManagement(components.previousObject);
+                        CollisionExitedManagement(components.previousObject, components.positionVec);
                     }
                     components.previousObject = obj;
                 }
@@ -82,7 +80,7 @@ public class CollisionController : MonoBehaviour
                 if (components.previousObject != null && !(objectsInCollision.Contains(components.previousObject) || objectsExited.Contains(components.previousObject)))
                 {
                     objectsExited.Add(components.previousObject);
-                    CollisionExitedManagement(components.previousObject);
+                    CollisionExitedManagement(components.previousObject, components.positionVec);
                 }
                 components.previousObject = null;
             }
@@ -90,12 +88,7 @@ public class CollisionController : MonoBehaviour
 
     }
 
-
-
-
-
-
-    private void CollisionManagement(GameObject colliderObject)
+    private void CollisionManagement(GameObject colliderObject,Vector3 vec)
     {
         switch (colliderObject.tag)
         {
@@ -108,18 +101,26 @@ public class CollisionController : MonoBehaviour
                 speaker.mute = true;
                 break;
             case "PressurePlate":
-                colliderObject.GetComponent<PressurePlate>().CollisionDetected();
+                if(vec==Vector3.zero)
+                {
+                    colliderObject.GetComponent<PressurePlate>().CollisionDetected();
+                }
+                
                 break;
 
         }
     }
 
-    private void CollisionExitedManagement(GameObject colliderObject)
+    private void CollisionExitedManagement(GameObject colliderObject,Vector3 vec)
     {
         switch (colliderObject.tag)
         {
             case "PressurePlate":
-                colliderObject.GetComponent<PressurePlate>().CollisionExited();
+                if (vec == Vector3.zero)
+                {
+                    colliderObject.GetComponent<PressurePlate>().CollisionExited();
+                }
+                    
                 break;
             case "MutePlateforme":
                 speaker.mute = false;

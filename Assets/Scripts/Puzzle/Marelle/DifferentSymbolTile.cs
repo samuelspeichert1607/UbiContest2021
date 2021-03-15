@@ -13,9 +13,14 @@ public class DifferentSymbolTile : ParentTile
     {
         
         
-        if (marelleController.hasCollisionUnlocked && sourceTile.transform.GetComponent<TileGoUpDown>().tileRenderer.material.color!=Color.green)
+        if (marelleController.hasCollisionUnlocked && IsSourceTileNotGreen(sourceTile))
         {
             marelleController.gameLost();
         }
+    }
+
+    private bool IsSourceTileNotGreen(GameObject sourceTile)
+    {
+        return sourceTile.transform.GetComponent<TileGoUpDown>().tileRenderer.material.color != Color.green;
     }
 }
