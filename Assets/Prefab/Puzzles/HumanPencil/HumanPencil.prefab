@@ -489,7 +489,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6688883498881643857, guid: f992930a442fe5440b6203c7759e614d, type: 3}
       propertyPath: interactRadius
-      value: 1.5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6688883498881643857, guid: f992930a442fe5440b6203c7759e614d, type: 3}
       propertyPath: interactPostButtonText
