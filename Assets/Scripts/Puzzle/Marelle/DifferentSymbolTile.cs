@@ -4,13 +4,23 @@ using UnityEngine;
 
 public class DifferentSymbolTile : ParentTile
 {
+    private MarelleController marelleController;
+    private void Start()
+    {
+         marelleController = transform.parent.GetComponent<MarelleController>();
+    }
     public override void CollisionDetected(GameObject sourceTile)
     {
-        MarelleController marelleController = transform.parent.GetComponent<MarelleController>();
-        if (marelleController.hasCollisionUnlocked)
+        
+        
+        if (marelleController.hasCollisionUnlocked && IsSourceTileNotGreen(sourceTile))
         {
             marelleController.gameLost();
-            marelleController.isResolve = false;
         }
+    }
+
+    private bool IsSourceTileNotGreen(GameObject sourceTile)
+    {
+        return sourceTile.transform.GetComponent<TileGoUpDown>().tileRenderer.material.color != Color.green;
     }
 }

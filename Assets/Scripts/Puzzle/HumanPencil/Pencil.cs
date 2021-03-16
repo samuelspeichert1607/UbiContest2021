@@ -14,23 +14,29 @@ namespace Puzzle.HumanPencil
         [SerializeField] private string drawingAxisName;
         private float distancePlayerPencil = 1;
 
+        private ControllerManager controllerManager;
+
 
         private string _toDrawText;
         private Transform _initialParent;
         private LineDrawer _lineDrawer;
+        private PhotonView photonView;
 
         // Start is called before the first frame update
         private new void Start()
         {
             base.Start();
+            photonView = PhotonView.Get(this);
             _toDrawText = String.Join(" ", drawingPreText , drawingAxisName, drawingPostText);
             _lineDrawer = GetComponent<LineDrawer>();
             _initialParent = this.gameObject.transform.parent;
+            controllerManager = GetComponent<ControllerManager>();
         }
 
         // Update is called once per frame
         void Update()
         {
+            
             CheckIfAPlayerIsInRange();
             if (hasPlayerEnteredRange())
             {
@@ -51,7 +57,7 @@ namespace Puzzle.HumanPencil
                 {
                     TextRenderer.ShowInfoText( _toDrawText + "\n" + ToEndInteractText);
                 }
-                if (Input.GetAxis(drawingAxisName) > 0)
+                if (controllerManager.GetAxis(drawingAxisName) > 0)
                 {
                     _lineDrawer.Draw();
                 }
@@ -64,7 +70,7 @@ namespace Puzzle.HumanPencil
         }
         public override void OnPlayerInRange()
         {
-            if (Input.GetButtonDown(interactButtonName))
+            if (controllerManager.GetButtonDown(interactButtonName))
             {
                 if (IsInteractedWith)
                 {
@@ -105,8 +111,10 @@ namespace Puzzle.HumanPencil
             TextRenderer.CloseInfoText();
         }
 
+        // Possibilit� de append ca avec RPC
         private void AppendSelfToPlayer()
         {
+            photonView.RequestOwnership();
             Transform player = GetInRangePlayer().transform;
             this.gameObject.transform.SetParent(player);
             transform.position = player.position + player.forward  + new Vector3(0, player.gameObject.GetComponent<BoxCollider>().bounds.size.y/2, 0);

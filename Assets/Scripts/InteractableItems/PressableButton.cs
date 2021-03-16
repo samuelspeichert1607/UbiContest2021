@@ -8,10 +8,12 @@ public class PressableButton : InteractableItem
 {
     // Start is called before the first frame update
     [SerializeField] private float pressingTime;
+    private ControllerManager controllerManager;
 
     private new void Start()
     {
-        base.Start();   
+        base.Start();
+        controllerManager = GetComponent<ControllerManager>();
     }
 
     // Update is called once per frame
@@ -39,7 +41,6 @@ public class PressableButton : InteractableItem
         TextRenderer.CloseInfoText();
     }
     
-
     public override void OnInteractEnd()
     {
         IsInteractedWith = false;
@@ -64,7 +65,7 @@ public class PressableButton : InteractableItem
 
     public override void OnPlayerInRange()
     {
-        if (Input.GetButtonDown(interactButtonName) && !IsInteractedWith)
+        if (controllerManager.GetButtonDown(interactButtonName) && !IsInteractedWith)
         {
             OnInteractStart();
         }

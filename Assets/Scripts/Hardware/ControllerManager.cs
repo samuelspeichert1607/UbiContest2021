@@ -11,6 +11,11 @@ public class ControllerManager : MonoBehaviour
         PickController();
     }
 
+    public float GetAxis(string axis)
+    {
+        return userController.GetAxis(axis);
+    }
+
     public float GetLeftAxisX()
     {
         return userController.GetLeftAxisX();

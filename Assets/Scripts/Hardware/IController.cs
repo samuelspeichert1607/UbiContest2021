@@ -4,6 +4,7 @@ using UnityEngine;
 
 public interface IController
 {
+    public float GetAxis(string axis);
     public float GetLeftAxisX();
     public float GetLeftAxisY();
     public float GetRightAxisX();

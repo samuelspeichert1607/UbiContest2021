@@ -3,7 +3,33 @@ using UnityEngine;
 
 public class PS4Controller : IController
 {
-
+    public float GetAxis(string axis)
+    {
+        switch (axis)
+        {
+            case "LStickX":
+                return GetLeftAxisX();
+                break;
+            case "LStickY":
+                return GetLeftAxisY();
+                break;
+            case "RStickX":
+                return GetRightAxisX();
+                break;
+            case "RStickY":
+                return GetRightAxisY();
+                break;
+            case "RTrigger":
+                return GetRTriggerAxis();
+                break;
+            case "LTrigger":
+                return GetLTriggerAxis();
+                break;
+            default:
+                return 0;
+        }
+    }
+    
     public float GetLeftAxisX()
     {
         return Input.GetAxis("Horizontal");

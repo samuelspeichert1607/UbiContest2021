@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PressurePlateButton : PressurePlate
@@ -10,18 +8,15 @@ public class PressurePlateButton : PressurePlate
     void Start()
     {
         controller = transform.parent.parent.parent.GetComponent<PressurePlateController>();//je sais.. mais sinon c'est tannant de glisser le script pour chaque plates...
-
-
     }
 
-    public override void CollisionDetected()
+    public override void CollisionEntered()
     {
 
-        goDown = true;
         if (controller.unlockedPlates)
         {
 
-            
+
             if (isTheRightOne)
             {
                 controller.won();
@@ -30,7 +25,6 @@ public class PressurePlateButton : PressurePlate
             else
             {
                 controller.penality();
-
             }
         }
 

@@ -34,7 +34,7 @@ GameObject:
   - component: {fileID: 4963175989326121046}
   m_Layer: 0
   m_Name: PlayerForTest
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -68,8 +68,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.8, y: 1.9, z: 0.7}
-  m_Center: {x: 0, y: 0.9, z: 0}
+  m_Size: {x: 0.8, y: 1.9, z: 0.8}
+  m_Center: {x: 0, y: 0.9, z: 0.1}
 --- !u!143 &2454722442041005094
 CharacterController:
   m_ObjectHideFlags: 0
@@ -82,12 +82,12 @@ CharacterController:
   m_Enabled: 1
   serializedVersion: 2
   m_Height: 1.8
-  m_Radius: 0.4
+  m_Radius: 0.6
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0.9, z: 0}
+  m_Center: {x: 0, y: 0.9, z: 0.1}
 --- !u!114 &340260269570391763
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -101,13 +101,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxPlayerSpeed: 6
-  rotationSpeed: 110
   jumpValue: 8
   gravity: -15
   airborneAcceleration: 10
   landingTime: 0.1
-  minimalJumpTime: 0.25
-  onJumpingReleaseDecelerationFactor: 15
+  minimalJumpingAscensionTime: 0.25
+  onJumpingReleaseDecelerationFactor: 8
   onAirborneNoMotionDecelerationFactor: 5
   minimalFallingSpeedForLandingPhase: 5
 --- !u!114 &4963175989326121046
@@ -315,7 +314,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4431572638733790327}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.6, z: 0}
+  m_LocalPosition: {x: 0, y: 1.6, z: 0.3}
   m_LocalScale: {x: 1, y: 1.9698465, z: 1.0301538}
   m_Children: []
   m_Father: {fileID: 4431572637935185262}

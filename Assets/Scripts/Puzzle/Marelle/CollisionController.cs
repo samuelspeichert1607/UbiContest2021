@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
 
 
 public class CollisionController : MonoBehaviour
@@ -9,79 +6,83 @@ public class CollisionController : MonoBehaviour
     [SerializeField] private float raycastRange = 0.1f;
     [SerializeField] private GameObject bottomObject;
 
-    private bool wasMute = false;
-
-    private GameObject colliderObject = null;
-    private GameObject previousColliderObject = null;
     private AudioSource speaker;
     private AudioSource sound;
 
+    private GameObject previousObject = null;
     private void Start()
     {
         speaker = transform.GetChild(1).gameObject.GetComponent<AudioSource>();
     }
+    
     void Update()
     {
 
-        
+        Vector3 bottomCenterPos = bottomObject.transform.position;
+
         RaycastHit hit;
-        if (Physics.Raycast(bottomObject.transform.position, Vector3.down, out hit, raycastRange))
+
+        if (Physics.Raycast(bottomCenterPos, Vector3.down, out hit, raycastRange))
         {
-            colliderObject = hit.collider.gameObject;
+            GameObject obj = hit.collider.gameObject;
 
-            if (wasMute && !colliderObject.CompareTag("MutePlateforme"))
+            if ((previousObject == null || previousObject != obj))
             {
-                speaker.mute = false;
-                wasMute = false;
-                sound.Play();
-                
 
-            }
+                CollisionManagement(obj);
 
-            if (previousColliderObject == null ^ (previousColliderObject != null && previousColliderObject != colliderObject))
-            {
-                if (previousColliderObject!=null && previousColliderObject.CompareTag("PressurePlate"))
+                if (previousObject != null)
                 {
-                    previousColliderObject.GetComponent<PressurePlate>().CollisionExited();
+                    CollisionExitedManagement(previousObject);
                 }
-                previousColliderObject = colliderObject;
-                switch (colliderObject.tag)
-                {
-                    case "MarelleTile":
-                        colliderObject.transform.parent.GetComponent<ParentTile>().CollisionDetected(colliderObject);
-                        break;
-                    case "MutePlateforme":
-                        if (!wasMute)
-                        {
-                            sound = colliderObject.GetComponent<AudioSource>();
-                            sound.Play();
-                            wasMute = true;
-                            speaker.mute = true;
-                        }
-                        break;
-                    case "PressurePlate":
-                        colliderObject.GetComponent<PressurePlate>().CollisionDetected();
-                        break;
-
-                }
-
-
+                previousObject = obj;
             }
-
-
         }
         else
         {
-            if (colliderObject!=null && colliderObject.CompareTag("PressurePlate"))
+            if (previousObject != null)
             {
-                colliderObject.GetComponent<PressurePlate>().CollisionExited();
+                CollisionExitedManagement(previousObject);
             }
-            colliderObject = null;
-
-
+            previousObject = null;
         }
 
     }
 
+    private void CollisionManagement(GameObject colliderObject)
+    {
+        switch (colliderObject.tag)
+        {
+            case "MarelleTile":
+                colliderObject.transform.parent.GetComponent<ParentTile>().CollisionDetected(colliderObject);
+                break;
+            case "MutePlateforme":
+                sound = colliderObject.GetComponent<AudioSource>();
+                sound.Play();
+                speaker.mute = true;
+                break;
+            case "PressurePlate":
+                colliderObject.GetComponent<PressurePlate>().CollisionDetected();
+                break;
+        }
+    }
+
+    private void CollisionExitedManagement(GameObject colliderObject)
+    {
+        switch (colliderObject.tag)
+        {
+            case "PressurePlate":
+                colliderObject.GetComponent<PressurePlate>().CollisionExited();
+                break;
+            case "MutePlateforme":
+                speaker.mute = false;
+                sound.Play();
+                break;
+        }
+    }
+
+
 
 }
+
+
