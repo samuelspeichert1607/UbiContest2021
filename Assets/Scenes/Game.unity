@@ -809,9 +809,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1832682322}
     m_Modifications:
+    - target: {fileID: 3037588788292206953, guid: 02a27965e5bf851478913c63750ecd84, type: 3}
+      propertyPath: viewIdField
+      value: 21
+      objectReference: {fileID: 0}
     - target: {fileID: 3390097158272560287, guid: 02a27965e5bf851478913c63750ecd84, type: 3}
       propertyPath: m_Name
       value: wallDoor (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4516655867592450881, guid: 02a27965e5bf851478913c63750ecd84, type: 3}
+      propertyPath: viewIdField
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 4706411958271363710, guid: 02a27965e5bf851478913c63750ecd84, type: 3}
       propertyPath: m_RootOrder
@@ -6538,7 +6546,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 764272026483293146, guid: 5b6e59192f31cee4ab02f5275d80c9e7, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 764272026483293146, guid: 5b6e59192f31cee4ab02f5275d80c9e7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -10776,6 +10784,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 10235657}
     m_Modifications:
+    - target: {fileID: 3037588788292206953, guid: 02a27965e5bf851478913c63750ecd84, type: 3}
+      propertyPath: viewIdField
+      value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 4516655867592450881, guid: 02a27965e5bf851478913c63750ecd84, type: 3}
+      propertyPath: viewIdField
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 4706411958271363710, guid: 02a27965e5bf851478913c63750ecd84, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -11109,9 +11125,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 500349765}
     m_Modifications:
+    - target: {fileID: 3037588788292206953, guid: 02a27965e5bf851478913c63750ecd84, type: 3}
+      propertyPath: viewIdField
+      value: 26
+      objectReference: {fileID: 0}
     - target: {fileID: 3703011078809429646, guid: 02a27965e5bf851478913c63750ecd84, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4516655867592450881, guid: 02a27965e5bf851478913c63750ecd84, type: 3}
+      propertyPath: viewIdField
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 4706411958271363710, guid: 02a27965e5bf851478913c63750ecd84, type: 3}
       propertyPath: m_RootOrder
@@ -11199,7 +11223,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9162246160214129723, guid: 02a27965e5bf851478913c63750ecd84, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 9162246160214129723, guid: 02a27965e5bf851478913c63750ecd84, type: 3}
       propertyPath: m_LocalPosition.x
@@ -11238,6 +11262,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 500349765}
     m_Modifications:
+    - target: {fileID: 3037588788292206953, guid: 02a27965e5bf851478913c63750ecd84, type: 3}
+      propertyPath: viewIdField
+      value: 27
+      objectReference: {fileID: 0}
+    - target: {fileID: 4516655867592450881, guid: 02a27965e5bf851478913c63750ecd84, type: 3}
+      propertyPath: viewIdField
+      value: 16
+      objectReference: {fileID: 0}
     - target: {fileID: 4706411958271363710, guid: 02a27965e5bf851478913c63750ecd84, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -11316,7 +11348,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9162246160214129723, guid: 02a27965e5bf851478913c63750ecd84, type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 9162246160214129723, guid: 02a27965e5bf851478913c63750ecd84, type: 3}
       propertyPath: m_LocalPosition.x
@@ -26585,9 +26617,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1832682322}
     m_Modifications:
+    - target: {fileID: 3037588788292206953, guid: 02a27965e5bf851478913c63750ecd84, type: 3}
+      propertyPath: viewIdField
+      value: 28
+      objectReference: {fileID: 0}
     - target: {fileID: 3390097158272560287, guid: 02a27965e5bf851478913c63750ecd84, type: 3}
       propertyPath: m_Name
       value: wallDoor (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4516655867592450881, guid: 02a27965e5bf851478913c63750ecd84, type: 3}
+      propertyPath: viewIdField
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 4706411958271363710, guid: 02a27965e5bf851478913c63750ecd84, type: 3}
       propertyPath: m_RootOrder
@@ -29272,6 +29312,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1201368122}
     m_Modifications:
+    - target: {fileID: 3037588788292206953, guid: 02a27965e5bf851478913c63750ecd84, type: 3}
+      propertyPath: viewIdField
+      value: 23
+      objectReference: {fileID: 0}
+    - target: {fileID: 4516655867592450881, guid: 02a27965e5bf851478913c63750ecd84, type: 3}
+      propertyPath: viewIdField
+      value: 18
+      objectReference: {fileID: 0}
     - target: {fileID: 4706411958271363710, guid: 02a27965e5bf851478913c63750ecd84, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -37253,6 +37301,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 10235657}
     m_Modifications:
+    - target: {fileID: 3037588788292206953, guid: 02a27965e5bf851478913c63750ecd84, type: 3}
+      propertyPath: viewIdField
+      value: 22
+      objectReference: {fileID: 0}
+    - target: {fileID: 4516655867592450881, guid: 02a27965e5bf851478913c63750ecd84, type: 3}
+      propertyPath: viewIdField
+      value: 19
+      objectReference: {fileID: 0}
     - target: {fileID: 4706411958271363710, guid: 02a27965e5bf851478913c63750ecd84, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -40840,7 +40896,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 764272026483293146, guid: 5b6e59192f31cee4ab02f5275d80c9e7, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 764272026483293146, guid: 5b6e59192f31cee4ab02f5275d80c9e7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -43449,9 +43505,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1201368122}
     m_Modifications:
+    - target: {fileID: 3037588788292206953, guid: 02a27965e5bf851478913c63750ecd84, type: 3}
+      propertyPath: viewIdField
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 3390097158272560287, guid: 02a27965e5bf851478913c63750ecd84, type: 3}
       propertyPath: m_Name
       value: wallDoor (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4516655867592450881, guid: 02a27965e5bf851478913c63750ecd84, type: 3}
+      propertyPath: viewIdField
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 4706411958271363710, guid: 02a27965e5bf851478913c63750ecd84, type: 3}
       propertyPath: m_RootOrder
