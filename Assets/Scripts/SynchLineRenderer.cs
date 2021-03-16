@@ -2,7 +2,7 @@ using Photon.Pun;
 using UnityEngine;
 
 [RequireComponent(typeof(PhotonView))]
-public class SynchLineRenderer : MonoBehaviourPun//, IPunObservable
+public class SynchLineRenderer : MonoBehaviourPun
 {
     //https://www.youtube.com/watch?v=MUKz8ZX69xI&ab_channel=FirstGearGames
     //Pour passer avec les RPC et les events.

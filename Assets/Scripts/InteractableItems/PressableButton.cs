@@ -41,7 +41,6 @@ public class PressableButton : InteractableItem
         TextRenderer.CloseInfoText();
     }
     
-
     public override void OnInteractEnd()
     {
         IsInteractedWith = false;

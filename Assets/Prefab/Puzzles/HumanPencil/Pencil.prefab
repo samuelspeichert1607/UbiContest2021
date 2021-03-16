@@ -41,7 +41,6 @@ GameObject:
   - component: {fileID: 6679823145998878775}
   - component: {fileID: 2052832361472615361}
   - component: {fileID: 5152296749375269648}
-  - component: {fileID: 8158095149717314144}
   m_Layer: 0
   m_Name: Pencil
   m_TagString: Untagged
@@ -85,7 +84,7 @@ MonoBehaviour:
   interactRadius: 3
   drawingPreText: Press
   drawingPostText: to draw
-  drawingAxisName: RTrigger
+  drawingAxisName: RT
 --- !u!114 &5152296749375269648
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -98,21 +97,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 773dddaf288eeb743b131c07a2905ceb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  brush: {fileID: 4692908856508772414, guid: b31c3cf21f4f00945a84f16609fd8118, type: 3}
   drawingPoint: {fileID: 3385479832246857674}
   drawingSurface: {fileID: 0}
-  displayMonitors: []
---- !u!114 &8158095149717314144
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6679823145998878774}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8688972652696894ca0a72513d7a937e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &6679823147427093186
 GameObject:
   m_ObjectHideFlags: 0
