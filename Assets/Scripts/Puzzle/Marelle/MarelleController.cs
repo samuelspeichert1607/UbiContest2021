@@ -4,22 +4,32 @@ using UnityEngine;
 
 public class MarelleController : MonoBehaviour
 {
-    [SerializeField] private Actionable[] actionableObject;
-    [SerializeField] private AudioSource winSound;
-    [SerializeField] private AudioSource lossSound;
-    public bool isResolve =false;
+    [SerializeField]
+    private Actionable[] actionableObject;
+
+    [SerializeField]
+    private AudioClip winSound;
+
+    [SerializeField]
+    private AudioClip lossSound;
+
+    private AudioSource audioSource;
+    
+    public bool isResolve = false;
+
     public float timerTime;
+
     public bool hasCollisionUnlocked =true;
-
-
+    
     private void Start() //sinon il est 'a false et je ne sais pas pourquoi
     {
         hasCollisionUnlocked = true;
- 
+        audioSource = GetComponent<AudioSource>();
     }
+
     public void gameWon()
     {
-        winSound.Play();
+        audioSource.PlayOneShot(winSound, 0.7f);
         hasCollisionUnlocked = false;
         foreach (Actionable a in actionableObject)
         {
@@ -30,7 +40,7 @@ public class MarelleController : MonoBehaviour
 
     public void gameLost()
     {
-        lossSound.Play();
+        audioSource.PlayOneShot(lossSound, 0.7f);
         hasCollisionUnlocked = false;
         foreach (Transform child in transform)
         {

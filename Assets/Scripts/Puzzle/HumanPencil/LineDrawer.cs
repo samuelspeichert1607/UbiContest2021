@@ -121,10 +121,10 @@ namespace Puzzle.HumanPencil
 
         public void ClearAllDrawing()
         {
-            mainDrawableSurface.ClearDrawing();
+            mainDrawableSurface.ClearDrawingRemote();
             foreach (DrawableSurface monitor in displayMonitors)
             {
-                monitor.ClearDrawing();
+                monitor.ClearDrawingRemote();
             }
         }
         

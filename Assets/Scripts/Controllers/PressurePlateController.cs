@@ -5,8 +5,8 @@ using UnityEngine;
 public class PressurePlateController : MonoBehaviour
 {
 
-[SerializeField] public Actionable[] actionableObject;
-        [SerializeField] private float penalityTimer;
+    [SerializeField] public Actionable[] actionableObject;
+    [SerializeField] private float penalityTimer;
     public bool unlockedPlates = true;
     public bool startPenalityTimer = false;
 

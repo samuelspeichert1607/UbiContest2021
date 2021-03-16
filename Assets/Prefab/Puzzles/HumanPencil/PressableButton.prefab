@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 8973010845316426476}
   - component: {fileID: 499339027837581071}
   - component: {fileID: 6688883498881643857}
-  - component: {fileID: -7871954427043559324}
   m_Layer: 0
   m_Name: PressableButton
   m_TagString: Untagged
@@ -116,15 +115,3 @@ MonoBehaviour:
   interactionStopPostButtonText: 
   interactRadius: 3
   pressingTime: 0.1
---- !u!114 &-7871954427043559324
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7152559465074792282}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8688972652696894ca0a72513d7a937e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
