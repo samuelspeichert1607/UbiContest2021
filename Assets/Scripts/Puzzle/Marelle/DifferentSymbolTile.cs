@@ -23,4 +23,8 @@ public class DifferentSymbolTile : ParentTile
     {
         return sourceTile.transform.GetComponent<TileGoUpDown>().tileRenderer.material.color != Color.green;
     }
+
+    public override void CollisionExited()
+    {
+    }
 }

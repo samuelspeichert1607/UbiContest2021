@@ -14,6 +14,7 @@ public class PressurePlate : MonoBehaviour
     private float heightDifferenceWhenDown = 2;
     private bool goUp = false;
     private bool goDown = false;
+    private bool isPressed;
     void Update()
     {
         if (goUp)
@@ -47,6 +48,7 @@ public class PressurePlate : MonoBehaviour
     {
         audioSource.PlayOneShot(plateDownSound, 0.7f);
         goDown = true;
+        isPressed = true;
         CollisionEntered();
     }
 
@@ -54,8 +56,13 @@ public class PressurePlate : MonoBehaviour
     {
         audioSource.PlayOneShot(plateUpSound, 0.7f);
         goUp = true;
+        isPressed = false;
 
+    }
 
+    public bool IsPressed()
+    {
+        return isPressed;
     }
 
     public virtual void CollisionEntered()

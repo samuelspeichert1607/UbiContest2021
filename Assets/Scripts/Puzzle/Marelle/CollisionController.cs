@@ -56,6 +56,9 @@ public class CollisionController : MonoBehaviour
             case "MarelleTile":
                 colliderObject.transform.parent.GetComponent<ParentTile>().CollisionDetected(colliderObject);
                 break;
+            case "SyncPlateform":
+                colliderObject.transform.GetComponent<ParentTile>().CollisionDetected(colliderObject);
+                break;
             case "MutePlateforme":
                 sound = colliderObject.GetComponent<AudioSource>();
                 sound.Play();
@@ -71,6 +74,12 @@ public class CollisionController : MonoBehaviour
     {
         switch (colliderObject.tag)
         {
+            case "MarelleTile":
+                colliderObject.transform.parent.GetComponent<ParentTile>().CollisionExited();
+                break;
+            case "SyncPlateform":
+                colliderObject.transform.GetComponent<ParentTile>().CollisionExited();
+                break;
             case "PressurePlate":
                 colliderObject.GetComponent<PressurePlate>().CollisionExited();
                 break;

@@ -30,7 +30,6 @@ public class TileGoUpDown : MonoBehaviour
 
     private void ResetPlatform()
     {
-        
         plateformeColider.enabled = true;
         tileRenderer.material.SetColor("_Color", defaultColor);
     }

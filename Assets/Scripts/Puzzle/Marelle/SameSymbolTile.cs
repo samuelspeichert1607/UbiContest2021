@@ -109,4 +109,8 @@ public class SameSymbolTile : ParentTile
             tile.ChangeColor(Color.green);
         }
     }
+
+    public override void CollisionExited()
+    {
+    }
 }

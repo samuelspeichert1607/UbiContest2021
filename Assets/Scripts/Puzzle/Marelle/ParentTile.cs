@@ -5,7 +5,6 @@ using Photon.Pun;
 
 public abstract class ParentTile : MonoBehaviourPun
 {
-
     public abstract void CollisionDetected(GameObject sourceTile);
 
 
@@ -19,4 +18,5 @@ public abstract class ParentTile : MonoBehaviourPun
     }
 
 
+    public abstract void CollisionExited();
 }
