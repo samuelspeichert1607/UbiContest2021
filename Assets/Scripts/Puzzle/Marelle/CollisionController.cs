@@ -77,6 +77,7 @@ public class CollisionController : MonoBehaviour
                 break;
             case "MutePlateforme":
                 speaker.mute = false;
+                Debug.Log("Out mute zone");
                 sound.Play();
                 break;
         }
