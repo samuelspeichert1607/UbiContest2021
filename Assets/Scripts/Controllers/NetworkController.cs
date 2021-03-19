@@ -67,7 +67,7 @@ public class NetworkController : MonoBehaviourPunCallbacks
         base.OnJoinedRoom();
 
         SceneManager.LoadScene(chosenRoomName);
-        //TODO only until game includes all piece
+        // //TODO only until game includes all piece
         // SceneManager.LoadScene("synchroLevel_v01", LoadSceneMode.Additive);
     }
 
