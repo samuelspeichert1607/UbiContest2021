@@ -18,7 +18,7 @@ public class SameSymbolTile : ParentTile
 
     private GameObject tileEntered = null;
 
-    bool testBool = false;
+    bool testBool = true;
     private MarelleController marelleController;
 
     void Start()
@@ -48,7 +48,7 @@ public class SameSymbolTile : ParentTile
         //cheat code
         if (Input.GetButtonDown("Fire2") && testBool)
         {
-            CollisionDetected(transform.GetChild(0).gameObject);
+            CollisionDetected(transform.GetChild(1).gameObject);
             testBool = false;
         }
 

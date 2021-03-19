@@ -241,7 +241,7 @@ MonoBehaviour:
     SceneNameToLoadOnStart: Game
     MaxPlayers: 2
   - Name: Room2
-    SceneNameToLoadOnStart: HumanPencilPrototype
+    SceneNameToLoadOnStart: labyrinthe_Mute_v01
     MaxPlayers: 2
 --- !u!4 &828601926
 Transform:
