@@ -19,9 +19,9 @@ public class MarelleController : MonoBehaviour
 
     public float timerTime;
 
-    public bool hasCollisionUnlocked;
+    public bool hasCollisionUnlocked =true;
     
-    private void Start() 
+    private void Start() //sinon il est 'a false et je ne sais pas pourquoi
     {
         hasCollisionUnlocked = true;
         audioSource = GetComponent<AudioSource>();

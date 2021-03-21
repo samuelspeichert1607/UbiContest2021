@@ -1,20 +1,22 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class LightPlateController : MonoBehaviour
 {
-    [SerializeField] float timerTime = 2;
+    [SerializeField] private GameObject gameLight;
+    [SerializeField] private float timerTime = 2;
+    private Light lightSpot;
     private float timer;
     private bool timerStart = false;
 
     private GameObject sourcePlate = null;
-    private Light lightSpot;
     private bool unlock = true;
 
     private bool testBool =true;
     private void Start()
     {
         timer = timerTime;
-        lightSpot = transform.GetChild(0).GetComponent<Light>();
+        lightSpot =gameLight.GetComponent<Light>();
     }
 
     private void Update()

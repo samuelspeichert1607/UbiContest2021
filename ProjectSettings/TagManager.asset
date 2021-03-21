@@ -8,6 +8,8 @@ TagManager:
   - MutePlateforme
   - PressurePlate
   - LightPlate
+  - LightFlickering
+  - MovingPlatform
   layers:
   - Default
   - TransparentFX
