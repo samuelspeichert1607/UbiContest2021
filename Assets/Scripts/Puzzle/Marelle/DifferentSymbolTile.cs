@@ -11,9 +11,7 @@ public class DifferentSymbolTile : ParentTile
     }
     public override void CollisionDetected(GameObject sourceTile)
     {
-        
-        
-        if (marelleController.hasCollisionUnlocked && IsSourceTileNotGreen(sourceTile))
+        if (IsSourceTileNotGreen(sourceTile))
         {
             marelleController.gameLost();
         }

@@ -542,9 +542,5 @@ Assets/Anims/*
 Assets/Animation/*
 Assets/Models/*
 Assets/Model/*
-
-Assets/Materials/groundConcrete_mat.mat
-
-Assets/Materials/spotLight.mat
-
-Assets/Materials/suspendedPlatforms.mat
+Assets/Sounds/*
+*.mat
