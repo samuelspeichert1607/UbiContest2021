@@ -31,12 +31,13 @@ public class PlayerController : CustomController
     private bool _isLanding;
     private bool _isInJumpingAscensionPhase;
     private bool _mustPlayLandingPhase;
-    
+
     private float _jumpingStartTime;
     
     private Animator _animator;
     private static readonly int Speed = Animator.StringToHash("Speed");
     private static readonly int Jump1 = Animator.StringToHash("Jump");
+    private static readonly int Emote = Animator.StringToHash("Emote");
 
     // Start is called before the first frame update
     void Start()
@@ -90,6 +91,10 @@ public class PlayerController : CustomController
                 if (_controllerManager.GetButtonDown("Jump") && !_isInJumpingAscensionPhase)
                 {
                     InitiateJumping();
+                }
+                else if (_controllerManager.GetButtonDown("RBumper"))
+                {
+                    PlayEmote();
                 }
 
                 _wasGrounded = true;
@@ -350,4 +355,14 @@ public class PlayerController : CustomController
         _animator.SetTrigger(Jump1);
     }
 
+    private void PlayEmote()
+    {
+        
+        _animator.SetTrigger(Emote);
+    }
+
+    public void ChangeCanMove()
+    {
+        canMove = !canMove;
+    }
 }
