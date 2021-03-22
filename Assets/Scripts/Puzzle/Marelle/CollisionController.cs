@@ -67,6 +67,16 @@ public class CollisionController : MonoBehaviour
             case "PressurePlate":
                 colliderObject.GetComponent<PressurePlate>().CollisionDetected();
                 break;
+            case "LightFlickering":
+            {
+                colliderObject.GetComponent<LightFlickering>().StartFlicker();
+                break;
+            }
+            case "MovingPlatform":
+            {
+                colliderObject.GetComponent<MovingPlatform>().PlayerEntered(transform);
+                break;
+            }
         }
     }
 
@@ -95,6 +105,11 @@ public class CollisionController : MonoBehaviour
             case "PressurePlate":
                 colliderObject.GetComponent<PressurePlate>().CollisionExited();
                 break;
+            case "MovingPlatform":
+            {
+                colliderObject.GetComponent<MovingPlatform>().PlayerExited();
+                break;
+            }
         }
     }
 

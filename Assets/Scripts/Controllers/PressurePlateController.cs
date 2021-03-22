@@ -13,19 +13,10 @@ public class PressurePlateController : MonoBehaviour
     private float timer;
     private Color initialColor;
 
-    [SerializeField]
-    private AudioClip winSound;
-
-    [SerializeField]
-    private AudioClip lossSound;
-
-    private AudioSource audioSource;
-
     void Start()
     {
         timer = penalityTimer;
         initialColor = GetComponentInChildren<Renderer>().material.color;
-        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -44,7 +35,6 @@ public class PressurePlateController : MonoBehaviour
     }
     public void won()
     {
-        audioSource.PlayOneShot(winSound, 0.7f);
         ChangeColor(Color.green);
         unlockedPlates = false;
         foreach (Actionable a in actionableObject)
@@ -57,8 +47,6 @@ public class PressurePlateController : MonoBehaviour
         startPenalityTimer = true;
         ChangeColor(Color.red);
         unlockedPlates = false;
-        audioSource.PlayOneShot(lossSound, 0.7f);
-        
 
     }
     private void resetPlates()
