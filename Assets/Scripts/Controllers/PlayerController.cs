@@ -169,6 +169,17 @@ public class PlayerController : CustomController
                 Idle();
             }
         }
+        else if(horizontalMotion == 0f)
+        {
+            if (verticalMotion <= -0.9f)
+            {
+                BackwardsRun();
+            }
+            else
+            {
+                Backwards();
+            }
+        }
         else if (verticalMotion >= 0.99f)
         {
             if (horizontalMotion > 0.5f)
@@ -323,6 +334,16 @@ public class PlayerController : CustomController
     private void DiagonalLeft()
     {
         _animator.SetFloat(Speed, 2f, 0.1f, Time.deltaTime);
+    }
+
+    private void Backwards()
+    {
+        _animator.SetFloat(Speed, 4.5f, 0, Time.deltaTime);
+    }
+
+    private void BackwardsRun()
+    {
+        _animator.SetFloat(Speed, 5f, 0f, Time.deltaTime);
     }
     private void Jump()
     {
