@@ -22,9 +22,6 @@ public class NetworkController : MonoBehaviourPunCallbacks
     private GameObject[] btnStarts = null;
 
     [SerializeField]
-    private byte MaxPlayers = 4;
-
-    [SerializeField]
     private List<DefaultRoom> defaultRooms;
 
     private string chosenRoomName;
@@ -57,7 +54,7 @@ public class NetworkController : MonoBehaviourPunCallbacks
         opts.IsVisible = true;
         opts.MaxPlayers = (byte)roomSettings.MaxPlayers;
 
-        PhotonNetwork.JoinOrCreateRoom(roomName, opts, Photon.Realtime.TypedLobby.Default);
+        PhotonNetwork.JoinOrCreateRoom(roomName, opts, TypedLobby.Default);
         ChangeStateOfButton(false);
         Status("Joining " + roomName);
     }
@@ -65,10 +62,16 @@ public class NetworkController : MonoBehaviourPunCallbacks
     public override void OnJoinedRoom()
     {
         base.OnJoinedRoom();
-
+        
         SceneManager.LoadScene(chosenRoomName);
         // //TODO only until game includes all piece
         // SceneManager.LoadScene("synchroLevel_v01", LoadSceneMode.Additive);
+    }
+
+    public override void OnJoinRandomFailed(short returnCode, string message)
+    {
+        Debug.Log("returnCode : " + returnCode);
+        Debug.Log("message : " + returnCode);
     }
 
     private void Status(string msg)
@@ -76,8 +79,7 @@ public class NetworkController : MonoBehaviourPunCallbacks
         Debug.Log(msg);
         txtStatus.text = msg;
     }
-
-
+    
     private void ChangeStateOfButton(bool state)
     {
         foreach (GameObject btnStart in btnStarts)
@@ -85,4 +87,6 @@ public class NetworkController : MonoBehaviourPunCallbacks
             btnStart.SetActive(state);
         }
     }
+
+    
 }
