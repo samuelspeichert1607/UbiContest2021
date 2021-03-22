@@ -48,7 +48,7 @@ public class SameSymbolTile : ParentTile
         //cheat code
         if (Input.GetButtonDown("Fire2") && testBool)
         {
-            CollisionDetected(transform.GetChild(1).gameObject);
+            CollisionDetected(transform.GetChild(0).gameObject);
             testBool = false;
         }
 
