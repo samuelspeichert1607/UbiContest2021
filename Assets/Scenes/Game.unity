@@ -13984,17 +13984,9 @@ MonoBehaviour:
   assetGuid: 
   m_Mesh: {fileID: 899055556}
   m_IsSelectable: 1
-  m_SelectedFaces: 00000000
-  m_SelectedEdges:
-  - a: 0
-    b: 1
-  - a: 2
-    b: 0
-  - a: 1
-    b: 3
-  - a: 3
-    b: 2
-  m_SelectedVertices: 00000000010000000200000003000000
+  m_SelectedFaces: 
+  m_SelectedEdges: []
+  m_SelectedVertices: 
 --- !u!1 &538570517
 GameObject:
   m_ObjectHideFlags: 0
@@ -44848,6 +44840,18 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1626606278}
+    - target: {fileID: 6934170189467913855, guid: 7663bc6e819becb42ba3bd0fd89258fc, type: 3}
+      propertyPath: m_SelectedEdges.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6934170189467913855, guid: 7663bc6e819becb42ba3bd0fd89258fc, type: 3}
+      propertyPath: m_SelectedFaces.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6934170189467913855, guid: 7663bc6e819becb42ba3bd0fd89258fc, type: 3}
+      propertyPath: m_SelectedVertices.Array.size
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 6934170189701049416, guid: 7663bc6e819becb42ba3bd0fd89258fc, type: 3}
       propertyPath: m_Mesh
       value: 
