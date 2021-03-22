@@ -2004,8 +2004,8 @@ namespace Photon.Pun
                 }
                 else if (one is float)
                 {
-                    float a = (float)one;
-                    float b = (float)two;
+                    float a = Convert.ToSingle(one);
+                    float b = Convert.ToSingle(two);
                     if (a.AlmostEquals(b, PhotonNetwork.PrecisionForFloatSynchronization))
                     {
                         return true;

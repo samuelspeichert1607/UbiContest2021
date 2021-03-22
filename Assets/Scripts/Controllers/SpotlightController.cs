@@ -8,9 +8,8 @@ public class SpotlightController : CustomController
     private Vector3 previousPosition;
     private AudioSource movingSound;
     private PhotonView photonView;
-
-    // Start is called before the first frame update
-    void Start()
+    
+    private void Start()
     {
         photonView = PhotonView.Get(this);
         previousPosition = transform.position;
@@ -25,12 +24,17 @@ public class SpotlightController : CustomController
         controller.Move(transform.right * (horizontalMotion * timeElapsed * movementSpeed));
         if (transform.position != previousPosition && !movingSound.isPlaying)
         {
-            movingSound.Play();
+            photonView.RPC("PlaySound", RpcTarget.All);
         }
 
         previousPosition = transform.position;
     }
     
+    [PunRPC]
+    private void PlaySound()
+    {
+        movingSound.Play();
+    }
 
     public override void Move(Vector3 speed, float timeElapsed)
     {

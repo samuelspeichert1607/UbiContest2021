@@ -38,6 +38,7 @@ public class PlayerController : CustomController
     private Animator _animator;
     private static readonly int Speed = Animator.StringToHash("Speed");
     private static readonly int Jump1 = Animator.StringToHash("Jump");
+    private AudioListener _audioListener;
 
     // Start is called before the first frame update
     void Start()
@@ -50,6 +51,9 @@ public class PlayerController : CustomController
         _controllerManager = GetComponent<ControllerManager>();
         _playerSpeed = new Vector3(0,-1,0);
         _animator = GetComponentInChildren<Animator>();
+        _audioListener = GetComponent<AudioListener>();
+        _audioListener.enabled = _photonView.IsMine;
+
     }
 
     // Update is called once per frame
@@ -77,7 +81,7 @@ public class PlayerController : CustomController
 
             if (!_wasGrounded && _mustPlayLandingPhase)
             {
-                StartLanding();
+                _photonView.RPC("StartLanding", RpcTarget.All);
             }
             
             //je sais que c'est bizarre mais, si je reset la velocite a 0, le controller.isGrounded ne fonctionne pas -_-
@@ -90,7 +94,7 @@ public class PlayerController : CustomController
             {
                 if (_controllerManager.GetButtonDown("Jump") && !_isInJumpingAscensionPhase)
                 {
-                    InitiateJumping();
+                    _photonView.RPC("InitiateJumping", RpcTarget.All);
                 }
 
                 _wasGrounded = true;
@@ -194,7 +198,8 @@ public class PlayerController : CustomController
         _playerSpeed.x = initialJumpSpeed.x;
         _playerSpeed.z = initialJumpSpeed.z;
     }
-    
+
+    [PunRPC]
     private void InitiateJumping()
     {
         audioSource.PlayOneShot(jumpingSounds, 0.7f);
@@ -248,7 +253,8 @@ public class PlayerController : CustomController
         }
         return incrementedPlayerSpeed;
     }
-    
+
+    [PunRPC]
     private void StartLanding()
     {
         audioSource.PlayOneShot(landingSounds, 0.7f);
