@@ -80,7 +80,7 @@ public class SameSymbolTile : ParentTile
                         ChangeColorToGreen();
                     if (lastTile)
                         {
-                            marelleController.gameWon();
+                        marelleController.gameWon();
                         }
                     else if (firstTile)
                     {
