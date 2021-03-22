@@ -121,7 +121,7 @@ public class SyncPressurePlateController : MonoBehaviour
 
     private void LockPuzzle()
     {
-        isLocked = false;
+        isLocked = true;
         foreach (var platePair in pressurePlatesPairs)
         {
             platePair.plate1.Lock();
