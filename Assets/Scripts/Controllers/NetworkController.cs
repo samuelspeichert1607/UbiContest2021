@@ -68,7 +68,7 @@ public class NetworkController : MonoBehaviourPunCallbacks
 
         SceneManager.LoadScene(chosenRoomName);
         // //TODO only until game includes all piece
-        SceneManager.LoadScene("synchroLevel_v01", LoadSceneMode.Additive);
+        // SceneManager.LoadScene("synchroLevel_v01", LoadSceneMode.Additive);
     }
 
     private void Status(string msg)
