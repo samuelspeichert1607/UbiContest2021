@@ -148,13 +148,21 @@ public class PlayerController : CustomController
     {
         if (verticalMotion == 0f)
         {
-            if (horizontalMotion < 0f)
+            if (horizontalMotion < 0f && horizontalMotion > -0.9f)
             {
                 StrafeLeft();
             }
-            else if (horizontalMotion > 0f)
+            else if (horizontalMotion <= -0.9f)
+            {
+                StrafeLeftRun();
+            }
+            else if (horizontalMotion > 0f && horizontalMotion < 0.9f)
             {
                 StrafeRight();
+            }
+            else if (horizontalMotion >= 0.9f)
+            {
+                StrafeRightRun();
             }
             else
             {
@@ -163,7 +171,18 @@ public class PlayerController : CustomController
         }
         else if (verticalMotion >= 0.99f)
         {
-            Run();
+            if (horizontalMotion > 0.5f)
+            {
+                DiagonalRight();
+            }
+            else if (horizontalMotion < -0.5f)
+            {
+                DiagonalLeft();
+            }
+            else
+            {
+                Run();
+            }
         }
         else
         {
@@ -273,19 +292,38 @@ public class PlayerController : CustomController
 
     private void StrafeLeft()
     {
-        _animator.SetFloat(Speed, 2f, 0.1f, Time.deltaTime);
+        _animator.SetFloat(Speed, 3.5f, 0.1f, Time.deltaTime);
+    }
+    
+    private void StrafeLeftRun()
+    {
+        _animator.SetFloat(Speed, 4f, 0.1f, Time.deltaTime);
     }
 
     private void StrafeRight()
     {
-        _animator.SetFloat(Speed, 1.5f, 0.1f, Time.deltaTime);
+        _animator.SetFloat(Speed, 2.5f, 0.1f, Time.deltaTime);
+    }
+    
+    private void StrafeRightRun()
+    {
+        _animator.SetFloat(Speed, 3f, 0.1f, Time.deltaTime);
     }
 
     private void Run()
     {
-        _animator.SetFloat(Speed, 1, 0.1f, Time.deltaTime);
+        _animator.SetFloat(Speed, 1f, 0.1f, Time.deltaTime);
     }
 
+    private void DiagonalRight()
+    {
+        _animator.SetFloat(Speed, 1.5f, 0.1f, Time.deltaTime);
+    }
+
+    private void DiagonalLeft()
+    {
+        _animator.SetFloat(Speed, 2f, 0.1f, Time.deltaTime);
+    }
     private void Jump()
     {
         _animator.SetTrigger(Jump1);

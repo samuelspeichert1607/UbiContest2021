@@ -10,6 +10,6 @@ public class FootstepPlayer : MonoBehaviour
 
     public void PlayFootsteps()
     {
-        audioSource.PlayOneShot(footstepSounds[Random.Range(0, footstepSounds.Length)], 0.5f);
+        audioSource.PlayOneShot(footstepSounds[Random.Range(0, footstepSounds.Length)], 0.1f);
     }
 }
