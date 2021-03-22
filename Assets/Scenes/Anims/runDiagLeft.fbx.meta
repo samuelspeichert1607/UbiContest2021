@@ -1,0 +1,1217 @@
+fileFormatVersion: 2
+guid: ce7f7a4fdc601cd4e8380dfe96c235ac
+ModelImporter:
+  serializedVersion: 19301
+  internalIDToNameTable:
+  - first:
+      74: 1827226128182048838
+    second: Take 001
+  externalObjects: {}
+  materials:
+    materialImportMode: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: "\nClip 'Take 001' has import animation warnings that
+      might lower retargeting quality:\nNote: Activate translation DOF on avatar
+      to improve retargeting quality.\n\t'Perso_final_RIGv_012:lowerBody_jnt' is
+      inbetween humanoid transforms and has rotation animation that will be discarded.\n"
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 3
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Take 001
+      takeName: Take 001
+      internalID: 0
+      firstFrame: 1
+      lastFrame: 23
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 1
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0.96
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human:
+    - boneName: Perso_final_RIGv_012:COG_jnt
+      humanName: Hips
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Perso_final_RIGv_012:L_hip_jnt
+      humanName: LeftUpperLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Perso_final_RIGv_012:R_hip_jnt
+      humanName: RightUpperLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Perso_final_RIGv_012:L_knee_jnt
+      humanName: LeftLowerLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Perso_final_RIGv_012:R_knee_jnt
+      humanName: RightLowerLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Perso_final_RIGv_012:L_ankle_jnt
+      humanName: LeftFoot
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Perso_final_RIGv_012:R_ankle_jnt
+      humanName: RightFoot
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Perso_final_RIGv_012:upperBody_jnt
+      humanName: Spine
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Perso_final_RIGv_012:spine_jnt
+      humanName: Chest
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Perso_final_RIGv_012:head_jnt
+      humanName: Head
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Perso_final_RIGv_012:L_scapula_jnt
+      humanName: LeftShoulder
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Perso_final_RIGv_012:R_scapula_jnt
+      humanName: RightShoulder
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Perso_final_RIGv_012:L_shoulder_jnt
+      humanName: LeftUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Perso_final_RIGv_012:R_shoulder_jnt
+      humanName: RightUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Perso_final_RIGv_012:L_elbow_jnt
+      humanName: LeftLowerArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Perso_final_RIGv_012:R_elbow_jnt
+      humanName: RightLowerArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Perso_final_RIGv_012:L_wrist_jnt
+      humanName: LeftHand
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Perso_final_RIGv_012:R_wrist_jnt
+      humanName: RightHand
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Perso_final_RIGv_012:L_ball_jnt
+      humanName: LeftToes
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Perso_final_RIGv_012:R_ball_jnt
+      humanName: RightToes
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Perso_final_RIGv_012:L_tuyau2_jnt
+      humanName: LeftEye
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Perso_final_RIGv_012:R_tuyau_2_jnt
+      humanName: RightEye
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Perso_final_RIGv_012:L_thumbFinger1_jnt
+      humanName: Left Thumb Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Perso_final_RIGv_012:L_thumbFinger2_jnt
+      humanName: Left Thumb Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Perso_final_RIGv_012:L_thumbFinger3_jnt
+      humanName: Left Thumb Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Perso_final_RIGv_012:L_indexFinger1_jnt
+      humanName: Left Index Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Perso_final_RIGv_012:L_indexFinger2_jnt
+      humanName: Left Index Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Perso_final_RIGv_012:L_indexFinger3_jnt
+      humanName: Left Index Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Perso_final_RIGv_012:L_middleFinger1_jnt
+      humanName: Left Middle Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Perso_final_RIGv_012:L_middleFinger2_jnt
+      humanName: Left Middle Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Perso_final_RIGv_012:L_middleFinger3_jnt
+      humanName: Left Middle Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Perso_final_RIGv_012:L_ringFinger1_jnt
+      humanName: Left Ring Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Perso_final_RIGv_012:L_ringFinger2_jnt
+      humanName: Left Ring Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Perso_final_RIGv_012:L_ringFinger3_jnt
+      humanName: Left Ring Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Perso_final_RIGv_012:L_pinkyFinger1_jnt
+      humanName: Left Little Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Perso_final_RIGv_012:L_pinkyFinger2_jnt
+      humanName: Left Little Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Perso_final_RIGv_012:L_pinkyFinger3_jnt
+      humanName: Left Little Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Perso_final_RIGv_012:R_thumbFinger1_jnt
+      humanName: Right Thumb Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Perso_final_RIGv_012:R_thumbFinger2_jnt
+      humanName: Right Thumb Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Perso_final_RIGv_012:R_thumbFinger3_jnt
+      humanName: Right Thumb Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Perso_final_RIGv_012:R_indexFinger1_jnt
+      humanName: Right Index Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Perso_final_RIGv_012:R_indexFinger2_jnt
+      humanName: Right Index Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Perso_final_RIGv_012:R_indexFinger3_jnt
+      humanName: Right Index Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Perso_final_RIGv_012:R_middleFinger1_jnt
+      humanName: Right Middle Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Perso_final_RIGv_012:R_middleFinger2_jnt
+      humanName: Right Middle Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Perso_final_RIGv_012:R_middleFinger3_jnt
+      humanName: Right Middle Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Perso_final_RIGv_012:R_ringFinger1_jnt
+      humanName: Right Ring Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Perso_final_RIGv_012:R_ringFinger2_jnt
+      humanName: Right Ring Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Perso_final_RIGv_012:R_ringFinger3_jnt
+      humanName: Right Ring Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Perso_final_RIGv_012:R_pinkyFinger1_jnt
+      humanName: Right Little Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Perso_final_RIGv_012:R_pinkyFinger2_jnt
+      humanName: Right Little Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Perso_final_RIGv_012:R_pinkyFinger3_jnt
+      humanName: Right Little Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Perso_final_RIGv_012:chest_jnt
+      humanName: UpperChest
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    skeleton:
+    - name: runDiagLeft(Clone)
+      parentName: 
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Perso_final_RIGv_012:geo_grp
+      parentName: runDiagLeft(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Perso_final_RIGv_012:Perso_final_GEO:perso_grp
+      parentName: Perso_final_RIGv_012:geo_grp
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Perso_final_RIGv_012:Perso_final_GEO:body
+      parentName: Perso_final_RIGv_012:Perso_final_GEO:perso_grp
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Perso_final_RIGv_012:Perso_final_GEO:o2_tanks
+      parentName: Perso_final_RIGv_012:Perso_final_GEO:perso_grp
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Perso_final_RIGv_012:Perso_final_GEO:tuyau_G
+      parentName: Perso_final_RIGv_012:Perso_final_GEO:perso_grp
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Perso_final_RIGv_012:Perso_final_GEO:tuyau_D
+      parentName: Perso_final_RIGv_012:Perso_final_GEO:perso_grp
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Perso_final_RIGv_012:Skel_grp
+      parentName: runDiagLeft(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Perso_final_RIGv_012:COG_jnt
+      parentName: Perso_final_RIGv_012:Skel_grp
+      position: {x: 0.00000021979213, y: 0.7475118, z: 0.01763262}
+      rotation: {x: -1.8189891e-10, y: 0.000000023283064, z: 3.6379788e-10, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Perso_final_RIGv_012:lowerBody_jnt
+      parentName: Perso_final_RIGv_012:COG_jnt
+      position: {x: -0, y: -0.007936505, z: 0}
+      rotation: {x: -0.000000002728484, y: -0.0000000698492, z: 0.0000000040017767,
+        w: 1}
+      scale: {x: 0.99999994, y: 1, z: 1}
+    - name: Perso_final_RIGv_012:R_hip_ik_jnt
+      parentName: Perso_final_RIGv_012:lowerBody_jnt
+      position: {x: 0.14233056, y: -0.045173295, z: -0.007936505}
+      rotation: {x: 0.11371255, y: 0.59021103, z: 0.1741575, w: 0.7799933}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Perso_final_RIGv_012:R_knee_ik_jnt
+      parentName: Perso_final_RIGv_012:R_hip_ik_jnt
+      position: {x: -0.2666758, y: 0, z: 0}
+      rotation: {x: 0.03949244, y: -0.10414995, z: 0.558347, w: 0.82209593}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Perso_final_RIGv_012:R_ankle_ik_jnt
+      parentName: Perso_final_RIGv_012:R_knee_ik_jnt
+      position: {x: -0.36043733, y: -2.220446e-16, z: -3.5527136e-17}
+      rotation: {x: 0.055128425, y: 0.050881412, z: -0.52113104, w: 0.8501732}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Perso_final_RIGv_012:R_ball_ik_jnt
+      parentName: Perso_final_RIGv_012:R_ankle_ik_jnt
+      position: {x: -0.15132827, y: 3.5527136e-17, z: 2.504663e-15}
+      rotation: {x: -0.000000002965942, y: 0.000000027837034, z: -0.10594709, w: 0.9943718}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Perso_final_RIGv_012:R_toe_ik_jnt
+      parentName: Perso_final_RIGv_012:R_ball_ik_jnt
+      position: {x: -0.12925953, y: -1.0533796e-14, z: -4.6540547e-15}
+      rotation: {x: 0, y: -0, z: -0.21855669, w: 0.97582424}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Perso_final_RIGv_012:R_heel_ik_jnt
+      parentName: Perso_final_RIGv_012:R_ankle_ik_jnt
+      position: {x: 0.036962155, y: -0.14789774, z: 2.643219e-14}
+      rotation: {x: 0, y: -0, z: -0.2186302, w: 0.9758078}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Perso_final_RIGv_012:R_hip_fk_jnt
+      parentName: Perso_final_RIGv_012:lowerBody_jnt
+      position: {x: 0.14233056, y: -0.045173295, z: -0.007936505}
+      rotation: {x: 0.43870583, y: 0.55456036, z: 0.4714061, w: 0.5270449}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Perso_final_RIGv_012:R_knee_fk_jnt
+      parentName: Perso_final_RIGv_012:R_hip_fk_jnt
+      position: {x: -0.2666758, y: 1.4210854e-16, z: 0}
+      rotation: {x: 0.0007791557, y: -0.030209206, z: 0.14541183, w: 0.9889096}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Perso_final_RIGv_012:R_ankle_fk_jnt
+      parentName: Perso_final_RIGv_012:R_knee_fk_jnt
+      position: {x: -0.36043733, y: -1.2434498e-16, z: -7.105427e-17}
+      rotation: {x: 0, y: -0, z: -0.5851725, w: 0.81090885}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Perso_final_RIGv_012:R_ball_fk_jnt
+      parentName: Perso_final_RIGv_012:R_ankle_fk_jnt
+      position: {x: -0.15132827, y: -8.881784e-18, z: 2.7000624e-15}
+      rotation: {x: 0, y: -0, z: -0.00007533754, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Perso_final_RIGv_012:R_toe_fk_jnt
+      parentName: Perso_final_RIGv_012:R_ball_fk_jnt
+      position: {x: -0.12925953, y: -1.04805055e-14, z: -4.760636e-15}
+      rotation: {x: 0, y: -0, z: -0.21855669, w: 0.97582424}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Perso_final_RIGv_012:R_heel_fk_jnt
+      parentName: Perso_final_RIGv_012:R_ankle_fk_jnt
+      position: {x: 0.036962155, y: -0.14789774, z: 2.6574298e-14}
+      rotation: {x: 0, y: -0, z: -0.2186302, w: 0.9758078}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Perso_final_RIGv_012:L_hip_ik_jnt
+      parentName: Perso_final_RIGv_012:lowerBody_jnt
+      position: {x: -0.14233099, y: -0.04517303, z: -0.007936509}
+      rotation: {x: 0.5430457, y: -0.4918046, z: 0.57188475, w: -0.36902228}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Perso_final_RIGv_012:L_knee_ik_jnt
+      parentName: Perso_final_RIGv_012:L_hip_ik_jnt
+      position: {x: 0.26667592, y: 0.000000016909866, z: 0.000000017835319}
+      rotation: {x: 0.018501928, y: -0.08487524, z: 0.43022358, w: 0.898533}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Perso_final_RIGv_012:L_ankle_ik_jnt
+      parentName: Perso_final_RIGv_012:L_knee_ik_jnt
+      position: {x: 0.36043712, y: 0.000000026063974, z: -2.6112444e-15}
+      rotation: {x: 0.07337222, y: 0.092667714, z: -0.74782556, w: 0.6532887}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Perso_final_RIGv_012:L_ball_ik_jnt
+      parentName: Perso_final_RIGv_012:L_ankle_ik_jnt
+      position: {x: 0.15132809, y: 0.000000567772, z: -1.2079227e-15}
+      rotation: {x: -0.000000002584499, y: 0.00000007232849, z: -0.03570825, w: 0.9993623}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Perso_final_RIGv_012:L_toe_ik_jnt
+      parentName: Perso_final_RIGv_012:L_ball_ik_jnt
+      position: {x: 0.12925965, y: -0.00000009763839, z: -1.0125234e-15}
+      rotation: {x: 0, y: -0, z: -0.21855669, w: 0.97582424}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Perso_final_RIGv_012:L_heel_ik_jnt
+      parentName: Perso_final_RIGv_012:L_ankle_ik_jnt
+      position: {x: -0.036961906, y: 0.14789806, z: -4.6185276e-16}
+      rotation: {x: 0, y: -0, z: -0.2186302, w: 0.9758078}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Perso_final_RIGv_012:L_hip_fk_jnt
+      parentName: Perso_final_RIGv_012:lowerBody_jnt
+      position: {x: -0.14233099, y: -0.04517303, z: -0.007936509}
+      rotation: {x: 0.52704483, y: -0.47140613, z: 0.5545603, w: -0.43870586}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Perso_final_RIGv_012:L_knee_fk_jnt
+      parentName: Perso_final_RIGv_012:L_hip_fk_jnt
+      position: {x: 0.26667592, y: 0.000000016909866, z: 0.000000017835319}
+      rotation: {x: 0.0007791557, y: -0.030209206, z: 0.14541183, w: 0.9889096}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Perso_final_RIGv_012:L_ankle_fk_jnt
+      parentName: Perso_final_RIGv_012:L_knee_fk_jnt
+      position: {x: 0.36043712, y: 0.000000026063974, z: -2.6256774e-15}
+      rotation: {x: 0, y: -0, z: -0.5851725, w: 0.81090885}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Perso_final_RIGv_012:L_ball_fk_jnt
+      parentName: Perso_final_RIGv_012:L_ankle_fk_jnt
+      position: {x: 0.15132809, y: 0.000000567772, z: -1.2034818e-15}
+      rotation: {x: 0, y: -0, z: -0.00007533754, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Perso_final_RIGv_012:L_toe_fk_jnt
+      parentName: Perso_final_RIGv_012:L_ball_fk_jnt
+      position: {x: 0.12925965, y: -0.00000009763839, z: -1.0413892e-15}
+      rotation: {x: 0, y: -0, z: -0.21855669, w: 0.97582424}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Perso_final_RIGv_012:L_heel_fk_jnt
+      parentName: Perso_final_RIGv_012:L_ankle_fk_jnt
+      position: {x: -0.036961906, y: 0.14789806, z: -4.751754e-16}
+      rotation: {x: 0, y: -0, z: -0.2186302, w: 0.9758078}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Perso_final_RIGv_012:L_hip_jnt
+      parentName: Perso_final_RIGv_012:lowerBody_jnt
+      position: {x: -0.14233099, y: -0.04517303, z: -0.007936509}
+      rotation: {x: 0.57248425, y: -0.5094663, z: 0.50531363, w: -0.39669135}
+      scale: {x: 1.0000002, y: 1.0000001, z: 1}
+    - name: Perso_final_RIGv_012:L_knee_jnt
+      parentName: Perso_final_RIGv_012:L_hip_jnt
+      position: {x: 0.26667592, y: 0.000000016909866, z: 0.000000017835319}
+      rotation: {x: -0.0007791221, y: 0.030209213, z: -0.14541183, w: -0.9889096}
+      scale: {x: 0.9999999, y: 0.99999976, z: 1}
+    - name: Perso_final_RIGv_012:L_ankle_jnt
+      parentName: Perso_final_RIGv_012:L_knee_jnt
+      position: {x: 0.36043712, y: 0.00000002606397, z: -2.5557332e-15}
+      rotation: {x: -0.07688175, y: -0.042108044, z: 0.58473796, w: -0.8064724}
+      scale: {x: 1.0000002, y: 1.0000001, z: 1.0000002}
+    - name: Perso_final_RIGv_012:L_heel_jnt
+      parentName: Perso_final_RIGv_012:L_ankle_jnt
+      position: {x: -0.036961906, y: 0.14789806, z: -4.6185276e-16}
+      rotation: {x: 0, y: -0, z: -0.2186302, w: 0.9758078}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Perso_final_RIGv_012:L_ball_jnt
+      parentName: Perso_final_RIGv_012:L_ankle_jnt
+      position: {x: 0.15132809, y: 0.000000567772, z: -1.2700951e-15}
+      rotation: {x: 0.00000006332993, y: 0.00000002235174, z: -0.0000753405, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Perso_final_RIGv_012:L_toe_jnt
+      parentName: Perso_final_RIGv_012:L_ball_jnt
+      position: {x: 0.12925965, y: -0.00000009763839, z: -1.0125234e-15}
+      rotation: {x: 0, y: -0, z: -0.21855669, w: 0.97582424}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Perso_final_RIGv_012:R_hip_jnt
+      parentName: Perso_final_RIGv_012:lowerBody_jnt
+      position: {x: 0.14233056, y: -0.045173295, z: -0.007936505}
+      rotation: {x: 0.3966914, y: 0.5053136, z: 0.50946635, w: 0.57248425}
+      scale: {x: 1, y: 1, z: 0.9999999}
+    - name: Perso_final_RIGv_012:R_knee_jnt
+      parentName: Perso_final_RIGv_012:R_hip_jnt
+      position: {x: -0.2666758, y: 0, z: 0}
+      rotation: {x: 0.0007791071, y: -0.03020912, z: 0.1454118, w: 0.9889096}
+      scale: {x: 0.9999999, y: 1, z: 1.0000001}
+    - name: Perso_final_RIGv_012:R_ankle_jnt
+      parentName: Perso_final_RIGv_012:R_knee_jnt
+      position: {x: -0.36043733, y: -2.1316282e-16, z: -7.105427e-17}
+      rotation: {x: 0.07688191, y: 0.042108145, z: -0.58473796, w: 0.8064723}
+      scale: {x: 0.99999976, y: 1, z: 1.0000001}
+    - name: Perso_final_RIGv_012:R_heel_jnt
+      parentName: Perso_final_RIGv_012:R_ankle_jnt
+      position: {x: 0.036962155, y: -0.14789774, z: 2.643219e-14}
+      rotation: {x: 0, y: -0, z: -0.2186302, w: 0.9758078}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Perso_final_RIGv_012:R_ball_jnt
+      parentName: Perso_final_RIGv_012:R_ankle_jnt
+      position: {x: -0.15132827, y: 7.105427e-17, z: 2.4158453e-15}
+      rotation: {x: 0.000000044703484, y: 0.000000018626451, z: -0.00007538544, w: 1}
+      scale: {x: 1.0000001, y: 1, z: 1}
+    - name: Perso_final_RIGv_012:R_toe_jnt
+      parentName: Perso_final_RIGv_012:R_ball_jnt
+      position: {x: -0.12925953, y: -1.0533796e-14, z: -4.6540547e-15}
+      rotation: {x: 0, y: -0, z: -0.21855669, w: 0.97582424}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Perso_final_RIGv_012:upperBody_jnt
+      parentName: Perso_final_RIGv_012:COG_jnt
+      position: {x: -0, y: 0.007936505, z: 0}
+      rotation: {x: -0, y: -0, z: 4.235164e-18, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Perso_final_RIGv_012:spine_jnt
+      parentName: Perso_final_RIGv_012:upperBody_jnt
+      position: {x: -5.3290704e-17, y: 0.22680153, z: -0.005067195}
+      rotation: {x: 0.5163621, y: -0.48308414, z: 0.516362, w: -0.48308417}
+      scale: {x: 1.0000005, y: 1.0000006, z: 1.0000004}
+    - name: Perso_final_RIGv_012:chest_jnt
+      parentName: Perso_final_RIGv_012:spine_jnt
+      position: {x: -0.1627732, y: -0.0065556243, z: 2.6645352e-17}
+      rotation: {x: -0.000000029802319, y: -0.000000029802319, z: -0.07478472, w: -0.9971997}
+      scale: {x: 1.0000002, y: 0.99999994, z: 1}
+    - name: Perso_final_RIGv_012:L_scapula_jnt
+      parentName: Perso_final_RIGv_012:chest_jnt
+      position: {x: -0.06168815, y: -0.11779557, z: -0.112907}
+      rotation: {x: -0.66933817, y: -0.16648369, z: 0.6835788, w: 0.23872516}
+      scale: {x: 1, y: 1, z: 0.9999997}
+    - name: Perso_final_RIGv_012:L_shoulder_ik_jnt
+      parentName: Perso_final_RIGv_012:L_scapula_jnt
+      position: {x: 0.16764942, y: 0.045747776, z: -0.014764245}
+      rotation: {x: -0.103925146, y: 0.07925434, z: 0.22687297, w: 0.965115}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Perso_final_RIGv_012:L_elbow_ik_jnt
+      parentName: Perso_final_RIGv_012:L_shoulder_ik_jnt
+      position: {x: 0.2150264, y: 0.0000000021364992, z: -0.0000047743697}
+      rotation: {x: -0.00013025277, y: 0.00006135897, z: 0.000013826538, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Perso_final_RIGv_012:L_wrist_ik_jnt
+      parentName: Perso_final_RIGv_012:L_elbow_ik_jnt
+      position: {x: 0.18213634, y: -0.000000085834486, z: -0.00000008355754}
+      rotation: {x: 0.06586908, y: -0.077169634, z: 0.2776292, w: 0.9553157}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Perso_final_RIGv_012:L_shoulder_fk_jnt
+      parentName: Perso_final_RIGv_012:L_scapula_jnt
+      position: {x: 0.16764942, y: 0.045747776, z: -0.014764245}
+      rotation: {x: -0.27778035, y: 0.39107293, z: 0.39380497, w: 0.7841031}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Perso_final_RIGv_012:L_elbow_fk_jnt
+      parentName: Perso_final_RIGv_012:L_shoulder_fk_jnt
+      position: {x: 0.2150264, y: 0.0000000021364994, z: -0.0000047743697}
+      rotation: {x: -0.014399567, y: -0.013614377, z: 0.72199106, w: 0.6916186}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Perso_final_RIGv_012:L_wrist_fk_jnt
+      parentName: Perso_final_RIGv_012:L_elbow_fk_jnt
+      position: {x: 0.18213634, y: -0.000000085834486, z: -0.00000008355754}
+      rotation: {x: -0.010937175, y: 0.03547599, z: 0.09636964, w: 0.99465305}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Perso_final_RIGv_012:L_shoulder_jnt
+      parentName: Perso_final_RIGv_012:L_scapula_jnt
+      position: {x: 0.16764942, y: 0.045747776, z: -0.014764245}
+      rotation: {x: -0.037916355, y: 0.030651081, z: 0.3135168, w: 0.94833016}
+      scale: {x: 1.0000002, y: 1, z: 1}
+    - name: Perso_final_RIGv_012:L_elbow_jnt
+      parentName: Perso_final_RIGv_012:L_shoulder_jnt
+      position: {x: 0.2150264, y: 0.0000000021364994, z: -0.0000047743697}
+      rotation: {x: -0.0007529293, y: -0.016138079, z: 0.006172053, w: 0.99985045}
+      scale: {x: 1.0000004, y: 1.0000001, z: 0.99999994}
+    - name: Perso_final_RIGv_012:L_wrist_jnt
+      parentName: Perso_final_RIGv_012:L_elbow_jnt
+      position: {x: 0.18213634, y: -0.000000085834486, z: -0.00000008355754}
+      rotation: {x: -0.041339308, y: -0.08352374, z: 0.09416686, w: 0.9911849}
+      scale: {x: 1, y: 0.99999994, z: 0.9999999}
+    - name: Perso_final_RIGv_012:L_handCup_jnt
+      parentName: Perso_final_RIGv_012:L_wrist_jnt
+      position: {x: 0.03491095, y: -0.025946429, z: -0.007809062}
+      rotation: {x: 0.0061572026, y: -0.003901424, z: -0.19229272, w: 0.9813106}
+      scale: {x: 1.0000001, y: 1.0000001, z: 1.0000001}
+    - name: Perso_final_RIGv_012:L_pinkyFinger1_jnt
+      parentName: Perso_final_RIGv_012:L_handCup_jnt
+      position: {x: 0.083783254, y: 0.000000043311893, z: -0.0000015707296}
+      rotation: {x: 0.05602382, y: 0.05978547, z: 0.13655216, w: 0.9872389}
+      scale: {x: 1.0000004, y: 1, z: 1.0000006}
+    - name: Perso_final_RIGv_012:L_pinkyFinger2_jnt
+      parentName: Perso_final_RIGv_012:L_pinkyFinger1_jnt
+      position: {x: 0.028784284, y: 0.00000005160255, z: 0.0000027684712}
+      rotation: {x: -0.016913967, y: 0.0009822546, z: 0.033355903, w: 0.9993}
+      scale: {x: 0.9999997, y: 1, z: 0.9999998}
+    - name: Perso_final_RIGv_012:L_pinkyFinger3_jnt
+      parentName: Perso_final_RIGv_012:L_pinkyFinger2_jnt
+      position: {x: 0.025927313, y: -0.000000010148971, z: -0.0000018297123}
+      rotation: {x: 0.012740753, y: -0.0006342547, z: -0.025104383, w: 0.9996035}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Perso_final_RIGv_012:L_pinkyFinger4_jnt
+      parentName: Perso_final_RIGv_012:L_pinkyFinger3_jnt
+      position: {x: 0.032994993, y: 0.000000108625876, z: 0.0000040226932}
+      rotation: {x: -0.7163303, y: -0.07375441, z: 0.07661217, w: 0.68960994}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Perso_final_RIGv_012:L_ringFinger1_jnt
+      parentName: Perso_final_RIGv_012:L_handCup_jnt
+      position: {x: 0.086333826, y: 0.028248405, z: 0.0041315453}
+      rotation: {x: 0.024210729, y: 0.072381146, z: 0.15306273, w: 0.9852647}
+      scale: {x: 1.0000001, y: 1.0000002, z: 1.0000007}
+    - name: Perso_final_RIGv_012:L_ringFinger2_jnt
+      parentName: Perso_final_RIGv_012:L_ringFinger1_jnt
+      position: {x: 0.035188902, y: -0.000000039443997, z: -0.0000069842595}
+      rotation: {x: -0.007089004, y: -0.0001777261, z: 0.012539023, w: 0.9998963}
+      scale: {x: 1, y: 1, z: 0.9999997}
+    - name: Perso_final_RIGv_012:L_ringFinger3_jnt
+      parentName: Perso_final_RIGv_012:L_ringFinger2_jnt
+      position: {x: 0.02850352, y: -0.00000019617076, z: 0.0000043715927}
+      rotation: {x: 0.008267448, y: 0.00019001056, z: -0.0146229435, w: 0.99985886}
+      scale: {x: 0.99999994, y: 0.99999994, z: 1}
+    - name: Perso_final_RIGv_012:L_ringFinger4_jnt
+      parentName: Perso_final_RIGv_012:L_ringFinger3_jnt
+      position: {x: 0.038036942, y: 0.00000011783051, z: -0.0000036082254}
+      rotation: {x: -0.705414, y: 0.005401966, z: -0.0053765047, w: 0.7087546}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Perso_final_RIGv_012:L_indexFinger1_jnt
+      parentName: Perso_final_RIGv_012:L_wrist_jnt
+      position: {x: 0.12224509, y: 0.035944503, z: -0.0004422672}
+      rotation: {x: -0.018357622, y: 0.07212065, z: 0.019751042, w: 0.9970314}
+      scale: {x: 0.9999998, y: 1.0000002, z: 1.0000001}
+    - name: Perso_final_RIGv_012:L_indexFinger2_jnt
+      parentName: Perso_final_RIGv_012:L_indexFinger1_jnt
+      position: {x: 0.04409804, y: 0.000000265073, z: 0.0000024354272}
+      rotation: {x: 0.006616877, y: 0.040170707, z: -0.008730242, w: 0.99913275}
+      scale: {x: 1, y: 1.0000001, z: 1}
+    - name: Perso_final_RIGv_012:L_indexFinger3_jnt
+      parentName: Perso_final_RIGv_012:L_indexFinger2_jnt
+      position: {x: 0.032154307, y: -0.0000008364438, z: 0.00000084803503}
+      rotation: {x: 0.009297288, y: -0.0048644943, z: -0.013549961, w: 0.9998532}
+      scale: {x: 1.0000005, y: 1, z: 1.0000004}
+    - name: Perso_final_RIGv_012:L_indexFinger4_jnt
+      parentName: Perso_final_RIGv_012:L_indexFinger3_jnt
+      position: {x: 0.03605956, y: 0.00000025891103, z: -0.0000042341194}
+      rotation: {x: -0.6912397, y: -0.0059624664, z: -0.06881706, w: 0.7193166}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Perso_final_RIGv_012:L_middleFinger1_jnt
+      parentName: Perso_final_RIGv_012:L_wrist_jnt
+      position: {x: 0.1288022, y: 0.00000042209706, z: 0.000003926685}
+      rotation: {x: 0.006572588, y: 0.07453879, z: -0.007077005, w: 0.99717134}
+      scale: {x: 0.9999998, y: 1.0000001, z: 1.0000004}
+    - name: Perso_final_RIGv_012:L_middleFinger2_jnt
+      parentName: Perso_final_RIGv_012:L_middleFinger1_jnt
+      position: {x: 0.042284783, y: -0.0000005307815, z: -0.0000045348934}
+      rotation: {x: 0.003439229, y: -0.006033987, z: -0.0061441446, w: 0.999957}
+      scale: {x: 0.99999994, y: 1, z: 0.99999994}
+    - name: Perso_final_RIGv_012:L_middleFinger3_jnt
+      parentName: Perso_final_RIGv_012:L_middleFinger2_jnt
+      position: {x: 0.033445958, y: 0.00000012518551, z: 0.00000012436422}
+      rotation: {x: 0.004592055, y: -0.0041264426, z: -0.008402791, w: 0.99994564}
+      scale: {x: 1.0000001, y: 1, z: 1.0000001}
+    - name: Perso_final_RIGv_012:L_middleFinger4_jnt
+      parentName: Perso_final_RIGv_012:L_middleFinger3_jnt
+      position: {x: 0.038461514, y: 0.00000007998207, z: 0.0000056076738}
+      rotation: {x: 0.020192655, y: -0.70492876, z: 0.05545723, w: 0.70681846}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Perso_final_RIGv_012:L_thumbFinger1_jnt
+      parentName: Perso_final_RIGv_012:L_wrist_jnt
+      position: {x: 0.049857, y: 0.03427759, z: -0.035569318}
+      rotation: {x: -0.5944469, y: -0.27530622, z: -0.2903185, w: -0.6975346}
+      scale: {x: 1.0000004, y: 1.0000001, z: 1.0000002}
+    - name: Perso_final_RIGv_012:L_thumbFinger2_jnt
+      parentName: Perso_final_RIGv_012:L_thumbFinger1_jnt
+      position: {x: 0.040392723, y: 0.000005602001, z: 0.00000008509503}
+      rotation: {x: 0.4935821, y: 0.02004426, z: 0.010086209, w: -0.8694097}
+      scale: {x: 1, y: 1.0000001, z: 1.0000001}
+    - name: Perso_final_RIGv_012:L_thumbFinger3_jnt
+      parentName: Perso_final_RIGv_012:L_thumbFinger2_jnt
+      position: {x: 0.045101628, y: 0.00000032215178, z: -0.0000070241335}
+      rotation: {x: 0.015182167, y: 0.025454879, z: -0.033481568, w: 0.99899983}
+      scale: {x: 1, y: 1.0000001, z: 1.0000001}
+    - name: Perso_final_RIGv_012:L_thumbFinger4_jnt
+      parentName: Perso_final_RIGv_012:L_thumbFinger3_jnt
+      position: {x: 0.038174525, y: -0.000000029919157, z: 0.000006237183}
+      rotation: {x: -0.6623823, y: -0.05632654, z: -0.12206705, w: 0.7370052}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Perso_final_RIGv_012:R_scapula_jnt
+      parentName: Perso_final_RIGv_012:chest_jnt
+      position: {x: -0.06168618, y: -0.117795385, z: 0.11290702}
+      rotation: {x: -0.17039682, y: 0.6678976, z: -0.24291909, w: 0.68254524}
+      scale: {x: 0.9999999, y: 1, z: 0.9999996}
+    - name: Perso_final_RIGv_012:R_shoulder_ik_jnt
+      parentName: Perso_final_RIGv_012:R_scapula_jnt
+      position: {x: -0.16951479, y: -0.048387963, z: 0.0156163415}
+      rotation: {x: -0.06538779, y: -0.036996927, z: 0.79704124, w: 0.5992336}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Perso_final_RIGv_012:R_elbow_ik_jnt
+      parentName: Perso_final_RIGv_012:R_shoulder_ik_jnt
+      position: {x: -0.21168226, y: 5.6864233e-17, z: 3.0214547e-16}
+      rotation: {x: -0.00013018699, y: 0.00004840099, z: 0.0000135039045, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Perso_final_RIGv_012:R_wrist_ik_jnt
+      parentName: Perso_final_RIGv_012:R_elbow_ik_jnt
+      position: {x: -0.18213622, y: 5.3290704e-17, z: -1.4210854e-16}
+      rotation: {x: 0.07800886, y: -0.037712328, z: 0.032952886, w: 0.995694}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Perso_final_RIGv_012:R_shoulder_fk_jnt
+      parentName: Perso_final_RIGv_012:R_scapula_jnt
+      position: {x: -0.16951479, y: -0.048387963, z: 0.0156163415}
+      rotation: {x: -0.2600406, y: 0.4202857, z: 0.42185417, w: 0.76011705}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Perso_final_RIGv_012:R_elbow_fk_jnt
+      parentName: Perso_final_RIGv_012:R_shoulder_fk_jnt
+      position: {x: -0.21168226, y: 1.4210854e-16, z: 2.842171e-16}
+      rotation: {x: -0.014837012, y: -0.013136281, z: 0.74421865, w: 0.6676421}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Perso_final_RIGv_012:R_wrist_fk_jnt
+      parentName: Perso_final_RIGv_012:R_elbow_fk_jnt
+      position: {x: -0.18213622, y: 3.5527135e-16, z: -1.4210854e-16}
+      rotation: {x: 0.02966935, y: 0.025240555, z: 0.09921475, w: 0.99430335}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Perso_final_RIGv_012:R_shoulder_jnt
+      parentName: Perso_final_RIGv_012:R_scapula_jnt
+      position: {x: -0.16951479, y: -0.048387963, z: 0.0156163415}
+      rotation: {x: 0.03759387, y: -0.03172034, z: -0.31924045, w: -0.9463964}
+      scale: {x: 1.0000002, y: 1, z: 1.0000002}
+    - name: Perso_final_RIGv_012:R_elbow_jnt
+      parentName: Perso_final_RIGv_012:R_shoulder_jnt
+      position: {x: -0.21168226, y: 1.5987211e-16, z: 2.842171e-16}
+      rotation: {x: -0.0006972179, y: -0.016539037, z: 0.006117277, w: 0.9998443}
+      scale: {x: 1.0000001, y: 1.0000005, z: 1.0000006}
+    - name: Perso_final_RIGv_012:R_wrist_jnt
+      parentName: Perso_final_RIGv_012:R_elbow_jnt
+      position: {x: -0.18213622, y: 4.973799e-16, z: -2.842171e-16}
+      rotation: {x: 0.04133929, y: 0.08352382, z: -0.094166845, w: -0.9911849}
+      scale: {x: 1, y: 1.0000004, z: 0.9999998}
+    - name: Perso_final_RIGv_012:R_handCup_jnt
+      parentName: Perso_final_RIGv_012:R_wrist_jnt
+      position: {x: -0.03491089, y: 0.025946356, z: 0.007812866}
+      rotation: {x: 0.0061572148, y: -0.003901367, z: -0.19229272, w: 0.9813106}
+      scale: {x: 0.99999994, y: 0.9999997, z: 0.99999994}
+    - name: Perso_final_RIGv_012:R_pinkyFinger1_jnt
+      parentName: Perso_final_RIGv_012:R_handCup_jnt
+      position: {x: -0.08378373, y: 2.842171e-16, z: 1.4210854e-16}
+      rotation: {x: -0.056042474, y: -0.059760686, z: -0.13655111, w: -0.9872394}
+      scale: {x: 0.99999994, y: 1.0000001, z: 1.0000001}
+    - name: Perso_final_RIGv_012:R_pinkyFinger2_jnt
+      parentName: Perso_final_RIGv_012:R_pinkyFinger1_jnt
+      position: {x: -0.028784899, y: -1.4210854e-16, z: 0}
+      rotation: {x: -0.016913822, y: 0.0009822099, z: 0.03335597, w: 0.9993}
+      scale: {x: 1.0000002, y: 1.0000004, z: 1}
+    - name: Perso_final_RIGv_012:R_pinkyFinger3_jnt
+      parentName: Perso_final_RIGv_012:R_pinkyFinger2_jnt
+      position: {x: -0.02592709, y: 0, z: 1.2434498e-15}
+      rotation: {x: 0.012740651, y: -0.0006342857, z: -0.025104377, w: 0.99960345}
+      scale: {x: 1.0000006, y: 1.0000004, z: 1.0000004}
+    - name: Perso_final_RIGv_012:R_pinkyFinger4_jnt
+      parentName: Perso_final_RIGv_012:R_pinkyFinger3_jnt
+      position: {x: -0.03299648, y: 0, z: -1.4210854e-15}
+      rotation: {x: -0.7163303, y: -0.07375441, z: 0.07661217, w: 0.68960994}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Perso_final_RIGv_012:R_ringFinger1_jnt
+      parentName: Perso_final_RIGv_012:R_handCup_jnt
+      position: {x: -0.08633436, y: -0.028248312, z: -0.004128356}
+      rotation: {x: 0.024178859, y: 0.07248605, z: 0.15304685, w: 0.98526025}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Perso_final_RIGv_012:R_ringFinger2_jnt
+      parentName: Perso_final_RIGv_012:R_ringFinger1_jnt
+      position: {x: -0.035184663, y: 0, z: -4.973799e-16}
+      rotation: {x: -0.007089087, y: -0.00017769633, z: 0.012538836, w: 0.9998963}
+      scale: {x: 1.0000002, y: 1, z: 0.9999998}
+    - name: Perso_final_RIGv_012:R_ringFinger3_jnt
+      parentName: Perso_final_RIGv_012:R_ringFinger2_jnt
+      position: {x: -0.028505342, y: 0, z: -2.4868996e-16}
+      rotation: {x: 0.008267466, y: 0.0001899671, z: -0.014622758, w: 0.9998589}
+      scale: {x: 0.99999994, y: 1, z: 1.0000001}
+    - name: Perso_final_RIGv_012:R_ringFinger4_jnt
+      parentName: Perso_final_RIGv_012:R_ringFinger3_jnt
+      position: {x: -0.038035292, y: 3.1086245e-17, z: -5.684342e-16}
+      rotation: {x: -0.705414, y: 0.005401966, z: -0.0053765047, w: 0.7087546}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Perso_final_RIGv_012:R_indexFinger1_jnt
+      parentName: Perso_final_RIGv_012:R_wrist_jnt
+      position: {x: -0.12224548, y: -0.035944466, z: 0.00044382882}
+      rotation: {x: -0.018361127, y: 0.07210676, z: 0.019752678, w: 0.9970323}
+      scale: {x: 1.0000002, y: 1.0000001, z: 1.0000001}
+    - name: Perso_final_RIGv_012:R_indexFinger2_jnt
+      parentName: Perso_final_RIGv_012:R_indexFinger1_jnt
+      position: {x: -0.044099044, y: 3.5527135e-16, z: 4.2632563e-16}
+      rotation: {x: 0.0066171666, y: 0.040187187, z: -0.008736247, w: 0.9991321}
+      scale: {x: 1, y: 1.0000005, z: 1.0000002}
+    - name: Perso_final_RIGv_012:R_indexFinger3_jnt
+      parentName: Perso_final_RIGv_012:R_indexFinger2_jnt
+      position: {x: -0.032154784, y: 1.4210854e-16, z: 2.1316282e-16}
+      rotation: {x: 0.009297206, y: -0.004864327, z: -0.013550045, w: 0.9998532}
+      scale: {x: 1.0000008, y: 1.0000005, z: 1.0000002}
+    - name: Perso_final_RIGv_012:R_indexFinger4_jnt
+      parentName: Perso_final_RIGv_012:R_indexFinger3_jnt
+      position: {x: -0.036057267, y: 0, z: 2.842171e-16}
+      rotation: {x: -0.6912397, y: -0.0059624664, z: -0.06881706, w: 0.7193166}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Perso_final_RIGv_012:R_middleFinger1_jnt
+      parentName: Perso_final_RIGv_012:R_wrist_jnt
+      position: {x: -0.12880224, y: 0, z: 4.2632563e-16}
+      rotation: {x: 0.006572669, y: 0.074608475, z: -0.007085241, w: 0.9971661}
+      scale: {x: 1.0000002, y: 1, z: 1}
+    - name: Perso_final_RIGv_012:R_middleFinger2_jnt
+      parentName: Perso_final_RIGv_012:R_middleFinger1_jnt
+      position: {x: -0.04228183, y: 2.842171e-16, z: -4.2632563e-16}
+      rotation: {x: 0.003439202, y: -0.0060339263, z: -0.0061439853, w: 0.999957}
+      scale: {x: 1, y: 1.0000001, z: 1.0000001}
+    - name: Perso_final_RIGv_012:R_middleFinger3_jnt
+      parentName: Perso_final_RIGv_012:R_middleFinger2_jnt
+      position: {x: -0.033445764, y: 2.842171e-16, z: 7.283063e-16}
+      rotation: {x: 0.0045920797, y: -0.0041263695, z: -0.008402877, w: 0.9999457}
+      scale: {x: 1.0000002, y: 1.0000004, z: 1}
+    - name: Perso_final_RIGv_012:R_middleFinger4_jnt
+      parentName: Perso_final_RIGv_012:R_middleFinger3_jnt
+      position: {x: -0.038465552, y: -1.0658141e-16, z: -8.5265126e-16}
+      rotation: {x: 0.020192655, y: -0.70492876, z: 0.05545723, w: 0.70681846}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Perso_final_RIGv_012:R_thumbFinger1_jnt
+      parentName: Perso_final_RIGv_012:R_wrist_jnt
+      position: {x: -0.04985653, y: -0.034277245, z: 0.0355683}
+      rotation: {x: -0.5942041, y: -0.27574176, z: -0.2900351, w: -0.6976873}
+      scale: {x: 1.0000001, y: 1.0000002, z: 1.0000005}
+    - name: Perso_final_RIGv_012:R_thumbFinger2_jnt
+      parentName: Perso_final_RIGv_012:R_thumbFinger1_jnt
+      position: {x: -0.040397644, y: -2.842171e-16, z: -6.3948843e-16}
+      rotation: {x: 0.49358028, y: 0.019938875, z: 0.010173918, w: -0.8694122}
+      scale: {x: 1.0000007, y: 1.0000001, z: 1.0000005}
+    - name: Perso_final_RIGv_012:R_thumbFinger3_jnt
+      parentName: Perso_final_RIGv_012:R_thumbFinger2_jnt
+      position: {x: -0.045099143, y: -1.4210854e-16, z: 7.105427e-16}
+      rotation: {x: 0.015182285, y: 0.025454786, z: -0.03348152, w: 0.9989998}
+      scale: {x: 0.99999994, y: 1.0000007, z: 1.0000004}
+    - name: Perso_final_RIGv_012:R_thumbFinger4_jnt
+      parentName: Perso_final_RIGv_012:R_thumbFinger3_jnt
+      position: {x: -0.038177524, y: -1.4210854e-16, z: -2.842171e-16}
+      rotation: {x: -0.6623823, y: -0.05632654, z: -0.12206705, w: 0.7370052}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Perso_final_RIGv_012:neck_jnt
+      parentName: Perso_final_RIGv_012:chest_jnt
+      position: {x: -0.16908108, y: -0.008435906, z: 2.2204459e-17}
+      rotation: {x: -0.000000059352715, y: 0.00000007000299, z: 0.17751436, w: 0.9841183}
+      scale: {x: 0.9999998, y: 0.9999999, z: 0.9999997}
+    - name: Perso_final_RIGv_012:head_jnt
+      parentName: Perso_final_RIGv_012:neck_jnt
+      position: {x: -0.055891536, y: 7.105427e-17, z: 1.4210854e-16}
+      rotation: {x: 0.000000029802322, y: -0.000000029802322, z: -0.21825963, w: 0.97589076}
+      scale: {x: 1.0000001, y: 1.0000001, z: 1.0000001}
+    - name: Perso_final_RIGv_012:L_tuyau1_jnt
+      parentName: Perso_final_RIGv_012:head_jnt
+      position: {x: 0.00975029, y: -0.080380894, z: -0.129853}
+      rotation: {x: 0.099626385, y: -0.69861114, z: 0.100029066, w: -0.70143515}
+      scale: {x: 1.000001, y: 1.0000004, z: 1.0000004}
+    - name: Perso_final_RIGv_012:L_tuyau2_jnt
+      parentName: Perso_final_RIGv_012:L_tuyau1_jnt
+      position: {x: 0.021968909, y: -0.00000007778354, z: -0.0000050938506}
+      rotation: {x: 0.0054102126, y: 0.14723165, z: 0.46608058, w: 0.872389}
+      scale: {x: 1.0000014, y: 1.000001, z: 1.0000012}
+    - name: Perso_final_RIGv_012:L_tuyau3_jnt
+      parentName: Perso_final_RIGv_012:L_tuyau2_jnt
+      position: {x: 0.040291414, y: -0.0000047701624, z: 0.008934174}
+      rotation: {x: 0.00036499175, y: 0.00019501145, z: 0.39459035, w: 0.91885704}
+      scale: {x: 1.0000004, y: 1.0000004, z: 1.0000001}
+    - name: Perso_final_RIGv_012:L_tuyau4_jnt
+      parentName: Perso_final_RIGv_012:L_tuyau3_jnt
+      position: {x: 0.03960253, y: -0.00000029762688, z: 0.003659317}
+      rotation: {x: -0.000000022497256, y: -0.000000102401806, z: -0.16231844, w: -0.98673844}
+      scale: {x: 1.0000001, y: 1.0000007, z: 1.0000004}
+    - name: Perso_final_RIGv_012:L_tuyau5_jnt
+      parentName: Perso_final_RIGv_012:L_tuyau4_jnt
+      position: {x: 0.05552925, y: 0.00006192644, z: -0.0035366288}
+      rotation: {x: 0.010471101, y: 0.034823976, z: 0.051525835, w: 0.99800944}
+      scale: {x: 0.99999994, y: 1.0000005, z: 1.0000004}
+    - name: Perso_final_RIGv_012:L_tuyau6_jnt
+      parentName: Perso_final_RIGv_012:L_tuyau5_jnt
+      position: {x: 0.10996166, y: -0.0055231494, z: -0.0033966447}
+      rotation: {x: -0.0007334507, y: -0.0015927138, z: 0.08785971, w: 0.9961313}
+      scale: {x: 1.0000006, y: 1.0000008, z: 1.0000002}
+    - name: Perso_final_RIGv_012:L_tuyau7_jnt
+      parentName: Perso_final_RIGv_012:L_tuyau6_jnt
+      position: {x: 0.044385284, y: -0.0028995075, z: -0.0019786512}
+      rotation: {x: -0.02929364, y: -0.08089856, z: -0.17071985, w: 0.981556}
+      scale: {x: 1.0000002, y: 1, z: 1.0000001}
+    - name: Perso_final_RIGv_012:L_tuyau8_jnt
+      parentName: Perso_final_RIGv_012:L_tuyau7_jnt
+      position: {x: 0.04973243, y: -0.00000010902425, z: 0.000002307456}
+      rotation: {x: -0.05533573, y: -0.29630497, z: 0.008978048, w: 0.9534467}
+      scale: {x: 1.0000005, y: 1.0000002, z: 1.0000001}
+    - name: Perso_final_RIGv_012:L_tuyau9_jnt
+      parentName: Perso_final_RIGv_012:L_tuyau8_jnt
+      position: {x: 0.054023758, y: 0.008307038, z: -0.0000010989506}
+      rotation: {x: -0.22957477, y: 0.66880155, z: 0.6119817, w: 0.35422924}
+      scale: {x: 1, y: 1.0000001, z: 0.99999994}
+    - name: Perso_final_RIGv_012:R_tuyau_1_jnt
+      parentName: Perso_final_RIGv_012:head_jnt
+      position: {x: 0.00975029, y: -0.080380894, z: 0.129853}
+      rotation: {x: -0.69861114, y: -0.09962638, z: 0.70143515, w: 0.10002911}
+      scale: {x: 1.0000004, y: 1.0000004, z: 1}
+    - name: Perso_final_RIGv_012:R_tuyau_2_jnt
+      parentName: Perso_final_RIGv_012:R_tuyau_1_jnt
+      position: {x: -0.021968909, y: 0.00000007778354, z: 0.0000050938506}
+      rotation: {x: 0.0054102535, y: 0.14723165, z: 0.4660805, w: 0.872389}
+      scale: {x: 1.000001, y: 1.0000005, z: 1.0000007}
+    - name: Perso_final_RIGv_012:R_tuyau_3_jnt
+      parentName: Perso_final_RIGv_012:R_tuyau_2_jnt
+      position: {x: -0.04029097, y: 0.0000045093843, z: -0.008936746}
+      rotation: {x: -0.00036486276, y: -0.00019519027, z: -0.3945905, w: -0.918857}
+      scale: {x: 0.99999994, y: 1.0000008, z: 1.0000001}
+    - name: Perso_final_RIGv_012:R_tuyau_4_jnt
+      parentName: Perso_final_RIGv_012:R_tuyau_3_jnt
+      position: {x: -0.03960269, y: 0.0000011670038, z: -0.0036555224}
+      rotation: {x: 0.00000009217181, y: -0.000000028812785, z: 0.16231835, w: 0.98673844}
+      scale: {x: 1.0000008, y: 1, z: 1.0000007}
+    - name: Perso_final_RIGv_012:R_tuyau_5_jnt
+      parentName: Perso_final_RIGv_012:R_tuyau_4_jnt
+      position: {x: -0.055529177, y: -0.000061097126, z: 0.0035387035}
+      rotation: {x: 0.010471231, y: 0.03482391, z: 0.05152567, w: 0.99800944}
+      scale: {x: 1.0000005, y: 1.000001, z: 1.0000005}
+    - name: Perso_final_RIGv_012:R_tuyau_6_jnt
+      parentName: Perso_final_RIGv_012:R_tuyau_5_jnt
+      position: {x: -0.10996184, y: 0.005522963, z: 0.0033976617}
+      rotation: {x: -0.0007336435, y: -0.0015927361, z: 0.08785983, w: 0.9961313}
+      scale: {x: 1.0000001, y: 0.9999997, z: 0.99999994}
+    - name: Perso_final_RIGv_012:R_tuyau_7_jnt
+      parentName: Perso_final_RIGv_012:R_tuyau_6_jnt
+      position: {x: -0.04438574, y: 0.0028982589, z: 0.0019740537}
+      rotation: {x: -0.029293545, y: -0.08089847, z: -0.17072004, w: 0.98155594}
+      scale: {x: 1.0000008, y: 1.0000005, z: 1.000001}
+    - name: Perso_final_RIGv_012:R_tuyau_8_jnt
+      parentName: Perso_final_RIGv_012:R_tuyau_7_jnt
+      position: {x: -0.04973264, y: -0.00000023554007, z: -0.0000029342764}
+      rotation: {x: 0.05533599, y: 0.29630518, z: -0.008978218, w: -0.95344675}
+      scale: {x: 1.0000004, y: 1.0000001, z: 1.0000011}
+    - name: Perso_final_RIGv_012:R_tuyau_9_jnt
+      parentName: Perso_final_RIGv_012:R_tuyau_8_jnt
+      position: {x: -0.054025095, y: -0.008307188, z: -0.0000015298968}
+      rotation: {x: 0.22957471, y: -0.6688014, z: -0.6119818, w: -0.35422933}
+      scale: {x: 1.0000005, y: 1.0000007, z: 1.0000007}
+    - name: Perso_final_RIGv_012:headTip_jnt
+      parentName: Perso_final_RIGv_012:head_jnt
+      position: {x: -0.3412468, y: -7.105427e-17, z: 2.7181052e-16}
+      rotation: {x: 0.5, y: -0.5, z: 0.5, w: 0.5}
+      scale: {x: 1, y: 1, z: 1}
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 3
+  humanoidOversampling: 1
+  avatarSetup: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

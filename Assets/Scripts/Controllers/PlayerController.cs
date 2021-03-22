@@ -13,7 +13,6 @@ public class PlayerController : CustomController
     [SerializeField] private float onJumpingReleaseDecelerationFactor = 15f;
     [SerializeField] private float onAirborneNoMotionDecelerationFactor = 5f;
     [SerializeField] private float minimalFallingSpeedForLandingPhase = 5f;
-    [SerializeField] private AudioClip footStepSounds;
     [SerializeField] private AudioClip jumpingSounds;
     [SerializeField] private AudioClip landingSounds;
     [SerializeField] private AudioSource audioSource;
