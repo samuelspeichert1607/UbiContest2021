@@ -14,7 +14,6 @@ public class ActionableLight : Actionable
 
     public override void OnAction()
     {
-        
         light.enabled = !light.enabled;
     }
 }
