@@ -58,12 +58,43 @@ public class CollisionController : MonoBehaviour
                 break;
             case "MutePlateforme":
                 sound = colliderObject.GetComponent<AudioSource>();
-                sound.Play();
-                speaker.mute = true;
+                MuteIfSpeakerOn();
+                break;
+            case "UnmutePlatform":
+                sound = colliderObject.GetComponent<AudioSource>();
+                UnmuteIfSpeakerOff();
                 break;
             case "PressurePlate":
                 colliderObject.GetComponent<PressurePlate>().CollisionDetected();
                 break;
+            case "LightFlickering":
+            {
+                colliderObject.GetComponent<LightFlickering>().StartFlicker();
+                break;
+            }
+            case "MovingPlatform":
+            {
+                colliderObject.GetComponent<MovingPlatform>().PlayerEntered(transform);
+                break;
+            }
+        }
+    }
+
+    private void MuteIfSpeakerOn()
+    {
+        if (!speaker.mute)
+        {
+            speaker.mute = true;
+            sound.Play();
+        }
+    }
+
+    private void UnmuteIfSpeakerOff()
+    {
+        if (speaker.mute)
+        {
+            speaker.mute = false;
+            sound.Play();
         }
     }
 
@@ -74,10 +105,11 @@ public class CollisionController : MonoBehaviour
             case "PressurePlate":
                 colliderObject.GetComponent<PressurePlate>().CollisionExited();
                 break;
-            case "MutePlateforme":
-                speaker.mute = false;
-                sound.Play();
+            case "MovingPlatform":
+            {
+                colliderObject.GetComponent<MovingPlatform>().PlayerExited();
                 break;
+            }
         }
     }
 

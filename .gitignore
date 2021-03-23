@@ -539,5 +539,8 @@ MigrationBackup/
 Assets/LevelAssets/*
 Assets/Textures/*
 Assets/Anims/*
+Assets/Animation/*
 Assets/Models/*
 Assets/Model/*
+Assets/Sounds/*
+*.mat

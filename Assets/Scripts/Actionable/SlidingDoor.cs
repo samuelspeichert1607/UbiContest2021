@@ -6,9 +6,10 @@ using UnityEngine.Apple;
 
 public class SlidingDoor : Actionable
 {
+   
     [SerializeField] private Vector3 movingDirection = new Vector3(1,0,0);
 
-    public float movingDistance;
+    public float movingDistance =1;
 
     [SerializeField] private bool isOpen;
     [SerializeField] private float movementSpeed = 1.0f;
@@ -21,7 +22,7 @@ public class SlidingDoor : Actionable
 
     private Transform slide1;
     private Transform slide2;
-
+    private Vector3 startPosSlide1;
     private void Start()
     {
         slide1 = transform.GetChild(1);
@@ -33,8 +34,10 @@ public class SlidingDoor : Actionable
         if (isTranslating)
         {
             float fractionOfTransition = (Time.time - startTime) * movementSpeed / movingDistance;
-            slide1.transform.position = Vector3.Lerp(startingPosition, startingPosition + (movingDirection * movingDistance), fractionOfTransition);
+            slide1.transform.position = Vector3.Lerp(startPosSlide1, startingPosition + (movingDirection * movingDistance), fractionOfTransition);
             slide2.transform.position = Vector3.Lerp(startingPosition, destination, fractionOfTransition);
+
+            
             if (fractionOfTransition >= 1)
             {
                 isTranslating = false;
@@ -46,15 +49,19 @@ public class SlidingDoor : Actionable
     {
         if (isOpen)
         {
+            isOpen = false;
             startTime = Time.time;
-            startingPosition = transform.position;
+            startingPosition = transform.position- (movingDirection * movingDistance);
+            startPosSlide1 = transform.position + (movingDirection * movingDistance);
             destination = startingPosition + (movingDirection * movingDistance);
             isTranslating = true;
         }
         else
         {
+            isOpen = true;
             startTime = Time.time;
             startingPosition = transform.position;
+            startPosSlide1 = transform.position;
             destination = startingPosition + (-movingDirection * movingDistance);
             isTranslating = true;
         }

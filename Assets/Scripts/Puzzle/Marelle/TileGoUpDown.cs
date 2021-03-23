@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class TileGoUpDown : MonoBehaviour
 {
-
     public Renderer tileRenderer;
 
     private Animation anim;
