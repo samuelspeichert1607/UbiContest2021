@@ -4,6 +4,8 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 using Photon.Realtime;
+using TMPro;
+using UnityEngine.EventSystems;
 
 [System.Serializable]
 public class DefaultRoom
@@ -15,11 +17,13 @@ public class DefaultRoom
 
 public class NetworkController : MonoBehaviourPunCallbacks
 {
-    [SerializeField]
-    private Text txtStatus = null;
+
+    [SerializeField] private TextMeshProUGUI txtStatus = null;
 
     [SerializeField]
     private GameObject[] btnStarts = null;
+
+    [SerializeField] private GameObject onOpenFirstSelected;
 
     [SerializeField]
     private List<DefaultRoom> defaultRooms;
@@ -31,6 +35,7 @@ public class NetworkController : MonoBehaviourPunCallbacks
         PhotonNetwork.ConnectUsingSettings();
         ChangeStateOfButton(false);
         Status("Connecting to Server");
+        SelectObject(onOpenFirstSelected);
     }
 
     public override void OnConnectedToMaster()
@@ -88,5 +93,15 @@ public class NetworkController : MonoBehaviourPunCallbacks
         }
     }
 
+    public void Disconnect()
+    {
+        PhotonNetwork.Disconnect();
+    }
+
+    private void SelectObject(GameObject gameObjectToSelect)
+    {
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(gameObjectToSelect);
+    }
     
 }

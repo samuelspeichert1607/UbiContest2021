@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
@@ -9,8 +10,13 @@ public class MenuPrincipal : MonoBehaviour
     
     [SerializeField]
     private GameObject onMenuOpenFirstSelected, onOptionsFirstSelected, onCreditsFirstSelected;
-    
-    public void ClickStartButton()
+
+    public void Start()
+    {
+        OpenMenu();
+    }
+
+    public void ClickPlayButton()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
@@ -26,7 +32,7 @@ public class MenuPrincipal : MonoBehaviour
         SelectObject(onOptionsFirstSelected);
     }
 
-    public void openMenu()
+    public void OpenMenu()
     {
         SelectObject(onMenuOpenFirstSelected);
     }
