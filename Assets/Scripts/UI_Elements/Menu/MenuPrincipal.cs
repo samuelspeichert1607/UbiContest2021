@@ -46,6 +46,11 @@ public class MenuPrincipal : MonoBehaviour
     public void ClickPlayButton()
     {
         _audioManager.PlayClickSound();
+        Invoke(nameof(PlayButtonPressed), 0.02f);
+    }
+
+    private void PlayButtonPressed()
+    {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 

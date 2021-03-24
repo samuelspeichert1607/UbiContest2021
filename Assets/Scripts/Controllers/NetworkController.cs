@@ -19,23 +19,46 @@ public class NetworkController : MonoBehaviourPunCallbacks
 {
 
     [SerializeField] private TextMeshProUGUI txtStatus = null;
+    [SerializeField] private GameObject onOpenFirstSelected;
+    [SerializeField] private AudioManagerMenu _audioManager;
 
     [SerializeField]
     private GameObject[] btnStarts = null;
 
-    [SerializeField] private GameObject onOpenFirstSelected;
 
     [SerializeField]
     private List<DefaultRoom> defaultRooms;
 
     private string chosenRoomName;
+    private GameObject _currentlySelected;
+    private bool isAtfirstOpeningFrame;
 
     private void Start()
     {
+        if (PhotonNetwork.IsConnected)
+        {
+            Disconnect();
+        }
         PhotonNetwork.ConnectUsingSettings();
         ChangeStateOfButton(false);
         Status("Connecting to Server");
         SelectObject(onOpenFirstSelected);
+        isAtfirstOpeningFrame = true;
+    }
+    
+    public void Update()
+    {
+        if (HasNavigatedInMenu())
+        {
+            _audioManager.PlayButtonNavigationSound();
+        }
+        _currentlySelected = EventSystem.current.currentSelectedGameObject;
+        if (isAtfirstOpeningFrame) isAtfirstOpeningFrame = false;
+    }
+
+    private bool HasNavigatedInMenu()
+    {
+        return _currentlySelected != EventSystem.current.currentSelectedGameObject && !isAtfirstOpeningFrame;
     }
 
     public override void OnConnectedToMaster()
@@ -49,6 +72,7 @@ public class NetworkController : MonoBehaviourPunCallbacks
 
     public void btnStart_Click(int defaultRoomIndex)
     {
+        _audioManager.PlayClickSound();
         DefaultRoom roomSettings = defaultRooms[defaultRoomIndex];
 
         chosenRoomName = defaultRooms[defaultRoomIndex].SceneNameToLoadOnStart;
@@ -63,7 +87,7 @@ public class NetworkController : MonoBehaviourPunCallbacks
         ChangeStateOfButton(false);
         Status("Joining " + roomName);
     }
-
+    
     public override void OnJoinedRoom()
     {
         base.OnJoinedRoom();
