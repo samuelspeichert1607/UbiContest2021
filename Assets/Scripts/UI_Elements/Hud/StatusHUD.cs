@@ -17,7 +17,7 @@ public class StatusHUD : MonoBehaviour
     // private TextMeshProUGUI timerTextBox;
 
     void Start()
-    { // timerTextBox = transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>();
+    {
         
         // Big problème : le timer se reset à chaque entrée d'un deuxième joueur
         _timeLeft = timeLimit;

@@ -18,12 +18,16 @@ namespace UI_Elements
 
         [SerializeField] 
         private GameObject onPauseFirstSelected, onValidationFirstSelected, onReturnFromValidationFirstSelected;
-
-        private ControllerManager controllerManager;
+        
+        private AudioPlayerMenu _audioPlayer;
+        private ControllerManager _controllerManager;
+        private GameObject _currentlySelected;
+        private bool isAtfirstOpeningFrame;
 
         public void Start()
         {
-            controllerManager = GetComponent<ControllerManager>();
+            _controllerManager = GetComponent<ControllerManager>();
+            _audioPlayer = GetComponent<AudioPlayerMenu>();
             // photonView = GetComponent<PhotonView>();
             pauseMenu.SetActive(false);
             playerController = GetComponentInParent<CustomController>();
@@ -34,16 +38,31 @@ namespace UI_Elements
             //TODO there is a better way to map this probably
             //// if (photonView.IsMine)
             // {
-            if (Input.GetKeyDown(KeyCode.Escape) || controllerManager.GetButtonDown("Start"))
+            if (Input.GetKeyDown(KeyCode.Escape) || _controllerManager.GetButtonDown("Start")
+                && !playerController.IsInCriticalMotion())
             {
                 pauseUnPause();
                 if (validationMenu.activeSelf)
                 {
                     validationMenu.SetActive(false);
                 }
-            } 
+            }
+            if (HasNavigatedInMenu())
+            {
+                _audioPlayer.PlayButtonNavigationSound();
+            }
+            _currentlySelected = EventSystem.current.currentSelectedGameObject;
+            if (isAtfirstOpeningFrame) isAtfirstOpeningFrame = false;
+            
             // }
         }
+
+        private bool HasNavigatedInMenu()
+        {
+            return _currentlySelected != EventSystem.current.currentSelectedGameObject && !isAtfirstOpeningFrame;
+        }
+        
+        
 
         public void pauseUnPause()
         {
@@ -62,6 +81,7 @@ namespace UI_Elements
             playerController.disableMovement();
             pauseMenu.SetActive(true);
             SelectObject(onPauseFirstSelected);
+            isAtfirstOpeningFrame = true;
         }
 
         private void UnPause()
@@ -79,7 +99,7 @@ namespace UI_Elements
         {
             Debug.Log("Logging out");
             PhotonNetwork.Disconnect();
-            PhotonNetwork.LoadLevel(0);
+            PhotonNetwork.LoadLevel(1);
         }
 
         public void OpenValidationMenu()

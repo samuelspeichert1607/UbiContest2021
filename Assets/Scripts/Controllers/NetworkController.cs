@@ -20,7 +20,7 @@ public class NetworkController : MonoBehaviourPunCallbacks
 
     [SerializeField] private TextMeshProUGUI txtStatus = null;
     [SerializeField] private GameObject onOpenFirstSelected;
-    [SerializeField] private AudioManagerMenu _audioManager;
+    [SerializeField] private AudioPlayerMenu audioPlayer;
 
     [SerializeField]
     private GameObject[] btnStarts = null;
@@ -50,7 +50,7 @@ public class NetworkController : MonoBehaviourPunCallbacks
     {
         if (HasNavigatedInMenu())
         {
-            _audioManager.PlayButtonNavigationSound();
+            audioPlayer.PlayButtonNavigationSound();
         }
         _currentlySelected = EventSystem.current.currentSelectedGameObject;
         if (isAtfirstOpeningFrame) isAtfirstOpeningFrame = false;
@@ -72,7 +72,7 @@ public class NetworkController : MonoBehaviourPunCallbacks
 
     public void btnStart_Click(int defaultRoomIndex)
     {
-        _audioManager.PlayClickSound();
+        audioPlayer.PlayClickSound();
         DefaultRoom roomSettings = defaultRooms[defaultRoomIndex];
 
         chosenRoomName = defaultRooms[defaultRoomIndex].SceneNameToLoadOnStart;

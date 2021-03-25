@@ -11,7 +11,7 @@ public class MenuPrincipal : MonoBehaviour
     [SerializeField]
     private GameObject onMenuOpenFirstSelected, onControlsFirstSelected, onCreditsFirstSelected;
 
-    [SerializeField] private AudioManagerMenu _audioManager;
+    [SerializeField] private AudioPlayerMenu audioPlayer;
     
     private GameObject _currentlySelected;
     private bool isAtfirstOpeningFrame = true;
@@ -32,7 +32,7 @@ public class MenuPrincipal : MonoBehaviour
     {
         if (HasNavigatedInMenu())
         {
-            _audioManager.PlayButtonNavigationSound();
+            audioPlayer.PlayButtonNavigationSound();
         }
         _currentlySelected = EventSystem.current.currentSelectedGameObject;
         if (isAtfirstOpeningFrame) isAtfirstOpeningFrame = false;
@@ -45,7 +45,7 @@ public class MenuPrincipal : MonoBehaviour
 
     public void ClickPlayButton()
     {
-        _audioManager.PlayClickSound();
+        audioPlayer.PlayClickSound();
         Invoke(nameof(PlayButtonPressed), 0.02f);
     }
 
@@ -56,13 +56,13 @@ public class MenuPrincipal : MonoBehaviour
 
     public void ClickQuitButton()
     {
-        _audioManager.PlayClickSound();
+        audioPlayer.PlayClickSound();
         Application.Quit();
     }
 
     public void ClickControlsBtn()
     {
-        _audioManager.PlayClickSound();
+        audioPlayer.PlayClickSound();
         controlsMenu.SetActive(true);
         SelectObject(onControlsFirstSelected);
     }
@@ -70,7 +70,7 @@ public class MenuPrincipal : MonoBehaviour
     
     public void ClickCreditsBtn()
     {
-        _audioManager.PlayClickSound();
+        audioPlayer.PlayClickSound();
         creditMenu.SetActive(true);
         SelectObject(onCreditsFirstSelected);
     }

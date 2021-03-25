@@ -98,6 +98,7 @@ public class PlayerController : CustomController
                 }
 
                 _wasGrounded = true;
+                isInCriticalMotion = false;
                 MoveOnGround(verticalMotion, horizontalMotion);
             }
         }
@@ -107,6 +108,7 @@ public class PlayerController : CustomController
             if (_wasGrounded)
             {
                 SetInitialJumpHorizontalSpeed(verticalMotion, horizontalMotion);
+                isInCriticalMotion = true;
             }
             _playerSpeed.y += gravity * Time.deltaTime;
             AdjustAirborneSpeed(verticalMotion, horizontalMotion);
