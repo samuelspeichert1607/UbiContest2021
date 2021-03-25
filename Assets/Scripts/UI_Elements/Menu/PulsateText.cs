@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class pulsateText : MonoBehaviour
+public class PulsateText : MonoBehaviour
 {
     private TextMeshProUGUI textBox;
     [SerializeField] private float pulsateTimer = 1f;
@@ -12,14 +12,9 @@ public class pulsateText : MonoBehaviour
     void Start()
     {
         textBox = gameObject.GetComponentInChildren<TextMeshProUGUI>();
-        StartCoroutine("Pulsate");
+        StartCoroutine(nameof(Pulsate));
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     IEnumerator Pulsate ()
     {
         while (true) {
@@ -47,4 +42,12 @@ public class pulsateText : MonoBehaviour
             yield return null;
         }
     }
+    
+    public void SetFastPulse()
+    {
+        pulsateTimer /= 4;
+        StopAllCoroutines();
+        StartCoroutine(nameof(Pulsate));
+    }
+    
 }

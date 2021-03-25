@@ -10,6 +10,6 @@ public class LobbyMenu : MonoBehaviour
 
     public void ClickReturnToMenu()
     {
-        SceneManager.LoadScene("Menu");
+        SceneManager.LoadScene("principalMENU");
     }
 }

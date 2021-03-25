@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
 
-public class colorChange : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class ColorChange : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] private TextMeshProUGUI text;
     [SerializeField] private Color colorHover;
@@ -16,6 +16,8 @@ public class colorChange : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         text = gameObject.GetComponentInChildren<TextMeshProUGUI>();
         text.color = new Color(colorDefault.r,colorDefault.g,colorDefault.b,colorDefault.a);
     }
+    
+    //Possibly pointless
     public void OnPointerExit (PointerEventData eventData)
     {
         text.color = new Color(colorDefault.r,colorDefault.g,colorDefault.b,colorDefault.a);
