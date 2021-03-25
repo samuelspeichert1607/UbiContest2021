@@ -13,11 +13,13 @@ namespace UI_Elements
         // private PhotonView photonView;
         private CustomController playerController;
         
-        [SerializeField]
-        private GameObject validationMenu;
+        [SerializeField] private GameObject validationMenu;
+        [SerializeField] private GameObject controlsMenu;
+        
 
         [SerializeField] 
-        private GameObject onPauseFirstSelected, onValidationFirstSelected, onReturnFromValidationFirstSelected;
+        private GameObject onPauseFirstSelected, onValidationFirstSelected, onControlsFirstSelected,
+            onReturnFromValidationFirstSelected, onReturnFromControlsFirstSelected;
         
         private AudioPlayerMenu _audioPlayer;
         private ControllerManager _controllerManager;
@@ -112,6 +114,18 @@ namespace UI_Elements
         {
             validationMenu.SetActive(false);
             SelectObject(onReturnFromValidationFirstSelected);
+        }
+        
+        public void OpenControlsMenu()
+        {
+            controlsMenu.SetActive(true);
+            SelectObject(onControlsFirstSelected);
+        }
+
+        public void CloseControlsMenu()
+        {
+            controlsMenu.SetActive(false);
+            SelectObject(onReturnFromControlsFirstSelected);
         }
         
 

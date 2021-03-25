@@ -310,6 +310,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   raycastRange: 0.5
   bottomObject: {fileID: 7939137518127453690}
+  onMuteHudIcon: {fileID: 5840118452145371984}
 --- !u!114 &507341764179454266
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1014,5 +1015,10 @@ PrefabInstance:
 --- !u!224 &2502942670885416834 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6847951498221142404, guid: d99000752cd7f634ea803c83a1bd9774, type: 3}
+  m_PrefabInstance: {fileID: 9058131391209385478}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5840118452145371984 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3222525954401080662, guid: d99000752cd7f634ea803c83a1bd9774, type: 3}
   m_PrefabInstance: {fileID: 9058131391209385478}
   m_PrefabAsset: {fileID: 0}
