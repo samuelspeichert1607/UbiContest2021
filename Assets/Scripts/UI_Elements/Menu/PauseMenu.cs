@@ -59,15 +59,20 @@ namespace UI_Elements
 
         private void Pause()
         {
-            pauseMenu.SetActive(true);
             playerController.disableMovement();
+            pauseMenu.SetActive(true);
             SelectObject(onPauseFirstSelected);
         }
 
         private void UnPause()
         {
-            playerController.allowMovement();
             pauseMenu.SetActive(false);
+            Invoke(nameof(AllowPlayerMovement), 0.05f);
+        }
+
+        private void AllowPlayerMovement()
+        {
+            playerController.allowMovement();
         }
 
         public void LogOut()
