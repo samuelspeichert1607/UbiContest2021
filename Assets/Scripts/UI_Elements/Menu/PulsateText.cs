@@ -49,5 +49,5 @@ public class PulsateText : MonoBehaviour
         StopAllCoroutines();
         StartCoroutine(nameof(Pulsate));
     }
-    
+
 }
