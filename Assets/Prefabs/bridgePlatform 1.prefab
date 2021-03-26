@@ -23,7 +23,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6526180087266800267}
   m_Layer: 0
-  m_Name: bridgePlatform
+  m_Name: bridgePlatform 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -114,7 +114,7 @@ PrefabInstance:
     - target: {fileID: -6907501659843646764, guid: 8b693158d18f27d41bdd2a7c47f5dea7, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 534243374d5607d479ebcb22eca0888c, type: 2}
+      objectReference: {fileID: 2100000, guid: dd0a337fae20fdd47bb3e5b5058cfce5, type: 2}
     - target: {fileID: -2011033438861686292, guid: 8b693158d18f27d41bdd2a7c47f5dea7, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 

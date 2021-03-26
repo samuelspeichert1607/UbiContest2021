@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Photon.Pun;
 public class PlateActivateObject : PressurePlate
 {
     [SerializeField] private float waitTime;
@@ -16,7 +15,7 @@ public class PlateActivateObject : PressurePlate
     }
     public override void CollisionEntered()
     {
-        if (IsUnlock&& PhotonNetwork.CurrentRoom.PlayerCount==2)
+        if (IsUnlock)
         {
             //faire joueur un message qui dit d<attendre l<autre joueur
             mat.SetColor("_Color", Color.green);

@@ -315,11 +315,11 @@ MonoBehaviour:
   - {fileID: 1568334921}
   - {fileID: 1994097991}
   defaultRooms:
-  - Name: Room5
+  - Name: Room 1
     SceneNameToLoadOnStart: Game
     MaxPlayers: 2
-  - Name: Room2
-    SceneNameToLoadOnStart: HumanPencilPrototype
+  - Name: Room 2
+    SceneNameToLoadOnStart: labyrinthe_Mute_v01
     MaxPlayers: 2
 --- !u!4 &828601926
 Transform:

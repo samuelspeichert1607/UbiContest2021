@@ -27,6 +27,7 @@ public class Joystick : InteractableItem
     {
         int targetYAngle = (int) target.transform.eulerAngles.y;
         int selfYAngle = (int) transform.eulerAngles.y;
+        
         if (selfYAngle == (targetYAngle + 90) % 360)
         {
             _swappedMotionAxis = true;
@@ -34,6 +35,7 @@ public class Joystick : InteractableItem
         }
         else if (selfYAngle == (targetYAngle + 180) % 360)
         {
+            
             _leftAxisYUnitDirection = -1;
             _leftAxisXUnitDirection = -1;
         }

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class MarelleController : MonoBehaviour
 {
+    [SerializeField] private RobotVoiceController robotFail;
+
     [SerializeField]
     private Actionable[] actionableObject;
 
@@ -41,6 +43,10 @@ public class MarelleController : MonoBehaviour
     public void gameLost()
     {
         audioSource.PlayOneShot(lossSound, 0.7f);
+        if (UnityEngine.Random.Range(0, 2) == 0)
+        {
+            robotFail.PlayTaskFailed();
+        }
         hasCollisionUnlocked = false;
         foreach (Transform child in transform)
         {
