@@ -354,7 +354,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5556258073005546573, guid: 0b30b84a565e3d4409542c5353d96c69, type: 3}
       propertyPath: m_text
-      value: 'Start In Room 6
+      value: 'Room 6  ?/?
 
 '
       objectReference: {fileID: 0}
@@ -555,7 +555,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5556258073005546573, guid: 0b30b84a565e3d4409542c5353d96c69, type: 3}
       propertyPath: m_text
-      value: 'Start In Room 4
+      value: 'Room 4  ?/?
 
 '
       objectReference: {fileID: 0}
@@ -732,7 +732,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5556258073005546573, guid: 0b30b84a565e3d4409542c5353d96c69, type: 3}
       propertyPath: m_text
-      value: Start In Room 10
+      value: Room 10  ?/?
       objectReference: {fileID: 0}
     - target: {fileID: 5556258073005546573, guid: 0b30b84a565e3d4409542c5353d96c69, type: 3}
       propertyPath: m_fontSize
@@ -907,7 +907,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5556258073005546573, guid: 0b30b84a565e3d4409542c5353d96c69, type: 3}
       propertyPath: m_text
-      value: Start In Room 8
+      value: Room 8  ?/?
       objectReference: {fileID: 0}
     - target: {fileID: 5556258073005546573, guid: 0b30b84a565e3d4409542c5353d96c69, type: 3}
       propertyPath: m_fontSize
@@ -1124,33 +1124,43 @@ MonoBehaviour:
   defaultRooms:
   - Name: Room 1
     SceneNameToLoadOnStart: Game
+    NumberOfCurrentPlayers: 0
     MaxPlayers: 2
   - Name: Room 2
     SceneNameToLoadOnStart: Game
+    NumberOfCurrentPlayers: 0
     MaxPlayers: 2
   - Name: Room 3
     SceneNameToLoadOnStart: Game
+    NumberOfCurrentPlayers: 0
     MaxPlayers: 2
   - Name: Room 4
     SceneNameToLoadOnStart: Game
+    NumberOfCurrentPlayers: 0
     MaxPlayers: 2
   - Name: Room 5
     SceneNameToLoadOnStart: Game
+    NumberOfCurrentPlayers: 0
     MaxPlayers: 2
   - Name: Room 6
     SceneNameToLoadOnStart: Game
+    NumberOfCurrentPlayers: 0
     MaxPlayers: 2
   - Name: Room 7
     SceneNameToLoadOnStart: Game
+    NumberOfCurrentPlayers: 0
     MaxPlayers: 2
   - Name: Room 8
     SceneNameToLoadOnStart: Game
+    NumberOfCurrentPlayers: 0
     MaxPlayers: 2
   - Name: Room 9
     SceneNameToLoadOnStart: Game
+    NumberOfCurrentPlayers: 0
     MaxPlayers: 2
   - Name: Room 10
     SceneNameToLoadOnStart: Game
+    NumberOfCurrentPlayers: 0
     MaxPlayers: 2
 --- !u!4 &828601926
 Transform:
@@ -1175,7 +1185,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5556258073005546573, guid: 0b30b84a565e3d4409542c5353d96c69, type: 3}
       propertyPath: m_text
-      value: 'Start In Room 3
+      value: 'Room 3  ?/?
 
 '
       objectReference: {fileID: 0}
@@ -1376,7 +1386,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5556258073005546573, guid: 0b30b84a565e3d4409542c5353d96c69, type: 3}
       propertyPath: m_text
-      value: 'Start In Room 9
+      value: 'Room 9  ?/?
 
 '
       objectReference: {fileID: 0}
@@ -1779,7 +1789,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1153200169}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -452, y: -251, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2032460798}
@@ -2263,7 +2273,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5556258073005546573, guid: 0b30b84a565e3d4409542c5353d96c69, type: 3}
       propertyPath: m_text
-      value: 'Start In Room 1
+      value: 'Room 1 ?/?
 
 '
       objectReference: {fileID: 0}
@@ -2543,7 +2553,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5556258073005546573, guid: 0b30b84a565e3d4409542c5353d96c69, type: 3}
       propertyPath: m_text
-      value: 'Start In Room 7
+      value: 'Room 7  ?/?
 
 '
       objectReference: {fileID: 0}
@@ -2720,7 +2730,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5556258073005546573, guid: 0b30b84a565e3d4409542c5353d96c69, type: 3}
       propertyPath: m_text
-      value: 'Start In Room 2
+      value: 'Room 2  ?/?
 
 '
       objectReference: {fileID: 0}
@@ -3025,7 +3035,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5556258073005546573, guid: 0b30b84a565e3d4409542c5353d96c69, type: 3}
       propertyPath: m_text
-      value: 'Start In Room 5
+      value: 'Room 5  ?/?
 
 '
       objectReference: {fileID: 0}

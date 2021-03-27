@@ -26,6 +26,8 @@ namespace UI_Elements
         private GameObject _currentlySelected;
         private bool isAtfirstOpeningFrame;
 
+        public event EventHandler disconnector;
+        
         public void Start()
         {
             _controllerManager = GetComponent<ControllerManager>();
@@ -57,6 +59,13 @@ namespace UI_Elements
             if (isAtfirstOpeningFrame) isAtfirstOpeningFrame = false;
             
             // }
+        }
+
+        public static void Disconnect()
+        {
+            Debug.Log("Logging out");
+            PhotonNetwork.Disconnect();
+            PhotonNetwork.LoadLevel(2);
         }
 
         private bool HasNavigatedInMenu()
@@ -99,9 +108,7 @@ namespace UI_Elements
 
         public void LogOut()
         {
-            Debug.Log("Logging out");
-            PhotonNetwork.Disconnect();
-            PhotonNetwork.LoadLevel(1);
+            Disconnect();
         }
 
         public void OpenValidationMenu()
