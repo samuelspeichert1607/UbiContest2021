@@ -18,7 +18,7 @@ public class DrawableSurface : MonoBehaviourPunCallbacks
 
     public void CreateBrush(Vector3 referencePoint)
     {
-        GameObject brushInstance = PhotonNetwork.Instantiate("Brush",brush.transform.position, brush.transform.rotation);
+        GameObject brushInstance = PhotonNetwork.Instantiate("Brush", brush.transform.position, brush.transform.rotation);
         _currentLineRenderer = brushInstance.GetComponent<LineRenderer>();
 
 

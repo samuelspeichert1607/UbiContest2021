@@ -45,6 +45,7 @@ public class PlayerController : CustomController
     private const float RunThreshold = 0.75f;
     private const float DiagonalThresholdX = 0.2f;
     private const float DiagonalThresholdZ = 0.35f;
+    private AudioListener _audioListener;
 
     // Start is called before the first frame update
     void Start()
@@ -57,6 +58,9 @@ public class PlayerController : CustomController
         _controllerManager = GetComponent<ControllerManager>();
         _playerSpeed = new Vector3(0,-1,0);
         _animator = GetComponentInChildren<Animator>();
+        _audioListener = GetComponent<AudioListener>();
+        _audioListener.enabled = _photonView.IsMine;
+
     }
 
     // Update is called once per frame
@@ -84,7 +88,7 @@ public class PlayerController : CustomController
 
             if (!_wasGrounded && _mustPlayLandingPhase)
             {
-                StartLanding();
+                _photonView.RPC("StartLanding", RpcTarget.All);
             }
             
             //je sais que c'est bizarre mais, si je reset la velocite a 0, le controller.isGrounded ne fonctionne pas -_-
@@ -97,7 +101,7 @@ public class PlayerController : CustomController
             {
                 if (_controllerManager.GetButtonDown("Jump") && !_isInJumpingAscensionPhase)
                 {
-                    InitiateJumping();
+                    _photonView.RPC("InitiateJumping", RpcTarget.All);
                 }
                 else if (_controllerManager.GetButtonDown("RBumper"))
                 {
@@ -105,6 +109,7 @@ public class PlayerController : CustomController
                 }
 
                 _wasGrounded = true;
+                isInCriticalMotion = false;
                 MoveOnGround(verticalMotion, horizontalMotion);
             }
         }
@@ -114,6 +119,7 @@ public class PlayerController : CustomController
             if (_wasGrounded)
             {
                 SetInitialJumpHorizontalSpeed(verticalMotion, horizontalMotion);
+                isInCriticalMotion = true;
             }
             _playerSpeed.y += gravity * Time.deltaTime;
             AdjustAirborneSpeed(verticalMotion, horizontalMotion);
@@ -235,7 +241,8 @@ public class PlayerController : CustomController
         _playerSpeed.x = initialJumpSpeed.x;
         _playerSpeed.z = initialJumpSpeed.z;
     }
-    
+
+    [PunRPC]
     private void InitiateJumping()
     {
         audioSource.PlayOneShot(jumpingSounds, 0.7f);
@@ -290,7 +297,8 @@ public class PlayerController : CustomController
         }
         return incrementedPlayerSpeed;
     }
-    
+
+    [PunRPC]
     private void StartLanding()
     {
         audioSource.PlayOneShot(landingSounds, 0.7f);
