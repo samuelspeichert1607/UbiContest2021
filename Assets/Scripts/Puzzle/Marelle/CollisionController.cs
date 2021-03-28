@@ -28,7 +28,7 @@ public class CollisionController : MonoBehaviour
 
             if ((previousObject == null || previousObject != obj))
             {
-
+                
                 CollisionManagement(obj);
 
                 if (previousObject != null)
@@ -75,6 +75,12 @@ public class CollisionController : MonoBehaviour
             case "MovingPlatform":
             {
                 colliderObject.GetComponent<MovingPlatform>().PlayerEntered(transform);
+                break;
+            }
+            case "LabyFloor":
+            {
+                colliderObject.GetComponent<LabyFloor>().FellOnFloor();
+        
                 break;
             }
         }

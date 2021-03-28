@@ -43,7 +43,7 @@ public class MarelleController : MonoBehaviour
     public void gameLost()
     {
         audioSource.PlayOneShot(lossSound, 0.7f);
-        if (UnityEngine.Random.Range(0, 2) == 0)
+        if (UnityEngine.Random.Range(0, 2) == 0)//50%
         {
             robotFail.PlayTaskFailed();
         }
