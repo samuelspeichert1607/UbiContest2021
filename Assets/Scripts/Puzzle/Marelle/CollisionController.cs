@@ -5,7 +5,6 @@ public class CollisionController : MonoBehaviour
 {
     [SerializeField] private float raycastRange = 0.1f;
     [SerializeField] private GameObject bottomObject;
-    [SerializeField] private GameObject onMuteHudIcon;
 
     private AudioSource speaker;
     private AudioSource sound;
@@ -86,7 +85,6 @@ public class CollisionController : MonoBehaviour
         if (!speaker.mute)
         {
             speaker.mute = true;
-            onMuteHudIcon.SetActive(true);
             sound.Play();
         }
     }
@@ -96,7 +94,6 @@ public class CollisionController : MonoBehaviour
         if (speaker.mute)
         {
             speaker.mute = false;
-            onMuteHudIcon.SetActive(false);
             sound.Play();
         }
     }

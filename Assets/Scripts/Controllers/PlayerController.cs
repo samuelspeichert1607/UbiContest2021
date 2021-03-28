@@ -164,41 +164,54 @@ public class PlayerController : CustomController
     
     private void MoveOnGround(float verticalMotion, float horizontalMotion)
     {
-        if (verticalMotion == 0f)
+        if (verticalMotion == 0f && horizontalMotion == 0f)
         {
-            if (horizontalMotion < 0f && horizontalMotion > -0.9f)
+            Idle();
+        }
+        
+        else if (verticalMotion <= 0.1f && verticalMotion >= -0.1f)
+        {
+            if (horizontalMotion < 0f && horizontalMotion > -0.75f)
             {
                 StrafeLeft();
             }
-            else if (horizontalMotion <= -0.9f)
+            else if (horizontalMotion <= -0.75f)
             {
                 StrafeLeftRun();
             }
-            else if (horizontalMotion > 0f && horizontalMotion < 0.9f)
+            else if (horizontalMotion > 0f && horizontalMotion < 0.75f)
             {
                 StrafeRight();
             }
-            else if (horizontalMotion >= 0.9f)
+            else if (horizontalMotion >= 0.75f)
             {
                 StrafeRightRun();
             }
-            else
-            {
-                Idle();
-            }
+            // else
+            // {
+            //     Idle();
+            // }
         }
-        else if(horizontalMotion == 0f)
+        else if(horizontalMotion >= -0.1f && horizontalMotion <= 0.1f)
         {
-            if (verticalMotion <= -0.9f)
-            {
-                BackwardsRun();
-            }
-            else
+            if (verticalMotion < 0 && verticalMotion > -0.75f)
             {
                 Backwards();
             }
+            else if (verticalMotion <= -0.75f)
+            {
+                BackwardsRun();
+            }
+            else if (verticalMotion > 0 && verticalMotion < 0.75f)
+            {
+                Walk();
+            }
+            else if (verticalMotion >= 0.75f)
+            {
+                Run();
+            }
         }
-        else if (verticalMotion >= 0.99f)
+        else if (verticalMotion >= 0.5f)
         {
             if (horizontalMotion > 0.5f)
             {
@@ -208,15 +221,15 @@ public class PlayerController : CustomController
             {
                 DiagonalLeft();
             }
-            else
-            {
-                Run();
-            }
+            // else
+            // {
+            //     Run();
+            // }
         }
-        else
-        {
-            Walk();
-        }
+        // else
+        // {
+        //     Walk();
+        // }
         MoveAtMaxSpeed(verticalMotion, horizontalMotion, Time.deltaTime);
     }
 
@@ -371,7 +384,7 @@ public class PlayerController : CustomController
     {
         // _animator.SetFloat(Speed, 2f, 0.1f, Time.deltaTime);
         _animator.SetFloat(SpeedX, -DiagonalThresholdX, 0.1f, Time.deltaTime);
-        _animator.SetFloat(SpeedZ, -DiagonalThresholdZ, 0.1f, Time.deltaTime);
+        _animator.SetFloat(SpeedZ, DiagonalThresholdZ, 0.1f, Time.deltaTime);
     }
 
     private void Backwards()

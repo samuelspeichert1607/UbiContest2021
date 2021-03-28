@@ -13,23 +13,17 @@ namespace UI_Elements
         // private PhotonView photonView;
         private CustomController playerController;
         
-        [SerializeField] private GameObject validationMenu;
-        [SerializeField] private GameObject controlsMenu;
-        
+        [SerializeField]
+        private GameObject validationMenu;
 
         [SerializeField] 
-        private GameObject onPauseFirstSelected, onValidationFirstSelected, onControlsFirstSelected,
-            onReturnFromValidationFirstSelected, onReturnFromControlsFirstSelected;
-        
-        private AudioPlayerMenu _audioPlayer;
-        private ControllerManager _controllerManager;
-        private GameObject _currentlySelected;
-        private bool isAtfirstOpeningFrame;
+        private GameObject onPauseFirstSelected, onValidationFirstSelected, onReturnFromValidationFirstSelected;
+
+        private ControllerManager controllerManager;
 
         public void Start()
         {
-            _controllerManager = GetComponent<ControllerManager>();
-            _audioPlayer = GetComponent<AudioPlayerMenu>();
+            controllerManager = GetComponent<ControllerManager>();
             // photonView = GetComponent<PhotonView>();
             pauseMenu.SetActive(false);
             playerController = GetComponentInParent<CustomController>();
@@ -40,31 +34,16 @@ namespace UI_Elements
             //TODO there is a better way to map this probably
             //// if (photonView.IsMine)
             // {
-            if (Input.GetKeyDown(KeyCode.Escape) || _controllerManager.GetButtonDown("Start")
-                && !playerController.IsInCriticalMotion())
+            if (Input.GetKeyDown(KeyCode.Escape) || controllerManager.GetButtonDown("Start"))
             {
                 pauseUnPause();
                 if (validationMenu.activeSelf)
                 {
                     validationMenu.SetActive(false);
                 }
-            }
-            if (HasNavigatedInMenu())
-            {
-                _audioPlayer.PlayButtonNavigationSound();
-            }
-            _currentlySelected = EventSystem.current.currentSelectedGameObject;
-            if (isAtfirstOpeningFrame) isAtfirstOpeningFrame = false;
-            
+            } 
             // }
         }
-
-        private bool HasNavigatedInMenu()
-        {
-            return _currentlySelected != EventSystem.current.currentSelectedGameObject && !isAtfirstOpeningFrame;
-        }
-        
-        
 
         public void pauseUnPause()
         {
@@ -80,28 +59,22 @@ namespace UI_Elements
 
         private void Pause()
         {
-            playerController.disableMovement();
             pauseMenu.SetActive(true);
+            playerController.disableMovement();
             SelectObject(onPauseFirstSelected);
-            isAtfirstOpeningFrame = true;
         }
 
         private void UnPause()
         {
-            pauseMenu.SetActive(false);
-            Invoke(nameof(AllowPlayerMovement), 0.05f);
-        }
-
-        private void AllowPlayerMovement()
-        {
             playerController.allowMovement();
+            pauseMenu.SetActive(false);
         }
 
         public void LogOut()
         {
             Debug.Log("Logging out");
             PhotonNetwork.Disconnect();
-            PhotonNetwork.LoadLevel(1);
+            PhotonNetwork.LoadLevel(0);
         }
 
         public void OpenValidationMenu()
@@ -114,18 +87,6 @@ namespace UI_Elements
         {
             validationMenu.SetActive(false);
             SelectObject(onReturnFromValidationFirstSelected);
-        }
-        
-        public void OpenControlsMenu()
-        {
-            controlsMenu.SetActive(true);
-            SelectObject(onControlsFirstSelected);
-        }
-
-        public void CloseControlsMenu()
-        {
-            controlsMenu.SetActive(false);
-            SelectObject(onReturnFromControlsFirstSelected);
         }
         
 

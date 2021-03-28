@@ -13,11 +13,13 @@ public class StatusHUD : MonoBehaviour
     private static float _timeLeft;
     private static float _previousTimeLeft;
     private static int _previousPlayerCount;
-    [SerializeField] private Image oxygenFill;
+    private Image oxygenFill;
     // private TextMeshProUGUI timerTextBox;
 
     void Start()
     {
+        oxygenFill = transform.GetChild(transform.childCount - 1).transform.GetComponent<Image>();
+        // timerTextBox = transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>();
         
         // Big problème : le timer se reset à chaque entrée d'un deuxième joueur
         _timeLeft = timeLimit;

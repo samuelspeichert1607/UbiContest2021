@@ -15,7 +15,11 @@ public class PairOfPlates
 public class SyncPressurePlateController : MonoBehaviour
 {
     [SerializeField] private Actionable[] actionableObject;
-    [SerializeField] private PairOfPlates[] pressurePlatesPairs;
+    [SerializeField] float pressTime = 2;
+    [SerializeField] float penalityTime = 5;
+    [SerializeField] private PairOfPlates[] pressurePlatesPairs; 
+    private float timer;
+    private bool isTimerStarted = false;
 
     private GameObject sourcePlate = null;
     private bool isLocked = true;
@@ -23,55 +27,86 @@ public class SyncPressurePlateController : MonoBehaviour
     private bool testBool =true;
     
     private Color successColor = Color.green;
+    private Color failureColor = Color.red;
     private Color pressedColor = Color.yellow;
     private void Start()
     {
+        timer = pressTime;
     }
 
     private void Update()
     {
-        UpdateAllPlatesState();
-
-        //cheat code
-        // if (Input.GetButtonDown("Fire2") && testBool)
-        // {
-        //     OnSuccess();
-        //     testBool = false;
-        // }
-        
-    }
-
-    private void UpdateAllPlatesState()
-    {
-        foreach (var platePair in pressurePlatesPairs)
+        if (isTimerStarted)
         {
-            UpdatePlateState(platePair.plate1);
-            UpdatePlateState(platePair.plate2);
-            if (platePair.plate1.IsPressedAndUnlocked() && platePair.plate2.IsPressedAndUnlocked())
+            if (timer > 0)
             {
-                OnSuccess();
-            }
-        }
-    }
-
-    private void UpdatePlateState(PressurePlateButtonSync plate)
-    {
-        if (!plate.IsLocked())
-        {
-            if (plate.IsPressedAndUnlocked())
-            {
-                PlateHaveBeenPressed(plate);
+                timer -= Time.deltaTime;
             }
             else
             {
-                plate.Reset();
-            }   
+                isTimerStarted = false;
+                timer = 0;
+                OnFailure();
+
+            }
+        }
+
+        CheckIfAnyPairOfPlateIsPressed();
+
+        //cheat code
+        if (Input.GetButtonDown("Fire2") && testBool)
+        {
+            OnSuccess();
+            testBool = false;
+        }
+        
+    }
+
+    private void CheckIfAnyPairOfPlateIsPressed()
+    {
+        foreach (var platePair in pressurePlatesPairs)
+        {
+            if (platePair.plate1.IsPressedAndUnlocked())
+            {
+                if (platePair.plate2.IsPressedAndUnlocked())
+                {
+                    OnSuccess();
+                }
+                else
+                {
+                    PlateHaveBeenPressed(platePair.plate1);
+                }
+            }
+
+            if (platePair.plate2.IsPressedAndUnlocked())
+            {
+                if (platePair.plate1.IsPressedAndUnlocked())
+                {
+                    OnSuccess();
+                }
+                else
+                {
+                    PlateHaveBeenPressed(platePair.plate2);
+                }
+            }
         }
     }
 
     private void PlateHaveBeenPressed(PressurePlateButtonSync plate)
     {
-        plate.SetColor(pressedColor);
+        if (!isTimerStarted)
+        {
+            timer = pressTime;
+            isTimerStarted = true;
+            plate.SetColor(pressedColor);
+        }
+    }
+
+    private void OnFailure()
+    {
+        SetAllPlatesColor(failureColor);
+        LockPuzzle();
+        Invoke(nameof(Reset), penalityTime);
     }
 
     private void OnSuccess()
