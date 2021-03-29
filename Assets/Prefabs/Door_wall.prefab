@@ -173,6 +173,7 @@ GameObject:
   - component: {fileID: 1977265386091671624}
   - component: {fileID: 1248941571877361004}
   - component: {fileID: 5080209062279649569}
+  - component: {fileID: 1927866935305447520}
   m_Layer: 0
   m_Name: Door_wall
   m_TagString: Untagged
@@ -222,6 +223,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 540, y: 300, z: 50}
   m_Center: {x: 330, y: 150, z: 4}
+--- !u!65 &1927866935305447520
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1169661329126664946}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 125, y: 50, z: 40}
+  m_Center: {x: 0, y: 250, z: 0}
 --- !u!1 &2958869808785459001
 GameObject:
   m_ObjectHideFlags: 0

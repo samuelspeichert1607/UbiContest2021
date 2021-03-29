@@ -4,16 +4,17 @@ using System.Collections.Generic;
 using Photon.Pun;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class StatusHUD : MonoBehaviour
 {
-    [SerializeField]
-    private float timeLimit;
+    [SerializeField] private float timeLimit;
+    [SerializeField] private float delayBeforeGameEnd = 15f;
+    [SerializeField] private Image oxygenFill;
     private static float _timeLeft;
     private static float _previousTimeLeft;
     private static int _previousPlayerCount;
-    [SerializeField] private Image oxygenFill;
     // private TextMeshProUGUI timerTextBox;
 
     void Start()
@@ -55,10 +56,13 @@ public class StatusHUD : MonoBehaviour
         }
         else
         {
-            // To keep the timer from going to a negative value that would make the game crash
-            // timerTextBox.text = "0:00";
-            _timeLeft = -1;
+            Invoke(nameof(GameIsLost), delayBeforeGameEnd);
         }
+    }
+
+    private void GameIsLost()
+    {
+        SceneManager.LoadScene("endingScreenFailure");
     }
 
     private void UpdateOxygenBar()

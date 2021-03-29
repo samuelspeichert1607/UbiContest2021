@@ -11,6 +11,7 @@ TagManager:
   - LightFlickering
   - MovingPlatform
   - UnmutePlatform
+  - LabyFloor
   layers:
   - Default
   - TransparentFX
@@ -18,7 +19,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - post processing
   - 
   - 
   - 
