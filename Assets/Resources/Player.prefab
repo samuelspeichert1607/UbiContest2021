@@ -569,7 +569,7 @@ MonoBehaviour:
   OwnershipTransfer: 1
   ObservedComponents:
   - {fileID: 507341764179454266}
-  - {fileID: 0}
+  - {fileID: 5821727508758833437}
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -833,6 +833,18 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 3ff72135b1689ac4a985292b0415c6be, type: 2}
+    - target: {fileID: 7277171696150746214, guid: 5081c5b2fadec0e4e82593e7c9833d32, type: 3}
+      propertyPath: m_DynamicOccludee
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7277171696150746214, guid: 5081c5b2fadec0e4e82593e7c9833d32, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3299cf8e0c4361c46a16eab5c899e02f, type: 2}
+    - target: {fileID: 9206509254403302982, guid: 5081c5b2fadec0e4e82593e7c9833d32, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3299cf8e0c4361c46a16eab5c899e02f, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5081c5b2fadec0e4e82593e7c9833d32, type: 3}
 --- !u!1 &2511467413627315140 stripped

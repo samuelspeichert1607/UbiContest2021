@@ -40,6 +40,7 @@ public class PlayerController : CustomController
     private static readonly int Emote = Animator.StringToHash("Emote");
     private static readonly int SpeedX = Animator.StringToHash("SpeedX");
     private static readonly int SpeedZ = Animator.StringToHash("SpeedZ");
+    private static readonly int Falling = Animator.StringToHash("Falling");
     
     private const float WalkThreshold = 0.5f;
     private const float RunThreshold = 0.75f;
@@ -133,6 +134,7 @@ public class PlayerController : CustomController
         if (_playerSpeed.y <= - minimalFallingSpeedForLandingPhase)
         {
             _mustPlayLandingPhase = true;
+            MidJump();
         }
         else
         {
@@ -187,10 +189,6 @@ public class PlayerController : CustomController
             {
                 StrafeRightRun();
             }
-            // else
-            // {
-            //     Idle();
-            // }
         }
         else if(horizontalMotion >= -0.1f && horizontalMotion <= 0.1f)
         {
@@ -221,15 +219,7 @@ public class PlayerController : CustomController
             {
                 DiagonalLeft();
             }
-            // else
-            // {
-            //     Run();
-            // }
         }
-        // else
-        // {
-        //     Walk();
-        // }
         MoveAtMaxSpeed(verticalMotion, horizontalMotion, Time.deltaTime);
     }
 
@@ -326,77 +316,66 @@ public class PlayerController : CustomController
 
     private void Idle()
     {
-        // _animator.SetFloat(Speed, 0, 0.1f, Time.deltaTime);
         _animator.SetFloat(SpeedX, 0, 0.1f, Time.deltaTime);
         _animator.SetFloat(SpeedZ, 0, 0.1f, Time.deltaTime);
     }
 
     private void Walk()
     {
-        // _animator.SetFloat(Speed, 0.5f, 0.1f, Time.deltaTime);
         _animator.SetFloat(SpeedX, 0, 0.1f, Time.deltaTime);
         _animator.SetFloat(SpeedZ, WalkThreshold, 0.1f, Time.deltaTime);
     }
 
     private void StrafeLeft()
     {
-        // _animator.SetFloat(Speed, 3.5f, 0.1f, Time.deltaTime);
         _animator.SetFloat(SpeedX, -WalkThreshold, 0.1f, Time.deltaTime);
         _animator.SetFloat(SpeedZ, 0, 0.1f, Time.deltaTime);
     }
     
     private void StrafeLeftRun()
     {
-        // _animator.SetFloat(Speed, 4f, 0.1f, Time.deltaTime);
         _animator.SetFloat(SpeedX, -RunThreshold, 0.1f, Time.deltaTime);
         _animator.SetFloat(SpeedZ, 0f, 0.1f, Time.deltaTime);
     }
 
     private void StrafeRight()
     {
-        // _animator.SetFloat(Speed, 2.5f, 0.1f, Time.deltaTime);
         _animator.SetFloat(SpeedX, WalkThreshold, 0.1f, Time.deltaTime);
         _animator.SetFloat(SpeedZ, 0, 0.1f, Time.deltaTime);
     }
 
     private void StrafeRightRun()
     {
-        // _animator.SetFloat(Speed, 3f, 0.1f, Time.deltaTime);
         _animator.SetFloat(SpeedX, RunThreshold, 0.1f, Time.deltaTime);
         _animator.SetFloat(SpeedZ, 0, 0.1f, Time.deltaTime);
     }
 
     private void Run()
     {
-        // _animator.SetFloat(Speed, 1f, 0.1f, Time.deltaTime);
         _animator.SetFloat(SpeedX, 0, 0.1f, Time.deltaTime);
         _animator.SetFloat(SpeedZ, RunThreshold, 0.1f, Time.deltaTime);
     }
 
     private void DiagonalRight()
     {
-        // _animator.SetFloat(Speed, 1.5f, 0.1f, Time.deltaTime);
         _animator.SetFloat(SpeedX, DiagonalThresholdX, 0.1f, Time.deltaTime);
         _animator.SetFloat(SpeedZ, DiagonalThresholdZ, 0.1f, Time.deltaTime);
     }
 
     private void DiagonalLeft()
     {
-        // _animator.SetFloat(Speed, 2f, 0.1f, Time.deltaTime);
         _animator.SetFloat(SpeedX, -DiagonalThresholdX, 0.1f, Time.deltaTime);
         _animator.SetFloat(SpeedZ, DiagonalThresholdZ, 0.1f, Time.deltaTime);
     }
 
     private void Backwards()
     {
-        // _animator.SetFloat(Speed, 4.5f, 0, Time.deltaTime);
         _animator.SetFloat(SpeedX, 0, 0.1f, Time.deltaTime);
         _animator.SetFloat(SpeedZ, -WalkThreshold, 0.1f, Time.deltaTime);
     }
 
     private void BackwardsRun()
     {
-        // _animator.SetFloat(Speed, 5f, 0f, Time.deltaTime);
         _animator.SetFloat(SpeedX, 0, 0.1f, Time.deltaTime);
         _animator.SetFloat(SpeedZ, -RunThreshold, 0.1f, Time.deltaTime);
     }
@@ -419,8 +398,7 @@ public class PlayerController : CustomController
     
     private void MidJump()
     {
-        _animator.SetFloat(Speed, 0.5f, 0.1f, Time.deltaTime);
-        _animator.SetTrigger(Jump1);
+        _animator.SetTrigger(Falling);
     }
     
     private void EndJump()
