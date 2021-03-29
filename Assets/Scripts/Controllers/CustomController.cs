@@ -44,4 +44,13 @@ public class CustomController : MonoBehaviour
     {
         return canMove;
     }
+    
+    /// <summary>
+    ///  If the controller is currently in a motion that should not be disturbed 
+    /// </summary>
+    /// <returns></returns>
+    public bool IsInCriticalMotion()
+    {
+        return isInCriticalMotion;
+    }
 }
