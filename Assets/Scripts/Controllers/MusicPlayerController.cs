@@ -9,10 +9,9 @@ public class MusicPlayerController : MonoBehaviour
     [SerializeField] private AudioMixer mainMixer;
     [SerializeField] private AudioSource track1;
     [SerializeField] private AudioSource track2;
-    // [SerializeField] private AudioClip track1Clip;
-    // [SerializeField] private AudioClip track2Clip;
     [SerializeField] private float startTime;
     [SerializeField] private float timeBeforeChange;
+    [SerializeField] private float fadeTime;
 
     private bool isSwitched = false;
     private bool hasStarted = false;
@@ -20,9 +19,6 @@ public class MusicPlayerController : MonoBehaviour
     void Start()
     {
         mainMixer.SetFloat("musicVolume", 0f);
-        // track1.clip = track1Clip;
-        // track2.clip = track2Clip;
-        // track1.Play();
     }
 
     // Update is called once per frame
@@ -31,7 +27,7 @@ public class MusicPlayerController : MonoBehaviour
         if (Time.time > startTime && !hasStarted)
         {
             track1.Play();
-            StartCoroutine(MixerFade.StartFade(mainMixer, "track1Volume", 2, 1f));
+            StartCoroutine(MixerFade.StartFade(mainMixer, "track1Volume", fadeTime, 0.7f));
             hasStarted = true;
         }
         // // Ceci fonctionne bien pour notre cas, mais ce serait à regler si les personnes décidaient de passer plus que 13 minutes dans le menu.
@@ -45,7 +41,7 @@ public class MusicPlayerController : MonoBehaviour
     private void CrossfadeTracks(AudioSource currentTrack, AudioSource nextTrack)
     {
         nextTrack.Play();
-        StartCoroutine(MixerFade.StartFade(mainMixer, "track1Volume", 2, 0.0001f));
-        StartCoroutine(MixerFade.StartFade(mainMixer, "track2Volume", 2, 1));
+        StartCoroutine(MixerFade.StartFade(mainMixer, "track1Volume", fadeTime, 0.0001f));
+        StartCoroutine(MixerFade.StartFade(mainMixer, "track2Volume", fadeTime, 0.7f));
     }
 }

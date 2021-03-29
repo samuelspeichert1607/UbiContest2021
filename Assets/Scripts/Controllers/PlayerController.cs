@@ -41,6 +41,7 @@ public class PlayerController : CustomController
     private static readonly int SpeedX = Animator.StringToHash("SpeedX");
     private static readonly int SpeedZ = Animator.StringToHash("SpeedZ");
     private static readonly int Falling = Animator.StringToHash("Falling");
+    private static readonly int Landed = Animator.StringToHash("Landed");
     
     private const float WalkThreshold = 0.5f;
     private const float RunThreshold = 0.75f;
@@ -134,7 +135,6 @@ public class PlayerController : CustomController
         if (_playerSpeed.y <= - minimalFallingSpeedForLandingPhase)
         {
             _mustPlayLandingPhase = true;
-            MidJump();
         }
         else
         {
@@ -403,8 +403,7 @@ public class PlayerController : CustomController
     
     private void EndJump()
     {
-        _animator.SetFloat(Speed, 1f, 0.1f, Time.deltaTime);
-        _animator.SetTrigger(Jump1);
+        _animator.SetTrigger(Landed);
 
     }
     
