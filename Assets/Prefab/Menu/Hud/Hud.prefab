@@ -300,6 +300,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeLimit: 900
+  delayBeforeGameEnd: 15
   oxygenFill: {fileID: 3900007994901213984}
 --- !u!1 &6847951498598669833
 GameObject:
@@ -959,6 +960,14 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 8612086129205473296}
+    - target: {fileID: 3148377136362056849, guid: 1fc0ed83a879de3408b7b9e4a653b907, type: 3}
+      propertyPath: m_text
+      value: Leave the cupcakes behind?
+      objectReference: {fileID: 0}
+    - target: {fileID: 3148377137010345627, guid: 1fc0ed83a879de3408b7b9e4a653b907, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5158802567212405300, guid: 1fc0ed83a879de3408b7b9e4a653b907, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
