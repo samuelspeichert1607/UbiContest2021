@@ -13,7 +13,7 @@ public class RobotVoiceController : MonoBehaviour
     private bool canPlaySound=true;
     private AudioSource audioSource;
     private AudioClip currentClip;
-    // Start is called before the first frame update
+
     void Start()
     {
         currentClip = introClip;
@@ -22,20 +22,15 @@ public class RobotVoiceController : MonoBehaviour
 
     private void Update()
     {
-        if (canPlaySound && PhotonNetwork.CurrentRoom.PlayerCount == 1)
+        if (canPlaySound && PhotonNetwork.CurrentRoom.PlayerCount == 2)
         {
             canPlaySound = false;
-            Invoke("PlayIntro", 2);
+            PlayClip(introClip);
         }
 
     }
-    // Update is called once per frame
-    
-    //
-    private void PlayIntro()
-    {
-        PlayClip(introClip);
-    }
+
+ 
     public void PlayTaskFailed()
     {
         PlayClip(taskFail[UnityEngine.Random.Range(0, taskFail.Length)]);

@@ -57,6 +57,7 @@ public class CollisionController : MonoBehaviour
                 colliderObject.transform.parent.GetComponent<ParentTile>().CollisionDetected(colliderObject);
                 break;
             case "MutePlateforme":
+                
                 sound = colliderObject.GetComponent<AudioSource>();
                 MuteIfSpeakerOn();
                 break;

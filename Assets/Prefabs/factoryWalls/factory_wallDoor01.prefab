@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3156785721142838364}
+  - component: {fileID: 8170237647543266433}
   m_Layer: 0
   m_Name: factory_wallDoor01
   m_TagString: Untagged
@@ -37,6 +38,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &8170237647543266433
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2343269628271058662}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 101.139915, y: 1193.7412, z: 1020.4382}
+  m_Center: {x: 50.069958, y: 596.3704, z: 2.7023315}
 --- !u!1 &2414773848125160263
 GameObject:
   m_ObjectHideFlags: 0
