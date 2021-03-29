@@ -6,48 +6,38 @@ public class PlateActivateObject : PressurePlate
     [SerializeField] private float waitTime;
     [SerializeField] private Actionable[] actionableObject;
     private Material mat;
-    private Color startColor;
-    private bool IsUnlock = true;
+    private Color originalColor;
+
      void Start()
     {
         mat = GetComponent<Renderer>().material;
-        startColor = mat.color;
+        originalColor = mat.color;
     }
     public override void CollisionEntered()
     {
-        if (IsUnlock)
+        if (mat.color!=Color.green)
         {
-            //faire joueur un message qui dit d<attendre l<autre joueur
             mat.SetColor("_Color", Color.green);
             ToggleActionable();
             Invoke("CloseActinable", waitTime);
-            IsUnlock = false;
         }
 
     }
 
     private void CloseActinable()
     {
-        mat.SetColor("_Color", Color.red);
+        mat.SetColor("_Color", originalColor);
         ToggleActionable();
-        Invoke("UnlockActionable", waitTime);
 
     }
 private void ToggleActionable()
     {
         foreach (Actionable a in actionableObject)
         {
-            
             a.OnAction();
         }
 
     }
 
 
-
-    private void UnlockActionable()
-    {
-        IsUnlock = true;
-        mat.SetColor("_Color", startColor);
-    }
 }

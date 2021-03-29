@@ -50,6 +50,9 @@ MonoBehaviour:
   - Type: 1
     SynchronizeType: 0
     Name: SpeedZ
+  - Type: 9
+    SynchronizeType: 0
+    Name: Falling
   m_SynchronizeLayers:
   - SynchronizeType: 2
     LayerIndex: 0
@@ -405,9 +408,9 @@ MonoBehaviour:
   m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0.289
+  m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -533,7 +536,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   raycastRange: 0.5
   bottomObject: {fileID: 7939137518127453690}
-  onMuteHudIcon: {fileID: 0}
 --- !u!114 &507341764179454266
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1010,6 +1012,10 @@ PrefabInstance:
       propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3222525954401080662, guid: d99000752cd7f634ea803c83a1bd9774, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5445417442422950649, guid: d99000752cd7f634ea803c83a1bd9774, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -1294,6 +1300,14 @@ PrefabInstance:
       propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6847951498577946161, guid: d99000752cd7f634ea803c83a1bd9774, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -535
+      objectReference: {fileID: 0}
+    - target: {fileID: 6847951498577946161, guid: d99000752cd7f634ea803c83a1bd9774, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 248
+      objectReference: {fileID: 0}
     - target: {fileID: 6847951498989743015, guid: d99000752cd7f634ea803c83a1bd9774, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -1301,6 +1315,14 @@ PrefabInstance:
     - target: {fileID: 6847951498989743015, guid: d99000752cd7f634ea803c83a1bd9774, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6847951499800987389, guid: d99000752cd7f634ea803c83a1bd9774, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 510
+      objectReference: {fileID: 0}
+    - target: {fileID: 6847951499800987389, guid: d99000752cd7f634ea803c83a1bd9774, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 248
       objectReference: {fileID: 0}
     - target: {fileID: 6847951500070513018, guid: d99000752cd7f634ea803c83a1bd9774, type: 3}
       propertyPath: m_AnchorMax.x

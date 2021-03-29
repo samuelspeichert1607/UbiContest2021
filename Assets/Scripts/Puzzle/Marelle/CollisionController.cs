@@ -5,7 +5,6 @@ public class CollisionController : MonoBehaviour
 {
     [SerializeField] private float raycastRange = 0.1f;
     [SerializeField] private GameObject bottomObject;
-    [SerializeField] private GameObject onMuteHudIcon;
 
     private AudioSource speaker;
     private AudioSource sound;
@@ -29,7 +28,7 @@ public class CollisionController : MonoBehaviour
 
             if ((previousObject == null || previousObject != obj))
             {
-
+                
                 CollisionManagement(obj);
 
                 if (previousObject != null)
@@ -58,6 +57,7 @@ public class CollisionController : MonoBehaviour
                 colliderObject.transform.parent.GetComponent<ParentTile>().CollisionDetected(colliderObject);
                 break;
             case "MutePlateforme":
+                
                 sound = colliderObject.GetComponent<AudioSource>();
                 MuteIfSpeakerOn();
                 break;
@@ -78,6 +78,12 @@ public class CollisionController : MonoBehaviour
                 colliderObject.GetComponent<MovingPlatform>().PlayerEntered(transform);
                 break;
             }
+            case "LabyFloor":
+            {
+                colliderObject.GetComponent<LabyFloor>().FellOnFloor();
+        
+                break;
+            }
         }
     }
 
@@ -86,7 +92,6 @@ public class CollisionController : MonoBehaviour
         if (!speaker.mute)
         {
             speaker.mute = true;
-            onMuteHudIcon.SetActive(true);
             sound.Play();
         }
     }
@@ -96,7 +101,6 @@ public class CollisionController : MonoBehaviour
         if (speaker.mute)
         {
             speaker.mute = false;
-            onMuteHudIcon.SetActive(false);
             sound.Play();
         }
     }
