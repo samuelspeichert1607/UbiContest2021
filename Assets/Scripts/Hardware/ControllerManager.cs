@@ -79,12 +79,12 @@ public class ControllerManager : MonoBehaviour
     {
         return (currentController != newController);
     }
-
+    
     public ControllerType GetControllerType()
     {
         string controller = Input.GetJoystickNames()[0];
         if (controller == "Controller (Xbox One For Windows)" || controller == "Afterglow Gamepad for Xbox 360"
-                                                                 || (controller == "Controller (XBOX 360 For Windows"))
+                                                              || (controller == "Controller (XBOX 360 For Windows"))
         {
             return ControllerType.XboxController;
         }
@@ -95,5 +95,4 @@ public class ControllerManager : MonoBehaviour
         }
         return ControllerType.XboxController;
     }
-
 }

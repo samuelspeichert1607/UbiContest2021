@@ -13,7 +13,6 @@ public class PlayerController : CustomController
     [SerializeField] private float onJumpingReleaseDecelerationFactor = 15f;
     [SerializeField] private float onAirborneNoMotionDecelerationFactor = 5f;
     [SerializeField] private float minimalFallingSpeedForLandingPhase = 5f;
-    [SerializeField] private AudioClip footStepSounds;
     [SerializeField] private AudioClip jumpingSounds;
     [SerializeField] private AudioClip landingSounds;
     [SerializeField] private AudioSource audioSource;
@@ -32,12 +31,22 @@ public class PlayerController : CustomController
     private bool _isLanding;
     private bool _isInJumpingAscensionPhase;
     private bool _mustPlayLandingPhase;
-    
+
     private float _jumpingStartTime;
     
     private Animator _animator;
     private static readonly int Speed = Animator.StringToHash("Speed");
     private static readonly int Jump1 = Animator.StringToHash("Jump");
+    private static readonly int Emote = Animator.StringToHash("Emote");
+    private static readonly int SpeedX = Animator.StringToHash("SpeedX");
+    private static readonly int SpeedZ = Animator.StringToHash("SpeedZ");
+    private static readonly int Falling = Animator.StringToHash("Falling");
+    private static readonly int Landed = Animator.StringToHash("Landed");
+    
+    private const float WalkThreshold = 0.5f;
+    private const float RunThreshold = 0.75f;
+    private const float DiagonalThresholdX = 0.2f;
+    private const float DiagonalThresholdZ = 0.35f;
     private AudioListener _audioListener;
 
     // Start is called before the first frame update
@@ -96,6 +105,10 @@ public class PlayerController : CustomController
                 {
                     _photonView.RPC("InitiateJumping", RpcTarget.All);
                 }
+                else if (_controllerManager.GetButtonDown("RBumper"))
+                {
+                    PlayEmote();
+                }
 
                 _wasGrounded = true;
                 isInCriticalMotion = false;
@@ -153,28 +166,59 @@ public class PlayerController : CustomController
     
     private void MoveOnGround(float verticalMotion, float horizontalMotion)
     {
-        if (verticalMotion == 0f)
+        if (verticalMotion == 0f && horizontalMotion == 0f)
         {
-            if (horizontalMotion < 0f)
+            Idle();
+        }
+        
+        else if (verticalMotion <= 0.1f && verticalMotion >= -0.1f)
+        {
+            if (horizontalMotion < 0f && horizontalMotion > -0.75f)
             {
                 StrafeLeft();
             }
-            else if (horizontalMotion > 0f)
+            else if (horizontalMotion <= -0.75f)
+            {
+                StrafeLeftRun();
+            }
+            else if (horizontalMotion > 0f && horizontalMotion < 0.75f)
             {
                 StrafeRight();
             }
-            else
+            else if (horizontalMotion >= 0.75f)
             {
-                Idle();
+                StrafeRightRun();
             }
         }
-        else if (verticalMotion >= 0.99f)
+        else if(horizontalMotion >= -0.1f && horizontalMotion <= 0.1f)
         {
-            Run();
+            if (verticalMotion < 0 && verticalMotion > -0.75f)
+            {
+                Backwards();
+            }
+            else if (verticalMotion <= -0.75f)
+            {
+                BackwardsRun();
+            }
+            else if (verticalMotion > 0 && verticalMotion < 0.75f)
+            {
+                Walk();
+            }
+            else if (verticalMotion >= 0.75f)
+            {
+                Run();
+            }
         }
-        else
+        else if (verticalMotion >= 0.5f)
         {
-            Walk();
+            if (horizontalMotion > 0.5f)
+            {
+                DiagonalRight();
+            }
+            else if (horizontalMotion < -0.5f)
+            {
+                DiagonalLeft();
+            }
         }
         MoveAtMaxSpeed(verticalMotion, horizontalMotion, Time.deltaTime);
     }
@@ -208,7 +252,8 @@ public class PlayerController : CustomController
         _jumpingStartTime = Time.time;
         _isInJumpingAscensionPhase = true;
         _playerSpeed.y = jumpValue;
-        Jump();
+        // Jump();
+        StartJump();
     }
     
     private void UpdateJumpingImpulse()
@@ -267,37 +312,103 @@ public class PlayerController : CustomController
     private void EndLanding()
     {
         _isLanding = false;
-        
     }
 
     private void Idle()
     {
-        _animator.SetFloat(Speed, 0, 0.1f, Time.deltaTime);
+        _animator.SetFloat(SpeedX, 0, 0.1f, Time.deltaTime);
+        _animator.SetFloat(SpeedZ, 0, 0.1f, Time.deltaTime);
     }
 
     private void Walk()
     {
-        _animator.SetFloat(Speed, 0.5f, 0.1f, Time.deltaTime);
+        _animator.SetFloat(SpeedX, 0, 0.1f, Time.deltaTime);
+        _animator.SetFloat(SpeedZ, WalkThreshold, 0.1f, Time.deltaTime);
     }
 
     private void StrafeLeft()
     {
-        _animator.SetFloat(Speed, 2f, 0.1f, Time.deltaTime);
+        _animator.SetFloat(SpeedX, -WalkThreshold, 0.1f, Time.deltaTime);
+        _animator.SetFloat(SpeedZ, 0, 0.1f, Time.deltaTime);
+    }
+    
+    private void StrafeLeftRun()
+    {
+        _animator.SetFloat(SpeedX, -RunThreshold, 0.1f, Time.deltaTime);
+        _animator.SetFloat(SpeedZ, 0f, 0.1f, Time.deltaTime);
     }
 
     private void StrafeRight()
     {
-        _animator.SetFloat(Speed, 1.5f, 0.1f, Time.deltaTime);
+        _animator.SetFloat(SpeedX, WalkThreshold, 0.1f, Time.deltaTime);
+        _animator.SetFloat(SpeedZ, 0, 0.1f, Time.deltaTime);
+    }
+
+    private void StrafeRightRun()
+    {
+        _animator.SetFloat(SpeedX, RunThreshold, 0.1f, Time.deltaTime);
+        _animator.SetFloat(SpeedZ, 0, 0.1f, Time.deltaTime);
     }
 
     private void Run()
     {
-        _animator.SetFloat(Speed, 1, 0.1f, Time.deltaTime);
+        _animator.SetFloat(SpeedX, 0, 0.1f, Time.deltaTime);
+        _animator.SetFloat(SpeedZ, RunThreshold, 0.1f, Time.deltaTime);
     }
 
+    private void DiagonalRight()
+    {
+        _animator.SetFloat(SpeedX, DiagonalThresholdX, 0.1f, Time.deltaTime);
+        _animator.SetFloat(SpeedZ, DiagonalThresholdZ, 0.1f, Time.deltaTime);
+    }
+
+    private void DiagonalLeft()
+    {
+        _animator.SetFloat(SpeedX, -DiagonalThresholdX, 0.1f, Time.deltaTime);
+        _animator.SetFloat(SpeedZ, DiagonalThresholdZ, 0.1f, Time.deltaTime);
+    }
+
+    private void Backwards()
+    {
+        _animator.SetFloat(SpeedX, 0, 0.1f, Time.deltaTime);
+        _animator.SetFloat(SpeedZ, -WalkThreshold, 0.1f, Time.deltaTime);
+    }
+
+    private void BackwardsRun()
+    {
+        _animator.SetFloat(SpeedX, 0, 0.1f, Time.deltaTime);
+        _animator.SetFloat(SpeedZ, -RunThreshold, 0.1f, Time.deltaTime);
+    }
+    
     private void Jump()
     {
         _animator.SetTrigger(Jump1);
     }
+    
+    private void PlayEmote()
+    {
+        _animator.SetTrigger(Emote);
+    }
+    
+    private void StartJump()
+    {
+        _animator.SetFloat(Speed, 0f, 0.1f, Time.deltaTime);
+        _animator.SetTrigger(Jump1);
+    }
+    
+    private void MidJump()
+    {
+        _animator.SetTrigger(Falling);
+    }
+    
+    private void EndJump()
+    {
+        _animator.SetTrigger(Landed);
 
+    }
+    
+    public void ChangeCanMove()
+    {
+        canMove = !canMove;
+    }
 }

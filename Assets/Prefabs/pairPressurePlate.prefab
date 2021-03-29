@@ -124,7 +124,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &2716061306714400034
+--- !u!114 &6000878561427882236
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -133,12 +133,29 @@ MonoBehaviour:
   m_GameObject: {fileID: 4003416808633909016}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92d74cfe5f7acf648981e8055e06c94f, type: 3}
+  m_Script: {fileID: 11500000, guid: 2cb2fa3c4d704884bad63939f95a159b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   plateDownSound: {fileID: 8300000, guid: fed44cc218211144fbd3974b13e7b8b0, type: 3}
   plateUpSound: {fileID: 8300000, guid: fed44cc218211144fbd3974b13e7b8b0, type: 3}
   audioSource: {fileID: 7222929025638735094}
+  isTheRightOne: 0
+--- !u!114 &6360113509999293014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4003416808633909016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ba9c6e3337f4c644a11877231120cb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plateDownSound: {fileID: 8300000, guid: fed44cc218211144fbd3974b13e7b8b0, type: 3}
+  plateUpSound: {fileID: 8300000, guid: fed44cc218211144fbd3974b13e7b8b0, type: 3}
+  audioSource: {fileID: 7222929025638735094}
+  controller: {fileID: 0}
 --- !u!1 &7322276494248610314
 GameObject:
   m_ObjectHideFlags: 0

@@ -8,7 +8,6 @@ public class CustomController : MonoBehaviour
 
     protected bool canMove = true;
     protected bool isInCriticalMotion = false;
-    
     public virtual void Move(Vector3 speed, float timeElapsed)
     {
         
@@ -45,7 +44,7 @@ public class CustomController : MonoBehaviour
     {
         return canMove;
     }
-
+    
     /// <summary>
     ///  If the controller is currently in a motion that should not be disturbed 
     /// </summary>
