@@ -63,9 +63,12 @@ namespace UI_Elements
         
         public void Disconnect()
         {
-            Debug.Log("Logging out");
-            PhotonNetwork.Disconnect();
-            PhotonNetwork.LoadLevel(1);
+            _players = GameObject.FindGameObjectsWithTag("Player");
+
+            foreach (var player in _players)
+            {
+                player.GetComponent<PlayerController>().Disconnect();
+            }
         }
 
         private bool HasNavigatedInMenu()

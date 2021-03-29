@@ -4,14 +4,14 @@ using UnityEngine;
 
 public interface IController
 {
-    public float GetAxis(string axis);
-    public float GetLeftAxisX();
-    public float GetLeftAxisY();
-    public float GetRightAxisX();
-    public float GetRightAxisY();
-    public float GetLTriggerAxis();
-    public float GetRTriggerAxis();
-    public bool GetButtonDown(string button);
+    float GetAxis(string axis);
+    float GetLeftAxisX();
+    float GetLeftAxisY();
+    float GetRightAxisX();
+    float GetRightAxisY();
+    float GetLTriggerAxis();
+    float GetRTriggerAxis();
+    bool GetButtonDown(string button);
 
     bool GetButton(string button);
 }

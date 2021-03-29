@@ -300,22 +300,29 @@ public class PlayerController : CustomController
     {
         _animator.SetTrigger(Jump1);
     }
-
+    
     public void Disconnect()
+    {
+        _photonView.RPC("RPCDisconnect", RpcTarget.AllViaServer);
+    }
+
+    [PunRPC]
+    private void RPCDisconnect()
     {
         Debug.Log("Logging out");
         PhotonNetwork.CurrentRoom.IsOpen = false;
         PhotonNetwork.CurrentRoom.IsVisible = false;
-        foreach (var player in PhotonNetwork.PlayerList)
-        {
-            if (PhotonNetwork.IsMasterClient && !player.IsMasterClient)
-            {
-                PhotonNetwork.CloseConnection(player);
-            }
-        }
-
+        
+        PhotonNetwork.LeaveRoom();
         PhotonNetwork.Disconnect();
         PhotonNetwork.LoadLevel(1);
     }
+
+    private void OnDestroy()
+    {
+        PhotonNetwork.LeaveRoom();
+        PhotonNetwork.LoadLevel(1);
+    }
+    
     
 }

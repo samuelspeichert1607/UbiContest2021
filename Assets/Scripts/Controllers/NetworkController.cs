@@ -151,7 +151,7 @@ public class NetworkController : MonoBehaviourPunCallbacks
 
             if(defaultRooms[i].NumberOfCurrentPlayers >= defaultRooms[i].MaxPlayers)
             {
-                btnStarts[i].GetComponentInChildren<TextMeshProUGUI>().color = Color.red;
+                btnStarts[i].GetComponentInChildren<TextMeshProUGUI>().color = Color.gray;
             }
             else
             {
