@@ -14,6 +14,34 @@ AudioMixerEffectController:
   m_SendTarget: {fileID: 0}
   m_EnableWetMix: 0
   m_Bypass: 0
+--- !u!244 &-7694566657956796957
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: ad4da0938c9e54c4fa9e231bd1e35b1a
+  m_EffectName: Attenuation
+  m_MixLevel: 5bc0d13e07bb5494498a77bf7f473f38
+  m_Parameters: []
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
+--- !u!244 &-6419871447807525730
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: 811be370c17155a488a22894a1731a78
+  m_EffectName: Attenuation
+  m_MixLevel: 6aef166bb9abc8644928788086c425e7
+  m_Parameters: []
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
 --- !u!243 &-3874560952772545732
 AudioMixerGroupController:
   m_ObjectHideFlags: 0
@@ -29,7 +57,7 @@ AudioMixerGroupController:
   m_Send: 00000000000000000000000000000000
   m_Effects:
   - {fileID: 3236937405532236059}
-  m_UserColorIndex: 0
+  m_UserColorIndex: 7
   m_Mute: 0
   m_Solo: 0
   m_BypassEffects: 0
@@ -42,13 +70,15 @@ AudioMixerGroupController:
   m_Name: Music
   m_AudioMixer: {fileID: 24100000}
   m_GroupID: 0dad5d57eede9fe40b8ff0b59efe2202
-  m_Children: []
+  m_Children:
+  - {fileID: 1164171008838459558}
+  - {fileID: 6349378798668778652}
   m_Volume: 2c58ca82b03bb6f4b8eb41e119e9996a
   m_Pitch: 60d5b3edccfbd1343830b4cc355ebee1
   m_Send: 00000000000000000000000000000000
   m_Effects:
   - {fileID: 2733684981307321642}
-  m_UserColorIndex: 0
+  m_UserColorIndex: 7
   m_Mute: 0
   m_Solo: 0
   m_BypassEffects: 0
@@ -74,6 +104,10 @@ AudioMixerController:
     name: musicVolume
   - guid: d8a7837a236e32d4296a3b26736d0c99
     name: sfxVolume
+  - guid: 94108d9722fc1af4a8e7960c6fadf60a
+    name: track1Volume
+  - guid: 3e6932814bf502e4ba3118ea443b28d3
+    name: track2Volume
   - guid: 9bcd39a54ff169c49bddcdef9637b3ac
     name: vcVolume
   m_AudioMixerGroupViews:
@@ -82,6 +116,8 @@ AudioMixerController:
     - 3cce598da863f4d4ea8c1cbe32f664d7
     - 0dad5d57eede9fe40b8ff0b59efe2202
     - b1ea23ae25411054cbf8a490ff3dc262
+    - 989b36dd8be264241a20e43941e2af62
+    - cc4893c7820853a4899b6022e2607dc8
     name: View
   m_CurrentViewIndex: 0
   m_TargetSnapshot: {fileID: 24500006}
@@ -103,7 +139,7 @@ AudioMixerGroupController:
   m_Send: 00000000000000000000000000000000
   m_Effects:
   - {fileID: 24400004}
-  m_UserColorIndex: 0
+  m_UserColorIndex: 3
   m_Mute: 0
   m_Solo: 0
   m_BypassEffects: 0
@@ -130,8 +166,28 @@ AudioMixerSnapshotController:
   m_Name: Snapshot
   m_AudioMixer: {fileID: 24100000}
   m_SnapshotID: 24c21b852705869439991fd6e211af33
-  m_FloatValues: {}
+  m_FloatValues:
+    3e6932814bf502e4ba3118ea443b28d3: -78.80283
   m_TransitionOverrides: {}
+--- !u!243 &1164171008838459558
+AudioMixerGroupController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Track1
+  m_AudioMixer: {fileID: 24100000}
+  m_GroupID: 989b36dd8be264241a20e43941e2af62
+  m_Children: []
+  m_Volume: 94108d9722fc1af4a8e7960c6fadf60a
+  m_Pitch: 8e00033ed4c91524c947ffdfbc81f014
+  m_Send: 00000000000000000000000000000000
+  m_Effects:
+  - {fileID: -7694566657956796957}
+  m_UserColorIndex: 4
+  m_Mute: 0
+  m_Solo: 0
+  m_BypassEffects: 0
 --- !u!244 &2733684981307321642
 AudioMixerEffectController:
   m_ObjectHideFlags: 3
@@ -161,7 +217,7 @@ AudioMixerGroupController:
   m_Send: 00000000000000000000000000000000
   m_Effects:
   - {fileID: -7940379009659285723}
-  m_UserColorIndex: 0
+  m_UserColorIndex: 7
   m_Mute: 0
   m_Solo: 0
   m_BypassEffects: 0
@@ -179,3 +235,22 @@ AudioMixerEffectController:
   m_SendTarget: {fileID: 0}
   m_EnableWetMix: 0
   m_Bypass: 0
+--- !u!243 &6349378798668778652
+AudioMixerGroupController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Track2
+  m_AudioMixer: {fileID: 24100000}
+  m_GroupID: cc4893c7820853a4899b6022e2607dc8
+  m_Children: []
+  m_Volume: 3e6932814bf502e4ba3118ea443b28d3
+  m_Pitch: 3337ef8334f7be348a3a2ae2779a99db
+  m_Send: 00000000000000000000000000000000
+  m_Effects:
+  - {fileID: -6419871447807525730}
+  m_UserColorIndex: 4
+  m_Mute: 0
+  m_Solo: 0
+  m_BypassEffects: 0

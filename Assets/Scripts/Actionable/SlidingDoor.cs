@@ -12,8 +12,13 @@ public class SlidingDoor : Actionable
     public float movingDistance =1;
 
     [SerializeField] private bool isOpen;
-    [SerializeField] private float movementSpeed = 1.0f;
-
+    [SerializeField] private float movementSpeed = 1.0f; 
+    
+    [SerializeField] private AudioClip openSoundClip;
+    [SerializeField] private AudioClip closeSoundClip;
+    
+    AudioSource audioSource;
+    
     private bool isTranslating = false;
 
     private Vector3 startingPosition;
@@ -27,6 +32,7 @@ public class SlidingDoor : Actionable
     {
         slide1 = transform.GetChild(1);
         slide2 = transform.GetChild(2);
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -55,6 +61,7 @@ public class SlidingDoor : Actionable
             startPosSlide1 = transform.position + (movingDirection * movingDistance);
             destination = startingPosition + (movingDirection * movingDistance);
             isTranslating = true;
+            PlayCloseSound();
         }
         else
         {
@@ -64,6 +71,17 @@ public class SlidingDoor : Actionable
             startPosSlide1 = transform.position;
             destination = startingPosition + (-movingDirection * movingDistance);
             isTranslating = true;
+            PlayOpenSound();
         }
+    }
+
+    private void PlayOpenSound()
+    {
+        audioSource.PlayOneShot(openSoundClip);
+    }
+
+    private void PlayCloseSound()
+    {
+        audioSource.PlayOneShot(closeSoundClip);
     }
 }
