@@ -13,25 +13,29 @@ public class MusicPlayerController : MonoBehaviour
     [SerializeField] private float timeBeforeChange;
     [SerializeField] private float fadeTime;
 
+    private float currentTime;
+    
     private bool isSwitched = false;
     private bool hasStarted = false;
 
     void Start()
     {
+        currentTime = 0;
         mainMixer.SetFloat("musicVolume", 0f);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Time.time > startTime && !hasStarted)
+        currentTime += Time.deltaTime;
+        if (currentTime > startTime && !hasStarted)
         {
             track1.Play();
             StartCoroutine(MixerFade.StartFade(mainMixer, "track1Volume", fadeTime, 0.7f));
             hasStarted = true;
         }
         // // Ceci fonctionne bien pour notre cas, mais ce serait à regler si les personnes décidaient de passer plus que 13 minutes dans le menu.
-        if (Time.time >= timeBeforeChange && !isSwitched)
+        if (currentTime >= timeBeforeChange && !isSwitched)
         {
             CrossfadeTracks(track1, track2);
             isSwitched = true;
