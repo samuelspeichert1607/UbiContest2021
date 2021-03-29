@@ -10,7 +10,7 @@ namespace UI_Elements
     {
         [SerializeField]
         private GameObject pauseMenu;
-        // private PhotonView photonView;
+        private PhotonView photonView;
         private CustomController playerController;
         
         [SerializeField] private GameObject validationMenu;
@@ -25,14 +25,14 @@ namespace UI_Elements
         private ControllerManager _controllerManager;
         private GameObject _currentlySelected;
         private bool isAtfirstOpeningFrame;
+        private GameObject[] _players;
 
-        public event EventHandler disconnector;
-        
         public void Start()
         {
+            
             _controllerManager = GetComponent<ControllerManager>();
             _audioPlayer = GetComponent<AudioPlayerMenu>();
-            // photonView = GetComponent<PhotonView>();
+            photonView = GetComponent<PhotonView>();
             pauseMenu.SetActive(false);
             playerController = GetComponentInParent<CustomController>();
         }
@@ -57,15 +57,15 @@ namespace UI_Elements
             }
             _currentlySelected = EventSystem.current.currentSelectedGameObject;
             if (isAtfirstOpeningFrame) isAtfirstOpeningFrame = false;
-            
+
             // }
         }
-
-        public static void Disconnect()
+        
+        public void Disconnect()
         {
             Debug.Log("Logging out");
             PhotonNetwork.Disconnect();
-            PhotonNetwork.LoadLevel(2);
+            PhotonNetwork.LoadLevel(1);
         }
 
         private bool HasNavigatedInMenu()
@@ -141,6 +141,7 @@ namespace UI_Elements
             EventSystem.current.SetSelectedGameObject(null);
             EventSystem.current.SetSelectedGameObject(gameObjectToSelect);
         }
+        
         
     }
 }

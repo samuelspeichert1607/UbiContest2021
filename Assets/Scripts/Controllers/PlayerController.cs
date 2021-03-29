@@ -39,11 +39,13 @@ public class PlayerController : CustomController
     private static readonly int Speed = Animator.StringToHash("Speed");
     private static readonly int Jump1 = Animator.StringToHash("Jump");
     private AudioListener _audioListener;
+    private GameObject _networkManager;
 
     // Start is called before the first frame update
     void Start()
     {
         _photonView = GetComponent<PhotonView>();
+        _networkManager = GameObject.Find("NetworkManager");
         _camera = transform.GetChild(0).gameObject;
         _camera.GetComponent<Camera>().enabled = _photonView.IsMine;
         _controller = GetComponent<CharacterController>();
@@ -53,7 +55,6 @@ public class PlayerController : CustomController
         _animator = GetComponentInChildren<Animator>();
         _audioListener = GetComponent<AudioListener>();
         _audioListener.enabled = _photonView.IsMine;
-
     }
 
     // Update is called once per frame
@@ -300,4 +301,21 @@ public class PlayerController : CustomController
         _animator.SetTrigger(Jump1);
     }
 
+    public void Disconnect()
+    {
+        Debug.Log("Logging out");
+        PhotonNetwork.CurrentRoom.IsOpen = false;
+        PhotonNetwork.CurrentRoom.IsVisible = false;
+        foreach (var player in PhotonNetwork.PlayerList)
+        {
+            if (PhotonNetwork.IsMasterClient && !player.IsMasterClient)
+            {
+                PhotonNetwork.CloseConnection(player);
+            }
+        }
+
+        PhotonNetwork.Disconnect();
+        PhotonNetwork.LoadLevel(1);
+    }
+    
 }

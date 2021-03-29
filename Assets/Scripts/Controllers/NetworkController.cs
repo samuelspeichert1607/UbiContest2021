@@ -33,19 +33,22 @@ public class NetworkController : MonoBehaviourPunCallbacks
     private GameObject _currentlySelected;
     private bool isAtfirstOpeningFrame;
 
-    private void Start()
+    private void Awake()
     {
         if (PhotonNetwork.IsConnected)
         {
-            Disconnect();
+            PhotonNetwork.Disconnect();
         }
         
+    }
+
+    private void Start()
+    {
         PhotonNetwork.ConnectUsingSettings();
         ChangeStateOfButton(false);
         Status("Connecting to Server");
         SelectObject(onOpenFirstSelected);
         isAtfirstOpeningFrame = true;
-        
     }
     
     public void Update()
@@ -146,7 +149,7 @@ public class NetworkController : MonoBehaviourPunCallbacks
                 + "/"
                 + defaultRooms[i].MaxPlayers;
 
-            if(defaultRooms[i].MaxPlayers == defaultRooms[i].NumberOfCurrentPlayers)
+            if(defaultRooms[i].NumberOfCurrentPlayers >= defaultRooms[i].MaxPlayers)
             {
                 btnStarts[i].GetComponentInChildren<TextMeshProUGUI>().color = Color.red;
             }
@@ -171,12 +174,7 @@ public class NetworkController : MonoBehaviourPunCallbacks
             btnStart.SetActive(state);
         }
     }
-
-    public void Disconnect()
-    {
-        PhotonNetwork.Disconnect();
-    }
-
+    
     private void SelectObject(GameObject gameObjectToSelect)
     {
         EventSystem.current.SetSelectedGameObject(null);
