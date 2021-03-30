@@ -57,7 +57,6 @@ public class CollisionController : MonoBehaviour
                 colliderObject.transform.parent.GetComponent<ParentTile>().CollisionDetected(colliderObject);
                 break;
             case "MutePlateforme":
-                
                 sound = colliderObject.GetComponent<AudioSource>();
                 MuteIfSpeakerOn();
                 break;
@@ -115,6 +114,11 @@ public class CollisionController : MonoBehaviour
             case "MovingPlatform":
             {
                 colliderObject.GetComponent<MovingPlatform>().PlayerExited();
+                break;
+            }
+            case "MarelleTile":
+            {
+                colliderObject.transform.parent.GetComponent<ParentTile>().CollisionExited();
                 break;
             }
         }

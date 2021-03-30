@@ -32,7 +32,8 @@ public class EndScreen : MonoBehaviour
 
     private void LoadMenu()
     {
-        //TODO probably should adapt this to a better way
+        //TODO probably should adapt this to a better way -> should be in StatusHud
+        PhotonNetwork.LeaveRoom();
         PhotonNetwork.Disconnect();
         SceneManager.LoadScene("principalMENU");
     }

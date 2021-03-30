@@ -6,7 +6,14 @@ using Photon.Pun;
 public abstract class ParentTile : MonoBehaviourPun
 {
 
+    [SerializeField] protected AudioClip pressedSound;
+    [SerializeField] protected AudioSource audioSource;
     public abstract void CollisionDetected(GameObject sourceTile);
+
+    public void CollisionExited()
+    {
+        audioSource.PlayOneShot(pressedSound);
+    }
 
 
     public void ChangeColor(Color color)
@@ -17,6 +24,5 @@ public abstract class ParentTile : MonoBehaviourPun
         }
 
     }
-
-
+    
 }
