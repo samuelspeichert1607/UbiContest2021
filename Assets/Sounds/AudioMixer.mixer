@@ -82,6 +82,20 @@ AudioMixerGroupController:
   m_Mute: 0
   m_Solo: 0
   m_BypassEffects: 0
+--- !u!244 &-893573166743116428
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: 3b290ead4ddff824eb2c5312c99f3ec0
+  m_EffectName: Attenuation
+  m_MixLevel: ca77745fd2c25fc4c8f198fbef5e6101
+  m_Parameters: []
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
 --- !u!241 &24100000
 AudioMixerController:
   m_ObjectHideFlags: 0
@@ -98,6 +112,8 @@ AudioMixerController:
   m_EnableSuspend: 1
   m_UpdateMode: 0
   m_ExposedParameters:
+  - guid: 977e881c3f247ff44b873850b22e7138
+    name: dialogVolume
   - guid: c4a2ae39a022dbe469c7fad0a7a41a2f
     name: masterVolume
   - guid: 2c58ca82b03bb6f4b8eb41e119e9996a
@@ -118,6 +134,7 @@ AudioMixerController:
     - b1ea23ae25411054cbf8a490ff3dc262
     - 989b36dd8be264241a20e43941e2af62
     - cc4893c7820853a4899b6022e2607dc8
+    - 6ed7f531cda0e7a4d8f6d64e1e8e8b56
     name: View
   m_CurrentViewIndex: 0
   m_TargetSnapshot: {fileID: 24500006}
@@ -134,6 +151,7 @@ AudioMixerGroupController:
   - {fileID: 2979312901927717724}
   - {fileID: -3130335519842291186}
   - {fileID: -3874560952772545732}
+  - {fileID: 8457135512633818107}
   m_Volume: c4a2ae39a022dbe469c7fad0a7a41a2f
   m_Pitch: 3582a7ba523055b4389e87049197162d
   m_Send: 00000000000000000000000000000000
@@ -168,6 +186,7 @@ AudioMixerSnapshotController:
   m_SnapshotID: 24c21b852705869439991fd6e211af33
   m_FloatValues:
     3e6932814bf502e4ba3118ea443b28d3: -78.80283
+    977e881c3f247ff44b873850b22e7138: 0
   m_TransitionOverrides: {}
 --- !u!243 &1164171008838459558
 AudioMixerGroupController:
@@ -251,6 +270,25 @@ AudioMixerGroupController:
   m_Effects:
   - {fileID: -6419871447807525730}
   m_UserColorIndex: 4
+  m_Mute: 0
+  m_Solo: 0
+  m_BypassEffects: 0
+--- !u!243 &8457135512633818107
+AudioMixerGroupController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Dialog
+  m_AudioMixer: {fileID: 24100000}
+  m_GroupID: 6ed7f531cda0e7a4d8f6d64e1e8e8b56
+  m_Children: []
+  m_Volume: 977e881c3f247ff44b873850b22e7138
+  m_Pitch: 28eff0a9ebbf87f44bf9cd9e5cf184c4
+  m_Send: 00000000000000000000000000000000
+  m_Effects:
+  - {fileID: -893573166743116428}
+  m_UserColorIndex: 0
   m_Mute: 0
   m_Solo: 0
   m_BypassEffects: 0

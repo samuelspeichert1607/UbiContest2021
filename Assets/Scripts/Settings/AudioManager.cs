@@ -20,6 +20,12 @@ public class AudioManager : MonoBehaviour
  
         mixer.SetFloat("musicVolume", Mathf.Log10(newVolume) * 20);
     }
+    
+    public void SetDialogVolume(float newVolume)
+    {
+ 
+        mixer.SetFloat("dialogVolume", Mathf.Log10(newVolume) * 20);
+    }
 
     public void SetSfxVolume(float newVolume)
     {
