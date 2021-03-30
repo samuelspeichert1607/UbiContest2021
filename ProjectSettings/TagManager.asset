@@ -12,6 +12,7 @@ TagManager:
   - MovingPlatform
   - UnmutePlatform
   - LabyFloor
+  - RobotVoice
   layers:
   - Default
   - TransparentFX

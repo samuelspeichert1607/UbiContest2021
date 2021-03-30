@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Photon.Pun;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -31,6 +32,8 @@ public class EndScreen : MonoBehaviour
 
     private void LoadMenu()
     {
+        //TODO probably should adapt this to a better way
+        PhotonNetwork.Disconnect();
         SceneManager.LoadScene("principalMENU");
     }
 }

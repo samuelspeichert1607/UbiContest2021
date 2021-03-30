@@ -32,7 +32,7 @@ namespace UI_Elements
             
             _controllerManager = GetComponent<ControllerManager>();
             _audioPlayer = GetComponent<AudioPlayerMenu>();
-            photonView = GetComponent<PhotonView>();
+            photonView = GetComponentInParent<PhotonView>();
             pauseMenu.SetActive(false);
             playerController = GetComponentInParent<CustomController>();
         }
@@ -40,25 +40,25 @@ namespace UI_Elements
         public void Update()
         {
             //TODO there is a better way to map this probably
-            //// if (photonView.IsMine)
-            // {
-            if (Input.GetKeyDown(KeyCode.Escape) || _controllerManager.GetButtonDown("Start")
-                && !playerController.IsInCriticalMotion())
+            if (photonView.IsMine)
             {
-                pauseUnPause();
-                if (validationMenu.activeSelf)
+                if (Input.GetKeyDown(KeyCode.Escape) || _controllerManager.GetButtonDown("Start")
+                    && !playerController.IsInCriticalMotion())
                 {
-                    validationMenu.SetActive(false);
+                    pauseUnPause();
+                    if (validationMenu.activeSelf)
+                    {
+                        validationMenu.SetActive(false);
+                    }
                 }
-            }
-            if (HasNavigatedInMenu())
-            {
-                _audioPlayer.PlayButtonNavigationSound();
-            }
-            _currentlySelected = EventSystem.current.currentSelectedGameObject;
-            if (isAtfirstOpeningFrame) isAtfirstOpeningFrame = false;
+                if (HasNavigatedInMenu())
+                {
+                    _audioPlayer.PlayButtonNavigationSound();
+                }
+                _currentlySelected = EventSystem.current.currentSelectedGameObject;
+                if (isAtfirstOpeningFrame) isAtfirstOpeningFrame = false;
 
-            // }
+            }
         }
         
         public void Disconnect()

@@ -12,9 +12,14 @@ public class StatusHUD : MonoBehaviour
     [SerializeField] private float timeLimit;
     [SerializeField] private float delayBeforeGameEnd = 15f;
     [SerializeField] private Image oxygenFill;
+    [SerializeField] private FadableScreen blackScreen;
+    private CustomController _playerController;
+    private RobotVoiceController _robotVoiceController;
     private static float _timeLeft;
     private static float _previousTimeLeft;
     private static int _previousPlayerCount;
+
+    private bool isTimerOver = false;
     // private TextMeshProUGUI timerTextBox;
 
     void Start()
@@ -23,6 +28,9 @@ public class StatusHUD : MonoBehaviour
         // Big problème : le timer se reset à chaque entrée d'un deuxième joueur
         _timeLeft = timeLimit;
         _previousTimeLeft = timeLimit;
+        _robotVoiceController = GameObject.FindWithTag("RobotVoice").GetComponent<RobotVoiceController>();
+        blackScreen.SetAlphaToZero();
+        _playerController = GetComponentInParent<CustomController>();
     }
 
     void Update()
@@ -41,30 +49,18 @@ public class StatusHUD : MonoBehaviour
             _previousTimeLeft = _timeLeft;
         }
 
-        UpdateTimerText();
+        CheckTimer();
         UpdateOxygenBar();
         _previousPlayerCount = PhotonNetwork.CurrentRoom.PlayerCount;
     }
 
-    private void UpdateTimerText()
+    private void CheckTimer()
     {
-        if (_timeLeft >= 0)
+        if (_timeLeft < 0 && !isTimerOver)
         {
-            int minutes = Mathf.FloorToInt(_timeLeft / 60);
-            int seconds = Mathf.FloorToInt(_timeLeft % 60);
-            // timerTextBox.text = $"{minutes}:" + (seconds > 9 ? seconds.ToString() : "0" + seconds.ToString());
-        }
-        else
-        {
-            Invoke(nameof(GameIsLost), delayBeforeGameEnd);
+            TimerIsOut();
         }
     }
-
-    private void GameIsLost()
-    {
-        SceneManager.LoadScene("endingScreenFailure");
-    }
-
     private void UpdateOxygenBar()
     {
         // At 15 minutes of time limit we don't notice, but the transition is rather rough
@@ -72,5 +68,33 @@ public class StatusHUD : MonoBehaviour
         float timePercentage = _timeLeft / timeLimit;
         oxygenFill.fillAmount = timePercentage;
         
+    }
+    private void TimerIsOut()
+    {
+        isTimerOver = true;
+        _robotVoiceController.PlayLost();
+        _playerController.disableMovement();
+        blackScreen.SetFadingTime(2f * delayBeforeGameEnd/ 3f);
+        blackScreen.FadeToFullAlpha();
+        Invoke(nameof(GameIsLost), delayBeforeGameEnd);
+    }
+
+
+    public void CallGameSucceededAfterDefaultDelay()
+    {
+        _robotVoiceController.PlayWin();
+        blackScreen.SetFadingTime(2f * delayBeforeGameEnd / 3f);
+        blackScreen.FadeToFullAlpha();
+        Invoke(nameof(GameIsWon), delayBeforeGameEnd);
+    }
+
+    private void GameIsWon()
+    {
+        SceneManager.LoadScene("endingScreenSuccess");
+    }
+    
+    private void GameIsLost()
+    {
+        SceneManager.LoadScene("endingScreenFailure");
     }
 }
