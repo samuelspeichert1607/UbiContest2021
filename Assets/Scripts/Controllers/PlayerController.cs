@@ -412,13 +412,6 @@ public class PlayerController : CustomController
         PhotonNetwork.Disconnect();
         PhotonNetwork.LoadLevel(1);
     }
-
-    private void OnDestroy()
-    {
-        PhotonNetwork.LeaveRoom();
-        PhotonNetwork.LoadLevel(1);
-    }
-    
     
     
     private void MidJump()
