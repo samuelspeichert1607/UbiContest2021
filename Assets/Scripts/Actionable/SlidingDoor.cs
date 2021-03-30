@@ -16,8 +16,8 @@ public class SlidingDoor : Actionable
     
     [SerializeField] private AudioClip openSoundClip;
     [SerializeField] private AudioClip closeSoundClip;
-    
-    AudioSource audioSource;
+
+    [SerializeField] private AudioSource audioSource;
     
     private bool isTranslating = false;
 
@@ -32,7 +32,6 @@ public class SlidingDoor : Actionable
     {
         slide1 = transform.GetChild(1);
         slide2 = transform.GetChild(2);
-        audioSource = GetComponent<AudioSource>();
     }
 
     private void Update()

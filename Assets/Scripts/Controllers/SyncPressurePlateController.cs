@@ -33,12 +33,12 @@ public class SyncPressurePlateController : MonoBehaviour
         UpdateAllPlatesState();
 
         //cheat code
-        // if (Input.GetButtonDown("Fire2") && testBool)
-        // {
-        //     OnSuccess();
-        //     testBool = false;
-        // }
-        
+         if (Input.GetKeyDown(KeyCode.P) && testBool)
+        {
+            OnSuccess();
+            testBool = false;
+        }
+
     }
 
     private void UpdateAllPlatesState()

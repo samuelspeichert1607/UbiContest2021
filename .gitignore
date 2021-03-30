@@ -544,3 +544,4 @@ Assets/Models/*
 Assets/Model/*
 Assets/Sounds/*
 *.mat
+/Build Linux

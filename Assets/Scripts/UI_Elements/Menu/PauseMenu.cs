@@ -10,7 +10,7 @@ namespace UI_Elements
     {
         [SerializeField]
         private GameObject pauseMenu;
-        // private PhotonView photonView;
+        private PhotonView photonView;
         private CustomController playerController;
         
         [SerializeField] private GameObject validationMenu;
@@ -25,12 +25,14 @@ namespace UI_Elements
         private ControllerManager _controllerManager;
         private GameObject _currentlySelected;
         private bool isAtfirstOpeningFrame;
+        private GameObject[] _players;
 
         public void Start()
         {
+            
             _controllerManager = GetComponent<ControllerManager>();
             _audioPlayer = GetComponent<AudioPlayerMenu>();
-            // photonView = GetComponent<PhotonView>();
+            photonView = GetComponent<PhotonView>();
             pauseMenu.SetActive(false);
             playerController = GetComponentInParent<CustomController>();
         }
@@ -55,8 +57,18 @@ namespace UI_Elements
             }
             _currentlySelected = EventSystem.current.currentSelectedGameObject;
             if (isAtfirstOpeningFrame) isAtfirstOpeningFrame = false;
-            
+
             // }
+        }
+        
+        public void Disconnect()
+        {
+            _players = GameObject.FindGameObjectsWithTag("Player");
+
+            foreach (var player in _players)
+            {
+                player.GetComponent<PlayerController>().Disconnect();
+            }
         }
 
         private bool HasNavigatedInMenu()
@@ -99,9 +111,7 @@ namespace UI_Elements
 
         public void LogOut()
         {
-            Debug.Log("Logging out");
-            PhotonNetwork.Disconnect();
-            PhotonNetwork.LoadLevel(1);
+            Disconnect();
         }
 
         public void OpenValidationMenu()
@@ -134,6 +144,7 @@ namespace UI_Elements
             EventSystem.current.SetSelectedGameObject(null);
             EventSystem.current.SetSelectedGameObject(gameObjectToSelect);
         }
+        
         
     }
 }
