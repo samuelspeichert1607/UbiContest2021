@@ -1920,7 +1920,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5556258073197310641, guid: 0b30b84a565e3d4409542c5353d96c69, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: PlayClickSound
+      value: PlayBackSound
       objectReference: {fileID: 0}
     - target: {fileID: 5556258073197310641, guid: 0b30b84a565e3d4409542c5353d96c69, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
@@ -1932,7 +1932,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5556258073197310641, guid: 0b30b84a565e3d4409542c5353d96c69, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: AudioManagerMenu, Assembly-CSharp
+      value: AudioPlayerMenu, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 5556258073197310641, guid: 0b30b84a565e3d4409542c5353d96c69, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
@@ -2202,6 +2202,18 @@ PrefabInstance:
       propertyPath: audioSource
       value: 
       objectReference: {fileID: 1517362030}
+    - target: {fileID: 8284622459008266465, guid: 118e20772e8df754cb25900e8b3083c9, type: 3}
+      propertyPath: buttonBackSound
+      value: 
+      objectReference: {fileID: 8300000, guid: ea1ae51b05567c045b1d5d1caf2aaa6b, type: 3}
+    - target: {fileID: 8284622459008266465, guid: 118e20772e8df754cb25900e8b3083c9, type: 3}
+      propertyPath: buttonClickedSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 4b81eec4ae019c340850f7bbfa2b0c49, type: 3}
+    - target: {fileID: 8284622459008266465, guid: 118e20772e8df754cb25900e8b3083c9, type: 3}
+      propertyPath: buttonNavigationSound
+      value: 
+      objectReference: {fileID: 8300000, guid: a3c170b5752231343876208ebb0d5809, type: 3}
     - target: {fileID: 8284622459008266479, guid: 118e20772e8df754cb25900e8b3083c9, type: 3}
       propertyPath: m_RootOrder
       value: 3
