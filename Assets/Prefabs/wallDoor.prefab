@@ -45,24 +45,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6995939120061258687
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4939690323464391124}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 56da1663a674e0749a6a685c4fe9a6fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  movingDirection: {x: 1, y: 0, z: 0}
-  movingDistance: 1
-  isOpen: 0
-  movementSpeed: 1
-  openSoundClip: {fileID: 8300000, guid: 37f70753f6d69fa48ab2278c9ec018ab, type: 3}
-  closeSoundClip: {fileID: 8300000, guid: 37f70753f6d69fa48ab2278c9ec018ab, type: 3}
 --- !u!82 &4328824108205640977
 AudioSource:
   m_ObjectHideFlags: 0
@@ -159,6 +141,25 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &6995939120061258687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4939690323464391124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56da1663a674e0749a6a685c4fe9a6fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movingDirection: {x: 1, y: 0, z: 0}
+  movingDistance: 1
+  isOpen: 0
+  movementSpeed: 1
+  openSoundClip: {fileID: 8300000, guid: 37f70753f6d69fa48ab2278c9ec018ab, type: 3}
+  closeSoundClip: {fileID: 8300000, guid: 37f70753f6d69fa48ab2278c9ec018ab, type: 3}
+  audioSource: {fileID: 4328824108205640977}
 --- !u!65 &3055758140598389473
 BoxCollider:
   m_ObjectHideFlags: 0

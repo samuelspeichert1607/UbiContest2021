@@ -1945,8 +1945,14 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "J\xE9r\xF4me Collin\nJ\xE9r\xE9my Julien\nC\xE9dric Lafond-Mercier\nSarah
-    Pelletier"
+  m_text: 'Jerome Collin
+
+    Jeremie Jullien
+
+    Cedric Lafond-Mercier
+
+    Sarah
+    Pelletier'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7ad62e09c0568b841bf7b3e98b2d2f89, type: 2}
   m_sharedMaterial: {fileID: -6147513208055498385, guid: 7ad62e09c0568b841bf7b3e98b2d2f89, type: 2}
@@ -3590,7 +3596,14 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Anthony Beaudoin\n\xC9lie B\xE9dard\nDiego Cabas Munster\nSamuel Speichert"
+  m_text: 'Anthony Beaudoin
+
+    Elie Bedard
+
+    Diego Cabas Munster
+
+    Samuel
+    Speichert'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7ad62e09c0568b841bf7b3e98b2d2f89, type: 2}
   m_sharedMaterial: {fileID: -6147513208055498385, guid: 7ad62e09c0568b841bf7b3e98b2d2f89, type: 2}
