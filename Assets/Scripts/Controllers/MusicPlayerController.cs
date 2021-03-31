@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
+using Photon.Pun;
 
 public class MusicPlayerController : MonoBehaviour
 {
@@ -27,7 +28,11 @@ public class MusicPlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        currentTime += Time.deltaTime;
+        if (PhotonNetwork.CurrentRoom.PlayerCount == 2)
+        {
+            currentTime += Time.deltaTime;
+        }
+        
         if (currentTime > startTime && !hasStarted)
         {
             track1.Play();
