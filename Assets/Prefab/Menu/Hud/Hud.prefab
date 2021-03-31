@@ -1273,13 +1273,37 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2194105739685772698, guid: 074f64ed40bc6fb459bef917c8832a33, type: 3}
+      propertyPath: m_fontSize
+      value: 36
+      objectReference: {fileID: 0}
+    - target: {fileID: 2194105739685772698, guid: 074f64ed40bc6fb459bef917c8832a33, type: 3}
+      propertyPath: m_margin.z
+      value: -120.39546
+      objectReference: {fileID: 0}
+    - target: {fileID: 2194105739685772698, guid: 074f64ed40bc6fb459bef917c8832a33, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    - target: {fileID: 2194105739685772698, guid: 074f64ed40bc6fb459bef917c8832a33, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 36
+      objectReference: {fileID: 0}
+    - target: {fileID: 2194105739685772698, guid: 074f64ed40bc6fb459bef917c8832a33, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    - target: {fileID: 2194105739685772698, guid: 074f64ed40bc6fb459bef917c8832a33, type: 3}
+      propertyPath: m_enableExtraPadding
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2194105739685772699, guid: 074f64ed40bc6fb459bef917c8832a33, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 161
       objectReference: {fileID: 0}
     - target: {fileID: 2194105739685772699, guid: 074f64ed40bc6fb459bef917c8832a33, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -127.5
+      value: -120
       objectReference: {fileID: 0}
     - target: {fileID: 2194105739742558964, guid: 074f64ed40bc6fb459bef917c8832a33, type: 3}
       propertyPath: m_IsActive
