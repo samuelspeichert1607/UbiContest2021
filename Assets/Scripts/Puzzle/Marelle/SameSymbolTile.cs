@@ -6,12 +6,10 @@ using Photon.Pun;
 public class SameSymbolTile : ParentTile
 {
 
-
-    [SerializeField] private bool firstTile = false;
     [SerializeField] private bool lastTile = false;
     [SerializeField] private ParentTile[] otherTiles;
 
-
+    private PhotonView _photonView ;
     private float timerTime;
     private float timer = 0;
     private bool timerEnable = false;
@@ -23,6 +21,7 @@ public class SameSymbolTile : ParentTile
 
     void Start()
     {
+        _photonView = GetComponent<PhotonView>();
         marelleController = transform.parent.GetComponent<MarelleController>();
         timerTime = marelleController.timerTime;
     }
@@ -58,22 +57,25 @@ public class SameSymbolTile : ParentTile
     {
         audioSource.PlayOneShot(pressedSound);
         Material sourceMat = sourceTile.transform.GetComponent<TileGoUpDown>().tileRenderer.material;
-        if ((marelleController.hasCollisionUnlocked || firstTile) && !(sourceMat.color==Color.green))
+        if (!(sourceMat.color==Color.green))
         {
             testBool = true;
 
                 if (tileEntered == null)//^tileEntered ==sourceTile
             {
                     tileEntered = sourceTile;
-                    timerEnable = true;
-                    timer = timerTime;
+                _photonView.RPC(nameof(EnableTimer), RpcTarget.All);
+                //timerEnable = true;
+
+                timer = timerTime;
                     ChangeColor(Color.yellow);
 
             }
 
             else if (tileEntered != sourceTile)
             {
-             timerEnable = false;
+                //timerEnable = false;
+                _photonView.RPC(nameof(DisableTimer), RpcTarget.All);
                 tileEntered = null;
                 if (timer > 0)
                 {
@@ -81,21 +83,13 @@ public class SameSymbolTile : ParentTile
                     ChangeColorToGreen();
                 if (lastTile)
                 {
-                        marelleController.gameWon();
+                    marelleController.gameWon();
                 }
-                else if (firstTile)
-                {
-                    marelleController.hasCollisionUnlocked = true;
-                }
+
 
                 }
 
             }
-                //bombe
-            //else if (!firstTile)
-            //{
-            //    marelleController.gameLost();
-            //}
 
         }
 
@@ -109,5 +103,15 @@ public class SameSymbolTile : ParentTile
         {
             tile.ChangeColor(Color.green);
         }
+    }
+    [PunRPC]
+    private void EnableTimer()
+    {
+        timerEnable = true;
+    }
+    [PunRPC]
+    private void DisableTimer()
+    {
+        timerEnable = false;
     }
 }

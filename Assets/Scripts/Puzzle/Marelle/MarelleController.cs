@@ -22,21 +22,19 @@ public class MarelleController : MonoBehaviour
 
     public float timerTime;
 
-    public bool hasCollisionUnlocked =true;
 
     private PhotonView _photonView;
 
 
-    private void Start() //sinon il est 'a false et je ne sais pas pourquoi
+    private void Start() 
     {
         _photonView = GetComponent<PhotonView>();
-        hasCollisionUnlocked = true;
+
         audioSource = GetComponent<AudioSource>();
     }
     public void gameWon()
     {
         audioSource.PlayOneShot(winSound, 0.7f);
-        hasCollisionUnlocked = false;
         foreach (Actionable a in actionableObject)
         {
             a.OnAction();
@@ -68,7 +66,6 @@ public class MarelleController : MonoBehaviour
         {
             robotFail.PlayTaskFailed();
         }
-        hasCollisionUnlocked = false;
         foreach (Transform child in transform)
         {
 
