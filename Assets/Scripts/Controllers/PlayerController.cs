@@ -112,7 +112,6 @@ public class PlayerController : CustomController
                 }
 
                 _wasGrounded = true;
-                isInCriticalMotion = false;
                 MoveOnGround(verticalMotion, horizontalMotion);
             }
         }
@@ -312,6 +311,7 @@ public class PlayerController : CustomController
     private void EndLanding()
     {
         _isLanding = false;
+        isInCriticalMotion = false;
     }
 
     private void Idle()
@@ -389,7 +389,7 @@ public class PlayerController : CustomController
     {
         isInCriticalMotion = true;
         _animator.SetTrigger(Emote);
-        Invoke(nameof(EndEmote),2.2f);
+        Invoke(nameof(EndEmote),1.7f);
     }
     
     private void StartJump()
