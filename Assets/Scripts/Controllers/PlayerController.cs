@@ -89,11 +89,18 @@ public class PlayerController : CustomController
                 horizontalMotion *= 0.5f;
             }
 
-            if (!_wasGrounded && _mustPlayLandingPhase)
+            if (!_wasGrounded)
             {
-                _photonView.RPC("StartLanding", RpcTarget.All);
+                if (_mustPlayLandingPhase)
+                {
+                    _photonView.RPC("StartLanding", RpcTarget.All);
+                }
+                else
+                {
+                    isInCriticalMotion = false;
+                }
             }
-            
+
             //je sais que c'est bizarre mais, si je reset la velocite a 0, le controller.isGrounded ne fonctionne pas -_-
             if (_playerSpeed.y < -1)
             {
@@ -112,7 +119,6 @@ public class PlayerController : CustomController
                 }
 
                 _wasGrounded = true;
-                isInCriticalMotion = false;
                 MoveOnGround(verticalMotion, horizontalMotion);
             }
         }
@@ -312,6 +318,7 @@ public class PlayerController : CustomController
     private void EndLanding()
     {
         _isLanding = false;
+        isInCriticalMotion = false;
     }
 
     private void Idle()
@@ -387,7 +394,9 @@ public class PlayerController : CustomController
     
     private void PlayEmote()
     {
+        isInCriticalMotion = true;
         _animator.SetTrigger(Emote);
+        Invoke(nameof(EndEmote),1.7f);
     }
     
     private void StartJump()
@@ -428,5 +437,9 @@ public class PlayerController : CustomController
     public void ChangeCanMove()
     {
         canMove = !canMove;
+    }
+    private void EndEmote()
+    {
+        isInCriticalMotion = false;
     }
 }
