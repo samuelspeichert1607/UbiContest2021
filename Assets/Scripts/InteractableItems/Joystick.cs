@@ -16,6 +16,8 @@ public class Joystick : InteractableItem
     private int _leftAxisYUnitDirection = 1;
     private int _leftAxisXUnitDirection = 1;
     private bool _swappedMotionAxis = false;
+    private static readonly int InputV = Animator.StringToHash("inputV");
+    private static readonly int InputH = Animator.StringToHash("inputH");
 
     private new void Start()
     {
@@ -53,8 +55,8 @@ public class Joystick : InteractableItem
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(_leverAnimator.GetFloat("inputH"));
-        Debug.Log(_leverAnimator.GetFloat("inputV"));
+        // Debug.Log(_leverAnimator.GetFloat("inputH"));
+        // Debug.Log(_leverAnimator.GetFloat("inputV"));
         CheckIfAPlayerIsInRange();
         if (hasPlayerEnteredRange())
         {
@@ -94,30 +96,31 @@ public class Joystick : InteractableItem
 
     private void AnimateLever(float horizontalMotion, float verticalMotion)
     {
-        if (verticalMotion < -0.25f)
+        float neutralPositionTolerance = 0.25f;
+        if (verticalMotion < -neutralPositionTolerance)
         {
             //Down
-            _leverAnimator.SetFloat("inputV", -1, 0.1f, Time.deltaTime);
+            _leverAnimator.SetFloat(InputV, -1, 0.1f, Time.deltaTime);
         }
-        else if (verticalMotion > 0.25f)
+        else if (verticalMotion > neutralPositionTolerance)
         {
             //Up
-            _leverAnimator.SetFloat("inputV", 1, 0.1f, Time.deltaTime);
+            _leverAnimator.SetFloat(InputV, 1, 0.1f, Time.deltaTime);
         }
-        else if (horizontalMotion < -0.25f)
+        else if (horizontalMotion < -neutralPositionTolerance)
         {
             //Left
-            _leverAnimator.SetFloat("inputH", -1, 0.1f, Time.deltaTime);
+            _leverAnimator.SetFloat(InputH, -1, 0.1f, Time.deltaTime);
         }
-        else if (horizontalMotion > 0.25f)
+        else if (horizontalMotion > neutralPositionTolerance)
         {
             //Right
-            _leverAnimator.SetFloat("inputH", 1, 0.1f, Time.deltaTime);
+            _leverAnimator.SetFloat(InputH, 1, 0.1f, Time.deltaTime);
         }
         else
         {
-            _leverAnimator.SetFloat("inputV", 0, 0.1f, Time.deltaTime);
-            _leverAnimator.SetFloat("inputH", 0, 0.1f, Time.deltaTime);
+            _leverAnimator.SetFloat(InputV, 0, 0.1f, Time.deltaTime);
+            _leverAnimator.SetFloat(InputH, 0, 0.1f, Time.deltaTime);
         }
     }
 
@@ -151,8 +154,8 @@ public class Joystick : InteractableItem
         IsInteractedWith = false;
         AllowPlayerMovement();
         TextRenderer.ShowInfoText(ToStartInteractText);
-        _leverAnimator.SetFloat("inputV", 0, 0.1f, Time.deltaTime);
-        _leverAnimator.SetFloat("inputH", 0, 0.1f, Time.deltaTime);
+        _leverAnimator.SetFloat(InputV, 0, 0.1f, Time.deltaTime);
+        _leverAnimator.SetFloat(InputH, 0, 0.1f, Time.deltaTime);
     }
 
     public override void OnPlayerEnterRange()
