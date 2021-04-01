@@ -1720,11 +1720,11 @@ PrefabInstance:
       objectReference: {fileID: 8612086129205473296}
     - target: {fileID: 1973039893548641376, guid: 1fc0ed83a879de3408b7b9e4a653b907, type: 3}
       propertyPath: m_Value
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1973039893548641376, guid: 1fc0ed83a879de3408b7b9e4a653b907, type: 3}
       propertyPath: m_MaxValue
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1973039893548641376, guid: 1fc0ed83a879de3408b7b9e4a653b907, type: 3}
       propertyPath: m_MinValue
