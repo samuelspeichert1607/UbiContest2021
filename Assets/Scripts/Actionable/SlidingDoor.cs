@@ -52,6 +52,7 @@ public class SlidingDoor : Actionable
 
     public override void OnAction()
     {
+        hasActioned = true;
         if (isOpen)
         {
             isOpen = false;

@@ -52,8 +52,12 @@ public class MarelleController : MonoBehaviour
         hasCollisionUnlocked = false;
         foreach (Actionable a in actionableObject)
         {
-            a.OnAction();
+            if (!a.hasActioned)
+            {
+                a.OnAction();
+            }
         }
+            
 
     }
     public void gameLost()
