@@ -89,11 +89,18 @@ public class PlayerController : CustomController
                 horizontalMotion *= 0.5f;
             }
 
-            if (!_wasGrounded && _mustPlayLandingPhase)
+            if (!_wasGrounded)
             {
-                _photonView.RPC("StartLanding", RpcTarget.All);
+                if (_mustPlayLandingPhase)
+                {
+                    _photonView.RPC("StartLanding", RpcTarget.All);
+                }
+                else
+                {
+                    isInCriticalMotion = false;
+                }
             }
-            
+
             //je sais que c'est bizarre mais, si je reset la velocite a 0, le controller.isGrounded ne fonctionne pas -_-
             if (_playerSpeed.y < -1)
             {
