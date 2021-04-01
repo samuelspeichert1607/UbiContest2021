@@ -18,14 +18,20 @@ public class TextRenderer : MonoBehaviour
 
     public void ShowInfoText(string info)
     {
-        textContainer.SetActive(true);
-        textField.text = info;
+        if(textContainer != null && textField != null)
+        {
+            textContainer.SetActive(true);
+            textField.text = info;
+        }
     }
 
     public void CloseInfoText()
     {
-        textContainer.SetActive(false);
-        textField.text = "";
+        if (textContainer != null && textField != null)
+        {
+            textContainer.SetActive(false);
+            textField.text = "";
+        }
     }
 
     public bool IsClosed()

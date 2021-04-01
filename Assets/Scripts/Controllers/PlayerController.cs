@@ -405,13 +405,13 @@ public class PlayerController : CustomController
         _animator.SetTrigger(Jump1);
     }
     
-    public void Disconnect()
+    public void Disconnect(int indexSceneToLoad)
     {
-        _photonView.RPC("RPCDisconnect", RpcTarget.AllViaServer);
+        _photonView.RPC("RPCDisconnect", RpcTarget.AllViaServer, indexSceneToLoad);
     }
 
     [PunRPC]
-    private void RPCDisconnect()
+    private void RPCDisconnect(int indexSceneToLoad)
     {
         Debug.Log("Logging out");
         PhotonNetwork.CurrentRoom.IsOpen = false;
@@ -419,7 +419,7 @@ public class PlayerController : CustomController
         
         PhotonNetwork.LeaveRoom();
         PhotonNetwork.Disconnect();
-        PhotonNetwork.LoadLevel(1);
+        PhotonNetwork.LoadLevel(indexSceneToLoad);
     }
     
     

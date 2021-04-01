@@ -67,7 +67,7 @@ namespace UI_Elements
 
             foreach (var player in _players)
             {
-                player.GetComponent<PlayerController>().Disconnect();
+                player.GetComponent<PlayerController>().Disconnect(1);
             }
         }
 
