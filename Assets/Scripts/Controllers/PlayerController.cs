@@ -389,7 +389,7 @@ public class PlayerController : CustomController
     {
         _animator.SetTrigger(Emote);
         isInCriticalMotion = true;
-        Invoke(Nameof(EndEmote),2);
+        Invoke(nameof(EndEmote),2);
     }
     
     private void StartJump()
