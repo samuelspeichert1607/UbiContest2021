@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class MarelleController : MonoBehaviour
 {
@@ -22,14 +23,24 @@ public class MarelleController : MonoBehaviour
     public float timerTime;
 
     public bool hasCollisionUnlocked =true;
-    
+
+    private PhotonView _photonView;
+
+
     private void Start() //sinon il est 'a false et je ne sais pas pourquoi
     {
+        _photonView = GetComponent<PhotonView>();
         hasCollisionUnlocked = true;
         audioSource = GetComponent<AudioSource>();
     }
-
     public void gameWon()
+    {
+
+        _photonView.RPC("rcpGameWon", RpcTarget.All);
+
+    }
+    [PunRPC]
+    private void rcpGameWon()
     {
         audioSource.PlayOneShot(winSound, 0.7f);
         hasCollisionUnlocked = false;
@@ -39,8 +50,13 @@ public class MarelleController : MonoBehaviour
         }
 
     }
-
     public void gameLost()
+    {
+        _photonView.RPC("rcpGameLost", RpcTarget.All);
+    }
+
+    [PunRPC]
+    public void rcpGameLost()
     {
         audioSource.PlayOneShot(lossSound, 0.7f);
         if (UnityEngine.Random.Range(0, 2) == 0)//50%
@@ -63,6 +79,4 @@ public class MarelleController : MonoBehaviour
             }
         }
     }
-
-
 }

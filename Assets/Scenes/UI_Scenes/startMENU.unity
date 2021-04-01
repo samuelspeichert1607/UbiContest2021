@@ -838,8 +838,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1f8d15638fa52b4e947461923394905, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loadDelay: 1.5
-  pressSound: {fileID: 8300000, guid: 790b52b61abf8c14f85330e7ed7803e9, type: 3}
+  loadDelay: 2
+  pressSound: {fileID: 8300000, guid: ba04d9338688a2e48ab3dcdae5bc8795, type: 3}
   pulsateText: {fileID: 1742604367}
 --- !u!82 &2081421000
 AudioSource:

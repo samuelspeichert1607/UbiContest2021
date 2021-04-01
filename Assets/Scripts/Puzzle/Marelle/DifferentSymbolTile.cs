@@ -14,6 +14,7 @@ public class DifferentSymbolTile : ParentTile
         audioSource.PlayOneShot(pressedSound);
         if (IsSourceTileNotGreen(sourceTile))
         {
+
             marelleController.gameLost();
         }
     }
