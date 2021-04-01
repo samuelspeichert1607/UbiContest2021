@@ -90,13 +90,14 @@ public class StatusHUD : MonoBehaviour
 
     private void GameIsWon()
     {
-        //TODO disconnect properly player
-        SceneManager.LoadScene("endingScreenSuccess");
+        // 4 = endingScreenSuccess
+        GetComponentInParent<PlayerController>().Disconnect(4);
     }
     
     private void GameIsLost()
     {
-        //TODO disconnect properly player
-        SceneManager.LoadScene("endingScreenFailure");
+        // 5 = endingScreenFailure
+        GetComponentInParent<PlayerController>().Disconnect(5);
     }
+
 }

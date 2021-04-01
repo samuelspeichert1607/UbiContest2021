@@ -37,9 +37,13 @@ public class Cupcake : InteractableItem
     {
         IsInteractedWith = true;
         TextRenderer.CloseInfoText();
-        
-        GetInRangePlayer().GetComponent<CustomController>().disableMovement();
-        GetInRangePlayer().GetComponentInChildren<StatusHUD>().CallGameSucceededAfterDefaultDelay();
+
+        if(GetInRangePlayer() != null)
+        {
+            GetInRangePlayer().GetComponent<CustomController>().disableMovement();
+            GetInRangePlayer().GetComponentInChildren<StatusHUD>().CallGameSucceededAfterDefaultDelay();
+        }   
+
     }
     
     public override void OnInteractEnd()
