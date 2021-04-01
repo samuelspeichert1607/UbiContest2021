@@ -31,8 +31,8 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!64 &4954605366919065352
-MeshCollider:
+--- !u!65 &2187899525691634601
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -41,10 +41,9 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -2586408471095714268, guid: 8abbbd55cf56dfc4182ca503bdfbf1d2, type: 3}
+  serializedVersion: 2
+  m_Size: {x: 110, y: 4.5, z: 110}
+  m_Center: {x: 0, y: 0.40187448, z: 0}
 --- !u!82 &3597896100567277921
 AudioSource:
   m_ObjectHideFlags: 0
@@ -233,6 +232,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8418733407793376729, guid: 8abbbd55cf56dfc4182ca503bdfbf1d2, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8418733407793376729, guid: 8abbbd55cf56dfc4182ca503bdfbf1d2, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8418733407793376729, guid: 8abbbd55cf56dfc4182ca503bdfbf1d2, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8418733407793376729, guid: 8abbbd55cf56dfc4182ca503bdfbf1d2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 8abbbd55cf56dfc4182ca503bdfbf1d2, type: 3}
       propertyPath: m_Name
       value: pressure_plate
@@ -240,7 +255,7 @@ PrefabInstance:
     - target: {fileID: 2825521487318136651, guid: 8abbbd55cf56dfc4182ca503bdfbf1d2, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 3206217294b9b8441b47fe4e4ad6da42, type: 2}
+      objectReference: {fileID: 2100000, guid: 323064c14c86a1b47b3849b62e30fe53, type: 2}
     - target: {fileID: 5004828909420324687, guid: 8abbbd55cf56dfc4182ca503bdfbf1d2, type: 3}
       propertyPath: m_TagString
       value: PressurePlate

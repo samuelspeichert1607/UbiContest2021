@@ -4,26 +4,33 @@ using System.Collections.Generic;
 using Photon.Pun;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class StatusHUD : MonoBehaviour
 {
-    [SerializeField]
-    private float timeLimit;
+    [SerializeField] private float timeLimit;
+    [SerializeField] private float delayBeforeGameEnd = 15f;
+    [SerializeField] private Image oxygenFill;
+    [SerializeField] private FadableScreen blackScreen;
+    private CustomController _playerController;
+    private RobotVoiceController _robotVoiceController;
     private static float _timeLeft;
     private static float _previousTimeLeft;
     private static int _previousPlayerCount;
-    private Image oxygenFill;
+
+    private bool isTimerOver = false;
     // private TextMeshProUGUI timerTextBox;
 
     void Start()
     {
-        oxygenFill = transform.GetChild(transform.childCount - 1).transform.GetComponent<Image>();
-        // timerTextBox = transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>();
         
         // Big problème : le timer se reset à chaque entrée d'un deuxième joueur
         _timeLeft = timeLimit;
         _previousTimeLeft = timeLimit;
+        _robotVoiceController = GameObject.FindWithTag("RobotVoice").GetComponent<RobotVoiceController>();
+        blackScreen.SetAlphaToZero();
+        _playerController = GetComponentInParent<CustomController>();
     }
 
     void Update()
@@ -42,27 +49,18 @@ public class StatusHUD : MonoBehaviour
             _previousTimeLeft = _timeLeft;
         }
 
-        UpdateTimerText();
+        CheckTimer();
         UpdateOxygenBar();
         _previousPlayerCount = PhotonNetwork.CurrentRoom.PlayerCount;
     }
 
-    private void UpdateTimerText()
+    private void CheckTimer()
     {
-        if (_timeLeft >= 0)
+        if (_timeLeft < 0 && !isTimerOver)
         {
-            int minutes = Mathf.FloorToInt(_timeLeft / 60);
-            int seconds = Mathf.FloorToInt(_timeLeft % 60);
-            // timerTextBox.text = $"{minutes}:" + (seconds > 9 ? seconds.ToString() : "0" + seconds.ToString());
-        }
-        else
-        {
-            // To keep the timer from going to a negative value that would make the game crash
-            // timerTextBox.text = "0:00";
-            _timeLeft = -1;
+            TimerIsOut();
         }
     }
-
     private void UpdateOxygenBar()
     {
         // At 15 minutes of time limit we don't notice, but the transition is rather rough
@@ -71,4 +69,35 @@ public class StatusHUD : MonoBehaviour
         oxygenFill.fillAmount = timePercentage;
         
     }
+    private void TimerIsOut()
+    {
+        isTimerOver = true;
+        _robotVoiceController.PlayLost();
+        _playerController.disableMovement();
+        blackScreen.SetFadingTime(2f * delayBeforeGameEnd/ 3f);
+        blackScreen.FadeToFullAlpha();
+        Invoke(nameof(GameIsLost), delayBeforeGameEnd);
+    }
+
+
+    public void CallGameSucceededAfterDefaultDelay()
+    {
+        _robotVoiceController.PlayWin();
+        blackScreen.SetFadingTime(2f * delayBeforeGameEnd / 3f);
+        blackScreen.FadeToFullAlpha();
+        Invoke(nameof(GameIsWon), delayBeforeGameEnd);
+    }
+
+    private void GameIsWon()
+    {
+        // 4 = endingScreenSuccess
+        GetComponentInParent<PlayerController>().Disconnect(4);
+    }
+    
+    private void GameIsLost()
+    {
+        // 5 = endingScreenFailure
+        GetComponentInParent<PlayerController>().Disconnect(5);
+    }
+
 }

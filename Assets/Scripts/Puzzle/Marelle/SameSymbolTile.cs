@@ -56,6 +56,7 @@ public class SameSymbolTile : ParentTile
 
     public override void CollisionDetected(GameObject sourceTile) 
     {
+        audioSource.PlayOneShot(pressedSound);
         Material sourceMat = sourceTile.transform.GetComponent<TileGoUpDown>().tileRenderer.material;
         if ((marelleController.hasCollisionUnlocked || firstTile) && !(sourceMat.color==Color.green))
         {
@@ -90,11 +91,11 @@ public class SameSymbolTile : ParentTile
                 }
 
             }
-
-            else if (!firstTile)
-            {
-                marelleController.gameLost();
-            }
+                //bombe
+            //else if (!firstTile)
+            //{
+            //    marelleController.gameLost();
+            //}
 
         }
 

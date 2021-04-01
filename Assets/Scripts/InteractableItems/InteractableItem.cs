@@ -47,14 +47,18 @@ namespace InteractableItems
             _previousPlayerRangeState = HasPlayerInRange;
             foreach (GameObject player in _players)
             {
-                float distance = Vector3.Distance(player.transform.position, transform.position);
-                if (distance <= interactRadius)
+                if(player!= null)
                 {
-                    HasPlayerInRange = true;
-                    _inRangePlayer = player;
-                    UpdatePlayerRangeState();
-                    return;
+                    float distance = Vector3.Distance(player.transform.position, transform.position);
+                    if (distance <= interactRadius)
+                    {
+                        HasPlayerInRange = true;
+                        _inRangePlayer = player;
+                        UpdatePlayerRangeState();
+                        return;
+                    }
                 }
+                
             }
             HasPlayerInRange = false;
             UpdatePlayerRangeState();

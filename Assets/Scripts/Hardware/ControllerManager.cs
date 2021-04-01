@@ -1,6 +1,12 @@
 
 using UnityEngine;
 
+public enum ControllerType
+{
+    XboxController,
+    PS4Controller
+};
+
 public class ControllerManager : MonoBehaviour
 {
     private IController userController;
@@ -72,5 +78,21 @@ public class ControllerManager : MonoBehaviour
     private bool IsDifferentController(string newController)
     {
         return (currentController != newController);
+    }
+    
+    public ControllerType GetControllerType()
+    {
+        string controller = Input.GetJoystickNames()[0];
+        if (controller == "Controller (Xbox One For Windows)" || controller == "Afterglow Gamepad for Xbox 360"
+                                                              || (controller == "Controller (XBOX 360 For Windows"))
+        {
+            return ControllerType.XboxController;
+        }
+
+        else if (controller == "Wireless Controller")
+        {
+            return ControllerType.PS4Controller;
+        }
+        return ControllerType.XboxController;
     }
 }

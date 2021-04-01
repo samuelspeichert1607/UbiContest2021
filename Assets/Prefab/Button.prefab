@@ -148,7 +148,6 @@ GameObject:
   - component: {fileID: 5556258073197310647}
   - component: {fileID: 5556258073197310640}
   - component: {fileID: 5556258073197310641}
-  - component: {fileID: 8037475896155086471}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -237,8 +236,8 @@ MonoBehaviour:
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 0}
     m_HighlightedColor: {r: 1, g: 1, b: 1, a: 0.627451}
-    m_PressedColor: {r: 1, g: 1, b: 1, a: 1}
-    m_SelectedColor: {r: 0.2270826, g: 0.5943396, b: 0.5827725, a: 0}
+    m_PressedColor: {r: 0.22745098, g: 0.59607846, b: 0.58431375, a: 0.88235295}
+    m_SelectedColor: {r: 0.2270826, g: 0.5943396, b: 0.5827725, a: 0.5882353}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -258,18 +257,3 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &8037475896155086471
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5556258073197310643}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed7a6111065a6734098a1d4bd92a6170, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  text: {fileID: 0}
-  colorHover: {r: 0, g: 0, b: 0, a: 0}
-  colorDefault: {r: 0, g: 0, b: 0, a: 0}

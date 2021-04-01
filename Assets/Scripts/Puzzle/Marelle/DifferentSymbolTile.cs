@@ -11,8 +11,10 @@ public class DifferentSymbolTile : ParentTile
     }
     public override void CollisionDetected(GameObject sourceTile)
     {
+        audioSource.PlayOneShot(pressedSound);
         if (IsSourceTileNotGreen(sourceTile))
         {
+
             marelleController.gameLost();
         }
     }
