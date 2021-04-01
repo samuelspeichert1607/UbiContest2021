@@ -11,6 +11,7 @@ public class Joystick : InteractableItem
     
     [SerializeField] private CustomController target;
 
+    private Animator _leverAnimator;
     private ControllerManager _controllerManager;
     private int _leftAxisYUnitDirection = 1;
     private int _leftAxisXUnitDirection = 1;
@@ -20,7 +21,10 @@ public class Joystick : InteractableItem
     {
         base.Start();
         _controllerManager = GetComponent<ControllerManager>();
+        _leverAnimator = GetComponentInChildren<Animator>();
         SetUnitDirectionRelativeToTarget();
+        // _leverAnimator.SetFloat("inputV", 0, 0.1f, Time.deltaTime);
+        // _leverAnimator.SetFloat("inputH", 0, 0.1f, Time.deltaTime);
     }
 
     private void SetUnitDirectionRelativeToTarget()
@@ -49,6 +53,8 @@ public class Joystick : InteractableItem
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(_leverAnimator.GetFloat("inputH"));
+        Debug.Log(_leverAnimator.GetFloat("inputV"));
         CheckIfAPlayerIsInRange();
         if (hasPlayerEnteredRange())
         {
@@ -75,7 +81,7 @@ public class Joystick : InteractableItem
         if (_swappedMotionAxis)
         {
             target.MoveAtMaxSpeed( _leftAxisYUnitDirection * _controllerManager.GetLeftAxisX(),
-                _leftAxisXUnitDirection * _controllerManager.GetLeftAxisY(), Time.deltaTime);   
+                _leftAxisXUnitDirection * _controllerManager.GetLeftAxisY(), Time.deltaTime);
         }
         else
         {
@@ -83,6 +89,36 @@ public class Joystick : InteractableItem
                 _leftAxisXUnitDirection * _controllerManager.GetLeftAxisX(), Time.deltaTime);
         }
         //Animation of the joystick would go here
+        AnimateLever(_controllerManager.GetLeftAxisX(), _controllerManager.GetLeftAxisY());
+    }
+
+    private void AnimateLever(float horizontalMotion, float verticalMotion)
+    {
+        if (verticalMotion < -0.25f)
+        {
+            //Down
+            _leverAnimator.SetFloat("inputV", -1, 0.1f, Time.deltaTime);
+        }
+        else if (verticalMotion > 0.25f)
+        {
+            //Up
+            _leverAnimator.SetFloat("inputV", 1, 0.1f, Time.deltaTime);
+        }
+        else if (horizontalMotion < -0.25f)
+        {
+            //Left
+            _leverAnimator.SetFloat("inputH", -1, 0.1f, Time.deltaTime);
+        }
+        else if (horizontalMotion > 0.25f)
+        {
+            //Right
+            _leverAnimator.SetFloat("inputH", 1, 0.1f, Time.deltaTime);
+        }
+        else
+        {
+            _leverAnimator.SetFloat("inputV", 0, 0.1f, Time.deltaTime);
+            _leverAnimator.SetFloat("inputH", 0, 0.1f, Time.deltaTime);
+        }
     }
 
     public override void OnInteractStart()
@@ -115,6 +151,8 @@ public class Joystick : InteractableItem
         IsInteractedWith = false;
         AllowPlayerMovement();
         TextRenderer.ShowInfoText(ToStartInteractText);
+        _leverAnimator.SetFloat("inputV", 0, 0.1f, Time.deltaTime);
+        _leverAnimator.SetFloat("inputH", 0, 0.1f, Time.deltaTime);
     }
 
     public override void OnPlayerEnterRange()
