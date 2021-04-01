@@ -91,11 +91,11 @@ public class SameSymbolTile : ParentTile
                 }
 
             }
-
-            else if (!firstTile)
-            {
-                marelleController.gameLost();
-            }
+                //bombe
+            //else if (!firstTile)
+            //{
+            //    marelleController.gameLost();
+            //}
 
         }
 
