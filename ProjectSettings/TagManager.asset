@@ -13,6 +13,7 @@ TagManager:
   - UnmutePlatform
   - LabyFloor
   - RobotVoice
+  - ToiletFloor
   layers:
   - Default
   - TransparentFX

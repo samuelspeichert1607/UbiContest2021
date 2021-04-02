@@ -82,6 +82,12 @@ public class CollisionController : MonoBehaviour
                 colliderObject.GetComponent<LabyFloor>().FellOnFloor(); 
                 break;
             }
+            case "ToiletFloor":
+            {
+                    colliderObject.GetComponent<ToiletFloor>().OnFloor();
+                    break;
+            }
+
         }
     }
 
