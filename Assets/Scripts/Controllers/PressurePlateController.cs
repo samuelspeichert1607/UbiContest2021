@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,32 +9,18 @@ public class PressurePlateController : MonoBehaviour
     [SerializeField] public Actionable[] actionableObject;
     [SerializeField] private float penalityTimer;
     public bool unlockedPlates = true;
-    public bool startPenalityTimer = false;
 
-    private float timer;
     private Color initialColor;
+    private PhotonView _photonView;
 
     void Start()
     {
-        timer = penalityTimer;
         initialColor = GetComponentInChildren<Renderer>().material.color;
+        _photonView = GetComponent<PhotonView>();
     }
 
-    void Update()
-    {
-        if (startPenalityTimer)
-        {
-            if (timer > 0)
-            {
-                timer -= Time.deltaTime;
-            }
-            else
-            {
-                resetPlates();
-            }
-        }
-    }
-    public void won()
+    [PunRPC]
+    private void wonRPC()
     {
         ChangeColor(Color.green);
         unlockedPlates = false;
@@ -42,19 +29,32 @@ public class PressurePlateController : MonoBehaviour
             a.OnAction();
         }
     }
-    public void penality()
+
+    public void won()
     {
-        startPenalityTimer = true;
+        _photonView.RPC(nameof(wonRPC), RpcTarget.All);
+    }
+    [PunRPC]
+    private void penalityRPC()
+    {
         ChangeColor(Color.red);
         unlockedPlates = false;
+        Invoke(nameof(resetPlates), penalityTimer);
 
+    }
+    public void penality()
+    {
+        _photonView.RPC(nameof(penalityRPC), RpcTarget.All);
     }
     private void resetPlates()
     {
+        _photonView.RPC(nameof(resetPlatesRPC), RpcTarget.All);
+    }
+    [PunRPC]
+    private void resetPlatesRPC()
+    {
         ChangeColor(initialColor);
-        timer = 0;
         unlockedPlates = true;
-        startPenalityTimer = false;
     }
 
     private void ChangeColor(Color color)

@@ -1503,6 +1503,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1973039892583654780, guid: 1fc0ed83a879de3408b7b9e4a653b907, type: 3}
+      propertyPath: m_Value
+      value: 130
+      objectReference: {fileID: 0}
+    - target: {fileID: 1973039892583654780, guid: 1fc0ed83a879de3408b7b9e4a653b907, type: 3}
       propertyPath: m_Navigation.m_SelectOnUp
       value: 
       objectReference: {fileID: 1615445311964503127}
