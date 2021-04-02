@@ -545,3 +545,5 @@ Assets/Model/*
 Assets/Sounds/*
 *.mat
 /Build Linux
+*.anim
+*.png
