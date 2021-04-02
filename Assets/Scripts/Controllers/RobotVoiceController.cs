@@ -9,6 +9,7 @@ public class RobotVoiceController : MonoBehaviour
     [SerializeField] private AudioClip winClip;
     [SerializeField] private AudioClip lostClip;
     [SerializeField] private AudioClip[] taskFail;
+    [SerializeField] private AudioClip poopClip;
     private float startTime;
     private bool canPlaySound=true;
     private AudioSource audioSource;
@@ -43,6 +44,11 @@ public class RobotVoiceController : MonoBehaviour
     public void PlayLost()
     {
         PlayClip(lostClip);
+    }
+
+    public void PlayNoPooping()
+    {
+        PlayClip(poopClip);
     }
 
     private void PlayClip(AudioClip clip)

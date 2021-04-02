@@ -6,8 +6,6 @@ using Photon.Pun;
 public class SameSymbolTile : ParentTile
 {
 
-
-    [SerializeField] private bool firstTile = false;
     [SerializeField] private bool lastTile = false;
     [SerializeField] private ParentTile[] otherTiles;
 
@@ -21,8 +19,11 @@ public class SameSymbolTile : ParentTile
     bool testBool = true;
     private MarelleController marelleController;
 
+    private PhotonView _photonView ;
+
     void Start()
     {
+        _photonView = GetComponent<PhotonView>();
         marelleController = transform.parent.GetComponent<MarelleController>();
         timerTime = marelleController.timerTime;
     }
@@ -56,9 +57,10 @@ public class SameSymbolTile : ParentTile
 
     public override void CollisionDetected(GameObject sourceTile) 
     {
+        Debug.Log(sourceTile);
         audioSource.PlayOneShot(pressedSound);
         Material sourceMat = sourceTile.transform.GetComponent<TileGoUpDown>().tileRenderer.material;
-        if ((marelleController.hasCollisionUnlocked || firstTile) && !(sourceMat.color==Color.green))
+        if (!(sourceMat.color==Color.green))
         {
             testBool = true;
 
@@ -79,13 +81,10 @@ public class SameSymbolTile : ParentTile
                 {
 
                     ChangeColorToGreen();
-                if (lastTile)
+                   
+                    if (lastTile)
                 {
                         marelleController.gameWon();
-                }
-                else if (firstTile)
-                {
-                    marelleController.hasCollisionUnlocked = true;
                 }
 
                 }
@@ -101,9 +100,10 @@ public class SameSymbolTile : ParentTile
 
 
     }
-
+    
     private void ChangeColorToGreen()
     {
+
         ChangeColor(Color.green);
         foreach(ParentTile tile in otherTiles)
         {
