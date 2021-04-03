@@ -407,7 +407,7 @@ public class PlayerController : CustomController
     
     public void Disconnect(int indexSceneToLoad)
     {
-        _photonView.RPC("RPCDisconnect", RpcTarget.AllViaServer, indexSceneToLoad);
+        _photonView.RPC(nameof(RPCDisconnect), RpcTarget.AllViaServer, indexSceneToLoad);
     }
 
     [PunRPC]
