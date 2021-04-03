@@ -3,23 +3,35 @@ using System.Collections.Generic;
 using UnityEngine;
 public class PlateActivateObject : PressurePlate
 {
+    [SerializeField] private float waitTime;
     [SerializeField] private Actionable[] actionableObject;
     private Material mat;
+    private Color originalColor;
 
-     void Start()
+    void Start()
     {
         mat = GetComponent<Renderer>().material;
+        originalColor = mat.color;
     }
     public override void CollisionEntered()
     {
-        if (mat.color!=Color.green)
+        if (mat.color==originalColor)
         {
             mat.SetColor("_Color", Color.green);
-            ToggleActionable();        }
+            ToggleActionable();
+            Invoke(nameof(CloseActionable), waitTime);
+        }
 
     }
 
-private void ToggleActionable()
+    private void CloseActionable()
+    {
+        mat.SetColor("_Color", Color.red);
+        ToggleActionable();
+        Invoke(nameof(ResetPlate),2);
+
+    }
+    private void ToggleActionable()
     {
         foreach (Actionable a in actionableObject)
         {
@@ -28,5 +40,9 @@ private void ToggleActionable()
 
     }
 
+    private void ResetPlate()
+    {
+        mat.SetColor("_Color", originalColor);
+    }
 
 }

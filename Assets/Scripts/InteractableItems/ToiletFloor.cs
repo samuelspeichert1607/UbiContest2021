@@ -5,7 +5,7 @@ using UnityEngine;
 public class ToiletFloor : MonoBehaviour
 {
     [SerializeField] RobotVoiceController robot;
-    [SerializeField] Actionable door;
+    // [SerializeField] Actionable door;
     private bool UnLock = true;
     // Start is called before the first frame update
     public void OnFloor()
@@ -14,7 +14,7 @@ public class ToiletFloor : MonoBehaviour
         {
             UnLock = false;
             robot.PlayNoPooping();
-            door.OnAction();
+            // door.OnAction();
         }
 
     }
