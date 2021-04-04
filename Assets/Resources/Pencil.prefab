@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 5152296749375269648}
   - component: {fileID: 6480918375691441676}
   - component: {fileID: 5866271253220905357}
+  - component: {fileID: 384283816008353616}
   m_Layer: 0
   m_Name: Pencil
   m_TagString: Untagged
@@ -141,6 +142,18 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
   m_UseLocal: 1
+--- !u!114 &384283816008353616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6679823145998878774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8688972652696894ca0a72513d7a937e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6679823147427093186
 GameObject:
   m_ObjectHideFlags: 0
