@@ -17,7 +17,7 @@ namespace Puzzle.HumanPencil
         private DrawableSurface[] displayMonitors;
         
         private DrawableSurface mainDrawableSurface; 
-        private float _maxDrawingDistance = 0.5f;
+        private float _maxDrawingDistance = .5f;
         private float _drawingSurfaceWidth = 0.2f;
 
         private const float NewPointDistanceTolerance = 0.001f;

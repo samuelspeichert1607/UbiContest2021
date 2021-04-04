@@ -823,7 +823,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b9de75c0ee27314caff94e5525aea0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeLimit: 900
+  timeLimit: 1e+9
   delayBeforeGameEnd: 15
   oxygenFill: {fileID: 3900007994901213984}
   blackScreen: {fileID: 5269037932493916623}
