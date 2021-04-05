@@ -73,10 +73,35 @@ public class StatusHUD : MonoBehaviour
     {
         isTimerOver = true;
         _robotVoiceController.PlayLost();
+
+        PlayerDeathInitialPhase();
+        
+        Invoke(nameof(BlackscreenFinalFading), 1f);
+        Invoke(nameof(GameIsLost), delayBeforeGameEnd);
+    }
+    
+    private void PlayerDeathInitialPhase()
+    {
         _playerController.disableMovement();
+
+        float shortBlackoutTime = 0.3f;
+        blackScreen.SetFadingTime(shortBlackoutTime/ 2f);
+        blackScreen.FadeToFullAlpha();
+        
+        Invoke(nameof(PlayDeathAnimation), shortBlackoutTime);
+    }
+
+    private void PlayDeathAnimation()
+    {
+        _playerController.PlayDeathAnimation();
+        
+        blackScreen.FadeToZeroAlpha();
+    }
+    
+    private void BlackscreenFinalFading()
+    {
         blackScreen.SetFadingTime(2f * delayBeforeGameEnd/ 3f);
         blackScreen.FadeToFullAlpha();
-        Invoke(nameof(GameIsLost), delayBeforeGameEnd);
     }
 
 
