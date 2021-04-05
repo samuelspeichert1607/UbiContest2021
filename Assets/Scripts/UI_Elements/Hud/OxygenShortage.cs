@@ -23,7 +23,6 @@ public class OxygenShortage : MonoBehaviour, MusicPlayerListener
         fillBar.color = onShortageFillBarColor;
         oxygenText.StartPulsating();
         Invoke(nameof(StopOxygenTextPulsation), pulsatingTextTime);
-        Debug.Log("OnMusicChange!");
     }
 
     private void StopOxygenTextPulsation()
