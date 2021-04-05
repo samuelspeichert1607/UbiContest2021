@@ -2681,7 +2681,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 75c4f54ce3c6b364f95e5880a7640b6a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4fc3938689c86e9478b641c0f3cd5390, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3211,6 +3211,8 @@ MonoBehaviour:
   onMenuOpenFirstSelected: {fileID: 1062293275}
   onControlsFirstSelected: {fileID: 702667444}
   onCreditsFirstSelected: {fileID: 373686946}
+  onReturnFromControlsFirstSelected: {fileID: 0}
+  onReturnFromCreditsFirstSelected: {fileID: 0}
   audioPlayer: {fileID: 1182008519}
 --- !u!1001 &824379611383451701
 PrefabInstance:
@@ -3319,14 +3321,6 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_Target
       value: 
       objectReference: {fileID: 1182008519}
-    - target: {fileID: 5074153411766024246, guid: 16c17c00d03226c46ac27ef100710264, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_MethodName
-      value: PlayBackSound
-      objectReference: {fileID: 0}
-    - target: {fileID: 5074153411766024246, guid: 16c17c00d03226c46ac27ef100710264, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_TargetAssemblyTypeName
-      value: AudioPlayerMenu, Assembly-CSharp
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 16c17c00d03226c46ac27ef100710264, type: 3}
 --- !u!1001 &7832947464970300205
