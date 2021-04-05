@@ -12,7 +12,6 @@ public class PulsateText : MonoBehaviour
     void Start()
     {
         textBox = gameObject.GetComponentInChildren<TextMeshProUGUI>();
-        StartCoroutine(nameof(Pulsate));
     }
 
     IEnumerator Pulsate ()
@@ -46,8 +45,27 @@ public class PulsateText : MonoBehaviour
     public void SetFastPulse()
     {
         pulsateTimer /= 4;
-        StopAllCoroutines();
+        StopPulsating();
+        StartCoroutine(nameof(Pulsate));
+    }
+    
+    public void SetAlphaToZero()
+    {
+        textBox.color = new Color(textBox.color.r, textBox.color.g, textBox.color.b, 0);
+    }
+    
+    public void SetAlphaToFull()
+    {
+        textBox.color = new Color(textBox.color.r, textBox.color.g, textBox.color.b, 255);
+    }
+
+    public void StartPulsating()
+    {
         StartCoroutine(nameof(Pulsate));
     }
 
+    public void StopPulsating()
+    {
+        StopAllCoroutines();
+    }
 }
