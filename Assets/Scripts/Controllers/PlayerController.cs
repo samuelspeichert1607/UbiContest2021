@@ -16,6 +16,7 @@ public class PlayerController : CustomController
     [SerializeField] private AudioClip jumpingSounds;
     [SerializeField] private AudioClip landingSounds;
     [SerializeField] private AudioSource audioSource;
+    [SerializeField] private GameObject deathCam;
 
     private CharacterController _controller;
     private GameObject _camera;
@@ -49,6 +50,7 @@ public class PlayerController : CustomController
     private const float DiagonalThresholdZ = 0.35f;
     private AudioListener _audioListener;
     private GameObject _networkManager;
+    private static readonly int IsDying = Animator.StringToHash("isDying");
 
     // Start is called before the first frame update
     void Start()
@@ -64,6 +66,8 @@ public class PlayerController : CustomController
         _animator = GetComponentInChildren<Animator>();
         _audioListener = GetComponent<AudioListener>();
         _audioListener.enabled = _photonView.IsMine;
+        
+        deathCam.SetActive(false);
     }
 
     // Update is called once per frame
@@ -438,6 +442,15 @@ public class PlayerController : CustomController
     {
         canMove = !canMove;
     }
+
+    public override void PlayDeathAnimation()
+    {
+        _camera.SetActive(false);
+        deathCam.SetActive(true);
+        _animator.SetBool(IsDying, true);
+    }
+    
+    
     private void EndEmote()
     {
         isInCriticalMotion = false;
