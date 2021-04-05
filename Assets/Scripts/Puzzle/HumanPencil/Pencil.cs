@@ -22,6 +22,7 @@ namespace Puzzle.HumanPencil
         private LineDrawer _lineDrawer;
         private PhotonView photonView;
 
+
         // Start is called before the first frame update
         private new void Start()
         {
@@ -53,7 +54,7 @@ namespace Puzzle.HumanPencil
 
             if (IsInteractedWith)
             {
-                if (TextRenderer.IsClosed())
+                if (TextRenderer != null &&TextRenderer.IsClosed())
                 {
                     TextRenderer.ShowInfoText( _toDrawText + "\n" + ToEndInteractText);
                 }
@@ -118,6 +119,7 @@ namespace Puzzle.HumanPencil
             Transform player = GetInRangePlayer().transform;
             this.gameObject.transform.SetParent(player);
             transform.position = player.position + player.forward  + new Vector3(0, player.gameObject.GetComponent<BoxCollider>().bounds.size.y/2, 0);
+            transform.rotation = Quaternion.identity;
         }
 
         private void DetachSelfFromPlayer()
