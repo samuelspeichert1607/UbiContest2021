@@ -547,3 +547,7 @@ Assets/Sounds/*
 /Build Linux
 *.anim
 *.png
+
+*.meta~Stashed changes
+
+*.meta~Updated upstream
