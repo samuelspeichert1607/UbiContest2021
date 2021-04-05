@@ -1309,7 +1309,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8575718750505916598, guid: d99000752cd7f634ea803c83a1bd9774, type: 3}
       propertyPath: timeLimit
-      value: 1
+      value: 900
       objectReference: {fileID: 0}
     - target: {fileID: 8612086129205473296, guid: d99000752cd7f634ea803c83a1bd9774, type: 3}
       propertyPath: audioSource
