@@ -414,8 +414,6 @@ public class PlayerController : CustomController
     private void RPCDisconnect(int indexSceneToLoad)
     {
         Debug.Log("Logging out");
-        PhotonNetwork.CurrentRoom.IsOpen = false;
-        PhotonNetwork.CurrentRoom.IsVisible = false;
         
         PhotonNetwork.LeaveRoom();
         PhotonNetwork.Disconnect();

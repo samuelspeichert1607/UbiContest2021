@@ -5,15 +5,15 @@ using UnityEngine;
 
 public class ActionableLight : Actionable
 {
-    [SerializeField] private Light light;
+    [SerializeField] private GameObject lightObject;
 
     private void Start()
     {
-        light.enabled = false;
+        lightObject.SetActive(false);
     }
 
     public override void OnAction()
     {
-        light.enabled = !light.enabled;
+        lightObject.SetActive(!lightObject.activeSelf);
     }
 }

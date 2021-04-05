@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface MusicPlayerListener
 {
-    public void OnMusicChange();
+    void OnMusicChange();
 }

@@ -17,30 +17,49 @@ public class PressurePlate : MonoBehaviour
     protected bool isLocked = false;
     void Update()
     {
-        if (goUp)
+        if (!isLocked)
         {
-            if (transform.localPosition.y < 0)
+            
+            if (goUp)
             {
-                transform.localPosition += new Vector3(0, Time.deltaTime * speed, 0);
+                RaisePlatform();
             }
-           
-            else
+            else if (goDown)
             {
-
-                goUp = false;
+                LowerPlatform();
             }
         }
-        else if (goDown)
+
+        if (isLocked && goUp)
         {
-            if (transform.localPosition.y > -heightDifferenceWhenDown)
-            {
-                transform.localPosition -= new Vector3(0, Time.deltaTime * speed, 0);
-            }
-            
-            else
-            {
-                goDown = false;
-            }
+            RaisePlatform();
+        }
+    }
+
+    private void RaisePlatform()
+    {
+        if (transform.localPosition.y < 0)
+        {
+            transform.localPosition += new Vector3(0, Time.deltaTime * speed, 0);
+        }
+               
+        else
+        {
+
+            goUp = false;
+        }
+    }
+
+    private void LowerPlatform()
+    {
+        if (transform.localPosition.y > -heightDifferenceWhenDown)
+        {
+            transform.localPosition -= new Vector3(0, Time.deltaTime * speed, 0);
+        }
+                
+        else
+        {
+            goDown = false;
         }
     }
 
