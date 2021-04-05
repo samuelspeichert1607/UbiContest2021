@@ -36,6 +36,6 @@ public class HumanPencilManager : MonoBehaviour
     private void ResetPuzzle()
     {
         _lineDrawer.ClearAllDrawing();
-        _pencil.transform.position = _pencilInitialPosition;
+       // _pencil.transform.position = _pencilInitialPosition;
     }
 }

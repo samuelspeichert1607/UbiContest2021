@@ -6,26 +6,36 @@ public class DrawableSurface : MonoBehaviourPunCallbacks
 {
     [SerializeField]
     private GameObject brush;
-    
-    private List<GameObject> brushes = new List<GameObject>();
+
+    private GameObject parentBrush;
+   // private List<GameObject> brushes = new List<GameObject>();
     private LineRenderer _currentLineRenderer;
     private PhotonView photonView;
 
     private void Awake()
     {
+        
+        parentBrush = new GameObject();
+        parentBrush.transform.parent = transform;
         photonView = PhotonView.Get(this);
     }
 
     public void CreateBrush(Vector3 referencePoint)
     {
-        GameObject brushInstance = PhotonNetwork.Instantiate("Brush", brush.transform.position, brush.transform.rotation);
+        GameObject brushInstance = PhotonNetwork.Instantiate("Brush", transform.position, transform.rotation);
         _currentLineRenderer = brushInstance.GetComponent<LineRenderer>();
 
 
         _currentLineRenderer.SetPosition(0, referencePoint);
         _currentLineRenderer.SetPosition(1, referencePoint);
+        // if (parentBrush == null)
+        // {
+        //     parentBrush = new GameObject();
+        //     
+        // }
 
-        brushes.Add(brushInstance);
+        brushInstance.transform.parent = parentBrush.transform;
+       // brushes.Add(brushInstance);
         
         photonView.RPC("CreateRemoteBrush", RpcTarget.All, referencePoint);
     }
@@ -49,10 +59,20 @@ public class DrawableSurface : MonoBehaviourPunCallbacks
 
     public void ClearDrawing()
     {
-        foreach (GameObject brush in brushes)
-        {
-            PhotonNetwork.Destroy(brush);
-        }
+        photonView.RPC(nameof(RPCClearDrawing), RpcTarget.All);
+
+        //parentBrush = new GameObject();
+        // foreach (GameObject brush in brushes)
+        // {
+        //     PhotonNetwork.Destroy(brush);
+        // }
+    }
+    [PunRPC]
+    private void RPCClearDrawing()
+    {
+        parentBrush.SetActive(false);
+        parentBrush = new GameObject();
+        parentBrush.transform.parent = transform;
     }
 
     public void CreateBrushRelativeToSelf(Vector3 referenceTransformToUpperLeftCorner, Vector3 referenceSurfaceEulerAngles)
@@ -92,13 +112,13 @@ public class DrawableSurface : MonoBehaviourPunCallbacks
     [PunRPC]
     void CreateRemoteBrush(Vector3 referencePoint)
     {
-        GameObject brushInstance = PhotonNetwork.Instantiate("Brush", brush.transform.position, brush.transform.rotation);
+        GameObject brushInstance = PhotonNetwork.Instantiate("Brush", transform.position, transform.rotation);
         _currentLineRenderer = brushInstance.GetComponent<LineRenderer>();
 
         _currentLineRenderer.SetPosition(0, referencePoint);
         _currentLineRenderer.SetPosition(1, referencePoint);
-
-        brushes.Add(brush);
+        brushInstance.transform.parent = parentBrush.transform;
+        //brushes.Add(brush);
     }
 
     [PunRPC]
@@ -117,4 +137,7 @@ public class DrawableSurface : MonoBehaviourPunCallbacks
         int positionIndex = positionCount - 1;
         _currentLineRenderer.SetPosition(positionIndex, pointPos);
     }
+
+
+
 }

@@ -29,6 +29,7 @@ namespace Puzzle.HumanPencil
             mainDrawableSurface = drawingSurface.GetComponent<DrawableSurface>();
         }
 
+
         public void Draw()
         {
             if (IsAllowedToDraw())
