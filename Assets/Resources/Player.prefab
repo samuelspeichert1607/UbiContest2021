@@ -1239,6 +1239,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 6193486925864636916}
     - target: {fileID: 8575718750505916598, guid: d99000752cd7f634ea803c83a1bd9774, type: 3}
+      propertyPath: timeLimit
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8575718750505916598, guid: d99000752cd7f634ea803c83a1bd9774, type: 3}
       propertyPath: audioSource
       value: 
       objectReference: {fileID: 7891492393573909030}
@@ -1246,6 +1250,10 @@ PrefabInstance:
       propertyPath: playerCamera
       value: 
       objectReference: {fileID: 2530426914044659649}
+    - target: {fileID: 8575718750505916598, guid: d99000752cd7f634ea803c83a1bd9774, type: 3}
+      propertyPath: timeBeforeOxygenStart
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 8612086129205473296, guid: d99000752cd7f634ea803c83a1bd9774, type: 3}
       propertyPath: audioSource
       value: 

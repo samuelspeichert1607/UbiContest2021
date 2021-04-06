@@ -158,9 +158,13 @@ public class StatusHUD : MonoBehaviour, MusicPlayerListener
     
     private void PlayDeathAnimation()
     {
+        var _photonView = GetComponentInParent<PhotonView>();
+        if (!_photonView.IsMine) return;
         _playerController.PlayDeathAnimation();
+        
         playerCamera.SetActive(false);
         deathCam.SetActive(true);
+
         _deathCamVignette.intensity.value = 1f;
         StartCoroutine(FadeIntensityDownToValue(_deathCamVignette, 0f, shortBlackoutTime));
         
