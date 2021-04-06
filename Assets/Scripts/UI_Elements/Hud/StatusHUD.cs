@@ -8,7 +8,7 @@ using UnityEngine.Rendering.PostProcessing;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class StatusHUD : MonoBehaviour
+public class StatusHUD : MonoBehaviour, MusicPlayerListener
 {
     [SerializeField] private float timeLimit;
     [SerializeField] private float delayBeforeGameEnd = 15f;
@@ -18,6 +18,12 @@ public class StatusHUD : MonoBehaviour
     [SerializeField] private GameObject deathCam;
     [SerializeField] private float shortBlackoutTime = 0.5f;
     [SerializeField] private float longBlackoutTime = 15f;
+    
+    [SerializeField] private AudioClip heavyBreathing;
+    [SerializeField] private AudioClip panickedBreathing;
+    [SerializeField] private AudioClip panickedBreathing2;
+
+    [SerializeField] private AudioSource audioSource;
 
     private Vignette _playerCameraPostProcessVignette;
     private Vignette _deathCamVignette;
@@ -93,14 +99,13 @@ public class StatusHUD : MonoBehaviour
     private void PlayerDeathInitialPhase()
     {
         _playerController.disableMovement();
-        
-        blackScreen.SetFadingTime(shortBlackoutTime/ 2f);
-        blackScreen.FadeToFullAlpha();
-        StartCoroutine(FadeIntensityUpToValue(_playerCameraPostProcessVignette, 1.0f, shortBlackoutTime));
-        
+        PanickedBreathing();
+
+        ShortBlackout();
+
         Invoke(nameof(PlayDeathAnimation), shortBlackoutTime);
     }
-
+    
     private void PlayDeathAnimation()
     {
         _playerController.PlayDeathAnimation();
@@ -112,14 +117,32 @@ public class StatusHUD : MonoBehaviour
         blackScreen.FadeToZeroAlpha();
     }
     
+    private void ShortBlackout()
+    {
+        blackScreen.SetFadingTime(shortBlackoutTime/ 2f);
+        blackScreen.FadeToFullAlpha();
+        StartCoroutine(FadeIntensityUpToValue(_playerCameraPostProcessVignette, 1.0f, shortBlackoutTime));
+    }
+    
+    private void PartialBlackout()
+    {
+        blackScreen.SetFadingTime(shortBlackoutTime/ 2f);
+        blackScreen.FadeToFullAlpha();
+        StartCoroutine(FadeIntensityUpToValue(_playerCameraPostProcessVignette, 0.7f, shortBlackoutTime));
+    }
+
+    
     private void FinalBlackout()
     {
         StartCoroutine(FadeIntensityUpToValue(_deathCamVignette, 1f, longBlackoutTime));
         blackScreen.SetFadingTime(2f * delayBeforeGameEnd/ 3f);
         blackScreen.FadeToFullAlpha();
+        Invoke(nameof(HeavyBreathing), 2f);
+        Invoke(nameof(PanickedBreathing2), 4f);
+        Invoke(nameof(PanickedBreathing), 10f);
+        Invoke(nameof(HeavyBreathing), 13f);
     }
-
-
+    
     public void CallGameSucceededAfterDefaultDelay()
     {
         _robotVoiceController.PlayWin();
@@ -162,4 +185,48 @@ public class StatusHUD : MonoBehaviour
         }
     }
 
+    public void OnMusicChange()
+    {
+        PlayOxygenRunningLowBlackout();
+    }
+
+    private void PlayOxygenRunningLowBlackout()
+    {
+        _playerController.disableMovement();
+        PanickedBreathing();
+        PartialBlackout();
+
+        Invoke(nameof(ReturnFromBlackout), shortBlackoutTime);
+        Invoke(nameof(ShortBlackout), shortBlackoutTime * 2f);
+        Invoke(nameof(ReturnFromBlackout), shortBlackoutTime * 3f);
+        Invoke(nameof(EndOxygenRunningLowBlackout), shortBlackoutTime * 4f);
+    }
+    
+    private void ReturnFromBlackout()
+    {
+        StartCoroutine(FadeIntensityDownToValue(_playerCameraPostProcessVignette, 0f, shortBlackoutTime));
+        blackScreen.SetFadingTime(shortBlackoutTime/ 2f);
+        blackScreen.FadeToZeroAlpha();
+    }
+
+    private void EndOxygenRunningLowBlackout()
+    {
+        _playerController.allowMovement();
+        HeavyBreathing();
+    }
+    
+    private void PanickedBreathing()
+    {
+        audioSource.PlayOneShot(panickedBreathing);
+    }
+    
+    private void PanickedBreathing2()
+    {
+        audioSource.PlayOneShot(panickedBreathing2);
+    }
+
+    private void HeavyBreathing()
+    {
+        audioSource.PlayOneShot(heavyBreathing);
+    }
 }

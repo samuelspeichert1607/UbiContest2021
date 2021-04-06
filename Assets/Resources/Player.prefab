@@ -1238,6 +1238,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6847951498577946158, guid: d99000752cd7f634ea803c83a1bd9774, type: 3}
+      propertyPath: m_TagString
+      value: MusicPlayerListener
+      objectReference: {fileID: 0}
     - target: {fileID: 8575718750505916598, guid: d99000752cd7f634ea803c83a1bd9774, type: 3}
       propertyPath: deathCam
       value: 
@@ -1247,6 +1251,10 @@ PrefabInstance:
       value: 900
       objectReference: {fileID: 0}
     - target: {fileID: 8575718750505916598, guid: d99000752cd7f634ea803c83a1bd9774, type: 3}
+      propertyPath: audioSource
+      value: 
+      objectReference: {fileID: 7891492393573909030}
+    - target: {fileID: 8575718750505916598, guid: d99000752cd7f634ea803c83a1bd9774, type: 3}
       propertyPath: playerCamera
       value: 
       objectReference: {fileID: 2530426914044659649}
@@ -1255,9 +1263,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2530426914044659649}
     - target: {fileID: 8575718750505916598, guid: d99000752cd7f634ea803c83a1bd9774, type: 3}
+      propertyPath: heavyBreathing
+      value: 
+      objectReference: {fileID: 8300000, guid: 894697e3d3f14034f8edef2ad23afa2a, type: 3}
+    - target: {fileID: 8575718750505916598, guid: d99000752cd7f634ea803c83a1bd9774, type: 3}
       propertyPath: longBlackoutTime
       value: 15
       objectReference: {fileID: 0}
+    - target: {fileID: 8575718750505916598, guid: d99000752cd7f634ea803c83a1bd9774, type: 3}
+      propertyPath: panickedBreathing
+      value: 
+      objectReference: {fileID: 8300000, guid: ec262f2534a2df0448897d1a01592e47, type: 3}
+    - target: {fileID: 8575718750505916598, guid: d99000752cd7f634ea803c83a1bd9774, type: 3}
+      propertyPath: panickedBreathing2
+      value: 
+      objectReference: {fileID: 8300000, guid: 7c5491ab95e2b174aa8db363578cd038, type: 3}
     - target: {fileID: 8612086129205473296, guid: d99000752cd7f634ea803c83a1bd9774, type: 3}
       propertyPath: audioSource
       value: 
