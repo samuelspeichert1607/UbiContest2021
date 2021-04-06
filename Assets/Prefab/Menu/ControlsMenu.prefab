@@ -226,7 +226,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &824379612395509373
 RectTransform:
   m_ObjectHideFlags: 0
@@ -710,10 +710,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: ManetteXBOX
       objectReference: {fileID: 0}
-    - target: {fileID: 8712840403396025941, guid: 57320d571c2d54f409b82bdd48b7935e, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 57320d571c2d54f409b82bdd48b7935e, type: 3}
 --- !u!1 &8330237422467427041 stripped
@@ -736,10 +732,6 @@ PrefabInstance:
     - target: {fileID: 1720586743775598724, guid: 747bfe1cb010d534db5b9042efddd2d9, type: 3}
       propertyPath: m_Name
       value: ManettePS4
-      objectReference: {fileID: 0}
-    - target: {fileID: 1720586743775598724, guid: 747bfe1cb010d534db5b9042efddd2d9, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1720586743775598725, guid: 747bfe1cb010d534db5b9042efddd2d9, type: 3}
       propertyPath: m_RootOrder
@@ -784,30 +776,6 @@ PrefabInstance:
     - target: {fileID: 1720586743775598725, guid: 747bfe1cb010d534db5b9042efddd2d9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1720586744642705576, guid: 747bfe1cb010d534db5b9042efddd2d9, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -275
-      objectReference: {fileID: 0}
-    - target: {fileID: 1720586744642705576, guid: 747bfe1cb010d534db5b9042efddd2d9, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -125
-      objectReference: {fileID: 0}
-    - target: {fileID: 1720586744814687505, guid: 747bfe1cb010d534db5b9042efddd2d9, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: e45a8dc4c69d842479d33435e29767ee, type: 3}
-    - target: {fileID: 1720586744814687507, guid: 747bfe1cb010d534db5b9042efddd2d9, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1720586745697388595, guid: 747bfe1cb010d534db5b9042efddd2d9, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -450
-      objectReference: {fileID: 0}
-    - target: {fileID: 1720586745697388595, guid: 747bfe1cb010d534db5b9042efddd2d9, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -125
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 747bfe1cb010d534db5b9042efddd2d9, type: 3}
