@@ -43,7 +43,7 @@ public class StatusHUD : MonoBehaviour, MusicPlayerListener
     private bool isTimerOver = false;
     private bool hasSecondPlayerEnteredRoom =false;
     // private TextMeshProUGUI timerTextBox;
-
+    private bool canStartConsuming = true;
     void Start()
     {
         // Big problème : le timer se reset à chaque entrée d'un deuxième joueur
@@ -65,7 +65,7 @@ public class StatusHUD : MonoBehaviour, MusicPlayerListener
             {
                 Invoke(nameof(WaitForSecondPlayerToJoin), TimeForSecondPlayerToJoin);
                 _needToInvokeOxygenConsumption = false;
-                Invoke(nameof(StartConsumingOxygen), timeBeforeOxygenStart);
+                //Invoke(nameof(StartConsumingOxygen), timeBeforeOxygenStart);
             }
 
 
@@ -77,6 +77,11 @@ public class StatusHUD : MonoBehaviour, MusicPlayerListener
 
             if (hasSecondPlayerEnteredRoom)
             {
+                if (canStartConsuming)
+                {
+                    canStartConsuming = false;
+                    Invoke(nameof(StartConsumingOxygen), timeBeforeOxygenStart);
+                }
                 _timeLeft -= Time.deltaTime / 2;
             }
             
