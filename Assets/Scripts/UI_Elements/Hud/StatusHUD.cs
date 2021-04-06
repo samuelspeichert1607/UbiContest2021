@@ -16,8 +16,11 @@ public class StatusHUD : MonoBehaviour
     [SerializeField] private FadableScreen blackScreen;
     [SerializeField] private GameObject playerCamera;
     [SerializeField] private GameObject deathCam;
+    [SerializeField] private float shortBlackoutTime = 0.5f;
+    [SerializeField] private float longBlackoutTime = 15f;
 
     private Vignette _playerCameraPostProcessVignette;
+    private Vignette _deathCamVignette;
     private CustomController _playerController;
     private RobotVoiceController _robotVoiceController;
     private static float _timeLeft;
@@ -37,6 +40,7 @@ public class StatusHUD : MonoBehaviour
         blackScreen.SetAlphaToZero();
         _playerController = GetComponentInParent<CustomController>();
         playerCamera.GetComponent<PostProcessVolume>().profile.TryGetSettings(out _playerCameraPostProcessVignette);
+        deathCam.GetComponent<PostProcessVolume>().profile.TryGetSettings(out _deathCamVignette);
     }
 
     void Update()
@@ -82,18 +86,17 @@ public class StatusHUD : MonoBehaviour
 
         PlayerDeathInitialPhase();
         
-        Invoke(nameof(BlackscreenFinalFading), 1f);
+        Invoke(nameof(FinalBlackout), 1f);
         Invoke(nameof(GameIsLost), delayBeforeGameEnd);
     }
     
     private void PlayerDeathInitialPhase()
     {
         _playerController.disableMovement();
-
-        float shortBlackoutTime = 0.3f;
-        // blackScreen.SetFadingTime(shortBlackoutTime/ 2f);
-        // blackScreen.FadeToFullAlpha();
-        StartCoroutine(FadeIntensityUpToValue(_playerCameraPostProcessVignette, 0.7f));
+        
+        blackScreen.SetFadingTime(shortBlackoutTime/ 2f);
+        blackScreen.FadeToFullAlpha();
+        StartCoroutine(FadeIntensityUpToValue(_playerCameraPostProcessVignette, 1.0f, shortBlackoutTime));
         
         Invoke(nameof(PlayDeathAnimation), shortBlackoutTime);
     }
@@ -103,14 +106,17 @@ public class StatusHUD : MonoBehaviour
         _playerController.PlayDeathAnimation();
         playerCamera.SetActive(false);
         deathCam.SetActive(true);
+        _deathCamVignette.intensity.value = 1f;
+        StartCoroutine(FadeIntensityDownToValue(_deathCamVignette, 0f, shortBlackoutTime));
         
-        // blackScreen.FadeToZeroAlpha();
+        blackScreen.FadeToZeroAlpha();
     }
     
-    private void BlackscreenFinalFading()
+    private void FinalBlackout()
     {
-        // blackScreen.SetFadingTime(2f * delayBeforeGameEnd/ 3f);
-        // blackScreen.FadeToFullAlpha();
+        StartCoroutine(FadeIntensityUpToValue(_deathCamVignette, 1f, longBlackoutTime));
+        blackScreen.SetFadingTime(2f * delayBeforeGameEnd/ 3f);
+        blackScreen.FadeToFullAlpha();
     }
 
 
@@ -134,20 +140,24 @@ public class StatusHUD : MonoBehaviour
         GetComponentInParent<PlayerController>().Disconnect(5);
     }
     
-    IEnumerator FadeIntensityUpToValue (Vignette vignette, float intensityValue)
+    IEnumerator FadeIntensityUpToValue (Vignette vignette, float intensityValue, float duration)
     {
-        while (vignette.intensity < intensityValue)
-        {
-            vignette.intensity.value += Time.deltaTime / 2f;
-            Debug.Log(vignette.intensity.value);
+        float startTime = Time.time;
+        float initialIntensity = vignette.intensity.value;
+        float intensityDifferential = intensityValue - initialIntensity;
+        while (vignette.intensity < intensityValue) {
+            vignette.intensity.value = initialIntensity + intensityDifferential * (Time.time - startTime) / duration;
             yield return null;
         }
     }
 
-    IEnumerator FadeIntensityDownToValue (Vignette vignette, float intensityValue)
+    IEnumerator FadeIntensityDownToValue (Vignette vignette, float intensityValue, float duration)
     {
+        float startTime = Time.time;
+        float initialIntensity = vignette.intensity.value;
+        float intensityDifferential = intensityValue - initialIntensity;
         while (vignette.intensity > intensityValue) {
-            vignette.intensity.value += Time.deltaTime / 2f;
+            vignette.intensity.value = initialIntensity + intensityDifferential * (Time.time - startTime) / duration;
             yield return null;
         }
     }
