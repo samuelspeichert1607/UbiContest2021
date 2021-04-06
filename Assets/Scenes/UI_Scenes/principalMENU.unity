@@ -3313,7 +3313,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 824379612395509362, guid: 16c17c00d03226c46ac27ef100710264, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 824379612395509373, guid: 16c17c00d03226c46ac27ef100710264, type: 3}
       propertyPath: m_Pivot.x
@@ -3401,7 +3401,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2058154259544461849, guid: 16c17c00d03226c46ac27ef100710264, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5074153411766024246, guid: 16c17c00d03226c46ac27ef100710264, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
@@ -3426,6 +3426,10 @@ PrefabInstance:
     - target: {fileID: 5074153411766024246, guid: 16c17c00d03226c46ac27ef100710264, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_TargetAssemblyTypeName
       value: AudioPlayerMenu, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8330237422467427041, guid: 16c17c00d03226c46ac27ef100710264, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 16c17c00d03226c46ac27ef100710264, type: 3}

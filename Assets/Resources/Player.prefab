@@ -1012,14 +1012,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4816625168403844867}
     m_Modifications:
-    - target: {fileID: 471128737559840678, guid: d99000752cd7f634ea803c83a1bd9774, type: 3}
-      propertyPath: m_text
-      value: DISCONNECT
-      objectReference: {fileID: 0}
-    - target: {fileID: 471128737559840678, guid: d99000752cd7f634ea803c83a1bd9774, type: 3}
-      propertyPath: m_margin.z
-      value: -6.9842296
-      objectReference: {fileID: 0}
     - target: {fileID: 1847758438790934291, guid: d99000752cd7f634ea803c83a1bd9774, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -1030,6 +1022,34 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1847758438790934291, guid: d99000752cd7f634ea803c83a1bd9774, type: 3}
       propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3080066553009627935, guid: d99000752cd7f634ea803c83a1bd9774, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3080066553789074049, guid: d99000752cd7f634ea803c83a1bd9774, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3080066554187921067, guid: d99000752cd7f634ea803c83a1bd9774, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3080066554317938203, guid: d99000752cd7f634ea803c83a1bd9774, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3080066554743198398, guid: d99000752cd7f634ea803c83a1bd9774, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3080066554973860779, guid: d99000752cd7f634ea803c83a1bd9774, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4422069402501216192, guid: d99000752cd7f634ea803c83a1bd9774, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5445417442422950649, guid: d99000752cd7f634ea803c83a1bd9774, type: 3}
