@@ -710,10 +710,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: ManetteXBOX
       objectReference: {fileID: 0}
-    - target: {fileID: 8712840403396025941, guid: 57320d571c2d54f409b82bdd48b7935e, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 57320d571c2d54f409b82bdd48b7935e, type: 3}
 --- !u!1 &4242007647390714107 stripped
@@ -736,10 +732,6 @@ PrefabInstance:
     - target: {fileID: 1720586743775598724, guid: 747bfe1cb010d534db5b9042efddd2d9, type: 3}
       propertyPath: m_Name
       value: ManettePS4
-      objectReference: {fileID: 0}
-    - target: {fileID: 1720586743775598724, guid: 747bfe1cb010d534db5b9042efddd2d9, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1720586743775598725, guid: 747bfe1cb010d534db5b9042efddd2d9, type: 3}
       propertyPath: m_RootOrder
