@@ -1022,6 +1022,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4816625168403844867}
     m_Modifications:
+    - target: {fileID: 128493976013884436, guid: d99000752cd7f634ea803c83a1bd9774, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1847758438790934291, guid: d99000752cd7f634ea803c83a1bd9774, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -1057,6 +1061,14 @@ PrefabInstance:
     - target: {fileID: 3080066554973860779, guid: d99000752cd7f634ea803c83a1bd9774, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3900007994014130128, guid: d99000752cd7f634ea803c83a1bd9774, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3900007995030427836, guid: d99000752cd7f634ea803c83a1bd9774, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4422069402501216192, guid: d99000752cd7f634ea803c83a1bd9774, type: 3}
       propertyPath: m_IsActive
@@ -1267,6 +1279,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 6193486925864636916}
     - target: {fileID: 8575718750505916598, guid: d99000752cd7f634ea803c83a1bd9774, type: 3}
+      propertyPath: explosion
+      value: 
+      objectReference: {fileID: 8300000, guid: ee1a1aed4040e9344bc3c71e28914535, type: 3}
+    - target: {fileID: 8575718750505916598, guid: d99000752cd7f634ea803c83a1bd9774, type: 3}
+      propertyPath: oxygenBar
+      value: 
+      objectReference: {fileID: 8414847852886762134}
+    - target: {fileID: 8575718750505916598, guid: d99000752cd7f634ea803c83a1bd9774, type: 3}
       propertyPath: timeLimit
       value: 900
       objectReference: {fileID: 0}
@@ -1298,6 +1318,10 @@ PrefabInstance:
       propertyPath: panickedBreathing2
       value: 
       objectReference: {fileID: 8300000, guid: 7c5491ab95e2b174aa8db363578cd038, type: 3}
+    - target: {fileID: 8575718750505916598, guid: d99000752cd7f634ea803c83a1bd9774, type: 3}
+      propertyPath: timeBeforeOxygenStart
+      value: 55
+      objectReference: {fileID: 0}
     - target: {fileID: 8612086129205473296, guid: d99000752cd7f634ea803c83a1bd9774, type: 3}
       propertyPath: audioSource
       value: 
@@ -1307,6 +1331,11 @@ PrefabInstance:
 --- !u!224 &2148455106842848939 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6847951498221142404, guid: d99000752cd7f634ea803c83a1bd9774, type: 3}
+  m_PrefabInstance: {fileID: 4816625169322651439}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8414847852886762134 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3900007995079691705, guid: d99000752cd7f634ea803c83a1bd9774, type: 3}
   m_PrefabInstance: {fileID: 4816625169322651439}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &7953534351166356089 stripped
