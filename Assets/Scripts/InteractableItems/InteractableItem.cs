@@ -36,6 +36,7 @@ namespace InteractableItems
         {
             _players = GameObject.FindGameObjectsWithTag("Player");
             ControllerManager = GetComponent<ControllerManager>();
+            ControllerManager.Start();
             buttonLayout = ControllerManager.CurrentButtonLayout;
             ToStartInteractText = String.Join(" ", interactPreButtonText, buttonLayout.actionRight, interactPostButtonText);
             ToEndInteractText = String.Join(" ", interactPreButtonText, buttonLayout.actionRight, interactionStopPostButtonText);

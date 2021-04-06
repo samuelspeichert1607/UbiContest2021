@@ -91,7 +91,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3005266554192843344}
   - component: {fileID: 3638599460128746529}
-  - component: {fileID: 265873809000772606}
+  - component: {fileID: 7100072733891314239}
   m_Layer: 0
   m_Name: cupcake
   m_TagString: Untagged
@@ -134,7 +134,7 @@ MonoBehaviour:
   interactButtonName: B
   interactionStopPostButtonText: 
   interactRadius: 1.5
---- !u!114 &265873809000772606
+--- !u!114 &7100072733891314239
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

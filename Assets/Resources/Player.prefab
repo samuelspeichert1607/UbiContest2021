@@ -440,8 +440,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8688972652696894ca0a72513d7a937e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ps4Layout: {fileID: 0}
-  xboxLayout: {fileID: 0}
 --- !u!114 &2075387171875053641
 MonoBehaviour:
   m_ObjectHideFlags: 0
