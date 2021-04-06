@@ -58,7 +58,7 @@ public class StatusHUD : MonoBehaviour, MusicPlayerListener
         deathCam.GetComponent<PostProcessVolume>().profile.TryGetSettings(out _deathCamVignette);
         oxygenBar.SetActive(false);
 
-        _photonView = GetComponentInParent<PhotonView>();
+        _photonView = GetComponent<PhotonView>();
     }
 
     void Update()
