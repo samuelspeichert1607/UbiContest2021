@@ -34,9 +34,13 @@ public class MarelleController : MonoBehaviour
     public void gameWon()
     {
         audioSource.PlayOneShot(winSound, 0.7f);
+
         foreach (Actionable a in actionableObject)
         {
-            a.OnAction();
+            if (!a.hasActioned)
+            {
+                a.OnAction();
+            }
         }
 
         // _photonView.RPC("rcpGameWon", RpcTarget.All);
@@ -54,7 +58,7 @@ public class MarelleController : MonoBehaviour
     //            a.OnAction();
     //        }
     //    }
-            
+
 
     //}
     public void gameLost()
