@@ -4,15 +4,29 @@ using System.Collections.Generic;
 using Photon.Pun;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Rendering.PostProcessing;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class StatusHUD : MonoBehaviour
+public class StatusHUD : MonoBehaviour, MusicPlayerListener
 {
     [SerializeField] private float timeLimit;
     [SerializeField] private float delayBeforeGameEnd = 15f;
     [SerializeField] private Image oxygenFill;
     [SerializeField] private FadableScreen blackScreen;
+    [SerializeField] private GameObject playerCamera;
+    [SerializeField] private GameObject deathCam;
+    [SerializeField] private float shortBlackoutTime = 0.5f;
+    [SerializeField] private float longBlackoutTime = 15f;
+    
+    [SerializeField] private AudioClip heavyBreathing;
+    [SerializeField] private AudioClip panickedBreathing;
+    [SerializeField] private AudioClip panickedBreathing2;
+
+    [SerializeField] private AudioSource audioSource;
+
+    private Vignette _playerCameraPostProcessVignette;
+    private Vignette _deathCamVignette;
     private CustomController _playerController;
     private RobotVoiceController _robotVoiceController;
     private static float _timeLeft;
@@ -31,6 +45,8 @@ public class StatusHUD : MonoBehaviour
         _robotVoiceController = GameObject.FindWithTag("RobotVoice").GetComponent<RobotVoiceController>();
         blackScreen.SetAlphaToZero();
         _playerController = GetComponentInParent<CustomController>();
+        playerCamera.GetComponent<PostProcessVolume>().profile.TryGetSettings(out _playerCameraPostProcessVignette);
+        deathCam.GetComponent<PostProcessVolume>().profile.TryGetSettings(out _deathCamVignette);
     }
 
     void Update()
@@ -73,13 +89,60 @@ public class StatusHUD : MonoBehaviour
     {
         isTimerOver = true;
         _robotVoiceController.PlayLost();
-        _playerController.disableMovement();
-        blackScreen.SetFadingTime(2f * delayBeforeGameEnd/ 3f);
-        blackScreen.FadeToFullAlpha();
+
+        PlayerDeathInitialPhase();
+        
+        Invoke(nameof(FinalBlackout), 1f);
         Invoke(nameof(GameIsLost), delayBeforeGameEnd);
     }
+    
+    private void PlayerDeathInitialPhase()
+    {
+        _playerController.disableMovement();
+        PanickedBreathing();
 
+        ShortBlackout();
 
+        Invoke(nameof(PlayDeathAnimation), shortBlackoutTime);
+    }
+    
+    private void PlayDeathAnimation()
+    {
+        _playerController.PlayDeathAnimation();
+        playerCamera.SetActive(false);
+        deathCam.SetActive(true);
+        _deathCamVignette.intensity.value = 1f;
+        StartCoroutine(FadeIntensityDownToValue(_deathCamVignette, 0f, shortBlackoutTime));
+        
+        blackScreen.FadeToZeroAlpha();
+    }
+    
+    private void ShortBlackout()
+    {
+        blackScreen.SetFadingTime(shortBlackoutTime/ 2f);
+        blackScreen.FadeToFullAlpha();
+        StartCoroutine(FadeIntensityUpToValue(_playerCameraPostProcessVignette, 1.0f, shortBlackoutTime));
+    }
+    
+    private void PartialBlackout()
+    {
+        blackScreen.SetFadingTime(shortBlackoutTime/ 2f);
+        blackScreen.FadeToFullAlpha();
+        StartCoroutine(FadeIntensityUpToValue(_playerCameraPostProcessVignette, 0.7f, shortBlackoutTime));
+    }
+
+    
+    private void FinalBlackout()
+    {
+        StartCoroutine(FadeIntensityUpToValue(_deathCamVignette, 1f, longBlackoutTime));
+        blackScreen.SetFadingTime(2f * delayBeforeGameEnd/ 3f);
+        blackScreen.FadeToFullAlpha();
+        Invoke(nameof(HeavyBreathing), 2f);
+        Invoke(nameof(PanickedBreathing2), 4f);
+        Invoke(nameof(PanickedBreathing), 10f);
+        Invoke(nameof(HeavyBreathing), 13f);
+    }
+    
     public void CallGameSucceededAfterDefaultDelay()
     {
         _robotVoiceController.PlayWin();
@@ -99,5 +162,71 @@ public class StatusHUD : MonoBehaviour
         // 5 = endingScreenFailure
         GetComponentInParent<PlayerController>().Disconnect(5);
     }
+    
+    IEnumerator FadeIntensityUpToValue (Vignette vignette, float intensityValue, float duration)
+    {
+        float startTime = Time.time;
+        float initialIntensity = vignette.intensity.value;
+        float intensityDifferential = intensityValue - initialIntensity;
+        while (vignette.intensity < intensityValue) {
+            vignette.intensity.value = initialIntensity + intensityDifferential * (Time.time - startTime) / duration;
+            yield return null;
+        }
+    }
 
+    IEnumerator FadeIntensityDownToValue (Vignette vignette, float intensityValue, float duration)
+    {
+        float startTime = Time.time;
+        float initialIntensity = vignette.intensity.value;
+        float intensityDifferential = intensityValue - initialIntensity;
+        while (vignette.intensity > intensityValue) {
+            vignette.intensity.value = initialIntensity + intensityDifferential * (Time.time - startTime) / duration;
+            yield return null;
+        }
+    }
+
+    public void OnMusicChange()
+    {
+        PlayOxygenRunningLowBlackout();
+    }
+
+    private void PlayOxygenRunningLowBlackout()
+    {
+        _playerController.disableMovement();
+        PanickedBreathing();
+        PartialBlackout();
+
+        Invoke(nameof(ReturnFromBlackout), shortBlackoutTime);
+        Invoke(nameof(ShortBlackout), shortBlackoutTime * 2f);
+        Invoke(nameof(ReturnFromBlackout), shortBlackoutTime * 3f);
+        Invoke(nameof(EndOxygenRunningLowBlackout), shortBlackoutTime * 4f);
+    }
+    
+    private void ReturnFromBlackout()
+    {
+        StartCoroutine(FadeIntensityDownToValue(_playerCameraPostProcessVignette, 0f, shortBlackoutTime));
+        blackScreen.SetFadingTime(shortBlackoutTime/ 2f);
+        blackScreen.FadeToZeroAlpha();
+    }
+
+    private void EndOxygenRunningLowBlackout()
+    {
+        _playerController.allowMovement();
+        HeavyBreathing();
+    }
+    
+    private void PanickedBreathing()
+    {
+        audioSource.PlayOneShot(panickedBreathing);
+    }
+    
+    private void PanickedBreathing2()
+    {
+        audioSource.PlayOneShot(panickedBreathing2);
+    }
+
+    private void HeavyBreathing()
+    {
+        audioSource.PlayOneShot(heavyBreathing);
+    }
 }
