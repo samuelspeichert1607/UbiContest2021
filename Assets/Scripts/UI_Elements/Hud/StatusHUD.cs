@@ -28,6 +28,7 @@ public class StatusHUD : MonoBehaviour, MusicPlayerListener
     [SerializeField] private AudioClip explosion;
 
     [SerializeField] private AudioSource audioSource;
+    [SerializeField] private float TimeForSecondPlayerToJoin =10;
 
     private Vignette _playerCameraPostProcessVignette;
     private Vignette _deathCamVignette;
@@ -40,6 +41,7 @@ public class StatusHUD : MonoBehaviour, MusicPlayerListener
     private bool _needToInvokeOxygenConsumption = true;
 
     private bool isTimerOver = false;
+    private bool hasSecondPlayerEnteredRoom =false;
     // private TextMeshProUGUI timerTextBox;
 
     void Start()
@@ -61,15 +63,23 @@ public class StatusHUD : MonoBehaviour, MusicPlayerListener
         {
             if (_needToInvokeOxygenConsumption)
             {
+                Invoke(nameof(WaitForSecondPlayerToJoin), TimeForSecondPlayerToJoin);
                 _needToInvokeOxygenConsumption = false;
                 Invoke(nameof(StartConsumingOxygen), timeBeforeOxygenStart);
             }
+
+
             if (PhotonNetwork.CurrentRoom.PlayerCount > _previousPlayerCount)
             {
                 _timeLeft = _previousTimeLeft;
             }
-            // Pourrait se changer pour diviser par le nombre de joueurs
-            _timeLeft -= Time.deltaTime / 2;
+     
+
+            if (hasSecondPlayerEnteredRoom)
+            {
+                _timeLeft -= Time.deltaTime / 2;
+            }
+            
         }
         else if (PhotonNetwork.CurrentRoom.PlayerCount < _previousPlayerCount)
         {
@@ -282,5 +292,10 @@ public class StatusHUD : MonoBehaviour, MusicPlayerListener
     private void HeavyBreathing()
     {
         audioSource.PlayOneShot(heavyBreathing);
+    }
+
+    private void WaitForSecondPlayerToJoin()
+    {
+        hasSecondPlayerEnteredRoom = true;
     }
 }
