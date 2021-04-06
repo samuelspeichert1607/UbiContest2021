@@ -46,10 +46,6 @@ namespace UI_Elements
                     && !playerController.IsInCriticalMotion())
                 {
                     pauseUnPause();
-                    if (validationMenu.activeSelf)
-                    {
-                        validationMenu.SetActive(false);
-                    }
                 }
                 if (HasNavigatedInMenu())
                 {
@@ -101,6 +97,8 @@ namespace UI_Elements
         private void UnPause()
         {
             pauseMenu.SetActive(false);
+            validationMenu.SetActive(false);
+            controlsMenu.SetActive(false);
             _audioPlayer.PlayBackSound();
             Invoke(nameof(AllowPlayerMovement), 0.05f);
         }
