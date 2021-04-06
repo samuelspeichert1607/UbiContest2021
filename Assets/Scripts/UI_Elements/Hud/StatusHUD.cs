@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Photon.Pun;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Rendering.PostProcessing;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -13,6 +14,10 @@ public class StatusHUD : MonoBehaviour
     [SerializeField] private float delayBeforeGameEnd = 15f;
     [SerializeField] private Image oxygenFill;
     [SerializeField] private FadableScreen blackScreen;
+    [SerializeField] private GameObject playerCamera;
+    [SerializeField] private GameObject deathCam;
+
+    private Vignette _playerCameraPostProcessVignette;
     private CustomController _playerController;
     private RobotVoiceController _robotVoiceController;
     private static float _timeLeft;
@@ -31,23 +36,24 @@ public class StatusHUD : MonoBehaviour
         _robotVoiceController = GameObject.FindWithTag("RobotVoice").GetComponent<RobotVoiceController>();
         blackScreen.SetAlphaToZero();
         _playerController = GetComponentInParent<CustomController>();
+        playerCamera.GetComponent<PostProcessVolume>().profile.TryGetSettings(out _playerCameraPostProcessVignette);
     }
 
     void Update()
     {
-        if(PhotonNetwork.CurrentRoom.PlayerCount == 2)
-        {
-            if (PhotonNetwork.CurrentRoom.PlayerCount > _previousPlayerCount)
-            {
+        // if(PhotonNetwork.CurrentRoom.PlayerCount == 2)
+        // {
+            // if (PhotonNetwork.CurrentRoom.PlayerCount > _previousPlayerCount)
+            // {
                 _timeLeft = _previousTimeLeft;
-            }
+            // }
             // Pourrait se changer pour diviser par le nombre de joueurs
             _timeLeft -= Time.deltaTime / 2;
-        }
-        else if(PhotonNetwork.CurrentRoom.PlayerCount < _previousPlayerCount)
-        {
+        // }
+        // else if(PhotonNetwork.CurrentRoom.PlayerCount < _previousPlayerCount)
+        // {
             _previousTimeLeft = _timeLeft;
-        }
+        // }
 
         CheckTimer();
         UpdateOxygenBar();
@@ -85,8 +91,9 @@ public class StatusHUD : MonoBehaviour
         _playerController.disableMovement();
 
         float shortBlackoutTime = 0.3f;
-        blackScreen.SetFadingTime(shortBlackoutTime/ 2f);
-        blackScreen.FadeToFullAlpha();
+        // blackScreen.SetFadingTime(shortBlackoutTime/ 2f);
+        // blackScreen.FadeToFullAlpha();
+        StartCoroutine(FadeIntensityUpToValue(_playerCameraPostProcessVignette, 0.7f));
         
         Invoke(nameof(PlayDeathAnimation), shortBlackoutTime);
     }
@@ -94,14 +101,16 @@ public class StatusHUD : MonoBehaviour
     private void PlayDeathAnimation()
     {
         _playerController.PlayDeathAnimation();
+        playerCamera.SetActive(false);
+        deathCam.SetActive(true);
         
-        blackScreen.FadeToZeroAlpha();
+        // blackScreen.FadeToZeroAlpha();
     }
     
     private void BlackscreenFinalFading()
     {
-        blackScreen.SetFadingTime(2f * delayBeforeGameEnd/ 3f);
-        blackScreen.FadeToFullAlpha();
+        // blackScreen.SetFadingTime(2f * delayBeforeGameEnd/ 3f);
+        // blackScreen.FadeToFullAlpha();
     }
 
 
@@ -123,6 +132,24 @@ public class StatusHUD : MonoBehaviour
     {
         // 5 = endingScreenFailure
         GetComponentInParent<PlayerController>().Disconnect(5);
+    }
+    
+    IEnumerator FadeIntensityUpToValue (Vignette vignette, float intensityValue)
+    {
+        while (vignette.intensity < intensityValue)
+        {
+            vignette.intensity.value += Time.deltaTime / 2f;
+            Debug.Log(vignette.intensity.value);
+            yield return null;
+        }
+    }
+
+    IEnumerator FadeIntensityDownToValue (Vignette vignette, float intensityValue)
+    {
+        while (vignette.intensity > intensityValue) {
+            vignette.intensity.value += Time.deltaTime / 2f;
+            yield return null;
+        }
     }
 
 }

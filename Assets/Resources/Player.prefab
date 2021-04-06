@@ -537,7 +537,6 @@ MonoBehaviour:
   jumpingSounds: {fileID: 8300000, guid: 173d44af0879f4a418c76fab9acec437, type: 3}
   landingSounds: {fileID: 8300000, guid: b005e7df82cef394da2888c7d6b760b7, type: 3}
   audioSource: {fileID: 7891492393573909030}
-  deathCam: {fileID: 6193486925864636916}
 --- !u!81 &2913121891411867750
 AudioListener:
   m_ObjectHideFlags: 0
@@ -636,6 +635,11 @@ PrefabInstance:
 --- !u!4 &2530426914044659648 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 469708567073038793, guid: 2491f7a91abf8504db671a621e35bf17, type: 3}
+  m_PrefabInstance: {fileID: 2709298540850505225}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2530426914044659649 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 469708567073038792, guid: 2491f7a91abf8504db671a621e35bf17, type: 3}
   m_PrefabInstance: {fileID: 2709298540850505225}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2913121892897922465
@@ -1234,6 +1238,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8575718750505916598, guid: d99000752cd7f634ea803c83a1bd9774, type: 3}
+      propertyPath: deathCam
+      value: 
+      objectReference: {fileID: 6193486925864636916}
+    - target: {fileID: 8575718750505916598, guid: d99000752cd7f634ea803c83a1bd9774, type: 3}
+      propertyPath: timeLimit
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8575718750505916598, guid: d99000752cd7f634ea803c83a1bd9774, type: 3}
+      propertyPath: playerCamera
+      value: 
+      objectReference: {fileID: 2530426914044659649}
+    - target: {fileID: 8575718750505916598, guid: d99000752cd7f634ea803c83a1bd9774, type: 3}
+      propertyPath: _playerCamera
+      value: 
+      objectReference: {fileID: 2530426914044659649}
     - target: {fileID: 8612086129205473296, guid: d99000752cd7f634ea803c83a1bd9774, type: 3}
       propertyPath: audioSource
       value: 
