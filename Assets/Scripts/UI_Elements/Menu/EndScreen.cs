@@ -22,11 +22,7 @@ public class EndScreen : MonoBehaviour
     {
         if (textToAppear.IsTransitionDone())
         {
-            if (!pulsateText.enabled)
-            {
-                pulsateText.enabled = true;
-                pulsateText.StartPulsating();
-            }
+            pulsateText.enabled = true;
             if (Input.anyKeyDown)
             {
                 Invoke(nameof(LoadMenu), loadDelay);
