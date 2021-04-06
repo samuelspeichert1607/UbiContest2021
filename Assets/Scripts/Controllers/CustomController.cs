@@ -53,4 +53,9 @@ public class CustomController : MonoBehaviour
     {
         return isInCriticalMotion;
     }
+
+    public virtual void PlayDeathAnimation()
+    {
+        
+    }
 }
