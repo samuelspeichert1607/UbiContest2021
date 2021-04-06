@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Photon.Pun;
 using TMPro;
+using TreeEditor;
 using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
 using UnityEngine.SceneManagement;
@@ -11,6 +12,7 @@ using UnityEngine.UI;
 public class StatusHUD : MonoBehaviour, MusicPlayerListener
 {
     [SerializeField] private float timeLimit;
+    [SerializeField] private float timeBeforeOxygenStart;
     [SerializeField] private float delayBeforeGameEnd = 15f;
     [SerializeField] private Image oxygenFill;
     [SerializeField] private FadableScreen blackScreen;
@@ -18,10 +20,12 @@ public class StatusHUD : MonoBehaviour, MusicPlayerListener
     [SerializeField] private GameObject deathCam;
     [SerializeField] private float shortBlackoutTime = 0.5f;
     [SerializeField] private float longBlackoutTime = 15f;
-    
+    [SerializeField] private GameObject oxygenBar;
+
     [SerializeField] private AudioClip heavyBreathing;
     [SerializeField] private AudioClip panickedBreathing;
     [SerializeField] private AudioClip panickedBreathing2;
+    [SerializeField] private AudioClip explosion;
 
     [SerializeField] private AudioSource audioSource;
 
@@ -32,13 +36,14 @@ public class StatusHUD : MonoBehaviour, MusicPlayerListener
     private static float _timeLeft;
     private static float _previousTimeLeft;
     private static int _previousPlayerCount;
+    private bool _hasOxygenConsumptionStarted = false;
+    private bool _needToInvokeOxygenConsumption = true;
 
     private bool isTimerOver = false;
     // private TextMeshProUGUI timerTextBox;
 
     void Start()
     {
-        
         // Big problème : le timer se reset à chaque entrée d'un deuxième joueur
         _timeLeft = timeLimit;
         _previousTimeLeft = timeLimit;
@@ -47,12 +52,18 @@ public class StatusHUD : MonoBehaviour, MusicPlayerListener
         _playerController = GetComponentInParent<CustomController>();
         playerCamera.GetComponent<PostProcessVolume>().profile.TryGetSettings(out _playerCameraPostProcessVignette);
         deathCam.GetComponent<PostProcessVolume>().profile.TryGetSettings(out _deathCamVignette);
+        oxygenBar.SetActive(false);
     }
 
     void Update()
     {
-        if(PhotonNetwork.CurrentRoom.PlayerCount == 2)
+        if(PhotonNetwork.CurrentRoom.PlayerCount == 2 )
         {
+            if (_needToInvokeOxygenConsumption)
+            {
+                _needToInvokeOxygenConsumption = false;
+                Invoke(nameof(StartConsumingOxygen), timeBeforeOxygenStart);
+            } 
             if (PhotonNetwork.CurrentRoom.PlayerCount > _previousPlayerCount)
             {
                 _timeLeft = _previousTimeLeft;
@@ -77,6 +88,39 @@ public class StatusHUD : MonoBehaviour, MusicPlayerListener
             TimerIsOut();
         }
     }
+
+    private void StartConsumingOxygen()
+    {
+        oxygenBar.SetActive(true);
+        _hasOxygenConsumptionStarted = true;
+        _timeLeft = timeLimit;
+        _previousTimeLeft = timeLimit;
+        audioSource.PlayOneShot(explosion);
+        _playerController.LockAllMovement();
+        StartCoroutine(CameraShake(8, 2, 0.04f));
+    }
+    
+    IEnumerator CameraShake (int numberOfCycle, float shakeDuration, float movement)
+    {
+        float startTime = Time.time;
+        float camPosY = playerCamera.transform.position.y;
+        float camPosZ = playerCamera.transform.position.z;
+        float camPosX = playerCamera.transform.position.x;
+        float BParam = 2f *  (float) Math.PI * numberOfCycle / shakeDuration;
+        while ((Time.time - startTime) < shakeDuration)
+        {
+            float sinValue = Mathf.Sin(Time.time * BParam); // -1 1
+            float newPosX = camPosX + movement * sinValue;
+            float newPosY = camPosY + movement * sinValue;
+            playerCamera.transform.position = new Vector3(newPosX, newPosY,  camPosZ);
+            yield return null;
+        }
+        playerCamera.transform.position = new Vector3(camPosX, camPosY, camPosZ);
+        _playerController.UnlockAllMovement();
+    }
+    
+    
+    
     private void UpdateOxygenBar()
     {
         // At 15 minutes of time limit we don't notice, but the transition is rather rough
