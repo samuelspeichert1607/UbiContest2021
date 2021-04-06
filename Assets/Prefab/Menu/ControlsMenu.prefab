@@ -226,7 +226,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &824379612395509373
 RectTransform:
   m_ObjectHideFlags: 0
@@ -234,7 +234,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 824379612395509362}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2.439644, y: 2.439644, z: 2.439644}
   m_Children:
@@ -518,7 +518,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5556258073197310641, guid: 0b30b84a565e3d4409542c5353d96c69, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_MethodName
-      value: PlayClickSound
+      value: PlayBackSound
       objectReference: {fileID: 0}
     - target: {fileID: 5556258073197310641, guid: 0b30b84a565e3d4409542c5353d96c69, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -534,7 +534,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5556258073197310641, guid: 0b30b84a565e3d4409542c5353d96c69, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_TargetAssemblyTypeName
-      value: AudioManagerMenu, Assembly-CSharp
+      value: AudioPlayerMenu, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 5556258073197310641, guid: 0b30b84a565e3d4409542c5353d96c69, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_BoolArgument
@@ -710,10 +710,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: ManetteXBOX
       objectReference: {fileID: 0}
-    - target: {fileID: 8712840403396025941, guid: 57320d571c2d54f409b82bdd48b7935e, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 57320d571c2d54f409b82bdd48b7935e, type: 3}
 --- !u!1 &8330237422467427041 stripped
@@ -736,10 +732,6 @@ PrefabInstance:
     - target: {fileID: 1720586743775598724, guid: 747bfe1cb010d534db5b9042efddd2d9, type: 3}
       propertyPath: m_Name
       value: ManettePS4
-      objectReference: {fileID: 0}
-    - target: {fileID: 1720586743775598724, guid: 747bfe1cb010d534db5b9042efddd2d9, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1720586743775598725, guid: 747bfe1cb010d534db5b9042efddd2d9, type: 3}
       propertyPath: m_RootOrder
