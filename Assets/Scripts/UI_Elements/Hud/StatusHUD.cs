@@ -51,19 +51,19 @@ public class StatusHUD : MonoBehaviour, MusicPlayerListener
 
     void Update()
     {
-        // if(PhotonNetwork.CurrentRoom.PlayerCount == 2)
-        // {
-            // if (PhotonNetwork.CurrentRoom.PlayerCount > _previousPlayerCount)
-            // {
+        if(PhotonNetwork.CurrentRoom.PlayerCount == 2)
+        {
+            if (PhotonNetwork.CurrentRoom.PlayerCount > _previousPlayerCount)
+            {
                 _timeLeft = _previousTimeLeft;
-            // }
+            }
             // Pourrait se changer pour diviser par le nombre de joueurs
             _timeLeft -= Time.deltaTime / 2;
-        // }
-        // else if(PhotonNetwork.CurrentRoom.PlayerCount < _previousPlayerCount)
-        // {
+        }
+        else if(PhotonNetwork.CurrentRoom.PlayerCount < _previousPlayerCount)
+        {
             _previousTimeLeft = _timeLeft;
-        // }
+        }
 
         CheckTimer();
         UpdateOxygenBar();
