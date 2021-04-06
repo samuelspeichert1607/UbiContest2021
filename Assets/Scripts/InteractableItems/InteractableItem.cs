@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace InteractableItems
 {
@@ -24,7 +25,8 @@ namespace InteractableItems
         private bool _playerHasEnteredRange = false;
         private bool _playerHasLeftRange = false;
 
-        protected IController UserController;
+        protected ControllerManager ControllerManager;
+        protected ButtonLayout buttonLayout;
 
 
 
@@ -33,8 +35,10 @@ namespace InteractableItems
         protected void Start()
         {
             _players = GameObject.FindGameObjectsWithTag("Player");
-            ToStartInteractText = String.Join(" ", interactPreButtonText, interactButtonName, interactPostButtonText);
-            ToEndInteractText = String.Join(" ", interactPreButtonText, interactButtonName, interactionStopPostButtonText);
+            ControllerManager = GetComponent<ControllerManager>();
+            buttonLayout = ControllerManager.CurrentButtonLayout;
+            ToStartInteractText = String.Join(" ", interactPreButtonText, buttonLayout.actionRight, interactPostButtonText);
+            ToEndInteractText = String.Join(" ", interactPreButtonText, buttonLayout.actionRight, interactionStopPostButtonText);
         }
 
         private void Update()
