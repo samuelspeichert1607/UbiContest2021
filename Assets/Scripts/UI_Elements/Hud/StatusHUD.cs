@@ -44,6 +44,8 @@ public class StatusHUD : MonoBehaviour, MusicPlayerListener
     private bool hasSecondPlayerEnteredRoom =false;
     // private TextMeshProUGUI timerTextBox;
     private bool canStartConsuming = true;
+
+    private PhotonView _photonView;
     void Start()
     {
         // Big problème : le timer se reset à chaque entrée d'un deuxième joueur
@@ -55,6 +57,8 @@ public class StatusHUD : MonoBehaviour, MusicPlayerListener
         playerCamera.GetComponent<PostProcessVolume>().profile.TryGetSettings(out _playerCameraPostProcessVignette);
         deathCam.GetComponent<PostProcessVolume>().profile.TryGetSettings(out _deathCamVignette);
         oxygenBar.SetActive(false);
+
+        _photonView = GetComponentInParent<PhotonView>();
     }
 
     void Update()
@@ -79,8 +83,9 @@ public class StatusHUD : MonoBehaviour, MusicPlayerListener
             {
                 if (canStartConsuming)
                 {
-                    canStartConsuming = false;
-                    Invoke(nameof(StartConsumingOxygen), timeBeforeOxygenStart);
+                    _photonView.RPC(nameof(InvokeConsumingOxygenRPC), RpcTarget.All);
+                    //canStartConsuming = false;
+                    //Invoke(nameof(StartConsumingOxygen), timeBeforeOxygenStart);
                 }
                 _timeLeft -= Time.deltaTime / 2;
             }
@@ -103,7 +108,12 @@ public class StatusHUD : MonoBehaviour, MusicPlayerListener
             TimerIsOut();
         }
     }
-
+    [PunRPC]
+    private void InvokeConsumingOxygenRPC()
+    {
+        canStartConsuming = false;
+        Invoke(nameof(StartConsumingOxygen), timeBeforeOxygenStart);
+    }
     private void StartConsumingOxygen()
     {
         oxygenBar.SetActive(true);
