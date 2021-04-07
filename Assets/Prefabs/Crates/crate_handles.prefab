@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 2193148317020537651}
   - component: {fileID: 2358000699591696316}
   - component: {fileID: 5750783784036756660}
+  - component: {fileID: 1161449038803489980}
   m_Layer: 0
   m_Name: Crate_handles_crate_handles
   m_TagString: Untagged
@@ -113,6 +114,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &1161449038803489980
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5626179952579408397}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 61.071518, y: 73.46361, z: 72.185326}
+  m_Center: {x: 0, y: 36.923965, z: 0.0009765625}
 --- !u!1 &7379520872771085116
 GameObject:
   m_ObjectHideFlags: 0
