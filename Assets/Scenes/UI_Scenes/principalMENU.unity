@@ -3327,7 +3327,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 824379612395509362, guid: 16c17c00d03226c46ac27ef100710264, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 824379612395509373, guid: 16c17c00d03226c46ac27ef100710264, type: 3}
       propertyPath: m_Pivot.x
@@ -3413,9 +3413,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2058154257587012269, guid: 16c17c00d03226c46ac27ef100710264, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2058154258757539609, guid: 16c17c00d03226c46ac27ef100710264, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2058154258895962025, guid: 16c17c00d03226c46ac27ef100710264, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2058154259338916620, guid: 16c17c00d03226c46ac27ef100710264, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2058154259544461849, guid: 16c17c00d03226c46ac27ef100710264, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5074153411766024246, guid: 16c17c00d03226c46ac27ef100710264, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
@@ -3441,8 +3457,32 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_TargetAssemblyTypeName
       value: AudioPlayerMenu, Assembly-CSharp
       objectReference: {fileID: 0}
+    - target: {fileID: 8330237421059109083, guid: 16c17c00d03226c46ac27ef100710264, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8330237421700208780, guid: 16c17c00d03226c46ac27ef100710264, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8330237422467427041, guid: 16c17c00d03226c46ac27ef100710264, type: 3}
       propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8330237422582686639, guid: 16c17c00d03226c46ac27ef100710264, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8330237422716657285, guid: 16c17c00d03226c46ac27ef100710264, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8330237422743024245, guid: 16c17c00d03226c46ac27ef100710264, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8784962911242724922, guid: 16c17c00d03226c46ac27ef100710264, type: 3}
+      propertyPath: m_hasFontAssetChanged
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

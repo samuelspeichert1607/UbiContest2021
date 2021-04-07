@@ -57,7 +57,7 @@ public class PressableButton : InteractableItem
     {
         float startTime = Time.time;
         Vector3 initialPosition = transform.position;
-        Vector3 displacement =  movingDirection * movingDistance;
+        Vector3 displacement =  pressingDirection * movingDistance;
         while (Time.time - startTime < pressingDownTime)
         {
             float fractionOfTransition = (Time.time - startTime) / pressingDownTime;
@@ -76,7 +76,7 @@ public class PressableButton : InteractableItem
     {
         float startTime = Time.time;
         Vector3 initialPosition = transform.position;
-        Vector3 displacement =  - movingDirection * movingDistance;
+        Vector3 displacement =  - pressingDirection * movingDistance;
         while (Time.time - startTime < unpressingTime)
         {
             float fractionOfTransition = (Time.time - startTime) / unpressingTime;

@@ -101,6 +101,8 @@ namespace UI_Elements
         private void UnPause()
         {
             pauseMenu.SetActive(false);
+            controlsMenu.SetActive(false);
+            validationMenu.SetActive(false);
             _audioPlayer.PlayBackSound();
             Invoke(nameof(AllowPlayerMovement), 0.05f);
         }
