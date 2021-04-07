@@ -12,7 +12,7 @@ public class Joystick : InteractableItem
     [SerializeField] private CustomController target;
 
     private Animator _leverAnimator;
-    private ControllerManager _controllerManager;
+    // private ControllerManager _controllerManager;
     private int _leftAxisYUnitDirection = 1;
     private int _leftAxisXUnitDirection = 1;
     private bool _swappedMotionAxis = false;
@@ -22,7 +22,7 @@ public class Joystick : InteractableItem
     private new void Start()
     {
         base.Start();
-        _controllerManager = GetComponent<ControllerManager>();
+        // _controllerManager = GetComponent<ControllerManager>();
         _leverAnimator = GetComponentInChildren<Animator>();
         SetUnitDirectionRelativeToTarget();
     }
@@ -78,15 +78,15 @@ public class Joystick : InteractableItem
     {
         if (_swappedMotionAxis)
         {
-            target.MoveAtMaxSpeed( _leftAxisYUnitDirection * _controllerManager.GetLeftAxisX(),
-                _leftAxisXUnitDirection * _controllerManager.GetLeftAxisY(), Time.deltaTime);
+            target.MoveAtMaxSpeed( _leftAxisYUnitDirection * ControllerManager.GetLeftAxisX(),
+                _leftAxisXUnitDirection * ControllerManager.GetLeftAxisY(), Time.deltaTime);
         }
         else
         {
-            target.MoveAtMaxSpeed( _leftAxisYUnitDirection * _controllerManager.GetLeftAxisY(),
-                _leftAxisXUnitDirection * _controllerManager.GetLeftAxisX(), Time.deltaTime);
+            target.MoveAtMaxSpeed( _leftAxisYUnitDirection * ControllerManager.GetLeftAxisY(),
+                _leftAxisXUnitDirection * ControllerManager.GetLeftAxisX(), Time.deltaTime);
         }
-        AnimateLever(_controllerManager.GetLeftAxisX(), _controllerManager.GetLeftAxisY());
+        AnimateLever(ControllerManager.GetLeftAxisX(), ControllerManager.GetLeftAxisY());
     }
 
     private void AnimateLever(float horizontalMotion, float verticalMotion)
@@ -145,7 +145,7 @@ public class Joystick : InteractableItem
 
     public override void OnPlayerInRange()
     {
-        if (_controllerManager.GetButtonDown(interactButtonName))
+        if (ControllerManager.GetButtonDown(interactButtonName))
         {
             if (IsInteractedWith)
             {

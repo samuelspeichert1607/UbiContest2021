@@ -1,4 +1,6 @@
 
+using System;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class PS4Controller : IController
@@ -57,7 +59,7 @@ public class PS4Controller : IController
     
     public float GetRTriggerAxis()
     {
-        return Input.GetAxis("RotateY");
+        return Mathf.Clamp(-1 * Input.GetAxis("RotateY"), 0, 1.0f);
     }
 
     public bool GetButtonDown(string button)

@@ -90,8 +90,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3005266554192843344}
-  - component: {fileID: 265873809000772606}
   - component: {fileID: 3638599460128746529}
+  - component: {fileID: 7100072733891314239}
   m_Layer: 0
   m_Name: cupcake
   m_TagString: Untagged
@@ -117,18 +117,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &265873809000772606
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2521746061756106986}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8688972652696894ca0a72513d7a937e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &3638599460128746529
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -146,6 +134,20 @@ MonoBehaviour:
   interactButtonName: B
   interactionStopPostButtonText: 
   interactRadius: 1.5
+--- !u!114 &7100072733891314239
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2521746061756106986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8688972652696894ca0a72513d7a937e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  XboxLayout: {fileID: 11400000, guid: c0439a82c40521f4890832c4ff0806a4, type: 2}
+  Ps4Layout: {fileID: 11400000, guid: 8b95fe241f380994fbb6c7f59545b73c, type: 2}
 --- !u!1 &4379563005799816640
 GameObject:
   m_ObjectHideFlags: 0

@@ -3,6 +3,7 @@ using InteractableItems;
 using Photon.Pun;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace Puzzle.HumanPencil
 {
@@ -14,8 +15,8 @@ namespace Puzzle.HumanPencil
         [SerializeField] private string drawingAxisName;
         private float distancePlayerPencil = 1;
 
-        private ControllerManager controllerManager;
-
+        // private ControllerManager controllerManager;
+        // private ButtonLayout buttonLayout;
 
         private string _toDrawText;
         private Transform _initialParent;
@@ -28,10 +29,10 @@ namespace Puzzle.HumanPencil
         {
             base.Start();
             photonView = PhotonView.Get(this);
-            _toDrawText = String.Join(" ", drawingPreText , drawingAxisName, drawingPostText);
+            _toDrawText = String.Join(" ", drawingPreText , buttonLayout.triggerRight, drawingPostText);
             _lineDrawer = GetComponent<LineDrawer>();
             _initialParent = this.gameObject.transform.parent;
-            controllerManager = GetComponent<ControllerManager>();
+            // controllerManager = GetComponent<ControllerManager>();
         }
 
         // Update is called once per frame
@@ -58,7 +59,7 @@ namespace Puzzle.HumanPencil
                 {
                     TextRenderer.ShowInfoText( _toDrawText + "\n" + ToEndInteractText);
                 }
-                if (controllerManager.GetAxis(drawingAxisName) > 0)
+                if (ControllerManager.GetAxis(drawingAxisName) > 0)
                 {
                     _lineDrawer.Draw();
                 }
@@ -71,7 +72,7 @@ namespace Puzzle.HumanPencil
         }
         public override void OnPlayerInRange()
         {
-            if (controllerManager.GetButtonDown(interactButtonName))
+            if (ControllerManager.GetButtonDown(interactButtonName))
             {
                 if (IsInteractedWith)
                 {

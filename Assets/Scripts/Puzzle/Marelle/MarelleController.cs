@@ -25,7 +25,7 @@ public class MarelleController : MonoBehaviour
 
     private PhotonView _photonView;
 
-
+    private float wonTime=0;
     private void Start() 
     {
         _photonView = GetComponent<PhotonView>();
@@ -33,10 +33,15 @@ public class MarelleController : MonoBehaviour
     }
     public void gameWon()
     {
+        wonTime = Time.time;
         audioSource.PlayOneShot(winSound, 0.7f);
+
         foreach (Actionable a in actionableObject)
         {
-            a.OnAction();
+            if (!a.hasActioned)
+            {
+                a.OnAction();
+            }
         }
 
         // _photonView.RPC("rcpGameWon", RpcTarget.All);
@@ -54,12 +59,20 @@ public class MarelleController : MonoBehaviour
     //            a.OnAction();
     //        }
     //    }
-            
+
 
     //}
     public void gameLost()
     {
-         _photonView.RPC(nameof(rcpGameLost), RpcTarget.All);
+        if (Time.time-wonTime>.1)
+        {
+            _photonView.RPC(nameof(rcpGameLost), RpcTarget.All);
+        }
+        else
+        {
+            gameWon();
+        }
+   
         //audioSource.PlayOneShot(lossSound, 0.7f);
         //if (UnityEngine.Random.Range(0, 2) == 0)//50%
         //{
