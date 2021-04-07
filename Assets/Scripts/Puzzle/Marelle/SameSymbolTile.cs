@@ -16,7 +16,6 @@ public class SameSymbolTile : ParentTile
 
     private GameObject tileEntered = null;
 
-    bool testBool = true;
     private MarelleController marelleController;
 
     private PhotonView _photonView ;
@@ -46,12 +45,7 @@ public class SameSymbolTile : ParentTile
                 tileEntered = null;
             }
         }
-        //cheat code
-        if (Input.GetButtonDown("Fire2") && testBool)
-        {
-            CollisionDetected(transform.GetChild(0).gameObject);
-            testBool = false;
-        }
+
 
     }
 
@@ -62,7 +56,7 @@ public class SameSymbolTile : ParentTile
         Material sourceMat = sourceTile.transform.GetComponent<TileGoUpDown>().tileRenderer.material;
         if (!(sourceMat.color==Color.green))
         {
-            testBool = true;
+
 
                 if (tileEntered == null)//^tileEntered ==sourceTile
             {

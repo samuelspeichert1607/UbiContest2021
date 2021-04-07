@@ -157,7 +157,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.000086308, y: 415.25}
+  m_AnchoredPosition: {x: -0.000086308, y: 375}
   m_SizeDelta: {x: 1270.596, y: 220.015}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &280780476
@@ -696,14 +696,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.09668157, g: 0.7075472, b: 0, a: 1}
+  m_Color: {r: 0.7914237, g: 1, b: 0.75849056, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 75c4f54ce3c6b364f95e5880a7640b6a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b5b3bd64196b7d443b924cda989c08c7, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -781,8 +781,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Press any button to play again
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 7ad62e09c0568b841bf7b3e98b2d2f89, type: 2}
-  m_sharedMaterial: {fileID: -6147513208055498385, guid: 7ad62e09c0568b841bf7b3e98b2d2f89, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: a50f8e8f1fc73134ab9e2d827702fa99, type: 2}
+  m_sharedMaterial: {fileID: 2479354286643821207, guid: a50f8e8f1fc73134ab9e2d827702fa99, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -863,7 +863,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1742604362}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 723e529689a97cd478e2df966ca68b2d, type: 3}
   m_Name: 

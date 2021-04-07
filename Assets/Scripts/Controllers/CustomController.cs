@@ -7,6 +7,7 @@ public class CustomController : MonoBehaviour
 {
 
     protected bool canMove = true;
+    protected bool isAllMovementUnlocked = true;
     protected bool isInCriticalMotion = false;
     public virtual void Move(Vector3 speed, float timeElapsed)
     {
@@ -52,5 +53,20 @@ public class CustomController : MonoBehaviour
     public bool IsInCriticalMotion()
     {
         return isInCriticalMotion;
+    }
+
+    public virtual void PlayDeathAnimation()
+    {
+        
+    }
+
+    public void LockAllMovement()
+    {
+        isAllMovementUnlocked = false;
+    }
+    
+    public void UnlockAllMovement()
+    {
+        isAllMovementUnlocked = true;
     }
 }

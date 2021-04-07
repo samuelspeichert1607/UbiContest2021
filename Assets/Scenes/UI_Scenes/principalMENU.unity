@@ -1541,6 +1541,7 @@ GameObject:
   - component: {fileID: 635565838}
   - component: {fileID: 635565840}
   - component: {fileID: 635565837}
+  - component: {fileID: 635565841}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -1608,6 +1609,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ab4ddd1e26499643b2ac5e15f9f1164, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  controllerManager: {fileID: 635565841}
   m_HorizontalAxis: Horizontal
   m_VerticalAxis: Vertical
   m_SubmitButton: Submit
@@ -1615,6 +1617,18 @@ MonoBehaviour:
   m_InputActionsPerSecond: 10
   m_RepeatDelay: 0.5
   m_ForceModuleActive: 0
+--- !u!114 &635565841
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 635565836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8688972652696894ca0a72513d7a937e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &702667444 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5074153411766024244, guid: 16c17c00d03226c46ac27ef100710264, type: 3}
@@ -2767,7 +2781,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 75c4f54ce3c6b364f95e5880a7640b6a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b5b3bd64196b7d443b924cda989c08c7, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3311,6 +3325,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ControlsMenu
       objectReference: {fileID: 0}
+    - target: {fileID: 824379612395509362, guid: 16c17c00d03226c46ac27ef100710264, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 824379612395509373, guid: 16c17c00d03226c46ac27ef100710264, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -3395,6 +3413,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 824379612845886861, guid: 16c17c00d03226c46ac27ef100710264, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: b5b3bd64196b7d443b924cda989c08c7, type: 3}
+    - target: {fileID: 2058154257587012269, guid: 16c17c00d03226c46ac27ef100710264, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2058154258757539609, guid: 16c17c00d03226c46ac27ef100710264, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2058154258895962025, guid: 16c17c00d03226c46ac27ef100710264, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2058154259338916620, guid: 16c17c00d03226c46ac27ef100710264, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2058154259544461849, guid: 16c17c00d03226c46ac27ef100710264, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5074153411766024246, guid: 16c17c00d03226c46ac27ef100710264, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
@@ -3418,6 +3460,34 @@ PrefabInstance:
     - target: {fileID: 5074153411766024246, guid: 16c17c00d03226c46ac27ef100710264, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_TargetAssemblyTypeName
       value: AudioPlayerMenu, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8330237421059109083, guid: 16c17c00d03226c46ac27ef100710264, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8330237421700208780, guid: 16c17c00d03226c46ac27ef100710264, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8330237422467427041, guid: 16c17c00d03226c46ac27ef100710264, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8330237422582686639, guid: 16c17c00d03226c46ac27ef100710264, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8330237422716657285, guid: 16c17c00d03226c46ac27ef100710264, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8330237422743024245, guid: 16c17c00d03226c46ac27ef100710264, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8784962911242724922, guid: 16c17c00d03226c46ac27ef100710264, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 16c17c00d03226c46ac27ef100710264, type: 3}
