@@ -430,6 +430,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8688972652696894ca0a72513d7a937e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  XboxLayout: {fileID: 11400000, guid: c0439a82c40521f4890832c4ff0806a4, type: 2}
+  Ps4Layout: {fileID: 11400000, guid: 8b95fe241f380994fbb6c7f59545b73c, type: 2}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0

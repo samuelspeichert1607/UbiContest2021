@@ -11,6 +11,8 @@ public enum ControllerType
 
 public class ControllerManager : MonoBehaviour
 {
+    [SerializeField] private ButtonLayout XboxLayout;
+    [SerializeField] private ButtonLayout Ps4Layout;
     private IController userController;
     private string currentController;
     private ButtonLayout currentButtonLayout;
@@ -64,18 +66,18 @@ public class ControllerManager : MonoBehaviour
             || (newController == "Controller (XBOX 360 For Windows"))
             {
                 userController = new XboxController();
-                SetButtonLayout("XboxLayout");
+                currentButtonLayout = XboxLayout;
             }
 
             else if (newController == "Wireless Controller")
             {
                 userController = new PS4Controller();
-                SetButtonLayout("PS4Layout");
+                currentButtonLayout = Ps4Layout;
             }
             else
             {
                 userController = new XboxController();
-                SetButtonLayout("XboxLayout");
+                currentButtonLayout = XboxLayout;
             }
             currentController = newController;
         }
@@ -102,12 +104,5 @@ public class ControllerManager : MonoBehaviour
         return ControllerType.XboxController;
     }
 
-    private void SetButtonLayout(string controller)
-    {
-        string assetGuid = AssetDatabase.FindAssets(controller)[0];
-        ButtonLayout a = AssetDatabase.LoadAssetAtPath<ButtonLayout>(AssetDatabase.GUIDToAssetPath(assetGuid));
-        currentButtonLayout = AssetDatabase.LoadAssetAtPath<ButtonLayout>(AssetDatabase.GUIDToAssetPath(assetGuid));
-    }
-    
     public ButtonLayout CurrentButtonLayout => currentButtonLayout;
 }
