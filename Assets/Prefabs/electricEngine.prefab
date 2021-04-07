@@ -523,6 +523,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1346631609100826613}
     m_Modifications:
+    - target: {fileID: 1342490443587748801, guid: 808894fa797c1eb48b854ead90f162b4, type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 0.001
+      objectReference: {fileID: 0}
+    - target: {fileID: 1342490443587748801, guid: 808894fa797c1eb48b854ead90f162b4, type: 3}
+      propertyPath: InitialModule.startSpeed.scalar
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 1342490443587748801, guid: 808894fa797c1eb48b854ead90f162b4, type: 3}
+      propertyPath: InitialModule.startSize.minScalar
+      value: 0.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 1342490443587748801, guid: 808894fa797c1eb48b854ead90f162b4, type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 0.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 1342490443587748801, guid: 808894fa797c1eb48b854ead90f162b4, type: 3}
+      propertyPath: InitialModule.startSpeed.minScalar
+      value: 75
+      objectReference: {fileID: 0}
+    - target: {fileID: 1342490443587748801, guid: 808894fa797c1eb48b854ead90f162b4, type: 3}
+      propertyPath: InitialModule.startLifetime.minScalar
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 1516376818614360915, guid: 808894fa797c1eb48b854ead90f162b4, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -533,7 +557,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1516376818614360915, guid: 808894fa797c1eb48b854ead90f162b4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 20
+      value: 18.28
       objectReference: {fileID: 0}
     - target: {fileID: 1516376818614360915, guid: 808894fa797c1eb48b854ead90f162b4, type: 3}
       propertyPath: m_LocalPosition.z

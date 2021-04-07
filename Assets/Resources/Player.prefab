@@ -1274,11 +1274,11 @@ PrefabInstance:
       objectReference: {fileID: 2530426914044659649}
     - target: {fileID: 8575718750505916598, guid: d99000752cd7f634ea803c83a1bd9774, type: 3}
       propertyPath: timeBeforeOxygenStart
-      value: 10
+      value: 55
       objectReference: {fileID: 0}
     - target: {fileID: 8575718750505916598, guid: d99000752cd7f634ea803c83a1bd9774, type: 3}
       propertyPath: TimeForSecondPlayerToJoin
-      value: 30
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8612086129205473296, guid: d99000752cd7f634ea803c83a1bd9774, type: 3}
       propertyPath: audioSource
