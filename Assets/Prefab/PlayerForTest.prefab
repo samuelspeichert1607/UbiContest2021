@@ -288,6 +288,14 @@ MonoBehaviour:
   m_InputActionsPerSecond: 10
   m_RepeatDelay: 0.5
   m_ForceModuleActive: 0
+--- !u!81 &381358572
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7144133435754562160}
+  m_Enabled: 1
 --- !u!1001 &4431572637370074780
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -716,6 +724,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2491f7a91abf8504db671a621e35bf17, type: 3}
+--- !u!1 &7144133435754562160 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 469708567073038792, guid: 2491f7a91abf8504db671a621e35bf17, type: 3}
+  m_PrefabInstance: {fileID: 7323331239559881656}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7144133435754562161 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 469708567073038793, guid: 2491f7a91abf8504db671a621e35bf17, type: 3}
