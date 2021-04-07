@@ -126,6 +126,10 @@ public class PlayerController : CustomController
                 _wasGrounded = true;
                 MoveOnGround(verticalMotion, horizontalMotion);
             }
+            else
+            {
+                Idle();
+            }
         }
         else
         {
