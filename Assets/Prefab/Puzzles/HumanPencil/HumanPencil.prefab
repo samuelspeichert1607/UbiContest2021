@@ -259,10 +259,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 7687796978070383016}
     - target: {fileID: 5152296749375269648, guid: 77cb8b2d06d77a940b721af54fc68d7f, type: 3}
-      propertyPath: displayMonitors.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5152296749375269648, guid: 77cb8b2d06d77a940b721af54fc68d7f, type: 3}
       propertyPath: displayMonitors.Array.data[0]
       value: 
       objectReference: {fileID: 7381113048296303123}
@@ -270,22 +266,6 @@ PrefabInstance:
       propertyPath: displayMonitors.Array.data[1]
       value: 
       objectReference: {fileID: 7772762095669110791}
-    - target: {fileID: 5866271253220905357, guid: 77cb8b2d06d77a940b721af54fc68d7f, type: 3}
-      propertyPath: m_UseLocal
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5866271253220905357, guid: 77cb8b2d06d77a940b721af54fc68d7f, type: 3}
-      propertyPath: m_SynchronizeScale
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6480918375691441676, guid: 77cb8b2d06d77a940b721af54fc68d7f, type: 3}
-      propertyPath: viewIdField
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6480918375691441676, guid: 77cb8b2d06d77a940b721af54fc68d7f, type: 3}
-      propertyPath: Synchronization
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 6679823145998878774, guid: 77cb8b2d06d77a940b721af54fc68d7f, type: 3}
       propertyPath: m_Name
       value: Pencil

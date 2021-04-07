@@ -42,6 +42,7 @@ public class PlayerController : CustomController
     private static readonly int SpeedZ = Animator.StringToHash("SpeedZ");
     private static readonly int Falling = Animator.StringToHash("Falling");
     private static readonly int Landed = Animator.StringToHash("Landed");
+    private static readonly int IsDying = Animator.StringToHash("isDying");
     
     private const float WalkThreshold = 0.5f;
     private const float RunThreshold = 0.75f;
@@ -71,7 +72,11 @@ public class PlayerController : CustomController
     {
         if (!_photonView.IsMine) return;
 
-        UpdateCameraRotation();
+
+        if (isAllMovementUnlocked)
+        {
+            UpdateCameraRotation();
+        }
         
         float verticalMotion = _controllerManager.GetLeftAxisY();
         float horizontalMotion = _controllerManager.GetLeftAxisX();
@@ -107,7 +112,7 @@ public class PlayerController : CustomController
                 _playerSpeed.y = -1;
             }
 
-            if (canMove)
+            if (canMove && isAllMovementUnlocked)
             {
                 if (_controllerManager.GetButtonDown("Jump") && !_isInJumpingAscensionPhase)
                 {
@@ -436,6 +441,13 @@ public class PlayerController : CustomController
     {
         canMove = !canMove;
     }
+
+    public override void PlayDeathAnimation()
+    {
+        _animator.SetBool(IsDying, true);
+    }
+    
+    
     private void EndEmote()
     {
         isInCriticalMotion = false;

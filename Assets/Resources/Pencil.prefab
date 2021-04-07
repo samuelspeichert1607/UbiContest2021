@@ -1,19 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!136 &6097558639150391166
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 443944574608028668}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 20
-  m_Height: 230
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3385479832246857674
 GameObject:
   m_ObjectHideFlags: 0
@@ -58,6 +44,7 @@ GameObject:
   - component: {fileID: 6480918375691441676}
   - component: {fileID: 5866271253220905357}
   - component: {fileID: 384283816008353616}
+  - component: {fileID: 1238942148149551369}
   m_Layer: 0
   m_Name: Pencil
   m_TagString: Untagged
@@ -117,7 +104,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   drawingPoint: {fileID: 3385479832246857674}
   drawingSurface: {fileID: 0}
-  displayMonitors: []
+  displayMonitors:
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &6480918375691441676
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -134,7 +123,7 @@ MonoBehaviour:
   Group: 0
   prefixField: -1
   observableSearch: 2
-  Synchronization: 1
+  Synchronization: 3
   OwnershipTransfer: 1
   ObservedComponents:
   - {fileID: 5866271253220905357}
@@ -155,8 +144,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_SynchronizePosition: 1
   m_SynchronizeRotation: 1
-  m_SynchronizeScale: 0
-  m_UseLocal: 1
+  m_SynchronizeScale: 1
+  m_UseLocal: 0
 --- !u!114 &384283816008353616
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -169,8 +158,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8688972652696894ca0a72513d7a937e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ps4Layout: {fileID: 11400000, guid: 8b95fe241f380994fbb6c7f59545b73c, type: 2}
-  xboxLayout: {fileID: 11400000, guid: c0439a82c40521f4890832c4ff0806a4, type: 2}
+--- !u!136 &1238942148149551369
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6679823145998878774}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.23
+  m_Height: 2.7
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.34, z: 0}
 --- !u!1 &6679823147427093186
 GameObject:
   m_ObjectHideFlags: 0
@@ -431,11 +432,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5c6315da6ed40c84996f66ed1f56e533, type: 3}
---- !u!1 &443944574608028668 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 5c6315da6ed40c84996f66ed1f56e533, type: 3}
-  m_PrefabInstance: {fileID: 785980307574886061}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &964585683690285382 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 5c6315da6ed40c84996f66ed1f56e533, type: 3}
