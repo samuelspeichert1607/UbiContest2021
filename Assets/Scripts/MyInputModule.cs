@@ -24,6 +24,7 @@ namespace UnityEngine.EventSystems
 
         private PointerEventData m_InputPointerEvent;
 
+        [SerializeField] private ControllerManager controllerManager;
         protected MyInputModule()
         {
         }
@@ -226,8 +227,8 @@ namespace UnityEngine.EventSystems
                 return false;
 
             var shouldActivate = m_ForceModuleActive;
-            shouldActivate |= input.GetButtonDown(m_SubmitButton);
-            shouldActivate |= input.GetButtonDown(m_CancelButton);
+            shouldActivate |= controllerManager.GetButtonDown(m_SubmitButton);
+            shouldActivate |= controllerManager.GetButtonDown(m_CancelButton);
             shouldActivate |= !Mathf.Approximately(input.GetAxisRaw(m_HorizontalAxis), 0.0f);
             shouldActivate |= !Mathf.Approximately(input.GetAxisRaw(m_VerticalAxis), 0.0f);
             shouldActivate |= (m_MousePosition - m_LastMousePosition).sqrMagnitude > 0.0f;
@@ -442,10 +443,10 @@ namespace UnityEngine.EventSystems
                 return false;
 
             var data = GetBaseEventData();
-            if (input.GetButtonDown(m_SubmitButton))
+            if (controllerManager.GetButtonDown(m_SubmitButton))
                 ExecuteEvents.Execute(eventSystem.currentSelectedGameObject, data, ExecuteEvents.submitHandler);
 
-            if (input.GetButtonDown(m_CancelButton))
+            if (controllerManager.GetButtonDown(m_CancelButton))
                 ExecuteEvents.Execute(eventSystem.currentSelectedGameObject, data, ExecuteEvents.cancelHandler);
             return data.used;
         }

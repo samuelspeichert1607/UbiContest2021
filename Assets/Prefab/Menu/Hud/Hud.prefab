@@ -815,7 +815,7 @@ GameObject:
   - component: {fileID: 8575718750505916598}
   m_Layer: 5
   m_Name: StatusHud
-  m_TagString: Untagged
+  m_TagString: MusicPlayerListener
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -853,9 +853,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeLimit: 900
+  timeBeforeOxygenStart: 55
   delayBeforeGameEnd: 16
   oxygenFill: {fileID: 3900007994901213984}
   blackScreen: {fileID: 5269037932493916623}
+  playerCamera: {fileID: 0}
+  deathCam: {fileID: 0}
+  shortBlackoutTime: 0.5
+  longBlackoutTime: 15
+  oxygenBar: {fileID: 3900007995079691705}
+  heavyBreathing: {fileID: 8300000, guid: 894697e3d3f14034f8edef2ad23afa2a, type: 3}
+  panickedBreathing: {fileID: 8300000, guid: ec262f2534a2df0448897d1a01592e47, type: 3}
+  panickedBreathing2: {fileID: 8300000, guid: 7c5491ab95e2b174aa8db363578cd038, type: 3}
+  explosion: {fileID: 8300000, guid: ee1a1aed4040e9344bc3c71e28914535, type: 3}
+  audioSource: {fileID: 0}
 --- !u!1 &6847951498598669833
 GameObject:
   m_ObjectHideFlags: 0
@@ -2067,7 +2078,7 @@ PrefabInstance:
       objectReference: {fileID: 365290515776856970, guid: 9701ea46f3fb0b64bb84ddd576b409aa, type: 2}
     - target: {fileID: 7903254075740327853, guid: 1fc0ed83a879de3408b7b9e4a653b907, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8711856167215772422, guid: 1fc0ed83a879de3408b7b9e4a653b907, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -2085,6 +2096,10 @@ PrefabInstance:
       propertyPath: m_sharedMaterial
       value: 
       objectReference: {fileID: 2479354286643821207, guid: a50f8e8f1fc73134ab9e2d827702fa99, type: 2}
+    - target: {fileID: 8812769530237727468, guid: 1fc0ed83a879de3408b7b9e4a653b907, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8812769530463853425, guid: 1fc0ed83a879de3408b7b9e4a653b907, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -475
@@ -2101,9 +2116,13 @@ PrefabInstance:
       propertyPath: m_sharedMaterial
       value: 
       objectReference: {fileID: 2479354286643821207, guid: a50f8e8f1fc73134ab9e2d827702fa99, type: 2}
+    - target: {fileID: 8812769530463853426, guid: 1fc0ed83a879de3408b7b9e4a653b907, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8812769531221724102, guid: 1fc0ed83a879de3408b7b9e4a653b907, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8812769531393731283, guid: 1fc0ed83a879de3408b7b9e4a653b907, type: 3}
       propertyPath: m_fontAsset
@@ -2117,6 +2136,10 @@ PrefabInstance:
       propertyPath: m_sharedMaterial
       value: 
       objectReference: {fileID: 2479354286643821207, guid: a50f8e8f1fc73134ab9e2d827702fa99, type: 2}
+    - target: {fileID: 8812769531393731283, guid: 1fc0ed83a879de3408b7b9e4a653b907, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8812769531441368774, guid: 1fc0ed83a879de3408b7b9e4a653b907, type: 3}
       propertyPath: m_fontAsset
       value: 
@@ -2129,6 +2152,10 @@ PrefabInstance:
       propertyPath: m_sharedMaterial
       value: 
       objectReference: {fileID: 2479354286643821207, guid: a50f8e8f1fc73134ab9e2d827702fa99, type: 2}
+    - target: {fileID: 8812769531441368774, guid: 1fc0ed83a879de3408b7b9e4a653b907, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8812769531551960042, guid: 1fc0ed83a879de3408b7b9e4a653b907, type: 3}
       propertyPath: m_SizeDelta.x
       value: 125
@@ -2149,6 +2176,10 @@ PrefabInstance:
       propertyPath: m_sharedMaterial
       value: 
       objectReference: {fileID: 2479354286643821207, guid: a50f8e8f1fc73134ab9e2d827702fa99, type: 2}
+    - target: {fileID: 8812769531839833718, guid: 1fc0ed83a879de3408b7b9e4a653b907, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1fc0ed83a879de3408b7b9e4a653b907, type: 3}
 --- !u!1 &471128737615554904 stripped

@@ -72,7 +72,11 @@ public class PlayerController : CustomController
     {
         if (!_photonView.IsMine) return;
 
-        UpdateCameraRotation();
+
+        if (isAllMovementUnlocked)
+        {
+            UpdateCameraRotation();
+        }
         
         float verticalMotion = _controllerManager.GetLeftAxisY();
         float horizontalMotion = _controllerManager.GetLeftAxisX();
@@ -108,7 +112,7 @@ public class PlayerController : CustomController
                 _playerSpeed.y = -1;
             }
 
-            if (canMove)
+            if (canMove && isAllMovementUnlocked)
             {
                 if (_controllerManager.GetButtonDown("Jump") && !_isInJumpingAscensionPhase)
                 {
@@ -121,10 +125,6 @@ public class PlayerController : CustomController
 
                 _wasGrounded = true;
                 MoveOnGround(verticalMotion, horizontalMotion);
-            }
-            else
-            {
-                Idle();
             }
         }
         else
@@ -452,5 +452,4 @@ public class PlayerController : CustomController
     {
         isInCriticalMotion = false;
     }
-    
 }

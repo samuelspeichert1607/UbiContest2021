@@ -1774,6 +1774,7 @@ GameObject:
   - component: {fileID: 1153200170}
   - component: {fileID: 1153200172}
   - component: {fileID: 1153200171}
+  - component: {fileID: 1153200173}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -1807,6 +1808,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ab4ddd1e26499643b2ac5e15f9f1164, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  controllerManager: {fileID: 1153200173}
   m_HorizontalAxis: Horizontal
   m_VerticalAxis: Vertical
   m_SubmitButton: Submit
@@ -1829,6 +1831,18 @@ MonoBehaviour:
   m_FirstSelected: {fileID: 0}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
+--- !u!114 &1153200173
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1153200169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8688972652696894ca0a72513d7a937e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1310440460
 PrefabInstance:
   m_ObjectHideFlags: 0

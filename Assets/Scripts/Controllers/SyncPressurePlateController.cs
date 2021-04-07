@@ -20,7 +20,7 @@ public class SyncPressurePlateController : MonoBehaviour
     private GameObject sourcePlate = null;
     private bool isLocked = true;
 
-    private bool testBool =true;
+
     
     private Color successColor = Color.green;
     private Color pressedColor = Color.yellow;
@@ -32,12 +32,7 @@ public class SyncPressurePlateController : MonoBehaviour
     {
         UpdateAllPlatesState();
 
-        //cheat code
-         if (Input.GetKeyDown(KeyCode.P) && testBool)
-        {
-            OnSuccess();
-            testBool = false;
-        }
+
 
     }
 

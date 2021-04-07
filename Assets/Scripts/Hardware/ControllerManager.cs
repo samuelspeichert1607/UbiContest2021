@@ -1,5 +1,7 @@
-
+using System;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public enum ControllerType
 {
@@ -11,6 +13,7 @@ public class ControllerManager : MonoBehaviour
 {
     private IController userController;
     private string currentController;
+    private ButtonLayout currentButtonLayout;
 
     public void Start()
     {
@@ -61,15 +64,18 @@ public class ControllerManager : MonoBehaviour
             || (newController == "Controller (XBOX 360 For Windows"))
             {
                 userController = new XboxController();
+                SetButtonLayout("XboxLayout");
             }
 
             else if (newController == "Wireless Controller")
             {
                 userController = new PS4Controller();
+                SetButtonLayout("PS4Layout");
             }
             else
             {
                 userController = new XboxController();
+                SetButtonLayout("XboxLayout");
             }
             currentController = newController;
         }
@@ -95,4 +101,13 @@ public class ControllerManager : MonoBehaviour
         }
         return ControllerType.XboxController;
     }
+
+    private void SetButtonLayout(string controller)
+    {
+        string assetGuid = AssetDatabase.FindAssets(controller)[0];
+        ButtonLayout a = AssetDatabase.LoadAssetAtPath<ButtonLayout>(AssetDatabase.GUIDToAssetPath(assetGuid));
+        currentButtonLayout = AssetDatabase.LoadAssetAtPath<ButtonLayout>(AssetDatabase.GUIDToAssetPath(assetGuid));
+    }
+    
+    public ButtonLayout CurrentButtonLayout => currentButtonLayout;
 }
