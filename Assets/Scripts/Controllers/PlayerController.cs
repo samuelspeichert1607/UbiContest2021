@@ -1,5 +1,6 @@
 using Photon.Pun;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : CustomController
 {
@@ -423,10 +424,10 @@ public class PlayerController : CustomController
     private void RPCDisconnect(int indexSceneToLoad)
     {
         Debug.Log("Logging out");
-        
+
         PhotonNetwork.LeaveRoom();
         PhotonNetwork.Disconnect();
-        PhotonNetwork.LoadLevel(indexSceneToLoad);
+        SceneManager.LoadScene(indexSceneToLoad);
     }
     
     

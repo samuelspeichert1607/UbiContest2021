@@ -30,11 +30,14 @@ public class MusicPlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (PhotonNetwork.CurrentRoom.PlayerCount == 2)
+        if (PhotonNetwork.CurrentRoom != null)
         {
-            currentTime += Time.deltaTime;
+            if (PhotonNetwork.CurrentRoom.PlayerCount == 2)
+            {
+                currentTime += Time.deltaTime;
+            }
         }
-        
+
         if (currentTime > startTime && !hasStarted)
         {
             track1.Play();

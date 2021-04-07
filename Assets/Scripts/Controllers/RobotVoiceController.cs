@@ -23,10 +23,13 @@ public class RobotVoiceController : MonoBehaviour
 
     private void Update()
     {
-        if (canPlaySound && PhotonNetwork.CurrentRoom.PlayerCount == 2)
+        if (PhotonNetwork.CurrentRoom != null)
         {
-            canPlaySound = false;
-            PlayClip(introClip);
+            if (canPlaySound && PhotonNetwork.CurrentRoom.PlayerCount == 2)
+            {
+                canPlaySound = false;
+                PlayClip(introClip);
+            }
         }
 
     }
