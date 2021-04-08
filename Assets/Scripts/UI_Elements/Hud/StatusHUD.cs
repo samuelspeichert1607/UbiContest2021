@@ -83,7 +83,7 @@ public class StatusHUD : MonoBehaviour, MusicPlayerListener
             _needToInitiateTimer = false;
         }
         
-        Debug.Log("Mr. CHrono is now at " + timeLimit);
+        Debug.Log("Mr. CHrono is now at " + _timeLeft);
         CheckTimer();
         UpdateOxygenBar();
         _previousPlayerCount = PhotonNetwork.CurrentRoom.PlayerCount;
