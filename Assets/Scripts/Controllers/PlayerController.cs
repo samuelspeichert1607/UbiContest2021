@@ -52,6 +52,12 @@ public class PlayerController : CustomController
     private AudioListener _audioListener;
     private GameObject _networkManager;
 
+    //nouveau isgrounded avec buffer
+    private bool IsOnFloor = true;
+    private float LastTimeOnFloor = 0;
+    private float LastTimeInJump = 0;
+    [SerializeField] private float bufferTime = 0.15f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -86,8 +92,25 @@ public class PlayerController : CustomController
         {
             UpdateJumpingImpulse();
         }
-        
+
         if (_controller.isGrounded)
+        {
+            LastTimeOnFloor = Time.time;
+            IsOnFloor = true;
+        }
+        else if(Time.time-LastTimeOnFloor<=bufferTime&&Time.time-LastTimeInJump>bufferTime)
+        {
+            IsOnFloor = true;
+
+            
+        }
+        else
+        {
+            IsOnFloor = false;
+        }
+
+        
+        if (IsOnFloor)
         {
             if (_isLanding)
             {
@@ -117,6 +140,8 @@ public class PlayerController : CustomController
             {
                 if (_controllerManager.GetButtonDown("Jump") && !_isInJumpingAscensionPhase)
                 {
+
+                    LastTimeInJump = Time.time;
                     _photonView.RPC("InitiateJumping", RpcTarget.All);
                 }
                 else if (_controllerManager.GetButtonDown("RBumper"))
