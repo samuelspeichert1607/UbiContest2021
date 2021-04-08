@@ -71,7 +71,7 @@ public class StatusHUD : MonoBehaviour, MusicPlayerListener
                 _photonView.RPC(nameof(InitiateTimer), RpcTarget.All); //Both player with same TIMER
             }
 
-            if (_canConsumeOxygen)
+            if (_canConsumeOxygen || _shouldCallForOxygenConsumption)
             {
                 _timeLeft -= Time.deltaTime / 2;
             }
@@ -83,6 +83,7 @@ public class StatusHUD : MonoBehaviour, MusicPlayerListener
             _needToInitiateTimer = false;
         }
         
+        Debug.Log("Mr. CHrono is now at " + timeLimit);
         CheckTimer();
         UpdateOxygenBar();
         _previousPlayerCount = PhotonNetwork.CurrentRoom.PlayerCount;
