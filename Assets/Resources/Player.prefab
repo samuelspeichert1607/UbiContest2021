@@ -565,6 +565,7 @@ MonoBehaviour:
   jumpingSounds: {fileID: 8300000, guid: 173d44af0879f4a418c76fab9acec437, type: 3}
   landingSounds: {fileID: 8300000, guid: b005e7df82cef394da2888c7d6b760b7, type: 3}
   audioSource: {fileID: 7891492393573909030}
+  bufferTime: 0.2
 --- !u!81 &2913121891411867750
 AudioListener:
   m_ObjectHideFlags: 0
