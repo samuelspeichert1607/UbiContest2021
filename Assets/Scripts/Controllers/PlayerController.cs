@@ -445,7 +445,14 @@ public class PlayerController : CustomController
         _animator.SetFloat(Speed, 0f, 0.1f, Time.deltaTime);
         _animator.SetTrigger(Jump1);
     }
-    
+
+    public void DisconnectPlayerOnly(int indexSceneToLoad)
+    {
+        PhotonNetwork.LeaveRoom();
+        PhotonNetwork.Disconnect();
+        SceneManager.LoadScene(indexSceneToLoad);
+    }
+
     public void Disconnect(int indexSceneToLoad)
     {
         _photonView.RPC(nameof(RPCDisconnect), RpcTarget.AllViaServer, indexSceneToLoad);
@@ -460,7 +467,6 @@ public class PlayerController : CustomController
         PhotonNetwork.Disconnect();
         SceneManager.LoadScene(indexSceneToLoad);
     }
-    
     
     private void MidJump()
     {

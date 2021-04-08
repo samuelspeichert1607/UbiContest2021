@@ -232,7 +232,7 @@ public class StatusHUD : MonoBehaviour, MusicPlayerListener
     private void GameIsWon()
     {
         // 4 = endingScreenSuccess
-        GetComponentInParent<PlayerController>().Disconnect(4);
+        GetComponentInParent<PlayerController>().DisconnectPlayerOnly(4);
     }
 
     private void GameIsLost()
