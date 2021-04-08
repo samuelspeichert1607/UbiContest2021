@@ -17,6 +17,8 @@ public class PatchIntroDoor : MonoBehaviour
     private float timer =1;
     private PhotonView _photonView;
     private bool HasStarted = false;
+
+    private bool hasNotFinished = true;
     private void Start()
     {
         previousPlayerCount = PhotonNetwork.CurrentRoom.PlayerCount;
@@ -25,33 +27,39 @@ public class PatchIntroDoor : MonoBehaviour
 
     private void Update()
     {
-        if (previousPlayerCount<PhotonNetwork.CurrentRoom.PlayerCount && PhotonNetwork.CurrentRoom.PlayerCount == 2)
+        if (hasNotFinished)
         {
-
-            _photonView.RPC(nameof(InitiateTimer), RpcTarget.All);
-        }
-        previousPlayerCount = PhotonNetwork.CurrentRoom.PlayerCount;
-
-
-        if (HasStarted)
-        {
-            timer -= Time.deltaTime;
-        }
-        if (timer <= 0)
-        {
-            HasStarted = false;
-            timer = 1;
-            if (_doorsAreNotSetToOpen)
+            
+            if (previousPlayerCount < PhotonNetwork.CurrentRoom.PlayerCount && PhotonNetwork.CurrentRoom.PlayerCount == 2)
             {
-                OpenIntroDoors();
-                _doorsAreNotSetToOpen = false;
 
+                _photonView.RPC(nameof(InitiateTimer), RpcTarget.All);
+            }
+            previousPlayerCount = PhotonNetwork.CurrentRoom.PlayerCount;
+
+
+            if (HasStarted)
+            {
+                timer -= Time.deltaTime;
+            }
+            if (timer <= 0)
+            {
+                HasStarted = false;
+                timer = 1;
+                if (_doorsAreNotSetToOpen)
+                {
+                    OpenIntroDoors();
+                    _doorsAreNotSetToOpen = false;
+
+                }
             }
         }
+
     }
     
     private void OpenIntroDoors()
     {
+        hasNotFinished = false;
         foreach (Actionable door in introDoors)
         {
             door.OnAction();
