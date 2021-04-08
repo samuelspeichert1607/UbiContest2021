@@ -75,6 +75,9 @@ MonoBehaviour:
   - Type: 9
     SynchronizeType: 2
     Name: Falling
+  - Type: 4
+    SynchronizeType: 0
+    Name: isDying
   m_SynchronizeLayers:
   - SynchronizeType: 0
     LayerIndex: 0
@@ -838,14 +841,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -5023873731568499944, guid: 5081c5b2fadec0e4e82593e7c9833d32, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 5081c5b2fadec0e4e82593e7c9833d32, type: 3}
       propertyPath: m_Name
       value: rigPub
+      objectReference: {fileID: 0}
+    - target: {fileID: 4669239286267218835, guid: 5081c5b2fadec0e4e82593e7c9833d32, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: 5081c5b2fadec0e4e82593e7c9833d32, type: 3}
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 3ff72135b1689ac4a985292b0415c6be, type: 2}
+    - target: {fileID: 6767202206847868161, guid: 5081c5b2fadec0e4e82593e7c9833d32, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9caae3412f4357d419c28aaf3b19b5c3, type: 2}
     - target: {fileID: 7277171696150746214, guid: 5081c5b2fadec0e4e82593e7c9833d32, type: 3}
       propertyPath: m_DynamicOccludee
       value: 1
