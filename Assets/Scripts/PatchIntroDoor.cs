@@ -17,6 +17,8 @@ public class PatchIntroDoor : MonoBehaviour
     private float timer =1;
     private PhotonView _photonView;
     private bool HasStarted = false;
+
+    private bool mustStartTimer = true;
     private void Start()
     {
         _photonView = GetComponent<PhotonView>();
@@ -25,9 +27,9 @@ public class PatchIntroDoor : MonoBehaviour
     private void Update()
     {
         if (PhotonNetwork.CurrentRoom == null) return;
-        if (PhotonNetwork.CurrentRoom.PlayerCount == 2)
+        if (PhotonNetwork.CurrentRoom.PlayerCount == 2&& mustStartTimer)
         {
-
+            mustStartTimer = false;
             _photonView.RPC(nameof(InitiateTimer), RpcTarget.All);
         }
 
@@ -35,7 +37,6 @@ public class PatchIntroDoor : MonoBehaviour
 
         if (HasStarted)
         {
-            Debug.Log(timer);
             timer -= Time.deltaTime;
         }
         if (timer <= 0)
