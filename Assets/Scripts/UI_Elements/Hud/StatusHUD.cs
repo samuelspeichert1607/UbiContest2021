@@ -74,7 +74,8 @@ public class StatusHUD : MonoBehaviour, MusicPlayerListener
 
             if (PhotonNetwork.CurrentRoom.PlayerCount > _previousPlayerCount)
             {
-                _timeLeft = _previousTimeLeft;
+                //RPC
+                _photonView.RPC(nameof(InitiateTimer), RpcTarget.All);
             }
      
 
@@ -98,6 +99,12 @@ public class StatusHUD : MonoBehaviour, MusicPlayerListener
         CheckTimer();
         UpdateOxygenBar();
         _previousPlayerCount = PhotonNetwork.CurrentRoom.PlayerCount;
+    }
+
+    [PunRPC]
+    private void InitiateTimer()
+    {
+        _timeLeft = timeLimit;
     }
 
     private void CheckTimer()
