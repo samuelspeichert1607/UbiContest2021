@@ -50,7 +50,7 @@ public class StatusHUD : MonoBehaviour, MusicPlayerListener
     void Start()
     {
         // Big problème : le timer se reset à chaque entrée d'un deuxième joueur
-        _timeLeft = timeLimit + 1;
+        _timeLeft = timeLimit + timeBeforeOxygenStart;
         _robotVoiceController = GameObject.FindWithTag("RobotVoice").GetComponent<RobotVoiceController>();
         blackScreen.SetAlphaToZero();
         _playerController = GetComponentInParent<CustomController>();
