@@ -9,15 +9,20 @@ public class PatchIntroDoor : MonoBehaviour
 
     [SerializeField] private Actionable[] introDoors;
 
-    [SerializeField] private float delayBeforeOpening = 60f;
-    // Start is called before the first frame update
+    [SerializeField] private float delayBeforeOpening = 57f;
+
+    private bool _doorsAreNotSetToOpen = true;
 
 
     private void Update()
     {
         if (PhotonNetwork.CurrentRoom.PlayerCount == 2)
         {
-            Invoke(nameof(OpenIntroDoors), delayBeforeOpening);            
+            if (_doorsAreNotSetToOpen)
+            {
+                _doorsAreNotSetToOpen = false;
+                Invoke(nameof(OpenIntroDoors), delayBeforeOpening);
+            }
         }
     }
 
