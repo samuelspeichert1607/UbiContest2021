@@ -873,7 +873,7 @@ PrefabInstance:
     - target: {fileID: 6767202206847868161, guid: 5081c5b2fadec0e4e82593e7c9833d32, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 9caae3412f4357d419c28aaf3b19b5c3, type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 7277171696150746214, guid: 5081c5b2fadec0e4e82593e7c9833d32, type: 3}
       propertyPath: m_DynamicOccludee
       value: 1
@@ -1353,7 +1353,7 @@ PrefabInstance:
       objectReference: {fileID: 2530426914044659649}
     - target: {fileID: 8575718750505916598, guid: d99000752cd7f634ea803c83a1bd9774, type: 3}
       propertyPath: timeBeforeOxygenStart
-      value: 10
+      value: 55
       objectReference: {fileID: 0}
     - target: {fileID: 8575718750505916598, guid: d99000752cd7f634ea803c83a1bd9774, type: 3}
       propertyPath: TimeForSecondPlayerToJoin
