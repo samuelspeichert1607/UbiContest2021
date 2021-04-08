@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7638052494590853145}
   - component: {fileID: 4118027730191127763}
   - component: {fileID: 6716938488155885647}
+  - component: {fileID: 8749315220681668686}
   m_Layer: 0
   m_Name: abyssCorp_3d
   m_TagString: Untagged
@@ -81,6 +82,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &8749315220681668686
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4798880548254738968}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 89.61756, y: 60.930786, z: 4.4011483}
+  m_Center: {x: -45.026356, y: 27.437332, z: 1.1650561}
 --- !u!1 &8981785780812068954
 GameObject:
   m_ObjectHideFlags: 0
