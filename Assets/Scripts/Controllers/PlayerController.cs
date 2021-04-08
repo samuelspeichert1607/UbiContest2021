@@ -84,7 +84,7 @@ public class PlayerController : CustomController
         {
             UpdateCameraRotation();
         }
-        
+
         float verticalMotion = _controllerManager.GetLeftAxisY();
         float horizontalMotion = _controllerManager.GetLeftAxisX();
 
@@ -98,19 +98,19 @@ public class PlayerController : CustomController
             LastTimeOnFloor = Time.time;
             IsOnFloor = true;
         }
-        else if(Time.time-LastTimeOnFloor<=bufferTime&&Time.time-LastTimeInJump>bufferTime)
+        else if (Time.time - LastTimeOnFloor <= bufferTime && Time.time - LastTimeInJump > bufferTime)
         {
             IsOnFloor = true;
 
-            
+
         }
         else
         {
             IsOnFloor = false;
         }
 
-        
-        if (IsOnFloor)
+
+        if (_controller.isGrounded)
         {
             if (_isLanding)
             {
@@ -138,16 +138,7 @@ public class PlayerController : CustomController
 
             if (canMove && isAllMovementUnlocked)
             {
-                if (_controllerManager.GetButtonDown("Jump") && !_isInJumpingAscensionPhase)
-                {
 
-                    LastTimeInJump = Time.time;
-                    _photonView.RPC("InitiateJumping", RpcTarget.All);
-                }
-                else if (_controllerManager.GetButtonDown("RBumper"))
-                {
-                    PlayEmote();
-                }
 
                 _wasGrounded = true;
                 MoveOnGround(verticalMotion, horizontalMotion);
@@ -169,6 +160,21 @@ public class PlayerController : CustomController
             AdjustAirborneSpeed(verticalMotion, horizontalMotion);
             Move(_playerSpeed, Time.deltaTime);
             _wasGrounded = false;
+        }
+
+
+        if (canMove && isAllMovementUnlocked && IsOnFloor)
+        {
+            if (_controllerManager.GetButtonDown("Jump") && !_isInJumpingAscensionPhase)
+            {
+
+                LastTimeInJump = Time.time;
+                _photonView.RPC("InitiateJumping", RpcTarget.All);
+            }
+            else if (_controllerManager.GetButtonDown("RBumper"))
+            {
+                PlayEmote();
+            }
         }
     }
 
