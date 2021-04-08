@@ -19,22 +19,23 @@ public class PatchIntroDoor : MonoBehaviour
     private bool HasStarted = false;
     private void Start()
     {
-        previousPlayerCount = PhotonNetwork.CurrentRoom.PlayerCount;
         _photonView = GetComponent<PhotonView>();
     }
 
     private void Update()
     {
-        if (previousPlayerCount<PhotonNetwork.CurrentRoom.PlayerCount && PhotonNetwork.CurrentRoom.PlayerCount == 2)
+        if (PhotonNetwork.CurrentRoom == null) return;
+        if (PhotonNetwork.CurrentRoom.PlayerCount == 2)
         {
 
             _photonView.RPC(nameof(InitiateTimer), RpcTarget.All);
         }
-        previousPlayerCount = PhotonNetwork.CurrentRoom.PlayerCount;
+
 
 
         if (HasStarted)
         {
+            Debug.Log(timer);
             timer -= Time.deltaTime;
         }
         if (timer <= 0)

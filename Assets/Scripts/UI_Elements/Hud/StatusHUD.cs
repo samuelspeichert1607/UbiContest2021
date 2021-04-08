@@ -46,7 +46,7 @@ public class StatusHUD : MonoBehaviour, MusicPlayerListener
     private bool _needToInitiateTimer = false;
 
     private PhotonView _photonView;
-
+    private bool mustInitiateTimer = true;
     void Start()
     {
         // Big problème : le timer se reset à chaque entrée d'un deuxième joueur
@@ -63,10 +63,13 @@ public class StatusHUD : MonoBehaviour, MusicPlayerListener
 
     void Update()
     {
+        if (PhotonNetwork.CurrentRoom ==null)  return;
+   
         if (PhotonNetwork.CurrentRoom.PlayerCount == 2)
         {
-            if (PhotonNetwork.CurrentRoom.PlayerCount > _previousPlayerCount) //from 1 to 2 player
+            if (mustInitiateTimer) //from 1 to 2 player
             {
+                mustInitiateTimer = false;
                 //RPC
                 _photonView.RPC(nameof(InitiateTimer), RpcTarget.All); //Both player with same TIMER
             }
