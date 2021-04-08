@@ -63,6 +63,10 @@ public class StatusHUD : MonoBehaviour, MusicPlayerListener
 
     void Update()
     {
+        if (PhotonNetwork.CurrentRoom==null)
+        {
+            return;
+        }
         if (PhotonNetwork.CurrentRoom.PlayerCount == 2)
         {
             if (PhotonNetwork.CurrentRoom.PlayerCount > _previousPlayerCount) //from 1 to 2 player

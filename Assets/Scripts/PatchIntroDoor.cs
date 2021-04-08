@@ -18,7 +18,6 @@ public class PatchIntroDoor : MonoBehaviour
     private PhotonView _photonView;
     private bool HasStarted = false;
 
-    private bool hasNotFinished = true;
     private void Start()
     {
         previousPlayerCount = PhotonNetwork.CurrentRoom.PlayerCount;
@@ -27,9 +26,8 @@ public class PatchIntroDoor : MonoBehaviour
 
     private void Update()
     {
-        if (hasNotFinished)
+        if (PhotonNetwork.CurrentRoom!=null)
         {
-            
             if (previousPlayerCount < PhotonNetwork.CurrentRoom.PlayerCount && PhotonNetwork.CurrentRoom.PlayerCount == 2)
             {
 
@@ -59,7 +57,6 @@ public class PatchIntroDoor : MonoBehaviour
     
     private void OpenIntroDoors()
     {
-        hasNotFinished = false;
         foreach (Actionable door in introDoors)
         {
             door.OnAction();
