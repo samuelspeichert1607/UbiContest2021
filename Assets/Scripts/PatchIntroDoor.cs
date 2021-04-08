@@ -14,7 +14,7 @@ public class PatchIntroDoor : MonoBehaviour
     private bool _doorsAreNotSetToOpen = true;
     private int previousPlayerCount;
 
-    private float timer;
+    private float timer =1;
     private PhotonView _photonView;
     private bool HasStarted = false;
     private void Start()

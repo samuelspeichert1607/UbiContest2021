@@ -83,7 +83,7 @@ public class StatusHUD : MonoBehaviour, MusicPlayerListener
             _needToInitiateTimer = false;
         }
         
-        Debug.Log("Mr. CHrono is now at " + _timeLeft);
+
         CheckTimer();
         UpdateOxygenBar();
         _previousPlayerCount = PhotonNetwork.CurrentRoom.PlayerCount;
@@ -93,7 +93,7 @@ public class StatusHUD : MonoBehaviour, MusicPlayerListener
     {
         if (_timeLeft < timeLimit && _shouldCallForOxygenConsumption) //time left was initiated at timeLimit + timeBeforeOxygenStart
         {
-            Debug.Log("wi" + _timeLeft +"  "+timeLimit);
+
             _shouldCallForOxygenConsumption = false;
             StartConsumingOxygen();
         }
@@ -115,7 +115,7 @@ public class StatusHUD : MonoBehaviour, MusicPlayerListener
     [PunRPC]
     private void InitiateTimer()
     {
-        Debug.Log(_timeLeft);
+
         _shouldCallForOxygenConsumption = true;
         _timeLeft = timeLimit + timeBeforeOxygenStart;
     }
