@@ -1336,6 +1336,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 6193486925864636916}
     - target: {fileID: 8575718750505916598, guid: d99000752cd7f634ea803c83a1bd9774, type: 3}
+      propertyPath: explosion
+      value: 
+      objectReference: {fileID: 8300000, guid: ee1a1aed4040e9344bc3c71e28914535, type: 3}
+    - target: {fileID: 8575718750505916598, guid: d99000752cd7f634ea803c83a1bd9774, type: 3}
       propertyPath: timeLimit
       value: 900
       objectReference: {fileID: 0}
