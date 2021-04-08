@@ -124,6 +124,7 @@ GameObject:
   - component: {fileID: 8039261491965094186}
   - component: {fileID: 1916912476963502463}
   - component: {fileID: 6208319126292324796}
+  - component: {fileID: 2094485280789135373}
   m_Layer: 0
   m_Name: Panel_pCube1
   m_TagString: Untagged
@@ -194,3 +195,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &2094485280789135373
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8098388899858232956}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 132.26474, y: 66.13234, z: 24.494205}
+  m_Center: {x: 0.00012207031, y: 165.47253, z: -3.1737528}
