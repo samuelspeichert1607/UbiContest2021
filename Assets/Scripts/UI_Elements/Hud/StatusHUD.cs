@@ -34,7 +34,7 @@ public class StatusHUD : MonoBehaviour, MusicPlayerListener
     private RobotVoiceController _robotVoiceController;
     private static float _timeLeft;
     private static int _previousPlayerCount;
-    private bool _hasOxygenConsumptionStarted = false;
+    private bool _shouldCallForOxygenConsumption = false;
     private bool _needToInvokeOxygenConsumption = true;
 
     private bool isTimerOver = false;
@@ -50,7 +50,7 @@ public class StatusHUD : MonoBehaviour, MusicPlayerListener
     void Start()
     {
         // Big problème : le timer se reset à chaque entrée d'un deuxième joueur
-        _timeLeft = timeLimit;
+        _timeLeft = timeLimit + 1;
         _robotVoiceController = GameObject.FindWithTag("RobotVoice").GetComponent<RobotVoiceController>();
         blackScreen.SetAlphaToZero();
         _playerController = GetComponentInParent<CustomController>();
@@ -88,6 +88,19 @@ public class StatusHUD : MonoBehaviour, MusicPlayerListener
         _previousPlayerCount = PhotonNetwork.CurrentRoom.PlayerCount;
     }
 
+    private void CheckTimer()
+    {
+        if (_timeLeft < timeLimit && _shouldCallForOxygenConsumption) //time left was initiated at timeLimit + timeBeforeOxygenStart
+        {
+            _shouldCallForOxygenConsumption = false;
+            StartConsumingOxygen();
+        }
+        if (_timeLeft < 0 && !isTimerOver)
+        {
+            TimerIsOut();
+        }
+    }
+    
     private void StartConsumingOxygen()
     {
         oxygenBar.SetActive(true);
@@ -100,22 +113,12 @@ public class StatusHUD : MonoBehaviour, MusicPlayerListener
     [PunRPC]
     private void InitiateTimer()
     {
+        Debug.Log(_timeLeft);
+        _shouldCallForOxygenConsumption = true;
         _timeLeft = timeLimit + timeBeforeOxygenStart;
     }
     
 
-    private void CheckTimer()
-    {
-        if (_timeLeft < timeLimit && !_hasOxygenConsumptionStarted) //time left was initiated at timeLimit + timeBeforeOxygenStart
-        {
-            _hasOxygenConsumptionStarted = true;
-            StartConsumingOxygen();
-        }
-        if (_timeLeft < 0 && !isTimerOver)
-        {
-            TimerIsOut();
-        }
-    }
 
     IEnumerator CameraShake(int numberOfCycle, float shakeDuration, float movement)
     {
