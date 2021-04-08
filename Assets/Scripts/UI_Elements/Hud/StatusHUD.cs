@@ -27,29 +27,30 @@ public class StatusHUD : MonoBehaviour, MusicPlayerListener
     [SerializeField] private AudioClip explosion;
 
     [SerializeField] private AudioSource audioSource;
-    [SerializeField] private float TimeForSecondPlayerToJoin =10;
 
     private Vignette _playerCameraPostProcessVignette;
     private Vignette _deathCamVignette;
     private CustomController _playerController;
     private RobotVoiceController _robotVoiceController;
     private static float _timeLeft;
-    private static float _previousTimeLeft;
     private static int _previousPlayerCount;
     private bool _hasOxygenConsumptionStarted = false;
     private bool _needToInvokeOxygenConsumption = true;
 
     private bool isTimerOver = false;
-    private bool hasSecondPlayerEnteredRoom =false;
+
+    private bool hasSecondPlayerEnteredRoom = false;
+
     // private TextMeshProUGUI timerTextBox;
-    private bool canStartConsuming = true;
+    private bool _canConsumeOxygen = false;
+    private bool _needToInitiateTimer = false;
 
     private PhotonView _photonView;
+
     void Start()
     {
         // Big problème : le timer se reset à chaque entrée d'un deuxième joueur
         _timeLeft = timeLimit;
-        _previousTimeLeft = timeLimit;
         _robotVoiceController = GameObject.FindWithTag("RobotVoice").GetComponent<RobotVoiceController>();
         blackScreen.SetAlphaToZero();
         _playerController = GetComponentInParent<CustomController>();
@@ -64,83 +65,68 @@ public class StatusHUD : MonoBehaviour, MusicPlayerListener
     {
         if (PhotonNetwork.CurrentRoom.PlayerCount == 2)
         {
-            if (_needToInvokeOxygenConsumption)
-            {
-                Invoke(nameof(WaitForSecondPlayerToJoin), TimeForSecondPlayerToJoin);
-                _needToInvokeOxygenConsumption = false;
-                //Invoke(nameof(StartConsumingOxygen), timeBeforeOxygenStart);
-            }
-
-
-            if (PhotonNetwork.CurrentRoom.PlayerCount > _previousPlayerCount)
+            if (PhotonNetwork.CurrentRoom.PlayerCount > _previousPlayerCount) //from 1 to 2 player
             {
                 //RPC
-                _photonView.RPC(nameof(InitiateTimer), RpcTarget.All);
+                _photonView.RPC(nameof(InitiateTimer), RpcTarget.All); //Both player with same TIMER
             }
-     
 
-            if (hasSecondPlayerEnteredRoom)
+            if (_canConsumeOxygen)
             {
-                if (canStartConsuming)
-                {
-                    _photonView.RPC(nameof(InvokeConsumingOxygenRPC), RpcTarget.All);
-                    //canStartConsuming = false;
-                    //Invoke(nameof(StartConsumingOxygen), timeBeforeOxygenStart);
-                }
                 _timeLeft -= Time.deltaTime / 2;
             }
-            
-        }
-        else if (PhotonNetwork.CurrentRoom.PlayerCount < _previousPlayerCount)
-        {
-            _previousTimeLeft = _timeLeft;
         }
 
+        if (_needToInitiateTimer)
+        {
+            Invoke(nameof(InitiateTimer), timeBeforeOxygenStart);
+            _needToInitiateTimer = false;
+        }
+        
         CheckTimer();
         UpdateOxygenBar();
         _previousPlayerCount = PhotonNetwork.CurrentRoom.PlayerCount;
     }
 
-    [PunRPC]
-    private void InitiateTimer()
-    {
-        _timeLeft = timeLimit;
-    }
-
-    private void CheckTimer()
-    {
-        if (_timeLeft < 0 && !isTimerOver)
-        {
-            TimerIsOut();
-        }
-    }
-    [PunRPC]
-    private void InvokeConsumingOxygenRPC()
-    {
-        canStartConsuming = false;
-        Invoke(nameof(StartConsumingOxygen), timeBeforeOxygenStart);
-    }
     private void StartConsumingOxygen()
     {
         oxygenBar.SetActive(true);
-        _hasOxygenConsumptionStarted = true;
-        _timeLeft = timeLimit;
-        _previousTimeLeft = timeLimit;
+        _canConsumeOxygen = true;
         audioSource.PlayOneShot(explosion);
         _playerController.LockAllMovement();
         StartCoroutine(CameraShake(8, 2, 0.04f));
     }
     
-    IEnumerator CameraShake (int numberOfCycle, float shakeDuration, float movement)
+    [PunRPC]
+    private void InitiateTimer()
+    {
+        _timeLeft = timeLimit + timeBeforeOxygenStart;
+    }
+    
+
+    private void CheckTimer()
+    {
+        if (_timeLeft < timeLimit && !_hasOxygenConsumptionStarted) //time left was initiated at timeLimit + timeBeforeOxygenStart
+        {
+            _hasOxygenConsumptionStarted = true;
+            StartConsumingOxygen();
+        }
+        if (_timeLeft < 0 && !isTimerOver)
+        {
+            TimerIsOut();
+        }
+    }
+
+    IEnumerator CameraShake(int numberOfCycle, float shakeDuration, float movement)
     {
         float startTime = Time.time;
-        float BParam = 2f *  (float) Math.PI * numberOfCycle / shakeDuration;
-        
+        float BParam = 2f * (float) Math.PI * numberOfCycle / shakeDuration;
+
         while (_playerController.IsInCriticalMotion())
         {
             yield return null;
         }
-        
+
         float camPosY = playerCamera.transform.position.y;
         float camPosZ = playerCamera.transform.position.z;
         float camPosX = playerCamera.transform.position.x;
@@ -149,34 +135,34 @@ public class StatusHUD : MonoBehaviour, MusicPlayerListener
             float sinValue = Mathf.Sin(Time.time * BParam); // -1 1
             float newPosX = camPosX + movement * sinValue;
             float newPosY = camPosY + movement * sinValue;
-            playerCamera.transform.position = new Vector3(newPosX, newPosY,  camPosZ);
+            playerCamera.transform.position = new Vector3(newPosX, newPosY, camPosZ);
             yield return null;
         }
+
         playerCamera.transform.position = new Vector3(camPosX, camPosY, camPosZ);
         _playerController.UnlockAllMovement();
     }
-    
-    
-    
+
+
     private void UpdateOxygenBar()
     {
         // At 15 minutes of time limit we don't notice, but the transition is rather rough
         // Could possibly be smoother
         float timePercentage = _timeLeft / timeLimit;
         oxygenFill.fillAmount = timePercentage;
-        
     }
+
     private void TimerIsOut()
     {
         isTimerOver = true;
         _robotVoiceController.PlayLost();
 
         PlayerDeathInitialPhase();
-        
+
         Invoke(nameof(FinalBlackout), 1f);
         Invoke(nameof(GameIsLost), delayBeforeGameEnd);
     }
-    
+
     private void PlayerDeathInitialPhase()
     {
         _playerController.disableMovement();
@@ -186,47 +172,47 @@ public class StatusHUD : MonoBehaviour, MusicPlayerListener
 
         Invoke(nameof(PlayDeathAnimation), shortBlackoutTime);
     }
-    
+
     private void PlayDeathAnimation()
     {
         if (!_photonView.IsMine) return;
         _playerController.PlayDeathAnimation();
-        
+
         playerCamera.SetActive(false);
         deathCam.SetActive(true);
 
         _deathCamVignette.intensity.value = 1f;
         StartCoroutine(FadeIntensityDownToValue(_deathCamVignette, 0f, shortBlackoutTime));
-        
+
         blackScreen.FadeToZeroAlpha();
     }
-    
+
     private void ShortBlackout()
     {
-        blackScreen.SetFadingTime(shortBlackoutTime/ 2f);
+        blackScreen.SetFadingTime(shortBlackoutTime / 2f);
         blackScreen.FadeToFullAlpha();
         StartCoroutine(FadeIntensityUpToValue(_playerCameraPostProcessVignette, 1.0f, shortBlackoutTime));
     }
-    
+
     private void PartialBlackout()
     {
-        blackScreen.SetFadingTime(shortBlackoutTime/ 2f);
+        blackScreen.SetFadingTime(shortBlackoutTime / 2f);
         blackScreen.FadeToFullAlpha();
         StartCoroutine(FadeIntensityUpToValue(_playerCameraPostProcessVignette, 0.7f, shortBlackoutTime));
     }
 
-    
+
     private void FinalBlackout()
     {
         StartCoroutine(FadeIntensityUpToValue(_deathCamVignette, 1f, longBlackoutTime));
-        blackScreen.SetFadingTime(2f * delayBeforeGameEnd/ 3f);
+        blackScreen.SetFadingTime(2f * delayBeforeGameEnd / 3f);
         blackScreen.FadeToFullAlpha();
         Invoke(nameof(HeavyBreathing), 2f);
         Invoke(nameof(PanickedBreathing2), 4f);
         Invoke(nameof(PanickedBreathing), 10f);
         Invoke(nameof(HeavyBreathing), 13f);
     }
-    
+
     public void CallGameSucceededAfterDefaultDelay()
     {
         _robotVoiceController.PlayWin();
@@ -240,30 +226,32 @@ public class StatusHUD : MonoBehaviour, MusicPlayerListener
         // 4 = endingScreenSuccess
         GetComponentInParent<PlayerController>().Disconnect(4);
     }
-    
+
     private void GameIsLost()
     {
         // 5 = endingScreenFailure
         GetComponentInParent<PlayerController>().Disconnect(5);
     }
-    
-    IEnumerator FadeIntensityUpToValue (Vignette vignette, float intensityValue, float duration)
+
+    IEnumerator FadeIntensityUpToValue(Vignette vignette, float intensityValue, float duration)
     {
         float startTime = Time.time;
         float initialIntensity = vignette.intensity.value;
         float intensityDifferential = intensityValue - initialIntensity;
-        while (vignette.intensity < intensityValue) {
+        while (vignette.intensity < intensityValue)
+        {
             vignette.intensity.value = initialIntensity + intensityDifferential * (Time.time - startTime) / duration;
             yield return null;
         }
     }
 
-    IEnumerator FadeIntensityDownToValue (Vignette vignette, float intensityValue, float duration)
+    IEnumerator FadeIntensityDownToValue(Vignette vignette, float intensityValue, float duration)
     {
         float startTime = Time.time;
         float initialIntensity = vignette.intensity.value;
         float intensityDifferential = intensityValue - initialIntensity;
-        while (vignette.intensity > intensityValue) {
+        while (vignette.intensity > intensityValue)
+        {
             vignette.intensity.value = initialIntensity + intensityDifferential * (Time.time - startTime) / duration;
             yield return null;
         }
@@ -285,11 +273,11 @@ public class StatusHUD : MonoBehaviour, MusicPlayerListener
         Invoke(nameof(ReturnFromBlackout), shortBlackoutTime * 3f);
         Invoke(nameof(EndOxygenRunningLowBlackout), shortBlackoutTime * 4f);
     }
-    
+
     private void ReturnFromBlackout()
     {
         StartCoroutine(FadeIntensityDownToValue(_playerCameraPostProcessVignette, 0f, shortBlackoutTime));
-        blackScreen.SetFadingTime(shortBlackoutTime/ 2f);
+        blackScreen.SetFadingTime(shortBlackoutTime / 2f);
         blackScreen.FadeToZeroAlpha();
     }
 
@@ -298,12 +286,12 @@ public class StatusHUD : MonoBehaviour, MusicPlayerListener
         _playerController.allowMovement();
         HeavyBreathing();
     }
-    
+
     private void PanickedBreathing()
     {
         audioSource.PlayOneShot(panickedBreathing);
     }
-    
+
     private void PanickedBreathing2()
     {
         audioSource.PlayOneShot(panickedBreathing2);
@@ -312,10 +300,5 @@ public class StatusHUD : MonoBehaviour, MusicPlayerListener
     private void HeavyBreathing()
     {
         audioSource.PlayOneShot(heavyBreathing);
-    }
-
-    private void WaitForSecondPlayerToJoin()
-    {
-        hasSecondPlayerEnteredRoom = true;
     }
 }
