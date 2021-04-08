@@ -93,6 +93,7 @@ public class StatusHUD : MonoBehaviour, MusicPlayerListener
     {
         if (_timeLeft < timeLimit && _shouldCallForOxygenConsumption) //time left was initiated at timeLimit + timeBeforeOxygenStart
         {
+            Debug.Log("wi" + _timeLeft +"  "+timeLimit);
             _shouldCallForOxygenConsumption = false;
             StartConsumingOxygen();
         }
