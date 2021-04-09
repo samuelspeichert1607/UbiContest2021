@@ -8,12 +8,21 @@ public class PressableButton : InteractableItem
 {
     // Start is called before the first frame update
     [SerializeField] private float pressingTime;
-    private ControllerManager controllerManager;
+
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip pressingSound;
+    [SerializeField] private Vector3 pressingDirection = new Vector3(-1,0, 0);
+    
+    // private ControllerManager controllerManager;
+    private readonly float movingDistance = 0.15f;
+    private Vector3 restPosition;
 
     private new void Start()
     {
         base.Start();
-        controllerManager = GetComponent<ControllerManager>();
+        audioSource = GetComponent<AudioSource>();
+        restPosition = transform.position;
+        // controllerManager = GetComponent<ControllerManager>();
     }
 
     // Update is called once per frame
@@ -37,8 +46,46 @@ public class PressableButton : InteractableItem
     public override void OnInteractStart()
     {
         IsInteractedWith = true;
-        Invoke("OnInteractEnd", pressingTime);
+        audioSource.PlayOneShot(pressingSound);
+        StartCoroutine(PressingDown(pressingTime / 2f));
+        Invoke(nameof(StartUnpressing), pressingTime / 2f);
+        Invoke(nameof(OnInteractEnd), pressingTime);
         TextRenderer.CloseInfoText();
+    }
+
+    IEnumerator PressingDown(float pressingDownTime)
+    {
+        float startTime = Time.time;
+        Vector3 initialPosition = transform.position;
+        Vector3 displacement =  pressingDirection * movingDistance;
+        while (Time.time - startTime < pressingDownTime)
+        {
+            float fractionOfTransition = (Time.time - startTime) / pressingDownTime;
+            transform.position = initialPosition + displacement * fractionOfTransition;
+            Debug.Log(transform.position.z);
+            yield return null;
+        }
+    }
+
+    private void StartUnpressing()
+    {
+        StartCoroutine(Unpressing(pressingTime/ 2f));
+    }
+    
+    IEnumerator Unpressing(float unpressingTime)
+    {
+        float startTime = Time.time;
+        Vector3 initialPosition = transform.position;
+        Vector3 displacement =  - pressingDirection * movingDistance;
+        while (Time.time - startTime < unpressingTime)
+        {
+            float fractionOfTransition = (Time.time - startTime) / unpressingTime;
+            transform.position = initialPosition + displacement * fractionOfTransition;
+            Debug.Log(transform.position.z);
+            yield return null;
+        }
+
+        transform.position = restPosition;
     }
     
     public override void OnInteractEnd()
@@ -65,7 +112,8 @@ public class PressableButton : InteractableItem
 
     public override void OnPlayerInRange()
     {
-        if (controllerManager.GetButtonDown(interactButtonName) && !IsInteractedWith)
+        
+        if (ControllerManager.GetButtonDown(interactButtonName) && !IsInteractedWith)
         {
             OnInteractStart();
         }

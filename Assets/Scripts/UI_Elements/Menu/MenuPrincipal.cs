@@ -7,9 +7,9 @@ public class MenuPrincipal : MonoBehaviour
 {
     [SerializeField]
     private GameObject controlsMenu, creditMenu;
-    
+
     [SerializeField]
-    private GameObject onMenuOpenFirstSelected, onControlsFirstSelected, onCreditsFirstSelected;
+    private GameObject onMenuOpenFirstSelected, onControlsFirstSelected, onCreditsFirstSelected, onReturnFromControlsFirstSelected, onReturnFromCreditsFirstSelected;
 
     [SerializeField] private AudioPlayerMenu audioPlayer;
     
@@ -25,6 +25,7 @@ public class MenuPrincipal : MonoBehaviour
         _currentlySelected = onControlsFirstSelected;
         SelectObject(onMenuOpenFirstSelected);
         controlsMenu.SetActive(false);
+        creditMenu.SetActive(false);
         isAtfirstOpeningFrame = true;
     }
     
@@ -66,7 +67,6 @@ public class MenuPrincipal : MonoBehaviour
         controlsMenu.SetActive(true);
         SelectObject(onControlsFirstSelected);
     }
-
     
     public void ClickCreditsBtn()
     {
@@ -81,4 +81,19 @@ public class MenuPrincipal : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(gameObjectToSelect);
     }
     
+    public void CloseCreditsMenu()
+    {
+        _currentlySelected = onReturnFromCreditsFirstSelected;
+        SelectObject(onReturnFromCreditsFirstSelected);
+        creditMenu.SetActive(false);
+        isAtfirstOpeningFrame = true;
+    }
+
+    public void CloseControlsMenu()
+    {
+        _currentlySelected = onReturnFromControlsFirstSelected;
+        SelectObject(onReturnFromControlsFirstSelected);
+        controlsMenu.SetActive(false);
+        isAtfirstOpeningFrame = true;
+    }
 }

@@ -3,6 +3,7 @@ using InteractableItems;
 using Photon.Pun;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace Puzzle.HumanPencil
 {
@@ -14,23 +15,24 @@ namespace Puzzle.HumanPencil
         [SerializeField] private string drawingAxisName;
         private float distancePlayerPencil = 1;
 
-        private ControllerManager controllerManager;
-
+        // private ControllerManager controllerManager;
+        // private ButtonLayout buttonLayout;
 
         private string _toDrawText;
         private Transform _initialParent;
         private LineDrawer _lineDrawer;
         private PhotonView photonView;
 
+
         // Start is called before the first frame update
         private new void Start()
         {
             base.Start();
             photonView = PhotonView.Get(this);
-            _toDrawText = String.Join(" ", drawingPreText , drawingAxisName, drawingPostText);
+            _toDrawText = String.Join(" ", drawingPreText , buttonLayout.triggerRight, drawingPostText);
             _lineDrawer = GetComponent<LineDrawer>();
             _initialParent = this.gameObject.transform.parent;
-            controllerManager = GetComponent<ControllerManager>();
+            // controllerManager = GetComponent<ControllerManager>();
         }
 
         // Update is called once per frame
@@ -53,11 +55,11 @@ namespace Puzzle.HumanPencil
 
             if (IsInteractedWith)
             {
-                if (TextRenderer.IsClosed())
+                if (TextRenderer != null &&TextRenderer.IsClosed())
                 {
                     TextRenderer.ShowInfoText( _toDrawText + "\n" + ToEndInteractText);
                 }
-                if (controllerManager.GetAxis(drawingAxisName) > 0)
+                if (ControllerManager.GetAxis(drawingAxisName) > 0)
                 {
                     _lineDrawer.Draw();
                 }
@@ -70,7 +72,7 @@ namespace Puzzle.HumanPencil
         }
         public override void OnPlayerInRange()
         {
-            if (controllerManager.GetButtonDown(interactButtonName))
+            if (ControllerManager.GetButtonDown(interactButtonName))
             {
                 if (IsInteractedWith)
                 {
@@ -118,6 +120,7 @@ namespace Puzzle.HumanPencil
             Transform player = GetInRangePlayer().transform;
             this.gameObject.transform.SetParent(player);
             transform.position = player.position + player.forward  + new Vector3(0, player.gameObject.GetComponent<BoxCollider>().bounds.size.y/2, 0);
+            transform.rotation = Quaternion.identity;
         }
 
         private void DetachSelfFromPlayer()

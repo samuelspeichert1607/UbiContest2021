@@ -15,6 +15,7 @@ public class StartMenuScript : MonoBehaviour
     void Start()
     {
         _audioSource = GetComponent<AudioSource>();
+        pulsateText.StartPulsating();
     }
 
     void Update()

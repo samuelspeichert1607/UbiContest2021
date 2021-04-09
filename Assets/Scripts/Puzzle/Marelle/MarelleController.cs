@@ -22,24 +22,26 @@ public class MarelleController : MonoBehaviour
 
     public float timerTime;
 
-    public bool hasCollisionUnlocked =true;
 
     private PhotonView _photonView;
 
-
-    private void Start() //sinon il est 'a false et je ne sais pas pourquoi
+    private float wonTime=0;
+    private void Start() 
     {
         _photonView = GetComponent<PhotonView>();
-        hasCollisionUnlocked = true;
         audioSource = GetComponent<AudioSource>();
     }
     public void gameWon()
     {
+        wonTime = Time.time;
         audioSource.PlayOneShot(winSound, 0.7f);
-        hasCollisionUnlocked = false;
+
         foreach (Actionable a in actionableObject)
         {
-            a.OnAction();
+            if (!a.hasActioned)
+            {
+                a.OnAction();
+            }
         }
 
         // _photonView.RPC("rcpGameWon", RpcTarget.All);
@@ -57,18 +59,49 @@ public class MarelleController : MonoBehaviour
     //            a.OnAction();
     //        }
     //    }
-            
+
 
     //}
     public void gameLost()
     {
-        // _photonView.RPC("rcpGameLost", RpcTarget.All);
+        if (Time.time-wonTime>.1)
+        {
+            _photonView.RPC(nameof(rcpGameLost), RpcTarget.All);
+        }
+        else
+        {
+            gameWon();
+        }
+   
+        //audioSource.PlayOneShot(lossSound, 0.7f);
+        //if (UnityEngine.Random.Range(0, 2) == 0)//50%
+        //{
+        //    robotFail.PlayTaskFailed();
+        //}
+        //foreach (Transform child in transform)
+        //{
+
+        //    foreach (Transform toddler in child)
+        //    {
+
+        //        Material tileMat = toddler.GetComponentInChildren<TileGoUpDown>().tileRenderer.material;
+
+        //        tileMat.SetColor("_Color", Color.red);
+
+        //        toddler.GetComponent<TileGoUpDown>().PlayAnimation();
+
+        //    }
+        //}
+    }
+
+    [PunRPC]
+    public void rcpGameLost()
+    {
         audioSource.PlayOneShot(lossSound, 0.7f);
         if (UnityEngine.Random.Range(0, 2) == 0)//50%
         {
             robotFail.PlayTaskFailed();
         }
-        hasCollisionUnlocked = false;
         foreach (Transform child in transform)
         {
 
@@ -84,29 +117,4 @@ public class MarelleController : MonoBehaviour
             }
         }
     }
-
-    //[PunRPC]
-    //public void rcpGameLost()
-    //{
-    //    audioSource.PlayOneShot(lossSound, 0.7f);
-    //    if (UnityEngine.Random.Range(0, 2) == 0)//50%
-    //    {
-    //        robotFail.PlayTaskFailed();
-    //    }
-    //    hasCollisionUnlocked = false;
-    //    foreach (Transform child in transform)
-    //    {
-
-    //        foreach (Transform toddler in child)
-    //        {
-
-    //            Material tileMat = toddler.GetComponentInChildren<TileGoUpDown>().tileRenderer.material;
-
-    //            tileMat.SetColor("_Color", Color.red);
-
-    //            toddler.GetComponent<TileGoUpDown>().PlayAnimation();
-
-    //        }
-    //    }
-    //}
 }

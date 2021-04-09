@@ -1,5 +1,6 @@
 using Photon.Pun;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : CustomController
 {
@@ -42,6 +43,7 @@ public class PlayerController : CustomController
     private static readonly int SpeedZ = Animator.StringToHash("SpeedZ");
     private static readonly int Falling = Animator.StringToHash("Falling");
     private static readonly int Landed = Animator.StringToHash("Landed");
+    private static readonly int IsDying = Animator.StringToHash("isDying");
     
     private const float WalkThreshold = 0.5f;
     private const float RunThreshold = 0.75f;
@@ -49,6 +51,12 @@ public class PlayerController : CustomController
     private const float DiagonalThresholdZ = 0.35f;
     private AudioListener _audioListener;
     private GameObject _networkManager;
+
+    //nouveau isgrounded avec buffer
+    private bool IsOnFloor = true;
+    private float LastTimeOnFloor = 0;
+    private float LastTimeInJump = 0;
+    [SerializeField] private float bufferTime = 0.15f;
 
     // Start is called before the first frame update
     void Start()
@@ -71,8 +79,12 @@ public class PlayerController : CustomController
     {
         if (!_photonView.IsMine) return;
 
-        UpdateCameraRotation();
-        
+
+        if (isAllMovementUnlocked)
+        {
+            UpdateCameraRotation();
+        }
+
         float verticalMotion = _controllerManager.GetLeftAxisY();
         float horizontalMotion = _controllerManager.GetLeftAxisX();
 
@@ -80,7 +92,24 @@ public class PlayerController : CustomController
         {
             UpdateJumpingImpulse();
         }
-        
+
+        if (_controller.isGrounded)
+        {
+            LastTimeOnFloor = Time.time;
+            IsOnFloor = true;
+        }
+        else if (Time.time - LastTimeOnFloor <= bufferTime && Time.time - LastTimeInJump > bufferTime)
+        {
+            IsOnFloor = true;
+
+
+        }
+        else
+        {
+            IsOnFloor = false;
+        }
+
+
         if (_controller.isGrounded)
         {
             if (_isLanding)
@@ -107,19 +136,16 @@ public class PlayerController : CustomController
                 _playerSpeed.y = -1;
             }
 
-            if (canMove)
+            if (canMove && isAllMovementUnlocked)
             {
-                if (_controllerManager.GetButtonDown("Jump") && !_isInJumpingAscensionPhase)
-                {
-                    _photonView.RPC("InitiateJumping", RpcTarget.All);
-                }
-                else if (_controllerManager.GetButtonDown("RBumper"))
-                {
-                    PlayEmote();
-                }
+
 
                 _wasGrounded = true;
                 MoveOnGround(verticalMotion, horizontalMotion);
+            }
+            else
+            {
+                Idle();
             }
         }
         else
@@ -134,6 +160,21 @@ public class PlayerController : CustomController
             AdjustAirborneSpeed(verticalMotion, horizontalMotion);
             Move(_playerSpeed, Time.deltaTime);
             _wasGrounded = false;
+        }
+
+
+        if (canMove && isAllMovementUnlocked && IsOnFloor)
+        {
+            if (_controllerManager.GetButtonDown("Jump") && !_isInJumpingAscensionPhase)
+            {
+
+                LastTimeInJump = Time.time;
+                _photonView.RPC("InitiateJumping", RpcTarget.All);
+            }
+            else if (_controllerManager.GetButtonDown("RBumper"))
+            {
+                PlayEmote();
+            }
         }
     }
 
@@ -404,24 +445,28 @@ public class PlayerController : CustomController
         _animator.SetFloat(Speed, 0f, 0.1f, Time.deltaTime);
         _animator.SetTrigger(Jump1);
     }
-    
+
+    public void DisconnectPlayerOnly(int indexSceneToLoad)
+    {
+        PhotonNetwork.LeaveRoom();
+        PhotonNetwork.Disconnect();
+        SceneManager.LoadScene(indexSceneToLoad);
+    }
+
     public void Disconnect(int indexSceneToLoad)
     {
-        _photonView.RPC("RPCDisconnect", RpcTarget.AllViaServer, indexSceneToLoad);
+        _photonView.RPC(nameof(RPCDisconnect), RpcTarget.AllViaServer, indexSceneToLoad);
     }
 
     [PunRPC]
     private void RPCDisconnect(int indexSceneToLoad)
     {
         Debug.Log("Logging out");
-        PhotonNetwork.CurrentRoom.IsOpen = false;
-        PhotonNetwork.CurrentRoom.IsVisible = false;
-        
+
         PhotonNetwork.LeaveRoom();
         PhotonNetwork.Disconnect();
-        PhotonNetwork.LoadLevel(indexSceneToLoad);
+        SceneManager.LoadScene(indexSceneToLoad);
     }
-    
     
     private void MidJump()
     {
@@ -438,6 +483,13 @@ public class PlayerController : CustomController
     {
         canMove = !canMove;
     }
+
+    public override void PlayDeathAnimation()
+    {
+        _animator.SetBool(IsDying, true);
+    }
+    
+    
     private void EndEmote()
     {
         isInCriticalMotion = false;

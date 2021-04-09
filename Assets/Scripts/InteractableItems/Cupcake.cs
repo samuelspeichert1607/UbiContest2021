@@ -6,13 +6,13 @@ using InteractableItems;
 public class Cupcake : InteractableItem
 {
     // Start is called before the first frame update
-    private ControllerManager _controllerManager;
+    // private ControllerManager _controllerManager;
     
 
     private new void Start()
     {
         base.Start();
-        _controllerManager = GetComponent<ControllerManager>();
+        // _controllerManager = GetComponent<ControllerManager>();
     }
 
     // Update is called once per frame
@@ -65,7 +65,7 @@ public class Cupcake : InteractableItem
 
     public override void OnPlayerInRange()
     {
-        if (_controllerManager.GetButtonDown(interactButtonName) && !IsInteractedWith)
+        if (ControllerManager.GetButtonDown(interactButtonName) && !IsInteractedWith)
         {
             OnInteractStart();
         }
